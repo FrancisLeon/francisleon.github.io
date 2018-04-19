@@ -319,19 +319,20 @@
 </li>
 </ul>
 <p>tf-idf 用来找到doc里面和question最相关的一句话</p>
-<p>当找到这句话后，我需要用syntax的方法来找到我的answer<br>主要用的的analysis方法是dependency parser:<br>然后我主要用的是spacy parser的api</p>
+<p>当找到这句话后，我需要用syntax的方法来找到我的answer<br>主要用的的analysis方法是dependency parser和consistuency parser:<br>下面先比较下这两种parse:</p>
+<ul>
+<li><p>consistuency tree:<br>  就是正常的S -&gt; NP VP 这种形式</p>
+</li>
+<li><p>dependency tree:<br>  就是每一个phrase里面都有一个head，其他相依赖于它，比如：<br>  I love you.<br>  head 是love，subject是I, 然后object是you</p>
+</li>
+</ul>
+<p>然后我主要用的是spacy parser的api</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">nlp = spacy.load(&apos;en&apos;)</span><br><span class="line">doc = nlp(u&apos;Autonomous cars shift insurance liability toward manufacturers&apos;)</span><br><span class="line">for chunk in doc.noun_chunks:</span><br><span class="line">    print(chunk.text, chunk.root.text, chunk.root.dep_,</span><br><span class="line">          chunk.root.head.text)</span><br><span class="line">Text: The original noun chunk text.</span><br><span class="line">Root text: The original text of the word connecting the noun chunk to the rest of the parse.</span><br><span class="line">Root dep: Dependency relation connecting the root to its head.</span><br><span class="line">Root head text: The text of the root token&apos;s head.</span><br><span class="line">(u&apos;Autonomous cars&apos;, u&apos;cars&apos;, u&apos;nsubj&apos;, u&apos;shift&apos;)</span><br><span class="line">(u&apos;insurance liability&apos;, u&apos;liability&apos;, u&apos;dobj&apos;, u&apos;shift&apos;)</span><br><span class="line">(u&apos;manufacturers&apos;, u&apos;manufacturers&apos;, u&apos;pobj&apos;, u&apos;toward&apos;)</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>这里要处理who, what, when, where, yes no, why 这几种问题</p>
 <ul>
-<li><ul>
 <li>when, where的话，我直接用parser先parse，然后遍历tree，找出期中的所有pp，然后在用NER tagger去tagger，看下里面有没涉及时间和LOCATION的。</li>
-</ul>
-</li>
-<li><ul>
 <li>yes no 比较简单，就是用dependency parse，找里面有没有neg，没有的话就是true </li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
