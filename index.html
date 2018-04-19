@@ -318,6 +318,9 @@
 </ul>
 </li>
 </ul>
+<p>tf-idf 用来找到doc里面和question最相关的一句话</p>
+<p>当找到这句话后，我需要用syntax的方法来找到我的answer<br>主要用的的analysis方法是dependency parser:<br>然后我主要用的是spacy parser的api</p>
+<p>···<br>nlp = spacy.load(‘en’)<br>doc = nlp(u’Autonomous cars shift insurance liability toward manufacturers’)<br>for chunk in doc.noun_chunks:<br>    print(chunk.text, chunk.root.text, chunk.root.dep_,<br>          chunk.root.head.text)<br>Text: The original noun chunk text.<br>Root text: The original text of the word connecting the noun chunk to the rest of the parse.<br>Root dep: Dependency relation connecting the root to its head.<br>Root head text: The text of the root token’s head.<br>(u’Autonomous cars’, u’cars’, u’nsubj’, u’shift’)<br>(u’insurance liability’, u’liability’, u’dobj’, u’shift’)<br>(u’manufacturers’, u’manufacturers’, u’pobj’, u’toward’)<br>···</p>
 
           
         
