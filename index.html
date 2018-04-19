@@ -233,6 +233,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/answer-processing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/19/answer-processing/" itemprop="url">answer_processing</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T09:47:05-04:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>自然语言处理的project，我负责的是anser processing，大概的pipeline是以question为query，做输入的article做information retrieval. 这里主要用的是tf-idf.</p>
+<ul>
+<li>tf-idf (term frequency–inverse document frequency)<ul>
+<li>tf 就是term frequency, 就是这个词在某一个文档出现的次数<ul>
+<li>有好几种计算方法，最简单就是 term在文档出现的词频/文档里面总词数 了</li>
+</ul>
+</li>
+<li>idf 就是inverse docment frequency, 就是衡量这个词在整个语言环境下使用的常见程度，比如the等常见词，在整个英语里面的idf值是很小的，因为太常见了<ul>
+<li>计算：log(语料库的文档总数/(包含这个词的总文档数 + 1)) (这里加1是为了防止出现divide  by zero error)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/概率图模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -543,7 +676,8 @@
       
         
           
-            
+            <p>先是讲下u-net, 他</p>
+
           
         
       
@@ -745,7 +879,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
