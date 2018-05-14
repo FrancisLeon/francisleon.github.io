@@ -1478,10 +1478,17 @@
 <h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>感觉在机器学习里面的模型主要指的是涉及变量之间的关系，特指他们的概率分布上面的联系，比如，对于随机变量X,Y，<br>X是input，Y是output，那么这里的模型就是P(X, Y)，来描述他们之间的关系，这个是probabilistic model of the data</p>
 <h3 id="Model-based"><a href="#Model-based" class="headerlink" title="Model-based"></a>Model-based</h3><p>总的来说model-based methods是这样子的流程<br>data — model learning —-&gt; model —- model inference —-&gt; knowledge</p>
 <ul>
-<li>model learning: learning from data to a model<ul>
+<li><p>model learning: learning from data to a model</p>
+<ul>
 <li>简单的来说，model是对data的总结：model-based方法会比较省内存，学完一个model后，predict/inference的时候你不需要遍历你的data了</li>
 <li>model也是描述数据是如何产生的：这里我的理解是model揭示了变量之间的关系，或者揭示了问题所涉及的变量之间的机理（mechanism）</li>
 <li>E.g. 给你症状和疾病的数据，然后所学习的model就是所谓的病理了，揭示了症状是如何与疾病相联系的</li>
+</ul>
+</li>
+<li><p>model inference: from model to knowledge</p>
+<ul>
+<li>知道物之理后，我们就可以推演了</li>
+<li>比如：给你症状，根据病理，推演出这个是什么疾病</li>
 </ul>
 </li>
 </ul>
