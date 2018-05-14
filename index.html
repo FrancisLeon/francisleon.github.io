@@ -1494,7 +1494,17 @@
 </ul>
 <p>然后，细分的话，有可以分为probabilistic model of the data methods, parametric models methods及nonparametric models methods</p>
 <h4 id="probabilistic-model-of-the-data-methods"><a href="#probabilistic-model-of-the-data-methods" class="headerlink" title="probabilistic model of the data methods"></a>probabilistic model of the data methods</h4><h4 id="parametric-models-methods"><a href="#parametric-models-methods" class="headerlink" title="parametric models methods"></a>parametric models methods</h4><h4 id="nonparametric-models-methods"><a href="#nonparametric-models-methods" class="headerlink" title="nonparametric models methods"></a>nonparametric models methods</h4><h3 id="Model-free"><a href="#Model-free" class="headerlink" title="Model-free"></a>Model-free</h3><p>总来的说就是不去学习一个model，而是直接通过algorithm学习knowledge。比如在强化学习里面q-learning, 我不去学model，我直接通过q-learning学习value function和policy。</p>
-
+<h3 id="Tasks-Knowledge"><a href="#Tasks-Knowledge" class="headerlink" title="Tasks/Knowledge"></a>Tasks/Knowledge</h3><h4 id="prediction"><a href="#prediction" class="headerlink" title="prediction"></a>prediction</h4><p>预测，根据输入，估计/预测输出，<br>主要分分类问题（classification）和回归问题（regression）两大类</p>
+<h4 id="description"><a href="#description" class="headerlink" title="description"></a>description</h4><p>会涉及聚类、密度估计、降维等，另外一种叫法叫非监督学习（unsupervised-learning）.</p>
+<ul>
+<li>需要处理的数据里面没有标注<br>比如：给你一个文档，你通过算法得到了词频的分布<br>再比如：给你一堆图片，你根据他们的相似度，做了一定的分类<br>再比如：nlp里面的一些ebedding方法，把word根据某些规则映射到一个向量空间（语义空间）里面，单词的意思的相近与否，可以通过这个空间里面点的距离来判断<br>字面上看，聚类、密度估计的确是对无标注的数据的一种描述吧，更确切的说，应该是一种表述和呈现方式（presentation）</li>
+</ul>
+<h1 id="Machine-Learning-Subfields"><a href="#Machine-Learning-Subfields" class="headerlink" title="Machine Learning Subfields"></a>Machine Learning Subfields</h1><p>在机器学习里面，根据这三个角度上面不同的组合就会有不同的子领域</p>
+<h2 id="supervised-learning"><a href="#supervised-learning" class="headerlink" title="supervised learning"></a>supervised learning</h2><p>数据这里包含了inputs和相应的标注<br>tasks这里涉及的是prediction</p>
+<h2 id="unsupervised-learning"><a href="#unsupervised-learning" class="headerlink" title="unsupervised learning"></a>unsupervised learning</h2><p>数据这里包含了inputs而不包含相应的标注<br>tasks这里涉及的是description</p>
+<h2 id="semi-supervised-learning"><a href="#semi-supervised-learning" class="headerlink" title="semi-supervised learning"></a>semi-supervised learning</h2><p>数据这里包含了inputs，包含了部分的标注<br>tasks这里涉及的是prediction</p>
+<p>如果，我们不仅仅只有observations，我们还可以有action （control），那么我们又会有</p>
+<h2 id="reinforcement-learning"><a href="#reinforcement-learning" class="headerlink" title="reinforcement learning"></a>reinforcement learning</h2><h2 id="multi-agent-system"><a href="#multi-agent-system" class="headerlink" title="multi-agent system"></a>multi-agent system</h2>
           
         
       
