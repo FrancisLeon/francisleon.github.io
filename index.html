@@ -1471,7 +1471,7 @@
         
           
             <h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><p>这学期选了 introduction to machine learning, 在ml这边相当于 15-513 这样子的入门课，后续课程有很多 10-702 statistic machine learing, 10-703 deep reinforcement learning control, 10-707 introduction to deep learning, 10-708 graphical model, 10-725 convex optimization …</p>
-<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><h2 id="machine-learning"><a href="#machine-learning" class="headerlink" title="machine learning"></a>machine learning</h2><p>data — ML algorithms —-&gt; knowledge<br>这个图应该可以很好的解释什么是ML。<br>比如imageNet里面你有image和对应的label，你通过dl学习到了，有关于input image和output label的knowledge.<br>在比如强化学习里面，你通过比如:deep q-learning的方法学习了，你自己的approximate q function. 然后这个东西，对你之后agent在environment里面做action选择产生直接影响。</p>
+<h1 id="big-picture-of-machine-learning"><a href="#big-picture-of-machine-learning" class="headerlink" title="big picture of machine learning"></a>big picture of machine learning</h1><p>data — ML algorithms —-&gt; knowledge<br>这个图应该可以很好的解释什么是ML。<br>比如imageNet里面你有image和对应的label，你通过dl学习到了，有关于input image和output label的knowledge.<br>在比如强化学习里面，你通过比如:deep q-learning的方法学习了，你自己的approximate q function. 然后这个东西，对你之后agent在environment里面做action选择产生直接影响。</p>
 <h1 id="Three-Axes"><a href="#Three-Axes" class="headerlink" title="Three Axes"></a>Three Axes</h1><p>有了上面的图，你可以从三个角度去总括机器学习，分别是数据，算法，任务（具体要解决的问题）</p>
 <h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><p>首先是数据，<br>分完全被观测到的数据;<br>部分被观测到的数据，这里部分被观测到，我的理解是有些sample的一些variable是未知的，<br>然后partially observable MDP也有这样的意思，毕竟信息不完整。<br>后面有会banch的算法来解决这样子的问题，比如EM等等。</p>
 <h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>算法这里，就主要分两大类，基于模型和不基于模型的，既然涉及到模型，这里讲下模型的定义吧</p>
@@ -1493,7 +1493,7 @@
 </li>
 </ul>
 <p>然后，细分的话，有可以分为probabilistic model of the data methods, parametric models methods及nonparametric models methods</p>
-<h4 id="probabilistic-model-of-the-data-methods"><a href="#probabilistic-model-of-the-data-methods" class="headerlink" title="probabilistic model of the data methods"></a>probabilistic model of the data methods</h4><h4 id="parametric-models-methods"><a href="#parametric-models-methods" class="headerlink" title="parametric models methods"></a>parametric models methods</h4><h4 id="nonparametric-models-methods"><a href="#nonparametric-models-methods" class="headerlink" title="nonparametric models methods"></a>nonparametric models methods</h4><h3 id="Model-free"><a href="#Model-free" class="headerlink" title="Model-free"></a>Model-free</h3><p>总来的说就是不去学习一个model，而是直接通过algorithm学习knowledge。比如在强化学习里面</p>
+<h4 id="probabilistic-model-of-the-data-methods"><a href="#probabilistic-model-of-the-data-methods" class="headerlink" title="probabilistic model of the data methods"></a>probabilistic model of the data methods</h4><h4 id="parametric-models-methods"><a href="#parametric-models-methods" class="headerlink" title="parametric models methods"></a>parametric models methods</h4><h4 id="nonparametric-models-methods"><a href="#nonparametric-models-methods" class="headerlink" title="nonparametric models methods"></a>nonparametric models methods</h4><h3 id="Model-free"><a href="#Model-free" class="headerlink" title="Model-free"></a>Model-free</h3><p>总来的说就是不去学习一个model，而是直接通过algorithm学习knowledge。比如在强化学习里面q-learning, 我不去学model，我直接通过q-learning学习value function和policy。</p>
 
           
         
