@@ -88,7 +88,7 @@
 <meta property="og:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCNs在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of vis">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/AdaptFCNs.jpg">
-<meta property="og:updated_time" content="2018-06-03T19:50:21.000Z">
+<meta property="og:updated_time" content="2018-06-03T23:58:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation">
 <meta name="twitter:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCNs在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of vis">
@@ -327,7 +327,7 @@
         <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCNs在segmentation里面是一样算是开篇之作。</p>
 <h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Fully convolutional models for dense prediction have proven successful for a wide range of visual tasks. Such models perform well in a supervised setting, but performance can be surprisingly poor under domain shifts that appear mild to a human observer. For example, training on one city and testing on another in a different geographic region and/or weather condition may result in significantly degraded performance due to pixel-level distribution shift. In this paper, we introduce the first domain adaptive semantic segmentation method, proposing an unsupervised adversarial approach to pixel prediction problems. Our method consists of both <strong>global and category specific adaptation techniques. Global domain alignment is performed using a novel semantic segmentation network with fully convolutional domain adversarial learning</strong>. This initially adapted space then enables category specific adaptation through a generalization of constrained weak learning, with explicit transfer of the spatial layout from the source to the target domains. Our approach outperforms baselines across different settings on multiple large-scale datasets, including adapting across various real city environments, different synthetic sub-domains, from simulated to real environments, and on a novel large-scale dash-cam dataset.</p>
 <p>摘要里面最重要的应该是这句话了，<strong>global and category specific adaptation techniques</strong>，后面会详细介绍。</p>
-<h1 id="approach"><a href="#approach" class="headerlink" title="approach"></a>approach</h1><h2 id="source-domain-and-target-domain"><a href="#source-domain-and-target-domain" class="headerlink" title="source domain and target domain"></a>source domain and target domain</h2><p>既然是涉及transfer，这里就要有source domain （源域），$S$，这里就有图片空间$I_S$和对应的标注空间$L_S$。我们训练得到$\phi_S(I_S)$。然后我们的目标是，学习一个语义分割的模型，它适用于没有被标注的目标域（target domain）$T$，有图片空间$I_T$。我们用$\phi_T()$来表示这个模型。</p>
+<h1 id="Fully-Convolutional-Adaptation-Models"><a href="#Fully-Convolutional-Adaptation-Models" class="headerlink" title="Fully Convolutional Adaptation Models"></a>Fully Convolutional Adaptation Models</h1><h2 id="source-domain-and-target-domain"><a href="#source-domain-and-target-domain" class="headerlink" title="source domain and target domain"></a>source domain and target domain</h2><p>既然是涉及transfer，这里就要有source domain （源域），$S$，这里就有图片空间$I_S$和对应的标注空间$L_S$。我们训练得到$\phi_S(I_S)$。然后我们的目标是，学习一个语义分割的模型，它适用于没有被标注的目标域（target domain）$T$，有图片空间$I_T$。我们用$\phi_T()$来表示这个模型。</p>
 <h2 id="domain-shifts"><a href="#domain-shifts" class="headerlink" title="domain shifts"></a>domain shifts</h2><ul>
 <li>global changes，会导致特征空间的边缘概率分布的不同<br>  这个常常是会出现在两个不用的领域里面，两个领域的越是不同，shift会越大，比如：模拟的数据和实际数据。</li>
 <li>category specific parameter changes<br>  不同类在两个不同的领域里面会有不同的偏差，比如：车和标志在不同领域里面的做迁移的时候，分布的改变会不同。</li>
@@ -339,6 +339,10 @@
 <li>$L_seg(I_S, I_T)$:<br>  这个是在源域上面的标准的监督分割的一个目标函数，就是正常的我们在source data上面训练的一个loss function而已。<br>所以最后的loss function:<br>$L(I_S, I_T, P_{L_S}) = L_da(I_S, I_T) + L_mi(I_T, P_{L_S}) + L_seg(I_S, I_T)$</li>
 </ul>
 <p><img src="/images/AdaptFCNs.jpg" alt=""><br>这张图很好的呈现了整个过程的pipeline，L_seg(I_S, I_T)是在source domain data上面训练的；fully-convolutional domain adversarial training则是用来降低，源和目标域概率分布不同的距离；我们又通过constrained pixel-wise multiple instance learning objective在目标域上面的数据训练，来完成category specific的更新。</p>
+<h1 id="Global-Domain-Alignment"><a href="#Global-Domain-Alignment" class="headerlink" title="Global Domain Alignment"></a>Global Domain Alignment</h1><p>这里我们详细阐述$L_da(I_S, I_T)$，然后重申一遍，我们需要减小源域和目标的域偏移，然后我们采用的是domain adversarial的方法。</p>
+<ul>
+<li>我们需要回答的第一个问题是：在这个密集的预测框架里面，需要由什么来组成一个实例？<br>  回答是考虑最终一个表示层的每一个空间单元的自然接受域所对应的区域，作为独立的实例。换句话说，我们不在网络的最后一层，而是在有pixel prediction的前一层进行操作。<br>我们将这一层的结果用$\phi_{l-1}(\theta, I)$来表示</li>
+</ul>
 
       
     </div>
@@ -503,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">2.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approach"><span class="nav-number">3.</span> <span class="nav-text">approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#source-domain-and-target-domain"><span class="nav-number">3.1.</span> <span class="nav-text">source domain and target domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domain-shifts"><span class="nav-number">3.2.</span> <span class="nav-text">domain shifts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-function"><span class="nav-number">3.3.</span> <span class="nav-text">loss function</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">2.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fully-Convolutional-Adaptation-Models"><span class="nav-number">3.</span> <span class="nav-text">Fully Convolutional Adaptation Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#source-domain-and-target-domain"><span class="nav-number">3.1.</span> <span class="nav-text">source domain and target domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domain-shifts"><span class="nav-number">3.2.</span> <span class="nav-text">domain shifts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-function"><span class="nav-number">3.3.</span> <span class="nav-text">loss function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Global-Domain-Alignment"><span class="nav-number">4.</span> <span class="nav-text">Global Domain Alignment</span></a></li></ol></div>
             
 
           </div>
