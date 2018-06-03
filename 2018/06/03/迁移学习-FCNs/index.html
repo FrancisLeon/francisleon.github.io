@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Truly">
 <meta property="og:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCNs在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of vis">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-03T18:01:26.000Z">
+<meta property="og:updated_time" content="2018-06-03T18:23:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation">
 <meta name="twitter:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCNs在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of vis">
@@ -325,8 +325,12 @@
         <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCNs在segmentation里面是一样算是开篇之作。</p>
 <h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Fully convolutional models for dense prediction have proven successful for a wide range of visual tasks. Such models perform well in a supervised setting, but performance can be surprisingly poor under domain shifts that appear mild to a human observer. For example, training on one city and testing on another in a different geographic region and/or weather condition may result in significantly degraded performance due to pixel-level distribution shift. In this paper, we introduce the first domain adaptive semantic segmentation method, proposing an unsupervised adversarial approach to pixel prediction problems. Our method consists of both <strong>global and category specific adaptation techniques. Global domain alignment is performed using a novel semantic segmentation network with fully convolutional domain adversarial learning</strong>. This initially adapted space then enables category specific adaptation through a generalization of constrained weak learning, with explicit transfer of the spatial layout from the source to the target domains. Our approach outperforms baselines across different settings on multiple large-scale datasets, including adapting across various real city environments, different synthetic sub-domains, from simulated to real environments, and on a novel large-scale dash-cam dataset.</p>
 <p>摘要里面最重要的应该是这句话了，<strong>global and category specific adaptation techniques</strong>，后面会详细介绍。</p>
-<h1 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h1><p>既然是涉及transfer，这里就要有source domain （源域），$S$，这里就有图片$I_s$和对应的标注$L_s$。我们训练得到$\phi_s(I_s)$</p>
-
+<h1 id="approach"><a href="#approach" class="headerlink" title="approach"></a>approach</h1><h2 id="source-domain-and-target-domain"><a href="#source-domain-and-target-domain" class="headerlink" title="source domain and target domain"></a>source domain and target domain</h2><p>既然是涉及transfer，这里就要有source domain （源域），$S$，这里就有图片$I_S$和对应的标注$L_S$。我们训练得到$\phi_S(I_S)$。然后我们的目标是，学习一个语义分割的模型，它适用于没有被标注的目标域（target domain）$T$，有图片$I_T$。我们用$\phi_T()$来表示这个模型。</p>
+<h2 id="domain-shifts"><a href="#domain-shifts" class="headerlink" title="domain shifts"></a>domain shifts</h2><ul>
+<li>global changes，会导致特征空间的边缘概率分布的不同<br>  这个常常是会出现在两个不用的领域里面，两个领域的越是不同，shift会越大，比如：模拟的数据和实际数据。</li>
+<li>category specific parameter changes<br>  不同类在两个不同的领域里面会有不同的偏差，比如：车和标志在不同领域里面的做迁移的时候，分布的改变会不同。</li>
+</ul>
+<h2 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h2>
       
     </div>
     
@@ -490,7 +494,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">2.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#methods"><span class="nav-number">3.</span> <span class="nav-text">methods</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">2.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approach"><span class="nav-number">3.</span> <span class="nav-text">approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#source-domain-and-target-domain"><span class="nav-number">3.1.</span> <span class="nav-text">source domain and target domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domain-shifts"><span class="nav-number">3.2.</span> <span class="nav-text">domain shifts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-function"><span class="nav-number">3.3.</span> <span class="nav-text">loss function</span></a></li></ol></li></ol></div>
             
 
           </div>
