@@ -340,7 +340,7 @@
 <li>$L_mi(I_T, P_{L_S})$:<br>  这个和category specific parameters有关，其中，$P_{L_S}$表示的是从源域迁移过来的标注空间的概率分布<br>此外我们还需要一个loss function:</li>
 <li>$L_seg(I_S, I_T)$:<br>  这个是在源域上面的标准的监督分割的一个目标函数，就是正常的我们在source data上面训练的一个loss function而已。<br>所以最后的loss function:<br>$L(I_S, I_T, P_{L_S}) = L_{da}(I_S, I_T) + L_{mi}(I_T, P_{L_S}) + L_{seg}(I_S, I_T)$</li>
 </ul>
-<p><img src="/images/AdaptFCNs.jpg" alt=""><br>这张图很好的呈现了整个过程的pipeline，L_seg(I_S, I_T)是在source domain data上面训练的；fully-convolutional domain adversarial training则是用来降低，源和目标域概率分布不同的距离；我们又通过constrained pixel-wise multiple instance learning objective在目标域上面的数据训练，来完成category specific的更新。</p>
+<p><img src="/images/AdaptFCNs.jpg" alt=""><br>这张图很好的呈现了整个过程的pipeline，$L_{seg}(I_S, I_T)$是在source domain data上面训练的；fully-convolutional domain adversarial training则是用来降低，源和目标域概率分布不同的距离；我们又通过constrained pixel-wise multiple instance learning objective在目标域上面的数据训练，来完成category specific的更新。</p>
 <h1 id="Global-Domain-Alignment"><a href="#Global-Domain-Alignment" class="headerlink" title="Global Domain Alignment"></a>Global Domain Alignment</h1><p>这里我们详细阐述$L_{da}(I_S, I_T)$，然后重申一遍，我们需要减小源域和目标的域偏移，然后我们采用的是domain adversarial （域的对抗学习）的方法。</p>
 <ul>
 <li>我们需要回答的第一个问题是：在这个密集的预测框架里面，需要由什么来组成一个实例？<br>  回答是考虑最终一个表示层的每一个空间单元的自然接受域所对应的区域，作为独立的实例。换句话说，我们不在网络的最后一层，而是在有pixel prediction的前一层进行操作。<br>  我们将这一层的结果用$\phi_{l-1}(\theta, I)$来表示，它对应的参数是$\theta$。</li>
