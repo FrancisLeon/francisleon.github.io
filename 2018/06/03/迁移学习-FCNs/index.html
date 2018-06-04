@@ -88,7 +88,7 @@
 <meta property="og:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of visu">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/AdaptFCNs.jpg">
-<meta property="og:updated_time" content="2018-06-04T03:29:28.000Z">
+<meta property="og:updated_time" content="2018-06-04T04:04:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation">
 <meta name="twitter:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of visu">
@@ -347,8 +347,11 @@
 <li>二是我们需要通过训练区分源域和目标域实例的域判别器来估计这个距离，我们将判别器的参数设为$\theta_D$<br>我们需要让这个判别器来学习源域区域和目标域区域的不同，进而来使源域和目标域在表示空间上的距离最小。</li>
 </ul>
 </li>
-<li>loss function:<br>  $L_D = - \sum_{I_S \in S}\sum_{h \in H}\sum_{w \in W}log(P_{\theta_D}(R_{hw}^S)) - \sum_{I_T \in T}\sum_{h \in H}\sum_{w \in W}log(1 - P_{\theta_D}(R_{hw}^T))$<ul>
+<li>loss function and inverse domain loss function:<br>  $L_D = - \sum_{I_S \in S}\sum_{h \in H}\sum_{w \in W}log(P_{\theta_D}(R_{hw}^S)) - \sum_{I_T \in T}\sum_{h \in H}\sum_{w \in W}log(1 - P_{\theta_D}(R_{hw}^T))$<br>  $L_{Dinv} = - \sum_{I_S \in S}\sum_{h \in H}\sum_{w \in W}log(1 - P_{\theta_D}(R_{hw}^S)) - \sum_{I_T \in T}\sum_{h \in H}\sum_{w \in W}log(P_{\theta_D}(R_{hw}^T)) $<ul>
 <li>$P_{\theta_D} = \sigma(\phi(\theta_D, x))$</li>
+<li>output layer l-1: $H \times W$ spatial units</li>
+<li>$R_{hw}^S = \phi_{l - 1}(\theta, I_S)_{hw}$ denote source representation of each unit</li>
+<li>$R_{hw}^T = \phi_{l - 1}(\theta, I_T)_{hw}$ denote target representation of each unit</li>
 </ul>
 </li>
 </ul>
