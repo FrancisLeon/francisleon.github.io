@@ -88,7 +88,7 @@
 <meta property="og:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of visu">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/AdaptFCNs.jpg">
-<meta property="og:updated_time" content="2018-06-04T00:14:45.000Z">
+<meta property="og:updated_time" content="2018-06-04T00:15:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation">
 <meta name="twitter:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of visu">
@@ -342,7 +342,7 @@
 <h1 id="Global-Domain-Alignment"><a href="#Global-Domain-Alignment" class="headerlink" title="Global Domain Alignment"></a>Global Domain Alignment</h1><p>这里我们详细阐述$L_{da}(I_S, I_T)$，然后重申一遍，我们需要减小源域和目标的域偏移，然后我们采用的是domain adversarial （域的对抗学习）的方法。</p>
 <ul>
 <li>我们需要回答的第一个问题是：在这个密集的预测框架里面，需要由什么来组成一个实例？<br>  回答是考虑最终一个表示层的每一个空间单元的自然接受域所对应的区域，作为独立的实例。换句话说，我们不在网络的最后一层，而是在有pixel prediction的前一层进行操作。<br>我们将这一层的结果用$\phi_{l-1}(\theta, I)$来表示，它对应的参数是$\theta$。<br>接下来我们来进一步拆解，我们的domain adversarial loss，它有交替的最小化目标组成。</li>
-<li>一是在表示空间，我们想要最小化源域和目标域的距离：$d(\pha_{l-1}(\theta, I_S), \pha_{l-1}(\theta, I_T))$ </li>
+<li>一是在表示空间，我们想要最小化源域和目标域的距离：$d(\phi_{l-1}(\theta, I_S), \phi_{l-1}(\theta, I_T))$ </li>
 <li>二是我们需要通过训练区分源域和目标域实例的域判别器来估计这个距离，我们将判别器的参数设为$\theta_D$<br>我们需要让这个判别器来学习源域区域和目标域区域的不同，进而来使源域和目标域在表示空间上的距离最小。</li>
 </ul>
 
