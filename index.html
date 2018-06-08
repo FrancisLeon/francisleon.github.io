@@ -738,7 +738,7 @@
 <h1 id="the-problem-to-solve"><a href="#the-problem-to-solve" class="headerlink" title="the problem to solve"></a>the problem to solve</h1><p>传统的GAN的问题是尽管可以实现从源域到目标域图片颜色和文理的迁移，但是会忽视关键区域的一些特征（这些特征和颜色文理有什么区别）。</p>
 <h1 id="whole-picture"><a href="#whole-picture" class="headerlink" title="whole picture"></a>whole picture</h1><p><img src="/images/SGGAN.jpeg" alt=""></p>
 <h1 id="loss-objective"><a href="#loss-objective" class="headerlink" title="loss objective"></a>loss objective</h1><p>下面对立面涉及的loss进行拆解</p>
-<h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>首先这里是基于标准的对抗损失，这里我先重温一下<a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="noopener">GAN</a>里面的基本loss function：<br>$min_G max_D V(D, G) | V(D, G) = E_{x~p_{data}(x)}[log D(x)] + E_{z_{p_{z}(z)}}[log(1 - D(G(z)))]$ </p>
+<h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>首先这里是基于标准的对抗损失，这里我先重温一下<a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="noopener">GAN</a>里面的基本loss function：<br>$min_G max_D V(D, G)  |  V(D, G) = E_{x~p_{data}(x)}[log D(x)] + E_{z_{p_{z}(z)}}[log(1 - D(G(z)))]$<br>Generative Adversarial Network 的基本思想，生成网络G想要使得V尽量小，而判别网络D想要使得V尽量大，然后二者一直在对抗。<br><img src="/images/GANdistribution.jpeg" alt=""></p>
 
           
         
