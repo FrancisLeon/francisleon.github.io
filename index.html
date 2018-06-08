@@ -477,7 +477,9 @@
 <h1 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h1><p>真是牛逼，总结的超级好：<br>Previous domain adap- tion approaches can be summarized as two lines: minimizing the difference between the source and target feature distributions [12, 15, 16, 17, 18, 36]; or explicitly ensuring that two data distributions close to each other by adversarial learning [24, 26, 27, 34, 42, 44] or feature combining [10, 11, 22, 25, 37].<br>Image-based adaptation can be also referred to as image-to-image translation, i.e., translating images from source domain to target domain, which can be summarized into two following directions.</p>
 <h1 id="the-problem-to-solve"><a href="#the-problem-to-solve" class="headerlink" title="the problem to solve"></a>the problem to solve</h1><p>传统的GAN的问题是尽管可以实现从源域到目标域图片颜色和文理的迁移，但是会忽视关键区域的一些特征（这些特征和颜色文理有什么区别）。</p>
 <h1 id="whole-picture"><a href="#whole-picture" class="headerlink" title="whole picture"></a>whole picture</h1><p><img src="/images/SGGAN.jpeg" alt=""></p>
-<h1 id="adversarial-network"><a href="#adversarial-network" class="headerlink" title="adversarial network"></a>adversarial network</h1>
+<h1 id="loss-objective"><a href="#loss-objective" class="headerlink" title="loss objective"></a>loss objective</h1><p>下面对立面涉及的loss进行拆解</p>
+<h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>首先这里是基于标准的对抗损失，这里我先重温一下GAN里面的基本loss function：</p>
+
           
         
       
