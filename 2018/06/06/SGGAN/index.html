@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="迁移学习," />
+  <meta name="keywords" content="迁移学习,GAN," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="最近在做迁移学习，这篇是我们学校的大佬做的工作，看下总结一下： abstractRecent advances in vision tasks (e.g., segmentation) highly depend on the availability of large-scale real-world image annotations obtained by cumbersome human">
-<meta name="keywords" content="迁移学习">
+<meta name="keywords" content="迁移学习,GAN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Semantic-aware Grad-GAN for Virtual-to-Real Urban Scene Adaption">
 <meta property="og:url" content="http://yoursite.com/2018/06/06/SGGAN/index.html">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/SGGAN.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/GANdistribution.jpeg">
-<meta property="og:updated_time" content="2018-06-08T19:31:20.000Z">
+<meta property="og:updated_time" content="2018-06-08T19:43:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Semantic-aware Grad-GAN for Virtual-to-Real Urban Scene Adaption">
 <meta name="twitter:description" content="最近在做迁移学习，这篇是我们学校的大佬做的工作，看下总结一下： abstractRecent advances in vision tasks (e.g., segmentation) highly depend on the availability of large-scale real-world image annotations obtained by cumbersome human">
@@ -330,7 +330,7 @@
 <h1 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h1><p>真是牛逼，总结的超级好：<br>Previous domain adap- tion approaches can be summarized as two lines: minimizing the difference between the source and target feature distributions [12, 15, 16, 17, 18, 36]; or explicitly ensuring that two data distributions close to each other by adversarial learning [24, 26, 27, 34, 42, 44] or feature combining [10, 11, 22, 25, 37].<br>Image-based adaptation can be also referred to as image-to-image translation, i.e., translating images from source domain to target domain, which can be summarized into two following directions.</p>
 <h1 id="the-problem-to-solve"><a href="#the-problem-to-solve" class="headerlink" title="the problem to solve"></a>the problem to solve</h1><p>传统的GAN的问题是尽管可以实现从源域到目标域图片颜色和文理的迁移，但是会忽视关键区域的一些特征（这些特征和颜色文理有什么区别）。</p>
 <h1 id="whole-picture"><a href="#whole-picture" class="headerlink" title="whole picture"></a>whole picture</h1><p><img src="/images/SGGAN.jpeg" alt=""></p>
-<h1 id="loss-objective"><a href="#loss-objective" class="headerlink" title="loss objective"></a>loss objective</h1><p>下面对立面涉及的loss进行拆解</p>
+<h1 id="loss-objective"><a href="#loss-objective" class="headerlink" title="loss objective"></a>loss objective</h1><p>下面对里面涉及的loss进行拆解</p>
 <h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>首先这里是基于标准的对抗损失，这里我先重温一下<a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="noopener">GAN</a>里面的基本loss function：<br>$min_G max_D V(D, G)  |  V(D, G) = E_{x~p_{data}(x)}[log D(x)] + E_{z_{p_{z}(z)}}[log(1 - D(G(z)))]$<br>Generative Adversarial Network 的基本思想，生成网络G想要使得V尽量小，而判别网络D想要使得V尽量大，然后二者一直在对抗。<br><img src="/images/GANdistribution.jpeg" alt=""></p>
 
       
@@ -350,6 +350,8 @@
         <div class="post-tags">
           
             <a href="/tags/迁移学习/" rel="tag"># 迁移学习</a>
+          
+            <a href="/tags/GAN/" rel="tag"># GAN</a>
           
         </div>
       
@@ -473,7 +475,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
