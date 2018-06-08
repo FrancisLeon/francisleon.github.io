@@ -361,6 +361,72 @@
 </tr>
 </tbody>
 </table>
+<h1 id="Using-environments"><a href="#Using-environments" class="headerlink" title="Using environments"></a>Using environments</h1><table>
+<thead>
+<tr>
+<th>statement</th>
+<th>command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create a new environment named py35, install Python 3.5</td>
+<td>conda create –name py35 python=3.5</td>
+</tr>
+<tr>
+<td>Activate the new environment to use it WINDOWS:</td>
+<td>activate py35</td>
+</tr>
+<tr>
+<td>LINUX, macOS:</td>
+<td>source activate py35</td>
+</tr>
+<tr>
+<td>Get a list of all my environments, active environment is shown with *</td>
+<td>conda env list </td>
+</tr>
+<tr>
+<td>Make exact copy of an environment</td>
+<td>conda create –clone py35 –name py35-2</td>
+</tr>
+<tr>
+<td>List all packages and versions installed in active environment</td>
+<td>conda list</td>
+</tr>
+<tr>
+<td>List the history of each change to the current environment</td>
+<td>conda list –revisions</td>
+</tr>
+<tr>
+<td>Restore environment to a previous revision</td>
+<td>conda install –revision 2</td>
+</tr>
+<tr>
+<td>Save environment to a text file</td>
+<td>conda list –explicit &gt; bio-env.txt</td>
+</tr>
+<tr>
+<td>Delete an environment and everything in it</td>
+<td>conda env remove –name bio-env</td>
+</tr>
+<tr>
+<td>Deactivate the current environment WINDOWS:</td>
+<td>deactivate</td>
+</tr>
+<tr>
+<td>macOS, LINUX:</td>
+<td>source deactivate</td>
+</tr>
+<tr>
+<td>Create environment from a text file</td>
+<td>conda env create – le bio-env.txt</td>
+</tr>
+<tr>
+<td>Stack commands: create a new environment, name and install the biopython package</td>
+<td>conda create –name bio-env biopython it bio-env </td>
+</tr>
+</tbody>
+</table>
 
           
         
