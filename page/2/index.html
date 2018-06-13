@@ -333,6 +333,8 @@
 <h1 id="whole-picture"><a href="#whole-picture" class="headerlink" title="whole picture"></a>whole picture</h1><p><img src="/images/SGGAN.jpeg" alt=""></p>
 <h1 id="loss-objective"><a href="#loss-objective" class="headerlink" title="loss objective"></a>loss objective</h1><p>下面对里面涉及的loss进行拆解</p>
 <h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>首先这里是基于标准的对抗损失，这里我先重温一下<a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="noopener">GAN</a>里面的基本loss function：<br>$min_G max_D V(D, G)  |  V(D, G) = E_{x~p_{data}(x)}[log D(x)] + E_{z_{p_{z}(z)}}[log(1 - D(G(z)))]$<br>Generative Adversarial Network 的基本思想，生成网络G想要使得V尽量小，而判别网络D想要使得V尽量大，然后二者一直在对抗。<br>这里有一张图很好的对此做了说明：<br><img src="/images/GANexplanation.jpeg" alt=""><br>我们从real data的分布里面sample得到一个图，我们有一个fake的数据分布$z~p_z(z)$,经过我们的生成网络生成一张图，然后这两张图，分别传到判别网络里面判断，输出0或者1。</p>
+<h2 id="cycle-consistency-loss"><a href="#cycle-consistency-loss" class="headerlink" title="cycle consistency loss"></a>cycle consistency loss</h2><p>如果看过我之前写的<a href="https://francisleon.github.io/2018/06/12/%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%E5%81%9A%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB/" target="_blank" rel="noopener">cycle-GAN</a>的分析这个就很好理解了。作者也说了，他们也是基于cycle-GAN来改进的。</p>
+<p>## </p>
 
           
         
