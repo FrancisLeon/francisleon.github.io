@@ -88,7 +88,7 @@
 <meta property="og:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/multiGAN.jpeg">
-<meta property="og:updated_time" content="2018-06-13T22:46:04.000Z">
+<meta property="og:updated_time" content="2018-06-13T22:47:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning to Adapt Structured Output Space for Semantic Segmentation">
 <meta name="twitter:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
@@ -326,9 +326,9 @@
       
         <p><a href="https://arxiv.org/abs/1802.10349" target="_blank" rel="noopener">这篇论文</a>对应的<a href="https://github.com/wasidennis/AdaptSegNet" target="_blank" rel="noopener">代码</a>是最近在跑的，需要好好看看。</p>
 <h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Convolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image domains. As the labeling process is tedious and labor intensive, developing algorithms that can adapt source ground truth labels to the target domain is of great interest. In this paper, we propose an adversarial learning method for domain adaptation in the context of semantic segmentation. Considering semantic segmentations as structured outputs that contain spatial similarities between the source and target domains, <strong>we adopt adversarial learning in the output space</strong>. To further enhance the adapted model, we construct a <strong>multi-level adversarial network</strong> to effectively perform output space domain adaptation at different feature levels. Extensive experiments and ablation study are conducted under various domain adaptation settings, including synthetic-to-real and cross-city scenarios. We show that the proposed method performs favorably against the state-of-the-art methods in terms of accuracy and visual quality.</p>
-<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><h2 id="the-proposed-model："><a href="#the-proposed-model：" class="headerlink" title="the proposed model："></a>the proposed model：</h2><ul>
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><ul>
 <li>1) a segmentation model to predict output results</li>
-<li>2) a discriminator to distinguish whether the input is from the source or target segmentation output. <h2 id="contributions"><a href="#contributions" class="headerlink" title="contributions:"></a>contributions:</h2></li>
+<li>2) a discriminator to distinguish whether the input is from the source or target segmentation output. <h2 id="contributions"><a href="#contributions" class="headerlink" title="contributions"></a>contributions</h2></li>
 <li>propose a domain adaptation method for pixel-level se- mantic segmentation via adversarial learning</li>
 <li>demonstrate that adaptation in the output (segmentation) space can effectively align scene layout and local context between source and target images</li>
 <li>a multi-level ad- versarial learning scheme is developed to adapt features at different levels of the segmentation model, which leads to improved performance.</li>
@@ -506,7 +506,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-proposed-model："><span class="nav-number">2.1.</span> <span class="nav-text">the proposed model：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contributions"><span class="nav-number">2.2.</span> <span class="nav-text">contributions:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#structure"><span class="nav-number">3.</span> <span class="nav-text">structure</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#model"><span class="nav-number">2.1.</span> <span class="nav-text">model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contributions"><span class="nav-number">2.2.</span> <span class="nav-text">contributions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#structure"><span class="nav-number">3.</span> <span class="nav-text">structure</span></a></li></ol></div>
             
 
           </div>
