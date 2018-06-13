@@ -626,6 +626,7 @@
 <p>然后我们在来看看这篇论文的loss，就会很清晰了，不就是是两个GAN吗，然后结合了这个cycle consistency loss<br><img src="/images/cycleconsisloss.jpeg" alt=""></p>
 <h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>$L_{GAN}(G, D_{Y}, X, Y) = E_{y \sim p_{data}(y)}[log D_{Y}(y)] + E_{x \sim p_{data}(x)}[log(1 - D_{Y}(G(x)))]$<br>$L_{GAN}(F, D_{X}, X, Y) = E_{x \sim p_{data}(x)}[log D_{X}(x)] + E_{y \sim p_{data}(y)}[log(1 - D_{X}(F(y)))]$</p>
 <h2 id="cycle-consistency-loss"><a href="#cycle-consistency-loss" class="headerlink" title="cycle consistency loss"></a>cycle consistency loss</h2><p>$L_{cyc}(G, F) = E_{x \sim p_{data}(x)}[|F(G(x)) - x |<em>{1}] + E</em>{y \sim p_{data}(y)}[|G(F(y)) - y |_{1}]$</p>
+<p>其实总的idea不是很难理解，看懂这个在看别的论文就会好很多，很多论文都是基于cycle-GAN来改的。</p>
 
           
         
