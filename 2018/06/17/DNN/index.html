@@ -88,7 +88,7 @@
 <meta property="og:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
-<meta property="og:updated_time" content="2018-06-18T02:57:26.000Z">
+<meta property="og:updated_time" content="2018-06-18T03:11:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNN">
 <meta name="twitter:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
@@ -329,9 +329,15 @@
 <h1 id="网络的基本结构："><a href="#网络的基本结构：" class="headerlink" title="网络的基本结构："></a>网络的基本结构：</h1><p><img src="/images/DNNstructure.jpeg" width="50%" height="50%"></p>
 <ul>
 <li>layer pre-activation for $k &gt; 0$ <strong>$(h_{0}(x) = x)$</strong><br>  $a^{(k)}(x) = b^{(k)} + W^{(k)}h^{(k - 1)}(x)$<br>  感觉这么记忆，不会记乱，k就是第几层neuron，然后$h^{(k - 1)}(x)$是前一层的输出，然后weights $W^{(k)}$，bias $b^{(k)}$都是这层的，虽然有前一层输出作为的输入，但是这些还是算这一层的。</li>
-<li><p>hidden layer activation $(k from 1 to L)$<br>  $h^{(k)}(x) = g(a^{(k)}(x))$<br>  反正这个就是这一层的输出，然后，这层的weights，bias最终都会由这层的输出所终结。</p>
+<li><p>hidden layer activation (k from 1 to L)<br>  $h^{(k)}(x) = g(a^{(k)}(x))$<br>  反正这个就是这一层的输出，然后，这层的weights，bias最终都会由这层的输出所终结。</p>
 </li>
 <li><p>output layer activation $k = L + 1$:<br>  $h^{(L + 1)}(x) = o(a^{(L + 1)}(x)) = f(x)$<br>  和hidden不一样就是这个是最后一层了，然后这层的activation function也会和之前hidden layers有所不同，如果是分类的话，往往是softmax</p>
+</li>
+<li><p>softmax activation function at the output:<br>  $o(a) = softmax(a) = [\frac{exp(a_1)}{\sum_c exp(a_c)}…\frac{a_C}{\sum_c exp(a_c)}]$<br>  如何理解softmax呢，为什么多分类问题里面要用softmax呢，而不是别的呢？<br>  知乎对此有一定的<a href="https://www.zhihu.com/question/40403377" target="_blank" rel="noopener">讨论</a>，我这里引用下王赟(yun第一声)大神的解答：</p>
+<ul>
+<li>原因之一：希望特征对概率的影响是乘性的</li>
+<li>原因之二：多类分类问题的目标函数常常选为cross-entropy，…(推完整个，回来补)</li>
+</ul>
 </li>
 </ul>
 
