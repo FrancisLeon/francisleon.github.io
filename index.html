@@ -473,10 +473,10 @@
 <p>然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：</p>
 <h1 id="网络的基本结构："><a href="#网络的基本结构：" class="headerlink" title="网络的基本结构："></a>网络的基本结构：</h1><p><img src="/images/DNNstructure.jpeg" width="50%" height="50%"></p>
 <ul>
-<li>layer pre-activation for $k &gt; 0$ <strong>$(h_{0}(x) = x)$</strong><br>  $a_{(k)}(x) = b_{(k)} + W_{(k)}h_{(k - 1)}(x)$<br>  感觉这么记忆，不会记乱，k就是第几层neuron，然后$h_{(k - 1)}(x)$是前一层的输出，然后weights $W_{(k)}$，bias $b_{(k)}$都是这层的，虽然有前一层输出作为的输入，但是这些还是算这一层的。</li>
+<li>layer pre-activation for $k &gt; 0$ <strong>$(h_{0}(x) = x)$</strong><br>  $a^{(k)}(x) = b^{(k)} + W^{(k)}h^{(k - 1)}(x)$<br>  感觉这么记忆，不会记乱，k就是第几层neuron，然后$h^{(k - 1)}(x)$是前一层的输出，然后weights $W^{(k)}$，bias $b^{(k)}$都是这层的，虽然有前一层输出作为的输入，但是这些还是算这一层的。</li>
 <li><p>hidden layer activation $(k from 1 to L)$<br>  $h_{(k)}(x) = g(a_{(k)}(x)$<br>  反正这个就是这一层的输出，然后，这层的weights，bias最终都会由这层的输出所终结。</p>
 </li>
-<li><p>output layer activation $k = L + 1$:<br>  $h_{(L + 1)(x) = o(a_{(L + 1)}(x))} = f(x)$<br>  和hidden不一样就是这个是最后一层了，然后这层的activation function也会和之前hidden layers有所不同，如果是分类的话，往往是softmax</p>
+<li><p>output layer activation $k = L + 1$:<br>  $h^{(L + 1)}(x) = o(a^{(L + 1)}(x)) = f(x)$<br>  和hidden不一样就是这个是最后一层了，然后这层的activation function也会和之前hidden layers有所不同，如果是分类的话，往往是softmax</p>
 </li>
 </ul>
 
