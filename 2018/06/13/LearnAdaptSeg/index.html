@@ -88,7 +88,7 @@
 <meta property="og:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/multiGAN.jpeg">
-<meta property="og:updated_time" content="2018-06-18T15:31:52.000Z">
+<meta property="og:updated_time" content="2018-06-18T18:06:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning to Adapt Structured Output Space for Semantic Segmentation">
 <meta name="twitter:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
@@ -334,7 +334,7 @@
 <li>a multi-level adversarial learning scheme is developed to adapt features at different levels of the segmentation model, which leads to improved performance.</li>
 </ul>
 <h1 id="structure"><a href="#structure" class="headerlink" title="structure"></a>structure</h1><p>感觉也不是那么难理解，就是有点像u-net，它这里的话就是在不同的layer里面用GAN，就是所谓的multi-，<br>然后主要是output space上面，因为这篇文章发现，不管两个domain的图多么不一样，他们在output space总是有很多相似的地方。<br><img src="/images/multiGAN.jpeg" alt=""></p>
-<h1 id="model-overview"><a href="#model-overview" class="headerlink" title="model overview"></a>model overview</h1><p>这个结构有两个模块：生成器G和判别器D_i （i 表示是第几层的判别器）。images通过生成器出来的是源域segmentation的概率分布P_s</p>
+<h1 id="model-overview"><a href="#model-overview" class="headerlink" title="model overview"></a>model overview</h1><p>这个结构有两个模块：生成器G和判别器$D_i$ （i 表示是第几层的判别器）。images通过生成器出来的是源域segmentation的概率分布$P_s$</p>
 <h1 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h1>
       
     </div>
