@@ -79,19 +79,20 @@
 
 
 
-<meta name="description" content="这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 首先是网络的基本结构：">
+<meta name="description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
 <meta name="keywords" content="10707">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DNN">
 <meta property="og:url" content="http://yoursite.com/2018/06/17/DNN/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 首先是网络的基本结构：">
+<meta property="og:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
-<meta property="og:updated_time" content="2018-06-18T02:13:40.000Z">
+<meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
+<meta property="og:updated_time" content="2018-06-18T02:24:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNN">
-<meta name="twitter:description" content="这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 首先是网络的基本结构：">
+<meta name="twitter:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
 <meta name="twitter:image" content="http://yoursite.com/images/DNNstructure.jpeg">
 
 
@@ -324,9 +325,12 @@
       
 
       
-        <p>这个是hugo的deep learning的学习<a href="http://www.dmi.usherb.ca/~larocheh/neural_networks/content.html" target="_blank" rel="noopener">tutorial</a>，需要慢慢刷掉，当然cmu 10707 的<a href="https://www.cs.cmu.edu/~rsalakhu/10707/" target="_blank" rel="noopener">slides</a>很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。</p>
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这个是hugo的deep learning的学习<a href="http://www.dmi.usherb.ca/~larocheh/neural_networks/content.html" target="_blank" rel="noopener">tutorial</a>，需要慢慢刷掉，当然cmu 10707 的<a href="https://www.cs.cmu.edu/~rsalakhu/10707/" target="_blank" rel="noopener">slides</a>很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。</p>
 <p>然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：</p>
-<p>首先是网络的基本结构：<br><img src="/images/DNNstructure.jpeg" alt=""></p>
+<h1 id="网络的基本结构："><a href="#网络的基本结构：" class="headerlink" title="网络的基本结构："></a>网络的基本结构：</h1><p><img src="/images/DNNstructure.jpeg" alt=""><br><img src="/images/DNNstructure.jpeg" width="50%" height="50%"></p>
+<ul>
+<li>layer pre-activation for $k &gt; 0$ <strong>$(h_{0}(x) = x)$</strong></li>
+</ul>
 
       
     </div>
@@ -421,8 +425,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -482,6 +495,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
