@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="10707,深度学习," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="去人迹罕至的地方，留下自己的足迹。">
-<meta name="keywords" content="reinforcement learning, deep learning, machine learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Truly">
-<meta property="og:url" content="http://yoursite.com/tags/学术/index.html">
+<meta name="description" content="这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：">
+<meta name="keywords" content="10707,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNN">
+<meta property="og:url" content="http://yoursite.com/2018/06/17/DNN/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta property="og:description" content="这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-18T01:41:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Truly">
-<meta name="twitter:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta name="twitter:title" content="DNN">
+<meta name="twitter:description" content="这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/学术/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/17/DNN/"/>
 
 
 
 
 
-  <title>Tag: 学术 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>DNN | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +145,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -218,54 +219,172 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>学术<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/17/DNN/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/07/如何读paper/" itemprop="url">
-              
-                <span itemprop="name">如何读paper</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">DNN</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-07T15:15:30-04:00"
-              content="2018-06-07" >
-          06-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-17T21:36:58-04:00">
+                2018-06-17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这个是hugo的deep learning的学习<a href="http://www.dmi.usherb.ca/~larocheh/neural_networks/content.html" target="_blank" rel="noopener">tutorial</a>，需要慢慢刷掉，当然cmu 10707 的<a href="https://www.cs.cmu.edu/~rsalakhu/10707/" target="_blank" rel="noopener">slides</a>很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。</p>
+<p>然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/10707/" rel="tag"># 10707</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/16/周末做什么/" rel="next" title="周末做什么">
+                <i class="fa fa-chevron-left"></i> 周末做什么
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -273,6 +392,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -487,6 +610,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
