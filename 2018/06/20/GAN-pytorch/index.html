@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="莫烦python也给了pytorch的GAN版本： 神经网络这里会创建两个神经网络, 分别是 Generator (新手画家), Discriminator(新手鉴赏家). G 会拿着自己的一些灵感当做输入, 输出一元二次曲线上的点 (G 的画). D 会接收一幅画作 (一元二次曲线), 输出这幅画作到底是不是著名画家的画(是著名画家的画的概率).">
+<meta name="description" content="莫烦python也给了pytorch的GAN版本： hyper parameter新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一整批话的点都规定一下(P">
 <meta name="keywords" content="GAN,pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GAN@pytorch">
 <meta property="og:url" content="http://yoursite.com/2018/06/20/GAN-pytorch/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="莫烦python也给了pytorch的GAN版本： 神经网络这里会创建两个神经网络, 分别是 Generator (新手画家), Discriminator(新手鉴赏家). G 会拿着自己的一些灵感当做输入, 输出一元二次曲线上的点 (G 的画). D 会接收一幅画作 (一元二次曲线), 输出这幅画作到底是不是著名画家的画(是著名画家的画的概率).">
+<meta property="og:description" content="莫烦python也给了pytorch的GAN版本： hyper parameter新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一整批话的点都规定一下(P">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-20T19:53:59.000Z">
+<meta property="og:updated_time" content="2018-06-20T22:26:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GAN@pytorch">
-<meta name="twitter:description" content="莫烦python也给了pytorch的GAN版本： 神经网络这里会创建两个神经网络, 分别是 Generator (新手画家), Discriminator(新手鉴赏家). G 会拿着自己的一些灵感当做输入, 输出一元二次曲线上的点 (G 的画). D 会接收一幅画作 (一元二次曲线), 输出这幅画作到底是不是著名画家的画(是著名画家的画的概率).">
+<meta name="twitter:description" content="莫烦python也给了pytorch的GAN版本： hyper parameter新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一整批话的点都规定一下(P">
 
 
 
@@ -323,8 +323,8 @@
 
       
         <p>莫烦python也给了pytorch的GAN<a href="https://morvanzhou.github.io/tutorials/machine-learning/torch/4-06-GAN/" target="_blank" rel="noopener">版本</a>：</p>
-<h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><p>这里会创建两个神经网络, 分别是 Generator (新手画家), Discriminator(新手鉴赏家). G 会拿着自己的一些灵感当做输入, 输出一元二次曲线上的点 (G 的画).</p>
-<p>D 会接收一幅画作 (一元二次曲线), 输出这幅画作到底是不是著名画家的画(是著名画家的画的概率).</p>
+<h1 id="hyper-parameter"><a href="#hyper-parameter" class="headerlink" title="hyper parameter"></a>hyper parameter</h1><p>新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一整批话的点都规定一下(PAINT_POINTS).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">torch.manual_seed(1) # reproducible</span><br><span class="line">np.random.seed(1)</span><br><span class="line"></span><br><span class="line"># hyper parameter</span><br><span class="line">BATCH_SIZE = 64</span><br><span class="line">LR_G = 0.0001 </span><br><span class="line">LR_D = 0.0001</span><br><span class="line">N_IDEAS = 5</span><br><span class="line">ART_COMPONENTS = 15</span><br><span class="line">PAINT_POINTS = np.vstack([np.linspace(-1, 1, ART_COMPONENTS) for _ in range(BATCH_SIZE)])</span><br><span class="line"></span><br><span class="line"># 著名画家的画</span><br><span class="line">我们需要有很多画是来自著名画家的(real data), 将这些著名画家的画, 和新手画家的画都传给新手鉴赏家, 让鉴赏家来区分哪些是著名画家, 哪些是新手画家的画. 如何区分我们在后面呈现. 这里我们生成一些著名画家的画 (batch 条不同的一元二次方程曲线).</span><br></pre></td></tr></table></figure></p>
+<p>def artist_works(): # real target<br>    a = np.random.uniform(1, 2, size = BATCH_SIZE)[:, np.newaxis]<br>    paintings = a * np.power(PAINT_POINTS, 2) + (a - 1)<br>    paintings = torch.from_numpy(paintings).float()<br>    return paintings<br><code>`</code></p>
 
       
     </div>
@@ -497,7 +497,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hyper-parameter"><span class="nav-number">1.</span> <span class="nav-text">hyper parameter</span></a></li></ol></div>
             
 
           </div>
