@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Truly">
 <meta property="og:description" content="莫烦python也给了pytorch的GAN版本：然后莫烦的全部代码在这里 hyper parameter新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-20T22:39:29.000Z">
+<meta property="og:updated_time" content="2018-06-20T22:42:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GAN@pytorch">
 <meta name="twitter:description" content="莫烦python也给了pytorch的GAN版本：然后莫烦的全部代码在这里 hyper parameter新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一">
@@ -331,9 +331,10 @@
 <pre><code>prob_artist0 = D(artist_paintings)          # D try to increase this prob
 prob_artist1 = D(G_paintings)               # D try to reduce this prob
 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后计算有多少来之画家的画猜对了, 有多少来自 G 的画猜对了, 我们想最大化这些猜对的次数. 这也就是 log(D(x)) + log(1-D(G(z)) 在论文中的形式. 而因为 torch 中提升参数的形式是最小化误差, 那我们把最大化 score 转换成最小化 loss, 在两个 score 的合的地方加一个符号就好. 而 G 的提升就是要减小 D 猜测 G 生成数据的正确率, 也就是减小 D_score1.</span><br></pre></td></tr></table></figure>
-<p>D_loss = -torch.mean(torch.log(prob_artist0) + torch.log(1. - prob_artist1))<br>G_loss = torch.mean(torch.log(1. - prob_artist1))</p>
-<p>最后我们在根据 loss 提升神经网络就好了.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">opt_D.zero_grad()</span><br><span class="line">D_loss.backward(retain_graph=True)              # retain_graph 这个参数是为了再次使用计算图纸</span><br><span class="line">opt_D.step()</span><br><span class="line"></span><br><span class="line">opt_G.zero_grad()</span><br><span class="line">G_loss.backward()</span><br><span class="line">opt_G.step()</span><br></pre></td></tr></table></figure></p>
-<p><code>`</code></p>
+<p>D_loss = -torch.mean(torch.log(prob_artist0) + torch.log(1. - prob_artist1))<br>G_loss = torch.mean(torch.log(1. - prob_artist1))<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后我们在根据 loss 提升神经网络就好了.</span><br></pre></td></tr></table></figure></p>
+<p>opt_D.zero_grad()<br>D_loss.backward(retain_graph=True)              # retain_graph 这个参数是为了再次使用计算图纸<br>opt_D.step()</p>
+<p>opt_G.zero_grad()<br>G_loss.backward()<br>opt_G.step()<br><code>`</code></p>
+<p>之后就是，开始整理总结最近在看的那篇论文作者代码的解读了。</p>
 
       
     </div>
