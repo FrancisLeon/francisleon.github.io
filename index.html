@@ -1576,6 +1576,9 @@
 <li><p>cross-entropy loss：<br>  我们将P传到全卷积的判别器D里面：$L_d(P) = - \sum_{h, w}((1 - z)log(D(P)<em>{(h,w,0)}) + z log(D(P)</em>{(h,w,1)}))$</p>
 </li>
 </ul>
+<h3 id="Segmentation-Network-Training"><a href="#Segmentation-Network-Training" class="headerlink" title="Segmentation Network Training"></a>Segmentation Network Training</h3><ul>
+<li>segmentation loss:<br>  还是由cross-entropy loss来定义：$L_{seg}(I_s) = -\sum_{h, w}\sum_{c \in C}Y_s^{h,w,c}log(P_s^{(h,w,c)})$</li>
+</ul>
 <h2 id="Multi-level-Adversarial-Learning"><a href="#Multi-level-Adversarial-Learning" class="headerlink" title="Multi-level Adversarial Learning"></a>Multi-level Adversarial Learning</h2>
           
         
