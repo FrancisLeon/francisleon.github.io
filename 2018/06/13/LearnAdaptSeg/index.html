@@ -88,7 +88,7 @@
 <meta property="og:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/multiGAN.jpeg">
-<meta property="og:updated_time" content="2018-06-22T02:53:01.000Z">
+<meta property="og:updated_time" content="2018-06-22T02:54:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning to Adapt Structured Output Space for Semantic Segmentation">
 <meta name="twitter:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
@@ -353,7 +353,7 @@
 </li>
 <li><p>segmentation softmax output:<br>  $P = G(I) \in R^{HxWxC}$, 这里C是种类数，这里C是2，来自源域或者来自目标域</p>
 </li>
-<li><p>cross-entropy loss：<br>  我们将P传到全卷积的判别器D里面：$L_d(P) = - \sum_{h, w}((1 - z)log(D(P)_{(h,w,0)}))$</p>
+<li><p>cross-entropy loss：<br>  我们将P传到全卷积的判别器D里面：$L_d(P) = - \sum_{h, w}((1 - z)log(D(P)^{(h,w,0)}))$</p>
 </li>
 </ul>
 <h3 id="Segmentation-Network-Training"><a href="#Segmentation-Network-Training" class="headerlink" title="Segmentation Network Training"></a>Segmentation Network Training</h3><ul>
