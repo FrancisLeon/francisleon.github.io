@@ -1578,7 +1578,7 @@
 </ul>
 <h3 id="Segmentation-Network-Training"><a href="#Segmentation-Network-Training" class="headerlink" title="Segmentation Network Training"></a>Segmentation Network Training</h3><ul>
 <li>segmentation loss:<br>  在源域的话我们正常训练，还是由cross-entropy loss来定义：$L_{seg}(I_s) = -\sum_{h, w}\sum_{c \in C}Y_s^{h,w,c}log(P_s^{(h,w,c)})$</li>
-<li>adversarial loss：<br>  在目标域，我们的对抗损失是：$L_{adv}(I_t) = -\sum_{h,w}log(D(G(I_t)))_{(h,w,1)}$，这个损失是用来欺骗判别器的，使得两者的预期的概率的一致</li>
+<li>adversarial loss：<br>  在目标域，我们的对抗损失是：$L_{adv}(I_t) = -\sum_{h,w}log(D(G(I_t)))^{(h,w,1)}$，这个损失是用来欺骗判别器的，使得两者的预期的概率的一致</li>
 </ul>
 <h2 id="Multi-level-Adversarial-Learning"><a href="#Multi-level-Adversarial-Learning" class="headerlink" title="Multi-level Adversarial Learning"></a>Multi-level Adversarial Learning</h2>
           
