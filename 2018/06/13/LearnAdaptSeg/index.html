@@ -88,7 +88,7 @@
 <meta property="og:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/multiGAN.jpeg">
-<meta property="og:updated_time" content="2018-06-22T02:56:25.000Z">
+<meta property="og:updated_time" content="2018-06-22T03:02:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning to Adapt Structured Output Space for Semantic Segmentation">
 <meta name="twitter:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
@@ -360,7 +360,11 @@
 <li>segmentation loss:<br>  在源域的话我们正常训练，还是由cross-entropy loss来定义：$L_{seg}(I_s) = -\sum_{h, w}\sum_{c \in C}Y_s^{h,w,c}log(P_s^{(h,w,c)})$</li>
 <li>adversarial loss：<br>  在目标域，我们的对抗损失是：$L_{adv}(I_t) = -\sum_{h,w}log(D(G(I_t)))^{(h,w,1)}$，这个损失是用来欺骗判别器的，使得两者的预期的概率的一致</li>
 </ul>
-<h2 id="Multi-level-Adversarial-Learning"><a href="#Multi-level-Adversarial-Learning" class="headerlink" title="Multi-level Adversarial Learning"></a>Multi-level Adversarial Learning</h2>
+<h2 id="Multi-level-Adversarial-Learning"><a href="#Multi-level-Adversarial-Learning" class="headerlink" title="Multi-level Adversarial Learning"></a>Multi-level Adversarial Learning</h2><ul>
+<li>multi-level loss<br>  就是在low-level的feature space里面加上上面的loss，也不是很难理解：<br>  $L_{I_s, I_t} = \sum_i \lambda_i^{seg}(I_s) + \sum_i \lambda_i^{adv}L_{adv}^i(I_t)$，i表示第几层网络。</li>
+<li>whole picture<br>  有了上面的对loss的介绍后，我们的问题其实就是一个min-max的优化问题：<br>  $max_D min_G L(I_s, I_t)$</li>
+</ul>
+
       
     </div>
     
