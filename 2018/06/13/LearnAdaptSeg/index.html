@@ -88,7 +88,7 @@
 <meta property="og:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/multiGAN.jpeg">
-<meta property="og:updated_time" content="2018-06-18T23:50:56.000Z">
+<meta property="og:updated_time" content="2018-06-22T01:45:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning to Adapt Structured Output Space for Semantic Segmentation">
 <meta name="twitter:description" content="这篇论文对应的代码是最近在跑的，需要好好看看。 abstractConvolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image d">
@@ -339,7 +339,18 @@
 <ul>
 <li>$L_{seg}(I_s)$<br>  cross-entropy loss using ground truth annotations in the source domain</li>
 <li>$L_{adv}$<br>  对抗损失，用来使得源域的预期的数据分布和目标域相近</li>
-<li>$\lambda_{abv}$<br>  这个weight用来平衡这两个loss<h1 id="Output-space-adaptation"><a href="#Output-space-adaptation" class="headerlink" title="Output space adaptation"></a>Output space adaptation</h1><h2 id="Single-level-adversarial-learning"><a href="#Single-level-adversarial-learning" class="headerlink" title="Single-level adversarial learning"></a>Single-level adversarial learning</h2></li>
+<li>$\lambda_{abv}$<br>  这个weight用来平衡这两个loss</li>
+</ul>
+<h1 id="Output-space-adaptation"><a href="#Output-space-adaptation" class="headerlink" title="Output space adaptation"></a>Output space adaptation</h1><h2 id="Single-level-adversarial-learning"><a href="#Single-level-adversarial-learning" class="headerlink" title="Single-level adversarial learning"></a>Single-level adversarial learning</h2><h3 id="Discriminator-Training"><a href="#Discriminator-Training" class="headerlink" title="Discriminator Training"></a>Discriminator Training</h3><ul>
+<li>cross entropy<ul>
+<li>定义</li>
+<li>讨论：讲到cross entropy，为什么用cross entropy loss 于分类呢？(<a href="http://jackon.me/posts/why-use-cross-entropy-error-for-loss-function/" target="_blank" rel="noopener">Jackon解答</a>)<ul>
+<li>比起一般的classification error 作为loss，它很更精细准确的去描述model的优劣</li>
+<li>比起MSE，来说，它是一个凸优化的问题</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="Multi-level-Adversarial-Learning"><a href="#Multi-level-Adversarial-Learning" class="headerlink" title="Multi-level Adversarial Learning"></a>Multi-level Adversarial Learning</h2>
       
@@ -515,7 +526,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#model"><span class="nav-number">2.1.</span> <span class="nav-text">model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contributions"><span class="nav-number">2.2.</span> <span class="nav-text">contributions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#structure"><span class="nav-number">3.</span> <span class="nav-text">structure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#model-overview"><span class="nav-number">4.</span> <span class="nav-text">model overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">5.</span> <span class="nav-text">loss function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Output-space-adaptation"><span class="nav-number">6.</span> <span class="nav-text">Output space adaptation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-level-adversarial-learning"><span class="nav-number">6.1.</span> <span class="nav-text">Single-level adversarial learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-level-Adversarial-Learning"><span class="nav-number">6.2.</span> <span class="nav-text">Multi-level Adversarial Learning</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#model"><span class="nav-number">2.1.</span> <span class="nav-text">model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contributions"><span class="nav-number">2.2.</span> <span class="nav-text">contributions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#structure"><span class="nav-number">3.</span> <span class="nav-text">structure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#model-overview"><span class="nav-number">4.</span> <span class="nav-text">model overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">5.</span> <span class="nav-text">loss function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Output-space-adaptation"><span class="nav-number">6.</span> <span class="nav-text">Output space adaptation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-level-adversarial-learning"><span class="nav-number">6.1.</span> <span class="nav-text">Single-level adversarial learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Discriminator-Training"><span class="nav-number">6.1.1.</span> <span class="nav-text">Discriminator Training</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-level-Adversarial-Learning"><span class="nav-number">6.2.</span> <span class="nav-text">Multi-level Adversarial Learning</span></a></li></ol></li></ol></div>
             
 
           </div>
