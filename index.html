@@ -1563,7 +1563,7 @@
 </ul>
 <h1 id="Output-space-adaptation"><a href="#Output-space-adaptation" class="headerlink" title="Output space adaptation"></a>Output space adaptation</h1><h2 id="Single-level-adversarial-learning"><a href="#Single-level-adversarial-learning" class="headerlink" title="Single-level adversarial learning"></a>Single-level adversarial learning</h2><h3 id="Discriminator-Training"><a href="#Discriminator-Training" class="headerlink" title="Discriminator Training"></a>Discriminator Training</h3><ul>
 <li>cross entropy<ul>
-<li>定义：<br>  给定两个分布，p，q，它们在给定样本集上面的交叉熵的定义如下<br>  $CEH(p, q) = E_p[-log q] = - \sum_{x \in \X}p(x)q(x) = H(p) + D_{KL}(p||q)$，当p的熵给定时，交叉熵和KL散度是一致是的，一定程度上可以用来描述，这两个分布的距离。</li>
+<li>定义：<br>  给定两个分布，p，q，它们在给定样本集上面的交叉熵的定义如下<br>  $CEH(p, q) = E_p[-log q] = - \sum_{x \in X}p(x)q(x) = H(p) + D_{KL}(p||q)$，当p的熵给定时，交叉熵和KL散度是一致是的，一定程度上可以用来描述，这两个分布的距离。</li>
 <li>讨论：讲到cross entropy，为什么用cross entropy loss 于分类呢？(<a href="http://jackon.me/posts/why-use-cross-entropy-error-for-loss-function/" target="_blank" rel="noopener">Jackon解答</a>)<ul>
 <li>比起一般的classification error 作为loss，它很更精细准确的去描述model的优劣</li>
 <li>比起MSE，来说，它是一个凸优化的问题</li>
