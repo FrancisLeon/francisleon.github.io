@@ -954,13 +954,16 @@
 </li>
 </ul>
 <h1 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function:"></a>loss function:</h1><ul>
-<li>stochastic gradient descent (SGD):<br>  随机梯度下降应该是最最基础的梯度下降的方法了，<ul>
+<li><p>stochastic gradient descent (SGD):<br>  随机梯度下降应该是最最基础的梯度下降的方法了，</p>
+<ul>
 <li>initialize  $\theta$ ($\theta = {W^{(1)}, b^{(1)}…，W^{(L + 1)}}$)</li>
 <li>algorithm:<br>  for N iterations: (One epoch)<pre><code>for each training example $(x_{(t)}, y_{(t)})$
     $\delta = -\nabla_{\theta}l(f(x_{(t)}, \theta), \y_{(t)}) - \lambda\nabla_{(\theta)}$\omiga_{(\theta)}$
     $\theta \leftarrow \theta + \alpha \delta$
 </code></pre></li>
 </ul>
+</li>
+<li><p>what neural network estimates?<br>  $f(x)_{c} = P(y=c|x)$， where c means which class.</p>
 </li>
 </ul>
 
