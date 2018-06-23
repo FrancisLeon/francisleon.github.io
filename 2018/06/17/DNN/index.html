@@ -88,7 +88,7 @@
 <meta property="og:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
-<meta property="og:updated_time" content="2018-06-23T19:41:31.000Z">
+<meta property="og:updated_time" content="2018-06-23T19:43:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNN">
 <meta name="twitter:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
@@ -345,8 +345,6 @@
 <ul>
 <li>initialize  $\theta$ ($\theta = {W^{(1)}, b^{(1)}…，W^{(L + 1)}}$)</li>
 <li>algorithm:<br>  for N iterations: (One epoch)<pre><code>for each training example $(x_{(t)}, y_{(t)})$
-    $\delta = -\nabla_{\theta}l(f(x_{(t)}, \theta), \y_{(t)}) - \lambda\nabla_{(\theta)}$\omiga_{(\theta)}$
-    $\theta \leftarrow \theta + \alpha \delta$
 </code></pre></li>
 <li>SGD 的<a href="https://zhuanlan.zhihu.com/p/22252270" target="_blank" rel="noopener">优缺点</a>：<ul>
 <li>缺点：<ul>
@@ -370,7 +368,7 @@
 <ul>
 <li><p>what neural network estimates?<br>  $f(x)_{c} = P(y=c|x)$， where c means which class.</p>
 </li>
-<li><p>what to optimize?<br>  maximize log likelihood —- minize negative log likelihood: $P(y_i=c|x_i)$，given $(x_i, y_i)$<br>  cross-entropy: p, q (p one-hot, q distribution of the P(y=c|x)) </p>
+<li><p>what to optimize?<br>  maximize log likelihood —- minize negative log likelihood: $P(y_i=c|x_i)$，given $(x_i, y_i)$<br>  cross-entropy: p, q (p one-hot, q distribution of the P(y=c|x))<br>  $l(f(x), y) = -\sum_c1(y=c)log f(x)_c = - log f(x)_y$</p>
 </li>
 </ul>
 

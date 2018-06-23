@@ -958,8 +958,6 @@
 <ul>
 <li>initialize  $\theta$ ($\theta = {W^{(1)}, b^{(1)}…，W^{(L + 1)}}$)</li>
 <li>algorithm:<br>  for N iterations: (One epoch)<pre><code>for each training example $(x_{(t)}, y_{(t)})$
-    $\delta = -\nabla_{\theta}l(f(x_{(t)}, \theta), \y_{(t)}) - \lambda\nabla_{(\theta)}$\omiga_{(\theta)}$
-    $\theta \leftarrow \theta + \alpha \delta$
 </code></pre></li>
 <li>SGD 的<a href="https://zhuanlan.zhihu.com/p/22252270" target="_blank" rel="noopener">优缺点</a>：<ul>
 <li>缺点：<ul>
@@ -983,7 +981,7 @@
 <ul>
 <li><p>what neural network estimates?<br>  $f(x)_{c} = P(y=c|x)$， where c means which class.</p>
 </li>
-<li><p>what to optimize?<br>  maximize log likelihood —- minize negative log likelihood: $P(y_i=c|x_i)$，given $(x_i, y_i)$<br>  cross-entropy: p, q (p one-hot, q distribution of the P(y=c|x)) </p>
+<li><p>what to optimize?<br>  maximize log likelihood —- minize negative log likelihood: $P(y_i=c|x_i)$，given $(x_i, y_i)$<br>  cross-entropy: p, q (p one-hot, q distribution of the P(y=c|x))<br>  $l(f(x), y) = -\sum_c1(y=c)log f(x)_c = - log f(x)_y$</p>
 </li>
 </ul>
 
