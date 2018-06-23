@@ -961,10 +961,27 @@
     $\delta = -\nabla_{\theta}l(f(x_{(t)}, \theta), \y_{(t)}) - \lambda\nabla_{(\theta)}$\omiga_{(\theta)}$
     $\theta \leftarrow \theta + \alpha \delta$
 </code></pre></li>
+<li>SGD 的<a href="https://zhuanlan.zhihu.com/p/22252270" target="_blank" rel="noopener">优缺点</a>：<ul>
+<li>缺点：<ul>
+<li>选择合适的learning rate比较困难 - 对所有的参数更新使用同样的learning rate。对于稀疏数据或者特征，有时我们可能想更新快一些对于不经常出现的特征，对于常出现的特征更新慢一些，这时候SGD就不太能满足要求了</li>
+<li>相对BGD noise会比较大</li>
 </ul>
 </li>
-<li><p>what neural network estimates?<br>  $f(x)_{c} = P(y=c|x)$， where c means which class.</p>
+</ul>
 </li>
+<li><p>batch gradient descent (BGD) 的<a href="https://zhuanlan.zhihu.com/p/25765735" target="_blank" rel="noopener">对比</a>：<br>  所谓batch就是一起算，你看公式就知道：<br>  $\theta \leftarrow \theta + \frac{1}{m}\sum_{i}(y_i - f(x;\theta)(x_i))$ (MSE)</p>
+<ul>
+<li>缺点：m很大的时候，train的会比较慢</li>
+<li>优点：比SGD稳定</li>
+</ul>
+</li>
+<li><p>mini-batch GD:<br>  就是这两个的折中，就像强化学习里面的，TD，Monta Carlo之间的n step-TD</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>what neural network estimates?<br>  $f(x)_{c} = P(y=c|x)$， where c means which class.</li>
 </ul>
 
           
