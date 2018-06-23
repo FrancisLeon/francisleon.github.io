@@ -88,7 +88,8 @@
 <meta property="og:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
-<meta property="og:updated_time" content="2018-06-23T19:51:18.000Z">
+<meta property="og:image" content="http://yoursite.com/images/DNN-output-layer-gradient.jpeg">
+<meta property="og:updated_time" content="2018-06-23T19:57:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNN">
 <meta name="twitter:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
@@ -374,6 +375,7 @@
 <li><p>what to optimize?<br>  maximize log likelihood —- minize negative log likelihood: $P(y_i=c|x_i)$，given $(x_i, y_i)$<br>  cross-entropy: p, q (p one-hot, q distribution of the P(y=c|x))<br>  $l(f(x), y) = -\sum_c1(y=c)log f(x)_c = - log f(x)_y$</p>
 </li>
 </ul>
+<h1 id="loss-gradient-output"><a href="#loss-gradient-output" class="headerlink" title="loss gradient output:"></a>loss gradient output:</h1><p><img src="/images/DNN-output-layer-gradient.jpeg" width="50%" height="50%"></p>
 
       
     </div>
@@ -548,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-gradient-output"><span class="nav-number">4.</span> <span class="nav-text">loss gradient output:</span></a></li></ol></div>
             
 
           </div>
