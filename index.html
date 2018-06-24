@@ -989,9 +989,9 @@
 </ul>
 <h1 id="loss-gradient-output"><a href="#loss-gradient-output" class="headerlink" title="loss gradient output:"></a>loss gradient output:</h1><p><img src="/images/DNN-output-layer-gradient.jpeg" width="50%" height="50%"></p>
 <ul>
-<li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^(y = c)}{f(x)^y}$</p>
+<li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^(y = c)}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
 </li>
-<li><p>gradient:<br>  $\nabla_{f(x)} = \frac{-1}{f(x)_y} $</p>
+<li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} = \frac{-1}{f(x)_y} [1^{(y=0)…1^{(y=C-1)}}]^T= $</p>
 </li>
 </ul>
 
