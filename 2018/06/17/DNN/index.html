@@ -89,7 +89,8 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/DNN-output-layer-gradient.jpeg">
-<meta property="og:updated_time" content="2018-06-24T01:06:14.000Z">
+<meta property="og:image" content="http://yoursite.com/images/DNN-output-layer-gradient-proof.jpeg">
+<meta property="og:updated_time" content="2018-06-24T03:41:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNN">
 <meta name="twitter:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
@@ -376,10 +377,18 @@
 </li>
 </ul>
 <h1 id="loss-gradient-output"><a href="#loss-gradient-output" class="headerlink" title="loss gradient output:"></a>loss gradient output:</h1><p><img src="/images/DNN-output-layer-gradient.jpeg" width="50%" height="50%"></p>
-<ul>
+<h2 id="loss-gradient-at-output"><a href="#loss-gradient-at-output" class="headerlink" title="loss gradient at output"></a>loss gradient at output</h2><ul>
 <li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^{(y = c)}}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
 </li>
 <li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} -logf(x)_y= \frac{-1}{f(x)_y} [1^{(y=0)}…1^{(y=C-1)}]^T = \frac{-e(y)}{f(x)^y}$</p>
+</li>
+</ul>
+<h2 id="loss-gradient-at-output-pre-activation"><a href="#loss-gradient-at-output-pre-activation" class="headerlink" title="loss gradient at output pre-activation"></a>loss gradient at output pre-activation</h2><ul>
+<li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^{(y = c)}}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
+</li>
+<li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} -logf(x)_y= \frac{-1}{f(x)_y} [1^{(y=0)}…1^{(y=C-1)}]^T = \frac{-e(y)}{f(x)^y}$</p>
+</li>
+<li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
 </li>
 </ul>
 
@@ -556,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-gradient-output"><span class="nav-number">4.</span> <span class="nav-text">loss gradient output:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-gradient-output"><span class="nav-number">4.</span> <span class="nav-text">loss gradient output:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output"><span class="nav-number">4.1.</span> <span class="nav-text">loss gradient at output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output-pre-activation"><span class="nav-number">4.2.</span> <span class="nav-text">loss gradient at output pre-activation</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -988,10 +988,18 @@
 </li>
 </ul>
 <h1 id="loss-gradient-output"><a href="#loss-gradient-output" class="headerlink" title="loss gradient output:"></a>loss gradient output:</h1><p><img src="/images/DNN-output-layer-gradient.jpeg" width="50%" height="50%"></p>
-<ul>
+<h2 id="loss-gradient-at-output"><a href="#loss-gradient-at-output" class="headerlink" title="loss gradient at output"></a>loss gradient at output</h2><ul>
 <li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^{(y = c)}}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
 </li>
 <li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} -logf(x)_y= \frac{-1}{f(x)_y} [1^{(y=0)}…1^{(y=C-1)}]^T = \frac{-e(y)}{f(x)^y}$</p>
+</li>
+</ul>
+<h2 id="loss-gradient-at-output-pre-activation"><a href="#loss-gradient-at-output-pre-activation" class="headerlink" title="loss gradient at output pre-activation"></a>loss gradient at output pre-activation</h2><ul>
+<li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^{(y = c)}}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
+</li>
+<li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} -logf(x)_y= \frac{-1}{f(x)_y} [1^{(y=0)}…1^{(y=C-1)}]^T = \frac{-e(y)}{f(x)^y}$</p>
+</li>
+<li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
 </li>
 </ul>
 
