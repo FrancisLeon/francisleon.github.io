@@ -991,7 +991,7 @@
 <ul>
 <li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^(y = c)}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
 </li>
-<li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} = \frac{-1}{f(x)_y} [1^{(y=0)…1^{(y=C-1)}}]^T= $</p>
+<li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} -logf(x)_y= \frac{-1}{f(x)_y} [1^{(y=0)…1^{(y=C-1)}}]^T = $</p>
 </li>
 </ul>
 
