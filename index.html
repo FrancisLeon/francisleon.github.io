@@ -336,7 +336,11 @@
 <li>ASPP:</li>
 </ul>
 <h2 id="Multi-level-Adaptation-Model"><a href="#Multi-level-Adaptation-Model" class="headerlink" title="Multi-level Adaptation Model"></a>Multi-level Adaptation Model</h2><p>上面的构成了他们single-level的网络结构。为了构建multi-level的结构，他们将conv4的feature map和一个作为辅助分类器的ASPP模块相结合。和single-level类似，这里面也加了一个同样结构的判别器来进行对抗学习。如图：<br><img src="/images/multi-GAN-structure.jpeg" width="70%" height="70%"></p>
-<h2 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h2><p>作者发现，将segmentation network和discriminitor一起训练效率会比较高。<br>对源域将图片$I_s$向前传最后得到$P_s$，以及优化$L_{seg}$。对于目标域，我们将得到的$P_t$和$P_s$一起输入到判别器里面，然后优化$L_{ad}$</p>
+<h2 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h2><p>作者发现，将segmentation network和discriminitor一起训练效率会比较高。<br>对源域将图片$I_s$向前传最后得到$P_s$，以及优化$L_{seg}$。对于目标域，我们将得到的$P_t$和$P_s$一起输入到判别器里面，然后优化$L_{d}$。此外，对于$P_t$，我们还需要计算对抗损失$L_{ad}$。</p>
+<ul>
+<li>$L_{d}$</li>
+<li>$L_{ad}$</li>
+</ul>
 
           
         
