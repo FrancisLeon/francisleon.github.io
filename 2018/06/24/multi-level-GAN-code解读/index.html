@@ -88,7 +88,7 @@
 <meta property="og:description" content="接下来我开始解读，这篇论文的code Network Structure and TrainingDiscriminatorFor the discriminator, we use an architecture similar to but utilize all fully-convolutional lay- ers to retain the spatial information.总是">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/multi-GAN-structure.jpeg">
-<meta property="og:updated_time" content="2018-06-25T19:40:18.000Z">
+<meta property="og:updated_time" content="2018-06-25T19:44:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="multi-level-GAN-code解读">
 <meta name="twitter:description" content="接下来我开始解读，这篇论文的code Network Structure and TrainingDiscriminatorFor the discriminator, we use an architecture similar to but utilize all fully-convolutional lay- ers to retain the spatial information.总是">
@@ -363,7 +363,7 @@
 </li>
 <li><p>multi-level:</p>
 <ul>
-<li>multi-level loss<br>  就是在low-level的feature space里面加上上面的loss，也不是很难理解：<br>  $L_{I_s, I_t} = \sum_i \lambda_i^{seg}(I_s) + \sum_i \lambda^i_{adv}L_{adv}^i(I_t)$，i表示第几层网络。</li>
+<li>multi-level loss<br>  就是在low-level的feature space里面加上上面的loss，也不是很难理解：<br>  $L_{I_s, I_t} = \sum_i \lambda_i^{seg}L^i_{seg}(I_s) + \sum_i \lambda^i_{adv}L_{adv}^i(I_t)$，i表示第几层网络。</li>
 </ul>
 </li>
 </ul>

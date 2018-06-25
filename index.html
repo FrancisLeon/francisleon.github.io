@@ -365,7 +365,7 @@
 </li>
 <li><p>multi-level:</p>
 <ul>
-<li>multi-level loss<br>  就是在low-level的feature space里面加上上面的loss，也不是很难理解：<br>  $L_{I_s, I_t} = \sum_i \lambda_i^{seg}(I_s) + \sum_i \lambda^i_{adv}L_{adv}^i(I_t)$，i表示第几层网络。</li>
+<li>multi-level loss<br>  就是在low-level的feature space里面加上上面的loss，也不是很难理解：<br>  $L_{I_s, I_t} = \sum_i \lambda_i^{seg}L^i_{seg}(I_s) + \sum_i \lambda^i_{adv}L_{adv}^i(I_t)$，i表示第几层网络。</li>
 </ul>
 </li>
 </ul>
