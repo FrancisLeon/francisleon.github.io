@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="DescriptionGiven two integers n and k, return all possible combinations of k numbers out of 1 … n. ExampleGiven 123456789```[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4]]">
+<meta name="description" content="DescriptionGiven two integers n and k, return all possible combinations of k numbers out of 1 … n. ExampleGiven 123456789```[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4]] Code1234567891011121314151">
 <meta name="keywords" content="lintcode,dfs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lintcode152">
 <meta property="og:url" content="http://yoursite.com/2018/06/26/lintcode152/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="DescriptionGiven two integers n and k, return all possible combinations of k numbers out of 1 … n. ExampleGiven 123456789```[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4]]">
+<meta property="og:description" content="DescriptionGiven two integers n and k, return all possible combinations of k numbers out of 1 … n. ExampleGiven 123456789```[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4]] Code1234567891011121314151">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-26T04:02:31.000Z">
+<meta property="og:updated_time" content="2018-06-26T04:36:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lintcode152">
-<meta name="twitter:description" content="DescriptionGiven two integers n and k, return all possible combinations of k numbers out of 1 … n. ExampleGiven 123456789```[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4]]">
+<meta name="twitter:description" content="DescriptionGiven two integers n and k, return all possible combinations of k numbers out of 1 … n. ExampleGiven 123456789```[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4]] Code1234567891011121314151">
 
 
 
@@ -324,7 +324,7 @@
       
         <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given two integers n and k, return all possible combinations of k numbers out of 1 … n.</p>
 <h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>Given <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">[</span><br><span class="line">  [2,4],</span><br><span class="line">  [3,4],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  [1,3],</span><br><span class="line">  [1,4]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param n: Given the range of numbers</span><br><span class="line">    @param k: Given the numbers of combinations</span><br><span class="line">    @return: All the combinations of k numbers out of 1..n</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def combine(self, n, k):</span><br><span class="line">        # write your code here</span><br><span class="line">        self.res = []</span><br><span class="line">        tmp = []</span><br><span class="line">        self.dfs(n, k, 1, 0, tmp)</span><br><span class="line">        return self.res</span><br><span class="line">        </span><br><span class="line">    # 递归的定义：在 [1,2...n] 中找到所有以 tmp 开头的的集合，并放到 res里面</span><br><span class="line">    # cur_start_pos: 表示当前要开始的位置</span><br><span class="line">    # visited_num: 表示已经遍历过的数目</span><br><span class="line">    def dfs(self, n, k, cur_start_pos, visited_num, tmp):</span><br><span class="line">        # 递归的出口:</span><br><span class="line">        if visited_num == k:</span><br><span class="line">            self.res.append(tmp[:])</span><br><span class="line">            return</span><br><span class="line">        # 递归的拆解：</span><br><span class="line">        for i in range(cur_start_pos, n + 1):</span><br><span class="line">            # 将当前的element放在tmp set里面: [1] -&gt; [1, 2]</span><br><span class="line">            tmp.append(i)</span><br><span class="line">            # 进入下一层: n = 4, k = 2, next_start_pos = i + 1 = 3 注意是在tmp最后的一个元素后面开始, visited_num_now = 2, </span><br><span class="line">            self.dfs(n, k, i + 1, visited_num + 1, tmp)</span><br><span class="line">            # 回溯: [1, 2] -&gt; [1]</span><br><span class="line">            tmp.pop()</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -496,7 +496,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">2.</span> <span class="nav-text">Example</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
 
           </div>
