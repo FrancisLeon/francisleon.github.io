@@ -233,6 +233,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode351/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/leetcode351/" itemprop="url">leetcode351</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T02:09:12-04:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given an Android 3x3 key lock screen and two integers m and n, where 1 ≤ m ≤ n ≤ 9, count the total number of unlock patterns of the Android lock screen, which consist of minimum of m keys and maximum n keys.</p>
+<p>Rules for a valid pattern:</p>
+<ol>
+<li>Each pattern must connect at least m keys and at most n keys.</li>
+<li>All the keys must be distinct.</li>
+<li>If the line connecting two consecutive keys in the pattern passes through any other keys, the other keys must have previously selected in the pattern. No jumps through non selected key is allowed.</li>
+<li>The order of keys used matters.</li>
+</ol>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| 1 | 2 | 3 |</span><br><span class="line">| 4 | 5 | 6 |</span><br><span class="line">| 7 | 8 | 9 |</span><br></pre></td></tr></table></figure>
+<p>Invalid move: 4 - 1 - 3 - 6<br>Line 1 - 3 passes through key 2 which had not been selected in the pattern.</p>
+<p>Invalid move: 4 - 1 - 9 - 2<br>Line 1 - 9 passes through key 5 which had not been selected in the pattern.</p>
+<p>Valid move: 2 - 4 - 1 - 3 - 6<br>Line 1 - 3 is valid because it passes through key 2, which had been selected in the pattern</p>
+<p>Valid move: 6 - 5 - 4 - 1 - 9 - 2<br>Line 1 - 9 is valid because it passes through key 5, which had been selected in the pattern.</p>
+<p>Example:<br>Given m = 1, n = 1, return 9.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>这种棋盘格子之类的问题往往是用dfs来求解的。然后，discussion里面这个哥们给的<a href="https://leetcode.com/problems/android-unlock-patterns/discuss/131737/Python-easy-readable-DFS-solution-with-clear-explaination" target="_blank" rel="noopener">解</a>挺好的，很清晰：<br>The basic idea is starting from an arbitrary digit (prev), search all the valid next digit. Use a set/dict (visited) to store all the visited digits. What is the invalid combination? Only two cases.</p>
+<p>if prev in {1, 3, 5, 7} and next in {1, 3, 5, 7}, however, (prev + next)/2 not in visited. e.g. 1 -&gt; 7 and 4 not visited.<br>if prev in {2, 4, 6, 8} and next == 10 - prev, however, 5 is not in visited. e.g. 2-&gt;8 and 5 not visited.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode766/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1601,212 +1758,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/17/DNN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/17/DNN/" itemprop="url">DNN</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-17T21:36:58-04:00">
-                2018-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这个是hugo的deep learning的学习<a href="http://www.dmi.usherb.ca/~larocheh/neural_networks/content.html" target="_blank" rel="noopener">tutorial</a>，需要慢慢刷掉，当然cmu 10707 的<a href="https://www.cs.cmu.edu/~rsalakhu/10707/" target="_blank" rel="noopener">slides</a>很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。</p>
-<p>然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：</p>
-<h1 id="网络的基本结构："><a href="#网络的基本结构：" class="headerlink" title="网络的基本结构："></a>网络的基本结构：</h1><p><img src="/images/DNNstructure.jpeg" width="50%" height="50%"></p>
-<ul>
-<li>layer pre-activation for $k &gt; 0$ <strong>$(h_{0}(x) = x)$</strong><br>  $a^{(k)}(x) = b^{(k)} + W^{(k)}h^{(k - 1)}(x)$<br>  感觉这么记忆，不会记乱，k就是第几层neuron，然后$h^{(k - 1)}(x)$是前一层的输出，然后weights $W^{(k)}$，bias $b^{(k)}$都是这层的，虽然有前一层输出作为的输入，但是这些还是算这一层的。</li>
-<li><p>hidden layer activation (k from 1 to L)<br>  $h^{(k)}(x) = g(a^{(k)}(x))$<br>  反正这个就是这一层的输出，然后，这层的weights，bias最终都会由这层的输出所终结。</p>
-</li>
-<li><p>output layer activation $k = L + 1$:<br>  $h^{(L + 1)}(x) = o(a^{(L + 1)}(x)) = f(x)$<br>  和hidden不一样就是这个是最后一层了，然后这层的activation function也会和之前hidden layers有所不同，如果是分类的话，往往是softmax</p>
-</li>
-<li><p>softmax activation function at the output:<br>  $o(a) = softmax(a) = [\frac{exp(a_1)}{\sum_c exp(a_c)}…\frac{a_C}{\sum_c exp(a_c)}]^T$<br>  如何理解softmax呢，为什么多分类问题里面要用softmax呢，而不是别的呢？<br>  知乎对此有一定的<a href="https://www.zhihu.com/question/40403377" target="_blank" rel="noopener">讨论</a>，我这里引用下王赟(yun第一声)大神的解答：</p>
-<ul>
-<li>原因之一：希望特征对概率的影响是乘性的</li>
-<li>原因之二：多类分类问题的目标函数常常选为cross-entropy，…(推完整个，回来补)</li>
-</ul>
-</li>
-</ul>
-<h1 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function:"></a>loss function:</h1><ul>
-<li><p>stochastic gradient descent (SGD):<br>  随机梯度下降应该是最最基础的梯度下降的方法了，</p>
-<ul>
-<li>initialize  $\theta$ ($\theta = {W^{(1)}, b^{(1)}…，W^{(L + 1)}}$)</li>
-<li>algorithm:<br>  for N iterations: (One epoch)<pre><code>for each training example $(x_{(t)}, y_{(t)})$   
-    $\delta = -\nabla_{\theta}l(f(x_{(t)}, \theta), \y_{(t)}) - \lambda\nabla_{(\theta)}$
-    $\omiga_{(\theta)}$
-    $\theta \leftarrow \theta + \alpha \delta$
-</code></pre></li>
-<li>SGD 的<a href="https://zhuanlan.zhihu.com/p/22252270" target="_blank" rel="noopener">优缺点</a>：<ul>
-<li>缺点：<ul>
-<li>选择合适的learning rate比较困难 - 对所有的参数更新使用同样的learning rate。对于稀疏数据或者特征，有时我们可能想更新快一些对于不经常出现的特征，对于常出现的特征更新慢一些，这时候SGD就不太能满足要求了</li>
-<li>相对BGD noise会比较大</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>batch gradient descent (BGD) 的<a href="https://zhuanlan.zhihu.com/p/25765735" target="_blank" rel="noopener">对比</a>：<br>  所谓batch就是一起算，你看公式就知道：<br>  $\theta \leftarrow \theta + \frac{1}{m}\sum_{i}(y_i - f(x;\theta)(x_i))$ (MSE)</p>
-<ul>
-<li>缺点：m很大的时候，train的会比较慢</li>
-<li>优点：比SGD稳定</li>
-</ul>
-</li>
-<li><p>mini-batch GD:<br>  就是这两个的折中，就像强化学习里面的，TD，Monta Carlo之间的n step-TD</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>what neural network estimates?<br>  $f(x)_{c} = P(y=c|x)$， where c means which class.</p>
-</li>
-<li><p>what to optimize?<br>  maximize log likelihood —- minize negative log likelihood: $P(y_i=c|x_i)$，given $(x_i, y_i)$<br>  cross-entropy: p, q (p one-hot, q distribution of the P(y=c|x))<br>  $l(f(x), y) = -\sum_c1(y=c)log f(x)_c = - log f(x)_y$</p>
-</li>
-</ul>
-<h1 id="loss-gradient-output"><a href="#loss-gradient-output" class="headerlink" title="loss gradient output:"></a>loss gradient output:</h1><p><img src="/images/DNN-output-layer-gradient.jpeg" width="50%" height="50%"></p>
-<h2 id="loss-gradient-at-output"><a href="#loss-gradient-at-output" class="headerlink" title="loss gradient at output"></a>loss gradient at output</h2><ul>
-<li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^{(y = c)}}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
-</li>
-<li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} -logf(x)_y= \frac{-1}{f(x)_y} [1^{(y=0)}…1^{(y=C-1)}]^T = \frac{-e(y)}{f(x)^y}$</p>
-</li>
-</ul>
-<h2 id="loss-gradient-at-output-pre-activation"><a href="#loss-gradient-at-output-pre-activation" class="headerlink" title="loss gradient at output pre-activation"></a>loss gradient at output pre-activation</h2><ul>
-<li><p>partial derivative:<br>  首先还是标量的形式，<br>  $\frac{\partial - logf(x)_y}{\partial a^{(L+1)}(x)_c} = (1^{(y = c)}} - f(x)^y)$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
-</li>
-<li><p>gradient:<br>  然后，我们类比到向量上面，<br>  $\nabla_{a^{(L+1)}(x)_c}[- logf(x)_y}] = -(e^{(y)}} - f(x)^y)$</p>
-</li>
-<li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补推一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1857,7 +1808,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
