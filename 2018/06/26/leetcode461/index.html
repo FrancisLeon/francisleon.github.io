@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="10707," />
+  <meta name="keywords" content="bit operation," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="虽然，强化学习、深度学习和迁移学习都是属于机器学习的，但是感觉blog里面，放在一起还是有点杂乱，所以还是分出来，慢慢整理，我应该主要整理cmu 10707 introduction to deep learning的东西，也会参考11785 introduction to deep learning 就是用自己的理解整理一遍吧，之前面试总是面挂在这里，希望之后不会，还有对自己目前research">
-<meta name="keywords" content="10707">
+<meta name="description" content="461. Hamming DistanceDescriptionThe Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming di">
+<meta name="keywords" content="bit operation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习篇">
-<meta property="og:url" content="http://yoursite.com/2018/06/17/深度学习/index.html">
+<meta property="og:title" content="leetcode461">
+<meta property="og:url" content="http://yoursite.com/2018/06/26/leetcode461/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="虽然，强化学习、深度学习和迁移学习都是属于机器学习的，但是感觉blog里面，放在一起还是有点杂乱，所以还是分出来，慢慢整理，我应该主要整理cmu 10707 introduction to deep learning的东西，也会参考11785 introduction to deep learning 就是用自己的理解整理一遍吧，之前面试总是面挂在这里，希望之后不会，还有对自己目前research">
+<meta property="og:description" content="461. Hamming DistanceDescriptionThe Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming di">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-18T02:01:21.000Z">
+<meta property="og:updated_time" content="2018-06-27T03:15:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习篇">
-<meta name="twitter:description" content="虽然，强化学习、深度学习和迁移学习都是属于机器学习的，但是感觉blog里面，放在一起还是有点杂乱，所以还是分出来，慢慢整理，我应该主要整理cmu 10707 introduction to deep learning的东西，也会参考11785 introduction to deep learning 就是用自己的理解整理一遍吧，之前面试总是面挂在这里，希望之后不会，还有对自己目前research">
+<meta name="twitter:title" content="leetcode461">
+<meta name="twitter:description" content="461. Hamming DistanceDescriptionThe Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming di">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/17/深度学习/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/26/leetcode461/"/>
 
 
 
 
 
-  <title>深度学习篇 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>leetcode461 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/17/深度学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode461/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深度学习篇</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode461</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-17T21:56:35-04:00">
-                2018-06-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T23:10:20-04:00">
+                2018-06-26
               </time>
             
 
@@ -285,8 +285,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
                   </a>
                 </span>
 
@@ -322,8 +322,12 @@
       
 
       
-        <p>虽然，强化学习、深度学习和迁移学习都是属于机器学习的，但是感觉blog里面，放在一起还是有点杂乱，所以还是分出来，慢慢整理，<br>我应该主要整理cmu <a href="https://www.cs.cmu.edu/~rsalakhu/10707/" target="_blank" rel="noopener">10707</a> introduction to deep learning的东西，也会参考<a href="http://deeplearning.cs.cmu.edu/" target="_blank" rel="noopener">11785</a> introduction to deep learning</p>
-<p>就是用自己的理解整理一遍吧，之前面试总是面挂在这里，希望之后不会，还有对自己目前research也有点帮助吧。毕竟基础不牢，地动山摇。</p>
+        <h1 id="461-Hamming-Distance"><a href="#461-Hamming-Distance" class="headerlink" title="461. Hamming Distance"></a>461. Hamming Distance</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.</p>
+<p>Given two integers x and y, calculate the Hamming distance.<br>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: x = 1, y = 4</span><br><span class="line"></span><br><span class="line">Output: 2</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">1   (0 0 0 1)</span><br><span class="line">4   (0 1 0 0)</span><br><span class="line">       ↑   ↑</span><br><span class="line"></span><br><span class="line">The above arrows point to positions where the corresponding bits are different.</span><br></pre></td></tr></table></figure></p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>It’s involved with bits, which bring bit operations into my mind. — xor</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def hammingDistance(self, x, y):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type x: int</span><br><span class="line">        :type y: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        return bin(x ^ y).count(&apos;1&apos;)</span><br></pre></td></tr></table></figure>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>bin() example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">number = 5</span><br><span class="line">print(&apos;The binary equivalent of 5 is:&apos;, bin(number))</span><br><span class="line"></span><br><span class="line"># result:</span><br><span class="line">The binary equivalent of 5 is: 0b101</span><br></pre></td></tr></table></figure></p>
+<p>count() example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">aList = [123, &apos;xyz&apos;, &apos;zara&apos;, &apos;abc&apos;, 123];</span><br><span class="line">print &quot;Count for 123 : &quot;, aList.count(123)</span><br><span class="line">print &quot;Count for zara : &quot;, aList.count(&apos;zara&apos;)</span><br><span class="line"></span><br><span class="line"># result:</span><br><span class="line">Count for 123 :  2</span><br><span class="line">Count for zara :  1</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -341,7 +345,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/10707/" rel="tag"># 10707</a>
+            <a href="/tags/bit-operation/" rel="tag"># bit operation</a>
           
         </div>
       
@@ -354,8 +358,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/17/DNN/" rel="next" title="DNN">
-                <i class="fa fa-chevron-left"></i> DNN
+              <a href="/2018/06/26/leetcode1/" rel="next" title="leetcode1">
+                <i class="fa fa-chevron-left"></i> leetcode1
               </a>
             
           </div>
@@ -363,10 +367,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/20/pytorch/" rel="prev" title="pytorch 入门">
-                pytorch 入门 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -418,8 +418,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -479,6 +488,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#461-Hamming-Distance"><span class="nav-number">1.</span> <span class="nav-text">461. Hamming Distance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">3.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">5.</span> <span class="nav-text">Python</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
