@@ -233,6 +233,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/SGGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/SGGAN/" itemprop="url">Semantic-aware Grad-GAN for Virtual-to-Real Urban Scene Adaption</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T20:25:45-04:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/迁移学习/" itemprop="url" rel="index">
+                    <span itemprop="name">迁移学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在做迁移学习，这篇是我们学校的大佬做的工作，看下总结一下：</p>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Recent advances in vision tasks (e.g., segmentation) highly depend on the availability of large-scale real-world image annotations obtained by cumbersome human labors. Moreover, the perception performance often drops signif- icantly for new scenarios, due to the poor generalization capability of models trained on limited and biased annota- tions. In this work, we resort to transfer knowledge from automatically rendered scene annotations in virtual-world to facilitate real-world visual tasks. Although virtual-world annotations can be ideally diverse and unlimited, the dis- crepant data distributions between virtual and real-world make it challenging for knowledge transferring. We thus propose a novel Semantic-aware Grad-GAN (SG-GAN) to perform virtual-to-real domain adaption with the ability of retaining vital semantic information. Beyond the sim- ple holistic color/texture transformation achieved by prior works, SG-GAN successfully personalizes the appearance adaption for each semantic region in order to preserve their key characteristic for better recognition. It presents two main contributions to traditional GANs: <strong>1) a soft gradient-sensitive objective for keeping semantic boundaries; 2) a semantic-aware discriminator for validating the fidelity of personalized adaptions with respect to each semantic region.</strong> Qualitative and quantitative experiments demonstrate the superiority of our SG-GAN in scene adaption over state- of-the-art GANs. Further evaluations on semantic seg- mentation on Cityscapes show using adapted virtual im- ages by SG-GAN dramatically improves segmentation per- formance than original virtual data.</p>
+<h1 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h1><p>真是牛逼，总结的超级好：<br>Previous domain adaption approaches can be summarized as two lines: minimizing the difference between the source and target feature distributions [12, 15, 16, 17, 18, 36]; or explicitly ensuring that two data distributions close to each other by adversarial learning [24, 26, 27, 34, 42, 44] or feature combining [10, 11, 22, 25, 37].<br>Image-based adaptation can be also referred to as image-to-image translation, i.e., translating images from source domain to target domain, which can be summarized into two following directions.</p>
+<h1 id="the-problem-to-solve"><a href="#the-problem-to-solve" class="headerlink" title="the problem to solve"></a>the problem to solve</h1><p>传统的GAN的问题是尽管可以实现从源域到目标域图片颜色和文理的迁移，但是会忽视关键区域的一些特征（这些特征和颜色文理有什么区别）。</p>
+<h1 id="whole-picture"><a href="#whole-picture" class="headerlink" title="whole picture"></a>whole picture</h1><p><img src="/images/SGGAN.jpeg" alt=""></p>
+<h1 id="loss-objective"><a href="#loss-objective" class="headerlink" title="loss objective"></a>loss objective</h1><p>下面对里面涉及的loss进行拆解</p>
+<h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>首先这里是基于标准的对抗损失，这里我先重温一下<a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="noopener">GAN</a>里面的基本loss function：<br>$min_G max_D V(D, G)  |  V(D, G) = E_{x~p_{data}(x)}[log D(x)] + E_{z_{p_{z}(z)}}[log(1 - D(G(z)))]$<br>Generative Adversarial Network 的基本思想，生成网络G想要使得V尽量小，而判别网络D想要使得V尽量大，然后二者一直在对抗。<br>这里有一张图很好的对此做了说明：<br><img src="/images/GANexplanation.jpeg" alt=""><br>我们从real data的分布里面sample得到一个图，我们有一个fake的数据分布$z~p_z(z)$,经过我们的生成网络生成一张图，然后这两张图，分别传到判别网络里面判断，输出0或者1。</p>
+<h2 id="cycle-consistency-loss"><a href="#cycle-consistency-loss" class="headerlink" title="cycle consistency loss"></a>cycle consistency loss</h2><p>如果看过我之前写的<a href="https://francisleon.github.io/2018/06/12/%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%E5%81%9A%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB/" target="_blank" rel="noopener">cycle-GAN</a>的分析这个就很好理解了。作者也说了，他们也是基于cycle-GAN来改进的。</p>
+<h2 id="Soft-gradient-sensitive-objective"><a href="#Soft-gradient-sensitive-objective" class="headerlink" title="Soft gradient-sensitive objective"></a>Soft gradient-sensitive objective</h2><p>这个和edge detector有关。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/找老师二三事/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1529,148 +1679,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/统计机器学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/统计机器学习/" itemprop="url">统计机器学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-12T01:01:12-04:00">
-                2018-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>要开始学习统计机器学习了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1721,7 +1729,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

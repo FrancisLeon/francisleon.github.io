@@ -233,6 +233,199 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/multi-level-GAN-code解读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/24/multi-level-GAN-code解读/" itemprop="url">multi-level-GAN-code解读</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-24T11:24:59-04:00">
+                2018-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/迁移学习/" itemprop="url" rel="index">
+                    <span itemprop="name">迁移学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>接下来我开始解读，<a href="https://arxiv.org/abs/1802.10349" target="_blank" rel="noopener">这篇</a>论文的<a href="https://github.com/wasidennis/AdaptSegNet" target="_blank" rel="noopener">code</a></p>
+<h1 id="Network-Structure-and-Training"><a href="#Network-Structure-and-Training" class="headerlink" title="Network Structure and Training"></a>Network Structure and Training</h1><h2 id="Discriminator"><a href="#Discriminator" class="headerlink" title="Discriminator"></a>Discriminator</h2><p>For the discriminator, we use an architecture similar to but utilize all fully-convolutional lay- ers to <strong>retain the spatial information</strong>.<br>总是来说就是，5层卷积网络，kernel是4 x 4 stride是2，channel是{64, 128, 256, 512, 1}。<br>除了最后一层卷积层，其他所有层都是用参数为0.2的leaky ReLU。在最后一层卷积层之后加了一个up-sampling的层，使得最后一层和输入图片的大小是一样的。他们没有使用batch-normalization层，因为他们用小的batch size一起训练判别器和分割网络。(?)</p>
+<ul>
+<li>batch normalization:</li>
+</ul>
+<h2 id="Segmentation-Network"><a href="#Segmentation-Network" class="headerlink" title="Segmentation Network"></a>Segmentation Network</h2><p>他们用DeepLab-v2 和 ResNet-101来作为他们分割的baseline，由于memory的问题，他们没有使用multi-scale。<br>他们去掉了最后的分类的一层，然后将最后的两层卷积stride从2改成1。这使得输出的feature maps是输入图片大小的1/8。为了使这个更大，他们在conv4和conv5用了stride分别是2，4的dilated conv。这后面又用了Atrous Spatial Pyramid Pooling (ASPP)作为最后的分类器。在ASPP后面，他们也采用了输出的是softmax的up-sampling层，这层输出的大小和输入的图片大小也是一样的。</p>
+<ul>
+<li>ASPP:</li>
+</ul>
+<h2 id="Multi-level-Adaptation-Model"><a href="#Multi-level-Adaptation-Model" class="headerlink" title="Multi-level Adaptation Model"></a>Multi-level Adaptation Model</h2><p>上面的构成了他们single-level的网络结构。为了构建multi-level的结构，他们将conv4的feature map和一个作为辅助分类器的ASPP模块相结合。和single-level类似，这里面也加了一个同样结构的判别器来进行对抗学习。如图：<br><img src="/images/multi-GAN-structure.jpeg" width="70%" height="70%"></p>
+<h2 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h2><p>作者发现，将segmentation network和discriminitor一起训练效率会比较高。<br>对源域将图片$I_s$向前传最后得到$P_s$，以及优化$L_{seg}$。对于目标域，我们将得到的$P_t$和$P_s$一起输入到判别器里面，然后优化$L_{d}$。此外，对于$P_t$，我们还需要计算对抗损失$L_{ad}$。</p>
+<h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><ul>
+<li><p>whole objective:<br>  $L(I_s, I_t) = L_{seg}(I_s) + \lambda L_{adv}(I_t)$</p>
+<ul>
+<li>$L_{seg}(I_s)$<br>  cross-entropy loss using ground truth annotations in the source domain</li>
+<li>$L_{adv}$<br>  对抗损失，用来使得源域的预期的数据分布和目标域相近</li>
+<li>$\lambda_{abv}$<br>  这个weight用来平衡这两个loss</li>
+</ul>
+</li>
+<li><p>discriminitor:</p>
+<ul>
+<li><p>segmentation softmax output:<br>  $P = G(I) \in R^{HxWxC}$, 这里C是种类数，这里C是19</p>
+</li>
+<li><p>cross-entropy loss：<br>  我们将P传到全卷积的判别器D里面：$L_d(P) = - \sum_{h, w}((1 - z)log(D(P)^{(h,w,0)})) + zlog(D(P)^{(h,w,1)})$，这个是binary cross entropy，这里z = 0，表示来自target，z = 1表示来自source</p>
+</li>
+</ul>
+</li>
+<li><p>segmentation network:</p>
+<ul>
+<li>segmentation loss:<br>  在源域的话我们正常训练，还是由cross-entropy loss来定义：$L_{seg}(I_s) = -\sum_{h, w}\sum_{c \in C}Y_s^{h,w,c}log(P_s^{(h,w,c)})$</li>
+<li>adversarial loss：<br>  在目标域，我们的对抗损失是：$L_{adv}(I_t) = -\sum_{h,w}log(D(G(I_t)))^{(h,w,1)}$，这个损失是用来欺骗判别器的，使得两者的预期的概率的一致</li>
+</ul>
+</li>
+<li><p>multi-level:</p>
+<ul>
+<li>multi-level loss<br>  就是在low-level的feature space里面加上上面的loss，也不是很难理解：<br>  $L_{I_s, I_t} = \sum_i \lambda_i^{seg}L^i_{seg}(I_s) + \sum_i \lambda^i_{adv}L_{adv}^i(I_t)$，i表示第几层网络。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Network-Code"><a href="#Network-Code" class="headerlink" title="Network Code"></a>Network Code</h1><h2 id="Discriminitor"><a href="#Discriminitor" class="headerlink" title="Discriminitor"></a>Discriminitor</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line">class FCDiscriminator(nn.Module):</span><br><span class="line">	def __init__(self, num_classes, ndf = 64):</span><br><span class="line">		super(FCDiscriminator, self).__init__()</span><br><span class="line"></span><br><span class="line">		self.conv1 = nn.Conv2d(num_classes, ndf, kernel_size=4, stride=2, padding=1)</span><br><span class="line">		self.conv2 = nn.Conv2d(ndf, ndf*2, kernel_size=4, stride=2, padding=1)</span><br><span class="line">		self.conv3 = nn.Conv2d(ndf*2, ndf*4, kernel_size=4, stride=2, padding=1)</span><br><span class="line">		self.conv4 = nn.Conv2d(ndf*4, ndf*8, kernel_size=4, stride=2, padding=1)</span><br><span class="line">		self.classifier = nn.Conv2d(ndf*8, 1, kernel_size=4, stride=2, padding=1)</span><br><span class="line"></span><br><span class="line">		self.leaky_relu = nn.LeakyReLU(negative_slope=0.2, inplace=True)</span><br><span class="line">		#self.up_sample = nn.Upsample(scale_factor=32, mode=&apos;bilinear&apos;)</span><br><span class="line">		#self.sigmoid = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">	def forward(self, x):</span><br><span class="line">		x = self.conv1(x)</span><br><span class="line">		x = self.leaky_relu(x)</span><br><span class="line">		x = self.conv2(x)</span><br><span class="line">		x = self.leaky_relu(x)</span><br><span class="line">		x = self.conv3(x)</span><br><span class="line">		x = self.leaky_relu(x)</span><br><span class="line">		x = self.conv4(x)</span><br><span class="line">		x = self.leaky_relu(x)</span><br><span class="line">		x = self.classifier(x)</span><br><span class="line">		#x = self.up_sample(x)</span><br><span class="line">		#x = self.sigmoid(x) </span><br><span class="line"></span><br><span class="line">		return x</span><br></pre></td></tr></table></figure>
+<p>有了上面的描述，判别器的网络还是很清楚的。</p>
+<h2 id="Segmentation-Network-1"><a href="#Segmentation-Network-1" class="headerlink" title="Segmentation Network"></a>Segmentation Network</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class ResNetMulti(nn.Module):</span><br><span class="line">    def __init__(self, block, layers, num_classes):</span><br><span class="line">        self.inplanes = 64</span><br><span class="line">        super(ResNetMulti, self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,</span><br><span class="line">                               bias=False)</span><br><span class="line">        self.bn1 = nn.BatchNorm2d(64, affine=affine_par)</span><br><span class="line">        for i in self.bn1.parameters():</span><br><span class="line">            i.requires_grad = False</span><br><span class="line">        self.relu = nn.ReLU(inplace=True)</span><br><span class="line">        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1, ceil_mode=True)  # change</span><br><span class="line">        self.layer1 = self._make_layer(block, 64, layers[0])</span><br><span class="line">        self.layer2 = self._make_layer(block, 128, layers[1], stride=2)</span><br><span class="line">        self.layer3 = self._make_layer(block, 256, layers[2], stride=1, dilation=2)</span><br><span class="line">        self.layer4 = self._make_layer(block, 512, layers[3], stride=1, dilation=4)</span><br><span class="line">        self.layer5 = self._make_pred_layer(Classifier_Module, 1024, [6, 12, 18, 24], [6, 12, 18, 24], num_classes)</span><br><span class="line">        self.layer6 = self._make_pred_layer(Classifier_Module, 2048, [6, 12, 18, 24], [6, 12, 18, 24], num_classes)</span><br></pre></td></tr></table></figure>
+<p>前面应该是对resnet的结构的继承吧，后面的layer5，和layer6应该就是前面说的ASPP的classifier了，这两个分别之后参与adaptation module的部分。</p>
+<h1 id="Train-Code"><a href="#Train-Code" class="headerlink" title="Train Code"></a>Train Code</h1><h2 id="Train-G"><a href="#Train-G" class="headerlink" title="Train G"></a>Train G</h2><p>类似train 原本的GAN，这里train的G其实就是segmentation network</p>
+<h3 id="Train-with-source"><a href="#Train-with-source" class="headerlink" title="Train with source"></a>Train with source</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">_, batch = trainloader_iter.next()</span><br><span class="line">images, labels, _, _ = batch</span><br><span class="line">images = Variable(images).cuda(args.gpu)</span><br><span class="line"></span><br><span class="line">pred1, pred2 = model(images)</span><br><span class="line">pred1 = interp(pred1)</span><br><span class="line">pred2 = interp(pred2)</span><br><span class="line"></span><br><span class="line">loss_seg1 = loss_calc(pred1, labels, args.gpu)</span><br><span class="line">loss_seg2 = loss_calc(pred2, labels, args.gpu)</span><br><span class="line">loss = loss_seg2 + args.lambda_seg * loss_seg1</span><br><span class="line"></span><br><span class="line"># proper normalization</span><br><span class="line">loss = loss / args.iter_size</span><br><span class="line">loss.backward()</span><br><span class="line">loss_seg_value1 += loss_seg1.data.cpu().numpy()[0] / args.iter_size</span><br><span class="line">loss_seg_value2 += loss_seg2.data.cpu().numpy()[0] / args.iter_size</span><br></pre></td></tr></table></figure>
+<p>train with source这里的loss就是：$\sum_i \lambda_i^{seg}L^i_{seg}(I_s)$，$L_{seg}(I_s) = -\sum_{h, w}\sum_{c \in C}Y_s^{h,w,c}log(P_s^{(h,w,c)})$</p>
+<h3 id="Train-with-target"><a href="#Train-with-target" class="headerlink" title="Train with target"></a>Train with target</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">_, batch = targetloader_iter.next()</span><br><span class="line">images, _, _ = batch</span><br><span class="line">images = Variable(images).cuda(args.gpu)</span><br><span class="line"></span><br><span class="line">pred_target1, pred_target2 = model(images)</span><br><span class="line">pred_target1 = interp_target(pred_target1)</span><br><span class="line">pred_target2 = interp_target(pred_target2)</span><br><span class="line"></span><br><span class="line">D_out1 = model_D1(F.softmax(pred_target1))</span><br><span class="line">D_out2 = model_D2(F.softmax(pred_target2))</span><br><span class="line"></span><br><span class="line">loss_adv_target1 = bce_loss(D_out1,</span><br><span class="line">                            Variable(torch.FloatTensor(D_out1.data.size()).fill_(source_label)).cuda(</span><br><span class="line">                                args.gpu))</span><br><span class="line"></span><br><span class="line">loss_adv_target2 = bce_loss(D_out2,</span><br><span class="line">                            Variable(torch.FloatTensor(D_out2.data.size()).fill_(source_label)).cuda(</span><br><span class="line">                                args.gpu))</span><br><span class="line"></span><br><span class="line">loss = args.lambda_adv_target1 * loss_adv_target1 + args.lambda_adv_target2 * loss_adv_target2</span><br><span class="line">loss = loss / args.iter_size</span><br><span class="line">loss.backward()</span><br><span class="line">loss_adv_target_value1 += loss_adv_target1.data.cpu().numpy()[0] / args.iter_size</span><br><span class="line">loss_adv_target_value2 += loss_adv_target2.data.cpu().numpy()[0] / args.iter_size</span><br></pre></td></tr></table></figure>
+<p>train target对应的就是：$\sum_i \lambda^i_{adv}L_{adv}^i(I_t)$，$L_{adv}(I_t) = -\sum_{h,w}log(D(G(I_t)))^{(h,w,1)}$</p>
+<h2 id="Train-D"><a href="#Train-D" class="headerlink" title="Train D"></a>Train D</h2><h3 id="Train-with-source-1"><a href="#Train-with-source-1" class="headerlink" title="Train with source"></a>Train with source</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># labels for adversarial training</span><br><span class="line">source_label = 0</span><br><span class="line"></span><br><span class="line">pred1 = pred1.detach()</span><br><span class="line">pred2 = pred2.detach()</span><br><span class="line"></span><br><span class="line">D_out1 = model_D1(F.softmax(pred1))</span><br><span class="line">D_out2 = model_D2(F.softmax(pred2))</span><br><span class="line"></span><br><span class="line">loss_D1 = bce_loss(D_out1,</span><br><span class="line">                    Variable(torch.FloatTensor(D_out1.data.size()).fill_(source_label)).cuda(args.gpu))</span><br><span class="line"></span><br><span class="line">loss_D2 = bce_loss(D_out2,</span><br><span class="line">                    Variable(torch.FloatTensor(D_out2.data.size()).fill_(source_label)).cuda(args.gpu))</span><br><span class="line"></span><br><span class="line">loss_D1 = loss_D1 / args.iter_size / 2</span><br><span class="line">loss_D2 = loss_D2 / args.iter_size / 2</span><br><span class="line"></span><br><span class="line">loss_D1.backward()</span><br><span class="line">loss_D2.backward()</span><br><span class="line"></span><br><span class="line">loss_D_value1 += loss_D1.data.cpu().numpy()</span><br><span class="line">loss_D_value2 += loss_D2.data.cpu().numpy()</span><br></pre></td></tr></table></figure>
+<p>$L_d(P) = - \sum_{h, w}((1 - z)log(D(P)^{(h,w,0)})) + zlog(D(P)^{(h,w,1)})$，z = 0</p>
+<h3 id="Train-with-target-1"><a href="#Train-with-target-1" class="headerlink" title="Train with target"></a>Train with target</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># labels for adversarial training</span><br><span class="line">target_label = 1</span><br><span class="line"></span><br><span class="line">pred_target1 = pred_target1.detach()</span><br><span class="line">pred_target2 = pred_target2.detach()</span><br><span class="line"></span><br><span class="line">D_out1 = model_D1(F.softmax(pred_target1))</span><br><span class="line">D_out2 = model_D2(F.softmax(pred_target2))</span><br><span class="line"></span><br><span class="line">loss_D1 = bce_loss(D_out1,</span><br><span class="line">                    Variable(torch.FloatTensor(D_out1.data.size()).fill_(target_label)).cuda(args.gpu))</span><br><span class="line"></span><br><span class="line">loss_D2 = bce_loss(D_out2,</span><br><span class="line">                    Variable(torch.FloatTensor(D_out2.data.size()).fill_(target_label)).cuda(args.gpu))</span><br><span class="line"></span><br><span class="line">loss_D1 = loss_D1 / args.iter_size / 2</span><br><span class="line">loss_D2 = loss_D2 / args.iter_size / 2</span><br><span class="line"></span><br><span class="line">loss_D1.backward()</span><br><span class="line">loss_D2.backward()</span><br><span class="line"></span><br><span class="line">loss_D_value1 += loss_D1.data.cpu().numpy()</span><br><span class="line">loss_D_value2 += loss_D2.data.cpu().numpy()</span><br></pre></td></tr></table></figure>
+<p>$L_d(P) = - \sum_{h, w}((1 - z)log(D(P)^{(h,w,0)})) + zlog(D(P)^{(h,w,1)})$，z = 1</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/leetcode体系/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1662,156 +1855,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/自省/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/13/自省/" itemprop="url">自省</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T10:08:55-04:00">
-                2018-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/思考/" itemprop="url" rel="index">
-                    <span itemprop="name">思考</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>重温了一下知乎上田渊栋大大的感悟：常常看来提醒自己：</p>
-<p>作者：田渊栋<br>链接：<a href="https://zhuanlan.zhihu.com/p/26178137" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26178137</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>思危，思退，思变</p>
-<p>首先要自律。这是最基本的。如果一个人不能控制自己的行为，那无法走出自己的路。像说到要做到，有规律地锻炼身体，勤奋努力，这些都是重要的。</p>
-<p>接下来要跳出舒适区。举个例子，勤奋本来就是舒适区的一种。“勤能补拙”这个词是很好的，首先它说明现在处于“拙”的状态中，需要继续努力；其次，勤只能用来“补”拙，而不能让拙变巧，不是根本的解决方案。勤奋是一种惶惶然的状态，而不是一种满足的状态，勤奋意味着自己不如别人，于是得要花更多的时间去补救，别人干八小时就够了，自己得花十几个小时才能赶上。这种状态是不长久的，碰到出些小毛小病，或者家里有事，那就补不过来，就要掉队了。勤奋的用处是试错，是让自己在落后时可以多花点时间找到正确的方法，以达到和别人相当甚至更高的效率，从而提高自己的能力。别人是科班出身，我半路杀进来，当然要多花时间去补；别人学习效率高，我的效率不高，于是得要多花点时间去探索更好的方法。勤奋是暂态，它最终目的是找到更好的方法及时补上以离开这个状态，而不是以一直维持这个状态为荣。</p>
-<p>不能按部就班，要随时作好把棋盘翻过来的准备，世事变化很快，以前的所有努力，不管经历过什么样的辛劳，全都是沉没成本，在必要时候都需要扔掉的，或许做了很多年方向A，时势告诉你情况不妙，要换成方向B，那就得坚决换。以前或许这个不常见，但是以后这样的事情会越来越多。干了十年方向A，人工智能把方向A吃掉了，然后马上转做方向B，做了五年，人工智能再把B吃掉，然后继续，如此往复。很多时候转变不是一朝一夕，而是靠滴水穿石的功夫，今天长进一点，明天长进一点，跟着领域一起变，若是一个人跑得比别人快，他就会在市场上稀缺并因此获得相对的安全。做研究的人都习惯这个，每天看新东西，每天打开思路，时刻承认自己老旧了几个月或者几周，马上拍拍屁股跟上。学会了这些再去教徒弟是饿不死师傅的，反而让师傅变得更厉害，因为师傅主动跳出来接受打脸，学得比徒弟快。对很多人来说这个比较难，特别是一直顺风顺水的。但若是一直不敢看外面的世界，那迟早有一天会被逼进去面对。与其被逼，不如提早一些主动跳进去。历史无数次以血的教训告诉了大家，适者生存乃永恒之铁律，人类在千万物种中杀出血路成为地球的主宰，也必将背负着这样的命运走向未来。一个人逃避，这个人会被淘汰，一个领域逃避，这个领域会被淘汰，一个国家逃避，这个国家就会被淘汰。</p>
-<p>任何时候，自己一定是有错的，最可怕的不是自己错了，而是不知道自己哪里错，并且在错的方向上越走越远。如果周围有厉害的同事，这种感觉尤其强烈，碰上了随便讨论两句，就知道自己哪些知识不足，暗地里记下马上回去补。为此，主动发言积极讨论是很重要的，思维有碰撞才知道问题在哪里。我有时候觉得自己一直在悬崖边上走，也许之前走得还行，但那都过去了，下一步随时有可能踏进崖边的泥地即将摔倒。踏错了不要紧，及时发现自己错了收脚就行；怕的是一直走安稳的道，连悬崖长什么样都不知道了。前辈和老师们说的话，也非常有可能是错的，而身为后辈的我们，大任在于如何找出他们的错误来。找出了的话，能力就得到了提升。而自信，往往就是通过这种方式磨练出来的——为什么自己和别人不同？因为选了一条不一样的路。</p>
-<p>再往上走，主次是要分清的。重要的要抓牢，不重要的要放手。有人读过很多文章看过很多书，勤勉自律好学爱问样样不缺，但门门都不精；有人事事亲为，务求完美，大事上往往把握不了。短木板理论是有问题的，大部分岗位不需要全才，要的是一专多能，要的是某方向很牛非常牛，相同程度的可以掰指头数过来，其它的过线就行，甚至不达标也无人关心。如果你不是专家，高薪聘请没有意义；如果你是专家，求全责备没有意义。人一天只有24小时，所以知道哪里要放弃是很重要的，很多时候，没有牺牲就没有得到，要得到就得付出代价，事前权衡利弊，事后愿赌服输。输了不要紧，再来一次。当然在现实中并没有那么惨烈的权衡，而往往是找到了自己的方向，自然而然地就向这个方向发展下去，这时候主要的阻力，就在于登顶之难而非选择之痛。然而，即便生于风平浪静的和平年代，觉悟依然要有，或许将来有一天，得要做出这样的决断。</p>
-<p>最后，不要在优越感中停止自己的脚步。名利于人最可怕的莫过于此，分明刚刚启程，但欢呼声让你觉得已然冲线，本来要万里长征，却变成了百米短跑，接受完了鲜花之后，就再也看不见远处的风景。其实境界到了或是未到，只有自己知道。跋山涉水，风餐露宿，鼓掌的是别人，度化的是自己。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1862,7 +1905,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
