@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Truly">
 <meta property="og:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T05:08:31.000Z">
+<meta property="og:updated_time" content="2018-06-28T05:08:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deep learning interview problems">
 <meta name="twitter:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：">
@@ -381,9 +381,10 @@
 <ul>
 <li><p>AdaDelta / RMSProp<br>$V_t = \psi (g_1, g_2, …, g_t) = \sum_{\tau=1}^1 g_{\tau}^2$ \rightarrow $V_t = \psi (V_{t - 1}, g_{t}) = \beta_2 V_{t - 1} + (1 - \beta_2) g_{t}^2$ 不是只考虑全部历史，考虑前一次对本次的影响有点像Markov Chain</p>
 </li>
-<li><p>Adam<br>简单说，就是把上面方法都整合了一遍：<br>谈到这里，Adam和Nadam的出现就很自然而然了——它们是前述方法的集大成者。我们看到，SGD-M在SGD基础上增加了一阶动量，AdaGrad和AdaDelta在SGD基础上增加了二阶动量。把一阶动量和二阶动量都用起来，就是Adam了——Adaptive + Momentum。（引自: <a href="https://zhuanlan.zhihu.com/p/32230623）" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32230623）</a></p>
+<li><p>Adam<br>简单说，就是把上面方法都整合了一遍：</p>
 </li>
 </ul>
+<p>谈到这里，Adam和Nadam的出现就很自然而然了——它们是前述方法的集大成者。我们看到，SGD-M在SGD基础上增加了一阶动量，AdaGrad和AdaDelta在SGD基础上增加了二阶动量。把一阶动量和二阶动量都用起来，就是Adam了——Adaptive + Momentum。（引自: <a href="https://zhuanlan.zhihu.com/p/32230623）" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32230623）</a></p>
 <p>SGD的一阶动量：<br>$m_t = \phi (m_{t - 1}, g_{t}) = \beta_1 m_{t - 1} + (1 - \beta_1) g_{t}$<br>加上AdaDelta的二阶动量：<br>$V_t = \psi (V_{t - 1}, g_{t}) = \beta_2 V_{t - 1} + (1 - \beta_2) g_{t}^2$</p>
 <h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1>
       
