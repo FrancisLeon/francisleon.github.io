@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi $ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：$w_{t + 1} = w_t -">
+<meta name="description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：">
 <meta name="keywords" content="deep learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deep learning interview problems">
 <meta property="og:url" content="http://yoursite.com/2018/06/27/deeplearning-interview/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi $ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：$w_{t + 1} = w_t -">
+<meta property="og:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T04:41:50.000Z">
+<meta property="og:updated_time" content="2018-06-28T04:56:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deep learning interview problems">
-<meta name="twitter:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi $ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：$w_{t + 1} = w_t -">
+<meta name="twitter:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：">
 
 
 
@@ -327,7 +327,7 @@
 </ul>
 <ol>
 <li>计算当前梯度：$g_t = \nabla f(w_t)$</li>
-<li>根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi $</li>
+<li>根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$</li>
 <li>计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$</li>
 <li>根据下降梯度进行更新：$w_{t + 1} = w_t - \eta_t$</li>
 </ol>
@@ -345,7 +345,8 @@
 <li>问题：<br>  trapped in local valley and can be unstable</li>
 </ul>
 </li>
-<li>SGD with Momentum<ul>
+<li><p>SGD with Momentum</p>
+<ul>
 <li>idea:<br>  to overcome the trapped problem and unstable problem, the Momentum is brought in.</li>
 <li>pipeline:</li>
 </ul>
@@ -356,7 +357,27 @@
 <li>根据下降梯度进行更新：$w_{t + 1} = w_t - \alpha (\beta_1 m_{t - 1}+ (1 - \beta_1) g_t)$</li>
 </ol>
 </li>
+<li><p>SGD with Nesterov Acceleration</p>
+<ul>
+<li>pipeline:</li>
 </ul>
+<ol>
+<li>计算当前梯度：$g_t = \nabla f(w_t - \alpha \frac{m_{t - 1}}{\sqrt{V_{t - 1}}})$</li>
+<li>根据历史记录计算一阶动量和二阶动量：$m_t = \beta_1 m_{t - 1}+ (1 - \beta_1) g_t$，$V_t = I^2$</li>
+<li>计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}} = \alpha (\beta_1 m_{t - 1}+ (1 - \beta_1) g_t)$</li>
+<li>根据下降梯度进行更新：$w_{t + 1} = w_t - \alpha (\beta_1 m_{t - 1}+ (1 - \beta_1) g_t)$</li>
+</ol>
+</li>
+<li><p>AdaGrad<br>开始考虑二阶动量(嘛个鸡，不就是加速度吗。。。。很朴素。。。就像电动力学里面的电场的展开项，我二阶了就电偶极矩了。。。)</p>
+</li>
+</ul>
+<ol>
+<li>计算当前梯度：$g_t = \nabla f(w_t)$</li>
+<li>根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \sum_{\tai=1}^1 g_{\tai}^2$</li>
+<li>计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}} = \frac{\alpha}{\sqrt{V_t}} m_t$</li>
+<li>根据下降梯度进行更新：$w_{t + 1} = w_t - \eta_t$</li>
+</ol>
+<p>你看这里 lr：$\frac{\alpha}{\sqrt{V_t}}$ 是自适应的</p>
 <h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1>
       
     </div>
