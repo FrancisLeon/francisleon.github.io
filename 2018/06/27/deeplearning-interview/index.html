@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Truly">
 <meta property="og:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T04:56:16.000Z">
+<meta property="og:updated_time" content="2018-06-28T05:04:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deep learning interview problems">
 <meta name="twitter:description" content="SGD 的发展： whole pipeline:   计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：">
@@ -368,16 +368,19 @@
 <li>根据下降梯度进行更新：$w_{t + 1} = w_t - \alpha (\beta_1 m_{t - 1}+ (1 - \beta_1) g_t)$</li>
 </ol>
 </li>
-<li><p>AdaGrad<br>开始考虑二阶动量(嘛个鸡，不就是加速度吗。。。。很朴素。。。就像电动力学里面的电场的展开项，我二阶了就电偶极矩了。。。)</p>
+<li><p>AdaGrad<br>开始考虑二阶动量(嘛个鸡，不就是加速度吗。。。。很朴素。。。就像电动力学里面的电场的展开项，我二阶了就电偶极矩了。。。)，考虑二阶量也很好理解，描述问题会更精准一点，但是会有额外的计算量的cost</p>
 </li>
 </ul>
 <ol>
 <li>计算当前梯度：$g_t = \nabla f(w_t)$</li>
-<li>根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \sum_{\tai=1}^1 g_{\tai}^2$</li>
+<li>根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \sum_{\tau=1}^1 g_{\tau}^2$</li>
 <li>计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}} = \frac{\alpha}{\sqrt{V_t}} m_t$</li>
 <li>根据下降梯度进行更新：$w_{t + 1} = w_t - \eta_t$</li>
 </ol>
-<p>你看这里 lr：$\frac{\alpha}{\sqrt{V_t}}$ 是自适应的</p>
+<p>你看这里 lr：$\frac{\alpha}{\sqrt{V_t}}$ 是自适应的，$V_t = \sum_{\tau=1}^1 g_{\tau}^2$，是递增，lr则会递减，如果lr下降的太快，提前converge，那global optimal可能就没有被探索到</p>
+<ul>
+<li>AdaDelta / RMSProp<br>$V_t = \psi (g_1, g_2, …, g_t) = \sum_{\tau=1}^1 g_{\tau}^2$ \rightarrow $V_t = \psi (V_{t - 1}, g_{t - 1}) = \beta_2 V_{t - 1} + (1 - \beta_2) g_{t}^2$ 不是只考虑全部历史，考虑前一次对本次的影响有点像Markov Chain</li>
+</ul>
 <h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1>
       
     </div>
