@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Truly">
 <meta property="og:description" content="SGD 的发展： whole pipeline:  计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T05:17:38.000Z">
+<meta property="og:updated_time" content="2018-06-28T05:32:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deep learning interview problems">
 <meta name="twitter:description" content="SGD 的发展： whole pipeline:  计算当前梯度：$g_t = \nabla f(w_t)$ 根据历史记录计算一阶动量和二阶动量：$m_t = \phi (g_1, g_2, …, g_t)$，$V_t = \psi (g_1, g_2, …, g_t)$ 计算当前时刻下降的梯度：$\eta = \alpha \frac{m_t}{\sqrt{V_t}}$ 根据下降梯度进行更新：$">
@@ -382,8 +382,12 @@
 <p>  谈到这里，Adam和Nadam的出现就很自然而然了——它们是前述方法的集大成者。我们看到，SGD-M在SGD基础上增加了一阶动量，AdaGrad和AdaDelta在SGD基础上增加了二阶动量。<br>  把一阶动量和二阶动量都用起来，就是Adam了——Adaptive + Momentum。<br>  （引自: <a href="https://zhuanlan.zhihu.com/p/32230623）" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32230623）</a></p>
 <p>  SGD的一阶动量：<br>  $m_t = \phi (m_{t - 1}, g_{t}) = \beta_1 m_{t - 1} + (1 - \beta_1) g_{t}$<br>  加上AdaDelta的二阶动量：<br>  $V_t = \psi (V_{t - 1}, g_{t}) = \beta_2 V_{t - 1} + (1 - \beta_2) g_{t}^2$</p>
 </li>
+<li><p>Bayesian Optimization：</p>
+</li>
+<li><p>总结：<br>  可以算是”万能”的，但对于特定的模型，不一定是最优的解法。更好的解法比如针对SVM的SMO算法、针对含隐变量的模型的EM算法等等。（from 王赟(yun第一声)）<br>  补充一点在数值分析里的结论…（虽然讨论的不是神经网络，但本质上还是求函数的极值点梯度下降法的问题在于，当很接近极值点的时候，下一步搜索的方向和之前搜索的方向correlation太高，会表现出在原地转圈的形状，每一步的改进量越来越小为了避免这一点才引出了共轭梯度法，要求新的搜索方向和之前每一步的搜索方向正交。<br>  (作者：匿名用户 链接：<a href="https://www.zhihu.com/question/38677354/answer/85324507）" target="_blank" rel="noopener">https://www.zhihu.com/question/38677354/answer/85324507）</a></p>
+<h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1></li>
 </ul>
-<h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1>
+
       
     </div>
     
