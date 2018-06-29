@@ -1433,7 +1433,42 @@
 </li>
 <li><p>activation function:</p>
 <ul>
-<li>sigmoid：$\sigma(x) = \frac{1}{1 + e^{-x}}$，$\sigma(x)’ = \frac{e^x}{(1 + e^x)^2} = (1 - \sigma(x)) \sigma(x)$</li>
+<li><p>sigmoid：</p>
+<ul>
+<li>formula:<br>  $\sigma(x) = \frac{1}{1 + e^{-x}}$，$\sigma(x)’ = \frac{e^x}{(1 + e^x)^2} = (1 - \sigma(x)) \sigma(x)$</li>
+<li>shortcomings:<ul>
+<li>gradient vanish</li>
+<li>symmetric</li>
+<li>time cosuming to compute exp</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>tanh:</p>
+<ul>
+<li>formula:<br>  $tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{2}{1 + e^{-2}} - 1 = 2 \sigma(2x) - 1$，$tanh(x)’ = \frac{e^x - e^{-x}}{e^x + e^{-x}}$</li>
+<li>感觉就是解决了原点对称的问题</li>
+</ul>
+</li>
+<li><p>relu:</p>
+<ul>
+<li>formula：$f(x) = max(0, x)$</li>
+<li>优点：<br>  Relu会使一部分神经元的输出为0，这样就造成了网络的稀疏性，并且减少了参数的相互依存关系，缓解了过拟合问题的发生<br>  计算量小</li>
+<li>缺点：<br>  部分neuro会死亡</li>
+</ul>
+</li>
+<li><p>leaky relu：</p>
+<ul>
+<li>formula：$f(x) = max(\epsilon x, x)$</li>
+<li>优点:<br>  解决了neuron会死亡的问题</li>
+</ul>
+</li>
+<li><p>maxout：</p>
+<ul>
+<li>formula: 对 relu 和 leaky relu的一般归纳：$f(x) = max(w_1^T x + b_1, w_2^T x + b_2)$</li>
+<li>优点:<br>  计算简单，不会死亡，不会饱和</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
