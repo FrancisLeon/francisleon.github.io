@@ -1431,6 +1431,11 @@
 <li>原因之二：多类分类问题的目标函数常常选为cross-entropy，…(推完整个，回来补)</li>
 </ul>
 </li>
+<li><p>activation function:</p>
+<ul>
+<li>sigmoid：$\sigma(x) = \frac{1}{1 + e^{-x}}$，$\sigma(x)’ = \frac{e^x}{(1 + e^x)^2} = (1 - \sigma(x)) \sigma(x)$</li>
+</ul>
+</li>
 </ul>
 <h1 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function:"></a>loss function:</h1><ul>
 <li><p>stochastic gradient descent (SGD):<br>  随机梯度下降应该是最最基础的梯度下降的方法了，</p>
@@ -1481,7 +1486,7 @@
 <li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补推一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
 </li>
 </ul>
-
+<h1 id="overfit"><a href="#overfit" class="headerlink" title="overfit"></a>overfit</h1>
           
         
       
@@ -1889,7 +1894,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

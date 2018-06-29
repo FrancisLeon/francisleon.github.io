@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/DNN-output-layer-gradient.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/DNN-output-layer-gradient-proof.jpeg">
-<meta property="og:updated_time" content="2018-06-29T02:49:59.000Z">
+<meta property="og:updated_time" content="2018-06-29T04:01:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNN">
 <meta name="twitter:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
@@ -341,6 +341,11 @@
 <li>原因之二：多类分类问题的目标函数常常选为cross-entropy，…(推完整个，回来补)</li>
 </ul>
 </li>
+<li><p>activation function:</p>
+<ul>
+<li>sigmoid：$\sigma(x) = \frac{1}{1 + e^{-x}}$，$\sigma(x)’ = \frac{e^x}{(1 + e^x)^2} = (1 - \sigma(x)) \sigma(x)$</li>
+</ul>
+</li>
 </ul>
 <h1 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function:"></a>loss function:</h1><ul>
 <li><p>stochastic gradient descent (SGD):<br>  随机梯度下降应该是最最基础的梯度下降的方法了，</p>
@@ -391,7 +396,7 @@
 <li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补推一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
 </li>
 </ul>
-
+<h1 id="overfit"><a href="#overfit" class="headerlink" title="overfit"></a>overfit</h1>
       
     </div>
     
@@ -532,7 +537,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -565,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-gradient-output"><span class="nav-number">4.</span> <span class="nav-text">loss gradient output:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output"><span class="nav-number">4.1.</span> <span class="nav-text">loss gradient at output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output-pre-activation"><span class="nav-number">4.2.</span> <span class="nav-text">loss gradient at output pre-activation</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-gradient-output"><span class="nav-number">4.</span> <span class="nav-text">loss gradient output:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output"><span class="nav-number">4.1.</span> <span class="nav-text">loss gradient at output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output-pre-activation"><span class="nav-number">4.2.</span> <span class="nav-text">loss gradient at output pre-activation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#overfit"><span class="nav-number">5.</span> <span class="nav-text">overfit</span></a></li></ol></div>
             
 
           </div>
