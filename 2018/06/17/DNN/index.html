@@ -90,7 +90,9 @@
 <meta property="og:image" content="http://yoursite.com/images/DNNstructure.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/DNN-output-layer-gradient.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/DNN-output-layer-gradient-proof.jpeg">
-<meta property="og:updated_time" content="2018-06-29T04:21:23.000Z">
+<meta property="og:image" content="http://yoursite.com/images/dropout.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/batch-normalization.jpeg">
+<meta property="og:updated_time" content="2018-06-29T20:48:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNN">
 <meta name="twitter:description" content="介绍这个是hugo的deep learning的学习tutorial，需要慢慢刷掉，当然cmu 10707 的slides很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。 然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚： 网络的基本结构：  layer pre-activation f">
@@ -431,7 +433,25 @@
 <li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补推一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
 </li>
 </ul>
-<h1 id="overfit"><a href="#overfit" class="headerlink" title="overfit"></a>overfit</h1>
+<h1 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h1><ul>
+<li><p>L1 &amp; L2 regularization</p>
+<ul>
+<li>L1 $\frac{\lambda}{2m} \sum |w|^2$<br>  L2 regularization is also known as weight decay as it forces the weights to decay towards zero (but not exactly zero).</li>
+<li>L2 $\frac{\lambda}{2m} \sum |w|$<br>  Unlike L2, the weights may be reduced to zero here. Hence, it is very useful when we are trying to compress our model. Otherwise, we usually prefer L2 over it. Sparse solution.</li>
+</ul>
+</li>
+<li><p>Dropout<br>  So what does dropout do? At every iteration, it randomly selects some nodes and removes them along with all of their incoming and outgoing connections as shown below.<br>  <img src="/images/dropout.jpeg" width="70%" height="70%"><br>  So each iteration has a different set of nodes and this results in a different set of outputs. It can also be thought of as an ensemble technique in machine learning.</p>
+<p>  Ensemble models usually perform better than a single model as they capture more randomness. Similarly, dropout also performs better than a normal neural network model.</p>
+<p>  This probability of choosing how many nodes should be dropped is the hyperparameter of the dropout function. As seen in the image above, dropout can be applied to both the hidden layers as well as the input layers.</p>
+</li>
+<li><p>Batch Normalization</p>
+<ul>
+<li>idea<br>  is that since it’s benefit to training if the input data is normalized, so why not normalize in hidden layers to solve the internal covariance shift.</li>
+<li>denormalization<br>  to avoid extra effect of normalization, the denormalization parameters are helpful to adjust<br><img src="/images/batch-normalization.jpeg" width="70%" height="70%"></li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     
@@ -605,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-gradient-output"><span class="nav-number">4.</span> <span class="nav-text">loss gradient output:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output"><span class="nav-number">4.1.</span> <span class="nav-text">loss gradient at output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output-pre-activation"><span class="nav-number">4.2.</span> <span class="nav-text">loss gradient at output pre-activation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#overfit"><span class="nav-number">5.</span> <span class="nav-text">overfit</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的基本结构："><span class="nav-number">2.</span> <span class="nav-text">网络的基本结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-number">3.</span> <span class="nav-text">loss function:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-gradient-output"><span class="nav-number">4.</span> <span class="nav-text">loss gradient output:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output"><span class="nav-number">4.1.</span> <span class="nav-text">loss gradient at output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-gradient-at-output-pre-activation"><span class="nav-number">4.2.</span> <span class="nav-text">loss gradient at output pre-activation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Regularization"><span class="nav-number">5.</span> <span class="nav-text">Regularization</span></a></li></ol></div>
             
 
           </div>

@@ -1521,7 +1521,25 @@
 <li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补推一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
 </li>
 </ul>
-<h1 id="overfit"><a href="#overfit" class="headerlink" title="overfit"></a>overfit</h1>
+<h1 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h1><ul>
+<li><p>L1 &amp; L2 regularization</p>
+<ul>
+<li>L1 $\frac{\lambda}{2m} \sum |w|^2$<br>  L2 regularization is also known as weight decay as it forces the weights to decay towards zero (but not exactly zero).</li>
+<li>L2 $\frac{\lambda}{2m} \sum |w|$<br>  Unlike L2, the weights may be reduced to zero here. Hence, it is very useful when we are trying to compress our model. Otherwise, we usually prefer L2 over it. Sparse solution.</li>
+</ul>
+</li>
+<li><p>Dropout<br>  So what does dropout do? At every iteration, it randomly selects some nodes and removes them along with all of their incoming and outgoing connections as shown below.<br>  <img src="/images/dropout.jpeg" width="70%" height="70%"><br>  So each iteration has a different set of nodes and this results in a different set of outputs. It can also be thought of as an ensemble technique in machine learning.</p>
+<p>  Ensemble models usually perform better than a single model as they capture more randomness. Similarly, dropout also performs better than a normal neural network model.</p>
+<p>  This probability of choosing how many nodes should be dropped is the hyperparameter of the dropout function. As seen in the image above, dropout can be applied to both the hidden layers as well as the input layers.</p>
+</li>
+<li><p>Batch Normalization</p>
+<ul>
+<li>idea<br>  is that since it’s benefit to training if the input data is normalized, so why not normalize in hidden layers to solve the internal covariance shift.</li>
+<li>denormalization<br>  to avoid extra effect of normalization, the denormalization parameters are helpful to adjust<br><img src="/images/batch-normalization.jpeg" width="70%" height="70%"></li>
+</ul>
+</li>
+</ul>
+
           
         
       
