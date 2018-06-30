@@ -1496,6 +1496,13 @@
 </ul>
 </li>
 <li><p>mini-batch GD:<br>  就是这两个的折中，就像强化学习里面的，TD，Monta Carlo之间的n step-TD</p>
+<ul>
+<li>advantages:<ul>
+<li>give a accurate estimate of average loss</li>
+<li>can leverage matrix operations, which cost less than BGD</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -1520,6 +1527,13 @@
 </li>
 <li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补推一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
 </li>
+</ul>
+<h1 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h1><h2 id="Compute-output-gradient-before-activation"><a href="#Compute-output-gradient-before-activation" class="headerlink" title="Compute output gradient (before activation)"></a>Compute output gradient (before activation)</h2><p>$\nabla_{a^{(L+1)}(x)} -logf(x)_y \leftarrow - (e(y)-f(x))$</p>
+<h2 id="for-k-from-L-1-to-1"><a href="#for-k-from-L-1-to-1" class="headerlink" title="for k from L + 1 to 1"></a>for k from L + 1 to 1</h2><ul>
+<li>compute gradients of hidden layer parameter<br>$\nabla_{W^{(k)}} -logf(x)^y \leftarrow $ $\nabla_{a^{(k)}(x)} -log f(x)^y h^{(k-1)}(x)^T$<br>$\nabla_{b^{(k)}} -logf(x)^y \leftarrow $ $\nabla_{a^{(k)}(x)} -log f(x)^y$</li>
+<li>compute gradient of hidden layer below<br>$\nabla_{b^{(k)}} -logf(x)^y \leftarrow $ $\nabla_{a^{(k)}(x)} -log f(x)^y$</li>
+<li>compute gradient of hidden layer below<br>$\nabla_{h^{(k-1)}(x)} -logf(x)^y \leftarrow $ $W^{(k)}^T \nabla_{a^{(k)}(x)} -log f(x)^y$</li>
+<li>compute gradient of hidden layer below (before activation)<br>$\nabla_{a^{(k-1)}(x)} -logf(x)^y \leftarrow $ $(\nabla_{h^{(k-1)}(x)} -log f(x)^y) \odot […,g’(a^{(k-1)}(x)_j),…]$</li>
 </ul>
 <h1 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h1><ul>
 <li><p>L1 &amp; L2 regularization</p>
