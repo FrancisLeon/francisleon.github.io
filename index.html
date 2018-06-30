@@ -233,6 +233,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/30/leetcode14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/30/leetcode14/" itemprop="url">leetcode14</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-30T16:04:14-04:00">
+                2018-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="14-Longest-Common-Prefix"><a href="#14-Longest-Common-Prefix" class="headerlink" title="14. Longest Common Prefix"></a>14. Longest Common Prefix</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Write a function to find the longest common prefix string amongst an array of strings.<br>If there is no common prefix, return an empty string “”.<br>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">Output: &quot;fl&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestCommonPrefix(self, strs):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type strs: List[str]</span><br><span class="line">        :rtype: str</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not strs or len(strs) == 0:</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        </span><br><span class="line">        for i, strs_ in enumerate(zip(*strs)):</span><br><span class="line">            if len(set(strs_)) &gt; 1:</span><br><span class="line">                return strs[0][:i]</span><br><span class="line">    </span><br><span class="line">        return min(strs)</span><br></pre></td></tr></table></figure>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="zip"><a href="#zip" class="headerlink" title="zip(*)"></a>zip(*)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">for group in zip(*arr):</span><br><span class="line">    print(group)</span><br></pre></td></tr></table></figure>
+<p>(‘f’, ‘f’, ‘f’)<br>(‘l’, ‘l’, ‘l’)<br>(‘o’, ‘o’, ‘i’)<br>(‘w’, ‘w’, ‘g’)<br>zip(*) unpack</p>
+<h2 id="min"><a href="#min" class="headerlink" title="min()"></a>min()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(min(arr))</span><br></pre></td></tr></table></figure>
+<p>flight</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/流水账/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1611,151 +1758,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/lintcode900/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/lintcode900/" itemprop="url">lintcode900</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T01:37:02-04:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.</p>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>Given root = {1}, target = 4.428571, return 1.</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>思路很简单，就是找到通过检索BST找到upper bound和lower bound，最后在比较谁是离得最近的。upper bound的意思是在整棵树里面，比target小却最大的数，lower bound的意思是在整棵树里面比target大的最小的数。这个大小关系是，进一步递归检索的关键。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">Definition of TreeNode:</span><br><span class="line">class TreeNode:</span><br><span class="line">    def __init__(self, val):</span><br><span class="line">        self.val = val</span><br><span class="line">        self.left, self.right = None, None</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param root: the given BST</span><br><span class="line">    @param target: the given target</span><br><span class="line">    @return: the value in the BST that is closest to the target</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def closestValue(self, root, target):</span><br><span class="line">        # write your code here</span><br><span class="line">        if root is None:</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        lower_node = self.lower_bound(root, target)</span><br><span class="line">        upper_node = self.upper_bound(root, target)</span><br><span class="line">        </span><br><span class="line">        if lower_node is None:</span><br><span class="line">            return upper_node.val</span><br><span class="line"></span><br><span class="line">        if upper_node is None:</span><br><span class="line">            return lower_node.val    </span><br><span class="line">    </span><br><span class="line">        if lower_node and upper_node:</span><br><span class="line">            if target - lower_node.val &gt; upper_node.val - target:</span><br><span class="line">                return upper_node.val</span><br><span class="line">            else:</span><br><span class="line">                return lower_node.val</span><br><span class="line">            </span><br><span class="line">        return None</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    # find the node with the largest value that smaller than target</span><br><span class="line">    def lower_bound(self, root, target):</span><br><span class="line">        if root is None:</span><br><span class="line">            return None</span><br><span class="line">        </span><br><span class="line">        # the expect val should be smaller than or equal to target</span><br><span class="line">        if root.val &gt; target:</span><br><span class="line">            return self.lower_bound(root.left, target)</span><br><span class="line">        </span><br><span class="line">        # the largest val</span><br><span class="line">        lower_node = self.lower_bound(root.right, target)</span><br><span class="line">        if lower_node:</span><br><span class="line">            return lower_node</span><br><span class="line">        </span><br><span class="line">        # if lower_node is None, the there&apos;s no node larger than root, so return root</span><br><span class="line">        return root</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    # find the node with the smallest value that larger than or equal to target</span><br><span class="line">    def upper_bound(self, root, target):</span><br><span class="line">        if root is None:</span><br><span class="line">            return None</span><br><span class="line">        </span><br><span class="line">        # the expect val should be larger than or equal to target</span><br><span class="line">        if root.val &lt; target:</span><br><span class="line">            return self.upper_bound(root.right, target)</span><br><span class="line">        </span><br><span class="line">        # the smallest val</span><br><span class="line">        upper_node = self.upper_bound(root.left, target)</span><br><span class="line">        if upper_node:</span><br><span class="line">            return upper_node</span><br><span class="line">            </span><br><span class="line">        return root</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1806,7 +1808,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
