@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="reinforcement learning,10703," />
+  <meta name="keywords" content="graph,linked-list," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="应该主要整理 CMU 10703 的slides和一些相关的论文吧，应该是面试导向。">
-<meta name="keywords" content="reinforcement learning,10703">
+<meta name="description" content="138. Copy List with Random PointerDescriptionA linked list is given such that each node contains an additional random pointer which could point to any node in the list or null. Return a deep copy of t">
+<meta name="keywords" content="graph,linked-list">
 <meta property="og:type" content="article">
-<meta property="og:title" content="强化学习篇">
-<meta property="og:url" content="http://yoursite.com/2018/05/13/强化学习/index.html">
+<meta property="og:title" content="leetcode138">
+<meta property="og:url" content="http://yoursite.com/2018/07/03/leetcode138/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="应该主要整理 CMU 10703 的slides和一些相关的论文吧，应该是面试导向。">
+<meta property="og:description" content="138. Copy List with Random PointerDescriptionA linked list is given such that each node contains an additional random pointer which could point to any node in the list or null. Return a deep copy of t">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-18T02:06:57.000Z">
+<meta property="og:updated_time" content="2018-07-03T06:56:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="强化学习篇">
-<meta name="twitter:description" content="应该主要整理 CMU 10703 的slides和一些相关的论文吧，应该是面试导向。">
+<meta name="twitter:title" content="leetcode138">
+<meta name="twitter:description" content="138. Copy List with Random PointerDescriptionA linked list is given such that each node contains an additional random pointer which could point to any node in the list or null. Return a deep copy of t">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/13/强化学习/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/03/leetcode138/"/>
 
 
 
 
 
-  <title>强化学习篇 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>leetcode138 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/强化学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/leetcode138/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">强化学习篇</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode138</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T22:24:51-04:00">
-                2018-05-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-03T02:54:46-04:00">
+                2018-07-03
               </time>
             
 
@@ -285,8 +285,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/强化学习/" itemprop="url" rel="index">
-                    <span itemprop="name">强化学习</span>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
                   </a>
                 </span>
 
@@ -322,7 +322,10 @@
       
 
       
-        <p>应该主要整理 CMU 10703 的slides和一些相关的论文吧，应该是面试导向。</p>
+        <h1 id="138-Copy-List-with-Random-Pointer"><a href="#138-Copy-List-with-Random-Pointer" class="headerlink" title="138. Copy List with Random Pointer"></a>138. Copy List with Random Pointer</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.</p>
+<p>Return a deep copy of the list.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Clone problem is always involved with hashmap which store the mapping from original nodes to new nodes.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># Definition for singly-linked list with a random pointer.</span><br><span class="line"># class RandomListNode(object):</span><br><span class="line">#     def __init__(self, x):</span><br><span class="line">#         self.label = x</span><br><span class="line">#         self.next = None</span><br><span class="line">#         self.random = None</span><br><span class="line"></span><br><span class="line">class Solution(object):</span><br><span class="line">    def copyRandomList(self, head):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type head: RandomListNode</span><br><span class="line">        :rtype: RandomListNode</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not head:</span><br><span class="line">            return None</span><br><span class="line"></span><br><span class="line">        # copy node (label) and create the mapping</span><br><span class="line">        cur = head</span><br><span class="line">        map_ = &#123;&#125;</span><br><span class="line">        while cur:</span><br><span class="line">            map_[cur] = RandomListNode(cur.label)</span><br><span class="line">            cur = cur.next</span><br><span class="line">            </span><br><span class="line">        # traverse raw list and copy the relation (next and random)</span><br><span class="line">        cur = head</span><br><span class="line">        while cur:</span><br><span class="line">            if cur.next:</span><br><span class="line">                map_[cur].next = map_[cur.next]</span><br><span class="line">            if cur.random:</span><br><span class="line">                map_[cur].random = map_[cur.random]</span><br><span class="line">            cur = cur.next</span><br><span class="line">        </span><br><span class="line">        return map_[head]</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -340,9 +343,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/reinforcement-learning/" rel="tag"># reinforcement learning</a>
+            <a href="/tags/graph/" rel="tag"># graph</a>
           
-            <a href="/tags/10703/" rel="tag"># 10703</a>
+            <a href="/tags/linked-list/" rel="tag"># linked-list</a>
           
         </div>
       
@@ -355,8 +358,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/12/数学篇/" rel="next" title="数学篇">
-                <i class="fa fa-chevron-left"></i> 数学篇
+              <a href="/2018/07/03/leetcode5/" rel="next" title="leetcode5">
+                <i class="fa fa-chevron-left"></i> leetcode5
               </a>
             
           </div>
@@ -364,10 +367,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/15/新的开始-1/" rel="prev" title="又一个开始">
-                又一个开始 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -419,8 +418,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -480,6 +488,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#138-Copy-List-with-Random-Pointer"><span class="nav-number">1.</span> <span class="nav-text">138. Copy List with Random Pointer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">3.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
