@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="linked-list," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="148. Sort ListDescriptionSort a linked list in O(n log n) time using constant space complexity.Example 112Input: 4-&amp;gt;2-&amp;gt;1-&amp;gt;3Output: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4 Ideamerge sort, divide and conquer Codeb">
-<meta name="keywords" content="linked-list">
+<meta name="description" content="RNNMotivationIf our inputs and outputs are sequences, the structure of the DNN may vary due to different length of inputs and outputs. Also, traditional DNN may not abstract the temporary feature from">
+<meta name="keywords" content="reinforcement learning, deep learning, machine learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode148">
-<meta property="og:url" content="http://yoursite.com/2018/06/30/leetcode148/index.html">
+<meta property="og:title" content="RNN">
+<meta property="og:url" content="http://yoursite.com/2018/07/04/RNN/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="148. Sort ListDescriptionSort a linked list in O(n log n) time using constant space complexity.Example 112Input: 4-&amp;gt;2-&amp;gt;1-&amp;gt;3Output: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4 Ideamerge sort, divide and conquer Codeb">
+<meta property="og:description" content="RNNMotivationIf our inputs and outputs are sequences, the structure of the DNN may vary due to different length of inputs and outputs. Also, traditional DNN may not abstract the temporary feature from">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-01T03:27:18.000Z">
+<meta property="og:updated_time" content="2018-07-04T04:38:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode148">
-<meta name="twitter:description" content="148. Sort ListDescriptionSort a linked list in O(n log n) time using constant space complexity.Example 112Input: 4-&amp;gt;2-&amp;gt;1-&amp;gt;3Output: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4 Ideamerge sort, divide and conquer Codeb">
+<meta name="twitter:title" content="RNN">
+<meta name="twitter:description" content="RNNMotivationIf our inputs and outputs are sequences, the structure of the DNN may vary due to different length of inputs and outputs. Also, traditional DNN may not abstract the temporary feature from">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/30/leetcode148/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/04/RNN/"/>
 
 
 
 
 
-  <title>leetcode148 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>RNN | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/30/leetcode148/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/RNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode148</h1>
+          <h1 class="post-title" itemprop="name headline">RNN</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-30T23:21:11-04:00">
-                2018-06-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T00:21:23-04:00">
+                2018-07-04
               </time>
             
 
@@ -285,8 +285,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">deep learning</span>
                   </a>
                 </span>
 
@@ -322,12 +322,18 @@
       
 
       
-        <h1 id="148-Sort-List"><a href="#148-Sort-List" class="headerlink" title="148. Sort List"></a>148. Sort List</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Sort a linked list in O(n log n) time using constant space complexity.<br>Example 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 4-&gt;2-&gt;1-&gt;3</span><br><span class="line">Output: 1-&gt;2-&gt;3-&gt;4</span><br></pre></td></tr></table></figure></p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>merge sort, divide and conquer</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="body"><a href="#body" class="headerlink" title="body"></a>body</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def sortList(self, head):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    :type head: ListNode</span><br><span class="line">    :rtype: ListNode</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # base case:</span><br><span class="line">    if head is None or head.next is None:</span><br><span class="line">        return head</span><br><span class="line">    </span><br><span class="line">    # divide</span><br><span class="line">    mid = self.findMid(head)</span><br><span class="line">    next_head = mid.next</span><br><span class="line">    mid.next = None</span><br><span class="line">    sorted_left = self.sortList(head)</span><br><span class="line">    sorted_right = self.sortList(next_head)</span><br><span class="line"></span><br><span class="line">    # conquer</span><br><span class="line">    res = self.merge(sorted_left, sorted_right)</span><br><span class="line">    return res</span><br></pre></td></tr></table></figure>
-<h2 id="find-middle-fast-and-slow-pointer"><a href="#find-middle-fast-and-slow-pointer" class="headerlink" title="find middle: fast and slow pointer"></a>find middle: fast and slow pointer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def findMid(self, head):</span><br><span class="line">    if head is None:</span><br><span class="line">        return None</span><br><span class="line">    runner = head</span><br><span class="line">    walker = head</span><br><span class="line">    while runner.next and runner.next.next:</span><br><span class="line">    # error while walker.next and runner.next.next:</span><br><span class="line">        walker = walker.next</span><br><span class="line">        runner = runner.next.next</span><br><span class="line">    return walker</span><br></pre></td></tr></table></figure>
-<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def merge(self, head1, head2):</span><br><span class="line">    dummy = ListNode(0)</span><br><span class="line">    cur = dummy</span><br><span class="line">    p1 = head1</span><br><span class="line">    p2 = head2</span><br><span class="line"></span><br><span class="line">    # perform the normal case</span><br><span class="line">    while p1 and p2:</span><br><span class="line">        if p1.val &lt; p2.val:</span><br><span class="line">            cur.next = ListNode(p1.val)</span><br><span class="line">            p1 = p1.next</span><br><span class="line">        else:</span><br><span class="line">            cur.next = ListNode(p2.val)</span><br><span class="line">            p2 = p2.next</span><br><span class="line">        cur = cur.next</span><br><span class="line"></span><br><span class="line">    # handle the rest list</span><br><span class="line">    if p1:</span><br><span class="line">        cur.next = p1</span><br><span class="line">    if p2:</span><br><span class="line">        cur.next = p2</span><br><span class="line">    return dummy.next</span><br></pre></td></tr></table></figure>
-
+        <h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>If our inputs and outputs are sequences, the structure of the DNN may vary due to different length of inputs and outputs. Also, traditional DNN may not abstract the temporary feature from the sequences. So, a new network which include information flow from previous states and share the weight in each single local structure may achieve our requirements.</p>
+<h2 id="Structure"><a href="#Structure" class="headerlink" title="Structure"></a>Structure</h2><h2 id="BPTT"><a href="#BPTT" class="headerlink" title="BPTT"></a>BPTT</h2><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>If you regard each layer in time flow as a layer in DNN, then the RNN somehow is a kind of DNN, while there’s an input in each layer. The BP of RNN (BPTT) is very similar to BP in DNN. Thus, if the length of RNN is large enough, then BPTT may suffer from gradient explosion and gradient vanishing.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<li><p>gradient explosion:<br>  The clipping may solve the problem of explosion</p>
+</li>
+<li><p>gradient vanishing:<br>  We may need modification of the traditional RNN structure. Thus, GRU and LSTM came into being.</p>
+</li>
+</ul>
+<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h1><h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>Why vanishing happens?</li>
+</ul>
+<h2 id="Gate"><a href="#Gate" class="headerlink" title="Gate"></a>Gate</h2><h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1>
       
     </div>
     
@@ -342,12 +348,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/linked-list/" rel="tag"># linked-list</a>
-          
-        </div>
-      
 
       
       
@@ -357,8 +357,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/30/leetcode14/" rel="next" title="leetcode14">
-                <i class="fa fa-chevron-left"></i> leetcode14
+              <a href="/2018/07/03/leetcode202/" rel="next" title="leetcode202">
+                <i class="fa fa-chevron-left"></i> leetcode202
               </a>
             
           </div>
@@ -366,10 +366,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/03/leetcode5/" rel="prev" title="leetcode5">
-                leetcode5 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -501,7 +497,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#148-Sort-List"><span class="nav-number">1.</span> <span class="nav-text">148. Sort List</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">3.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#body"><span class="nav-number">4.1.</span> <span class="nav-text">body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-middle-fast-and-slow-pointer"><span class="nav-number">4.2.</span> <span class="nav-text">find middle: fast and slow pointer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number">4.3.</span> <span class="nav-text">merge</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">1.2.</span> <span class="nav-text">Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BPTT"><span class="nav-number">1.3.</span> <span class="nav-text">BPTT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">1.4.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.5.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GRU"><span class="nav-number">2.</span> <span class="nav-text">GRU</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gate"><span class="nav-number">2.2.</span> <span class="nav-text">Gate</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LSTM"><span class="nav-number">3.</span> <span class="nav-text">LSTM</span></a></li></ol></div>
             
 
           </div>
