@@ -334,10 +334,9 @@
 <li><p>gradient vanishing:<br>  We may need modification of the traditional RNN structure. Thus, GRU and LSTM came into being.</p>
 </li>
 </ul>
-<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h1><h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
-<li>Why vanishing happens?</li>
-</ul>
-<h2 id="Gate"><a href="#Gate" class="headerlink" title="Gate"></a>Gate</h2><h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1>
+<h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1><p>The chain rule results in vanishing, thus, if we change this structue into combination of sum terms.<br><img src="/images/LSTM.jpeg" alt=""><br>The cell state in LSTM is linear combination of current state and previous state, which avoid the gradient vanishing.</p>
+<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h1><p>The GRU simplifies the output and remove forget gate in LSTM.<br><img src="/images/GRULSTM.jpeg" alt=""></p>
+
           
         
       

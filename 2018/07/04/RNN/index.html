@@ -87,10 +87,13 @@
 <meta property="og:site_name" content="Truly">
 <meta property="og:description" content="RNNMotivationIf our inputs and outputs are sequences, the structure of the DNN may vary due to different length of inputs and outputs. Also, traditional DNN may not abstract the temporary feature from">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-04T04:38:09.000Z">
+<meta property="og:image" content="http://yoursite.com/images/LSTM.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/GRULSTM.jpeg">
+<meta property="og:updated_time" content="2018-07-04T23:57:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNN">
 <meta name="twitter:description" content="RNNMotivationIf our inputs and outputs are sequences, the structure of the DNN may vary due to different length of inputs and outputs. Also, traditional DNN may not abstract the temporary feature from">
+<meta name="twitter:image" content="http://yoursite.com/images/LSTM.jpeg">
 
 
 
@@ -330,10 +333,9 @@
 <li><p>gradient vanishing:<br>  We may need modification of the traditional RNN structure. Thus, GRU and LSTM came into being.</p>
 </li>
 </ul>
-<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h1><h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
-<li>Why vanishing happens?</li>
-</ul>
-<h2 id="Gate"><a href="#Gate" class="headerlink" title="Gate"></a>Gate</h2><h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1>
+<h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1><p>The chain rule results in vanishing, thus, if we change this structue into combination of sum terms.<br><img src="/images/LSTM.jpeg" alt=""><br>The cell state in LSTM is linear combination of current state and previous state, which avoid the gradient vanishing.</p>
+<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h1><p>The GRU simplifies the output and remove forget gate in LSTM.<br><img src="/images/GRULSTM.jpeg" alt=""></p>
+
       
     </div>
     
@@ -497,7 +499,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">1.2.</span> <span class="nav-text">Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BPTT"><span class="nav-number">1.3.</span> <span class="nav-text">BPTT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">1.4.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.5.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GRU"><span class="nav-number">2.</span> <span class="nav-text">GRU</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gate"><span class="nav-number">2.2.</span> <span class="nav-text">Gate</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LSTM"><span class="nav-number">3.</span> <span class="nav-text">LSTM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">1.2.</span> <span class="nav-text">Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BPTT"><span class="nav-number">1.3.</span> <span class="nav-text">BPTT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">1.4.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.5.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LSTM"><span class="nav-number">2.</span> <span class="nav-text">LSTM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GRU"><span class="nav-number">3.</span> <span class="nav-text">GRU</span></a></li></ol></div>
             
 
           </div>
