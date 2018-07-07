@@ -328,15 +328,15 @@
           
             <h1 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h1><p>To what extent do [Krizhevsky et. al’s results] generalize to object detection?</p>
 <p>Object detection is the task of finding the different objects in an image and classifying them</p>
-<h1 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h1><p>The goal of R-CNN is to take in an image, and correctly identify where the main objects (via a bounding box) in the image.</p>
+<h1 id="mAP-mean-average-precision-http-tarangshah-com-blog-2018-01-27-what-is-map-understanding-the-statistic-of-choice-for-comparing-object-detection-models"><a href="#mAP-mean-average-precision-http-tarangshah-com-blog-2018-01-27-what-is-map-understanding-the-statistic-of-choice-for-comparing-object-detection-models" class="headerlink" title="(mAP (mean average precision))[http://tarangshah.com/blog/2018-01-27/what-is-map-understanding-the-statistic-of-choice-for-comparing-object-detection-models/]"></a>(mAP (mean average precision))[<a href="http://tarangshah.com/blog/2018-01-27/what-is-map-understanding-the-statistic-of-choice-for-comparing-object-detection-models/]" target="_blank" rel="noopener">http://tarangshah.com/blog/2018-01-27/what-is-map-understanding-the-statistic-of-choice-for-comparing-object-detection-models/]</a></h1><h1 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h1><p>The goal of R-CNN is to take in an image, and correctly identify where the main objects (via a bounding box) in the image.</p>
 <p>Inputs: Image<br>Outputs: Bounding boxes + labels for each object in the image.</p>
 <p><img src="/images/RCNN-pipeline.jpeg" alt=""></p>
-<ul>
-<li><p>step1: region proposals:<br>At a high level, Selective Search (shown in the image above) looks at the image through windows of different sizes, and for each size tries to group together adjacent pixels by texture, color, or intensity to identify objects.</p>
-</li>
-<li><p>step2: </p>
-</li>
-</ul>
+<h2 id="region-proposals"><a href="#region-proposals" class="headerlink" title="region proposals:"></a>region proposals:</h2><p>At a high level, Selective Search (shown in the image above) looks at the image through windows of different sizes, and for each size tries to group together adjacent pixels by texture, color, or intensity to identify objects.</p>
+<h2 id="feature-extraction"><a href="#feature-extraction" class="headerlink" title="feature extraction:"></a>feature extraction:</h2><p>They extract a 4096-dimensional feature vector from each region proposal using the Caffe implementation of the CNN described by Krizhevsky et al.. Features are computed by forward propagating a mean-subtracted 227 × 227 RGB image through five convolutional layers and two fully connected layers. </p>
+<p>Since the sizes of boxes from region proposals varies, they need firstly warp image data in that region into a form that is compatible with the CNN (its architecture requires inputs of a fixed 227 × 227 pixel size)  </p>
+<h2 id="training"><a href="#training" class="headerlink" title="training:"></a>training:</h2><h3 id="Supervised-pre-training"><a href="#Supervised-pre-training" class="headerlink" title="Supervised pre-training"></a>Supervised pre-training</h3><p>They discriminatively pre-trained the CNN on a large auxiliary dataset (ILSVRC2012 classification) using image-level annotations only (bounding-box labels are not available for this data).</p>
+<h3 id="Domain-specific-fine-tuning"><a href="#Domain-specific-fine-tuning" class="headerlink" title="Domain-specific fine-tuning."></a>Domain-specific fine-tuning.</h3><p> To adapt our CNN to the new task (detection) and the new domain (warped proposal windows), we continue stochastic gradient descent (SGD) training of the CNN parameters using only warped region proposals with a bias ratio mini-batch amoung negative and positive samples which are assigned according to the IoU larger than 0.5 or not.</p>
+<h3 id="Object-category-classifiers"><a href="#Object-category-classifiers" class="headerlink" title="Object category classifiers."></a>Object category classifiers.</h3><p>Similar to the step above, given threshold split the data set into negative and positve samples for classification in SVM.</p>
 
           
         
