@@ -337,6 +337,11 @@
 <h2 id="training"><a href="#training" class="headerlink" title="training:"></a>training:</h2><h3 id="Supervised-pre-training"><a href="#Supervised-pre-training" class="headerlink" title="Supervised pre-training"></a>Supervised pre-training</h3><p>They discriminatively pre-trained the CNN on a large auxiliary dataset (ILSVRC2012 classification) using image-level annotations only (bounding-box labels are not available for this data).</p>
 <h3 id="Domain-specific-fine-tuning"><a href="#Domain-specific-fine-tuning" class="headerlink" title="Domain-specific fine-tuning."></a>Domain-specific fine-tuning.</h3><p> To adapt our CNN to the new task (detection) and the new domain (warped proposal windows), we continue stochastic gradient descent (SGD) training of the CNN parameters using only warped region proposals with a bias ratio mini-batch amoung negative and positive samples which are assigned according to the IoU larger than 0.5 or not.</p>
 <h3 id="Object-category-classifiers"><a href="#Object-category-classifiers" class="headerlink" title="Object category classifiers."></a>Object category classifiers.</h3><p>Similar to the step above, given threshold split the data set into negative and positve samples for classification in SVM.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>Generate a set of proposals for bounding boxes.</li>
+<li>Run the images in the bounding boxes through a pre-trained AlexNet and finally an SVM to see what object the image in the box is.</li>
+<li>Run the box through a linear regression model to output tighter coordinates for the box once the object has been classified.</li>
+</ul>
 
           
         
