@@ -361,7 +361,7 @@
 </ul>
 </li>
 <li>loss: multi-task loss:<br>  $L(p, u, t^u, v) = L_{cls}(p, u) + \lambda[u &gt; 0]L_{loc}(t^u, v)$<br>  Each training RoI is labeled with a ground-truth class u and a ground-truth bounding-box regression target v. We use a multi-task loss L on each labeled RoI to jointly train for classification and bounding-box regression:<ul>
-<li>L_{cls}(p, u) = - log p_u<br> classification loss is log loss for true class u</li>
+<li>$L_{cls}(p(x), u) = - log p_u$<br> classification loss is log loss for true class u</li>
 </ul>
 </li>
 </ul>
