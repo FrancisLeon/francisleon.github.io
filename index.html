@@ -351,7 +351,14 @@
 <h1 id="Fast-RCNN"><a href="#Fast-RCNN" class="headerlink" title="Fast-RCNN"></a>Fast-RCNN</h1><h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/images/fast-rcnn.jpeg" alt=""><br>The input images as well as a set of region proposals are forwarded through a conv network and projected to a feature map. The feature map for each projected region proposal is processed via the RoI pooling layer and FCs into a fix-size RoI feature vector. Each feature vector is then fed into a sequence of fully connected layers (FC) that finally branch into two sibling output layers: one that produces softmax probability estimates over K object classes plus a catch-all “background” class and another layer that outputs four real-valued numbers for each of the K object classes. Each set of 4 values encodes refined bounding-box positions for one of the K classes.</p>
 <h2 id="RoI-Region-of-Interest-pooling-layer"><a href="#RoI-Region-of-Interest-pooling-layer" class="headerlink" title="RoI (Region of Interest) pooling layer"></a>RoI (Region of Interest) pooling layer</h2><p>Similary to the warping in RCNN to process the region proposal into a fix-size input of fine-tune netowrk, the RoI max pooling works by dividing the h  w RoI window into an H  W grid of sub-windows of approximate size h=H  w=W and then max-pooling the values in each sub-window into the corresponding output grid cell.</p>
 <h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><ul>
-<li>step1: pre-trained:<br>  Amoung three pre-trained network from ImageNet the last max pooling layer is replaced by a RoI pooling layer that is configured by setting H and W to be compatible with the net’s first fully connected layer and last fully connected layer and softmax are replaced with the two sibling layers.</li>
+<li><p>step1: pre-trained:<br>  Amoung three pre-trained network from ImageNet the last max pooling layer is replaced by a RoI pooling layer that is configured by setting H and W to be compatible with the net’s first fully connected layer and last fully connected layer and softmax are replaced with the two sibling layers.</p>
+</li>
+<li><p>step2: fine-tune:</p>
+<ul>
+<li>mini-batch:<br>  In Fast RCNN training, stochastic gradient descent (SGD) minibatches are sampled hierarchically, first by sampling N images and then by sampling R=N RoIs from each image.</li>
+<li>end-to-end:<br>  Fast R-CNN uses a streamlined training process with one fine-tuning stage that jointly optimizes a softmax classifier and bounding-box regressors, rather than training a softmax classifier, SVMs, and regressors in three separate stages</li>
+</ul>
+</li>
 </ul>
 
           
