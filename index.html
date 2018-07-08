@@ -342,7 +342,12 @@
 <li>Run the images in the bounding boxes through a pre-trained AlexNet and finally an SVM to see what object the image in the box is.</li>
 <li>Run the box through a linear regression model to output tighter coordinates for the box once the object has been classified.</li>
 </ul>
-
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems:"></a>Problems:</h2><ol>
+<li>Training is a multi-stage pipeline. R-CNN first fine-tunes a ConvNet on object proposals using log loss. Then, it fits SVMs to ConvNet features. These SVMs act as object detectors, replacing the softmax classifier learnt by fine-tuning. In the third training stage, bounding-box regressors are learned.</li>
+<li>Training is expensive in space and time. For SVM and bounding-box regressor training, features are extracted from each object proposal in each image and written to disk. With very deep networks, such as VGG16, this process takes 2.5 GPU-days for the 5k images of the VOC07 trainval set. These features require hundreds of gigabytes of storage.</li>
+<li>Object detection is slow. At test-time, features are extracted from each object proposal in each test image. Detection with VGG16 takes 47s / image (on a GPU).</li>
+</ol>
+<h1 id="Fast-RCNN"><a href="#Fast-RCNN" class="headerlink" title="Fast-RCNN"></a>Fast-RCNN</h1><h2 id="RoI-pooling-layer"><a href="#RoI-pooling-layer" class="headerlink" title="RoI pooling layer"></a>RoI pooling layer</h2>
           
         
       
