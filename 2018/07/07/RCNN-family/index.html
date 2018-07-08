@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/RCNN-pipeline.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/fast-rcnn.jpeg">
-<meta property="og:updated_time" content="2018-07-08T15:18:16.000Z">
+<meta property="og:updated_time" content="2018-07-08T15:19:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RCNN-family">
 <meta name="twitter:description" content="Object DetectionTo what extent do [Krizhevsky et. al’s results] generalize to object detection? Object detection is the task of finding the different objects in an image and classifying them mAP (mean">
@@ -359,7 +359,7 @@
 <li>end-to-end:<br>  Fast R-CNN uses a streamlined training process with one fine-tuning stage that jointly optimizes a softmax classifier and bounding-box regressors, rather than training a softmax classifier, SVMs, and regressors in three separate stages.</li>
 </ul>
 </li>
-<li>loss: multi-task loss:<br>  $L(p, u, t^u, v) = L_{cls}(p, u) + \lambda[u &gt; 0]L_{loc}(t^u, v)$<br>  Each training RoI is labeled with a ground-truth class u and a ground-truth bounding-box regression target v. We use a multi-task loss L on each labeled RoI to jointly train for classification and bounding-box regression:<ul>
+<li>loss: multi-task loss:<br>  $L(p, u, t^u, v) = L_{cls}(p, u) + \lambda_{[u &gt; 0]}L_{loc}(t^u, v)$<br>  Each training RoI is labeled with a ground-truth class u and a ground-truth bounding-box regression target v. We use a multi-task loss L on each labeled RoI to jointly train for classification and bounding-box regression:<ul>
 <li>$L_{cls}(p(x), u) = - log p_u$<br> classification loss is log loss for true class u</li>
 </ul>
 </li>
