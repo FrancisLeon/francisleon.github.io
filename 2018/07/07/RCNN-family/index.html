@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/RCNN-pipeline.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/fast-rcnn.jpeg">
-<meta property="og:updated_time" content="2018-07-08T15:51:46.000Z">
+<meta property="og:updated_time" content="2018-07-08T18:35:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RCNN-family">
 <meta name="twitter:description" content="Object DetectionTo what extent do [Krizhevsky et. al’s results] generalize to object detection? Object detection is the task of finding the different objects in an image and classifying them mAP (mean">
@@ -364,6 +364,11 @@
 <li>$L_{loc}(t^u, v) = \sum_{i \in {x, y, w, h}} smooth_{L_1} (t_i^u - v)$<br>  is a robust L1 loss that is less sensitive to outliers than the L2 loss used in R-CNN and SPPnet. When the regression targets are unbounded, training with L2 loss can require careful tuning of learning rates in order to prevent exploding gradients. </li>
 </ul>
 </li>
+<li>mini-batch:<ul>
+<li>sharing weights:<br>  each SGD mini-batch is constructed from N = 2 images, chosen uniformly at random (as is common practice, we actually iterate over permutations of the dataset). We use mini-batches of size R = 128, sampling 64 RoIs from each image.</li>
+<li>ratio: Similar to the ratio mini-batch in RCNN, 25 % RoIs IoU at least 0.5 are as positive     images (with ground truth labels), [0.1, 0.5) are as back-ground.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -408,6 +413,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/09/leetcode43/" rel="prev" title="leetcode43">
+                leetcode43 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -484,7 +493,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
