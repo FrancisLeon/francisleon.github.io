@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="math," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="14. Longest Common PrefixDescriptionWrite a function to find the longest common prefix string amongst an array of strings.If there is no common prefix, return an empty string “”.Example 1:12Input: [&amp;q">
-<meta name="keywords" content="reinforcement learning, deep learning, machine learning">
+<meta name="description" content="48. Rotate ImageYou are given an n x n 2D matrix representing an image. Rotate the image by 90 degrees (clockwise). Note: You have to rotate the image in-place, which means you have to modify the inpu">
+<meta name="keywords" content="math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode14">
-<meta property="og:url" content="http://yoursite.com/2018/06/30/leetcode14/index.html">
+<meta property="og:title" content="leetcode48">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/leetcode48/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="14. Longest Common PrefixDescriptionWrite a function to find the longest common prefix string amongst an array of strings.If there is no common prefix, return an empty string “”.Example 1:12Input: [&amp;q">
+<meta property="og:description" content="48. Rotate ImageYou are given an n x n 2D matrix representing an image. Rotate the image by 90 degrees (clockwise). Note: You have to rotate the image in-place, which means you have to modify the inpu">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-30T20:14:15.000Z">
+<meta property="og:updated_time" content="2018-07-09T05:13:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode14">
-<meta name="twitter:description" content="14. Longest Common PrefixDescriptionWrite a function to find the longest common prefix string amongst an array of strings.If there is no common prefix, return an empty string “”.Example 1:12Input: [&amp;q">
+<meta name="twitter:title" content="leetcode48">
+<meta name="twitter:description" content="48. Rotate ImageYou are given an n x n 2D matrix representing an image. Rotate the image by 90 degrees (clockwise). Note: You have to rotate the image in-place, which means you have to modify the inpu">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/30/leetcode14/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/09/leetcode48/"/>
 
 
 
 
 
-  <title>leetcode14 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>leetcode48 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/30/leetcode14/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/leetcode48/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode14</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode48</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-30T16:04:14-04:00">
-                2018-06-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T01:09:28-04:00">
+                2018-07-09
               </time>
             
 
@@ -322,13 +322,16 @@
       
 
       
-        <h1 id="14-Longest-Common-Prefix"><a href="#14-Longest-Common-Prefix" class="headerlink" title="14. Longest Common Prefix"></a>14. Longest Common Prefix</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Write a function to find the longest common prefix string amongst an array of strings.<br>If there is no common prefix, return an empty string “”.<br>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">Output: &quot;fl&quot;</span><br></pre></td></tr></table></figure></p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestCommonPrefix(self, strs):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type strs: List[str]</span><br><span class="line">        :rtype: str</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not strs or len(strs) == 0:</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        </span><br><span class="line">        for i, strs_ in enumerate(zip(*strs)):</span><br><span class="line">            if len(set(strs_)) &gt; 1:</span><br><span class="line">                return strs[0][:i]</span><br><span class="line">    </span><br><span class="line">        return min(strs)</span><br></pre></td></tr></table></figure>
-<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="zip"><a href="#zip" class="headerlink" title="zip(*)"></a>zip(*)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">for group in zip(*arr):</span><br><span class="line">    print(group)</span><br></pre></td></tr></table></figure>
-<p>(‘f’, ‘f’, ‘f’)<br>(‘l’, ‘l’, ‘l’)<br>(‘o’, ‘o’, ‘i’)<br>(‘w’, ‘w’, ‘g’)<br>zip(*) unpack</p>
-<h2 id="min"><a href="#min" class="headerlink" title="min()"></a>min()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(min(arr))</span><br></pre></td></tr></table></figure>
-<p>flight</p>
-
+        <h1 id="48-Rotate-Image"><a href="#48-Rotate-Image" class="headerlink" title="48. Rotate Image"></a>48. Rotate Image</h1><p>You are given an n x n 2D matrix representing an image.</p>
+<p>Rotate the image by 90 degrees (clockwise).</p>
+<p>Note:</p>
+<p>You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.</p>
+<p>Example 1:</p>
+<p>Given input matrix =<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>],</p>
+<p>rotate the input matrix in-place such that it becomes:<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>tranpose firtly and mirror translate second.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param matrix: a lists of integers</span><br><span class="line">    @return: nothing</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def rotate(self, matrix):</span><br><span class="line">        # write your code here</span><br><span class="line">        if matrix == None or len(matrix) == 0:</span><br><span class="line">            return None</span><br><span class="line">        matrix = self.transpose(matrix)</span><br><span class="line">        matrix = self.mirror(matrix)</span><br><span class="line">        return matrix</span><br><span class="line"></span><br><span class="line">    def mirror(self, matrix):</span><br><span class="line">        for i in range(len(matrix)):</span><br><span class="line">            matrix[i].reverse()        </span><br><span class="line">        return matrix</span><br><span class="line">        </span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        n = len(matrix)</span><br><span class="line">        for i in range(n):</span><br><span class="line">            for j in range(i, n):</span><br><span class="line">                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]</span><br><span class="line">        return matrix</span><br></pre></td></tr></table></figure>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># list reverse</span><br><span class="line">matrix[i].reverse()</span><br><span class="line"># exchange</span><br><span class="line">matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -343,6 +346,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/math/" rel="tag"># math</a>
+          
+        </div>
+      
 
       
       
@@ -352,8 +361,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/28/流水账/" rel="next" title="流水账">
-                <i class="fa fa-chevron-left"></i> 流水账
+              <a href="/2018/07/09/leetcode43/" rel="next" title="leetcode43">
+                <i class="fa fa-chevron-left"></i> leetcode43
               </a>
             
           </div>
@@ -361,10 +370,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/30/leetcode148/" rel="prev" title="leetcode148">
-                leetcode148 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -496,7 +501,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#14-Longest-Common-Prefix"><span class="nav-number">1.</span> <span class="nav-text">14. Longest Common Prefix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">4.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">4.1.</span> <span class="nav-text">zip(*)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#min"><span class="nav-number">4.2.</span> <span class="nav-text">min()</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#48-Rotate-Image"><span class="nav-number">1.</span> <span class="nav-text">48. Rotate Image</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">4.</span> <span class="nav-text">Python</span></a></li></ol></div>
             
 
           </div>
