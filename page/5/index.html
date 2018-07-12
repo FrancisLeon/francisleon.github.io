@@ -233,6 +233,187 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/LearnAdaptSeg/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/13/LearnAdaptSeg/" itemprop="url">Learning to Adapt Structured Output Space for Semantic Segmentation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T17:00:49-04:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">transfer learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://arxiv.org/abs/1802.10349" target="_blank" rel="noopener">这篇论文</a>对应的<a href="https://github.com/wasidennis/AdaptSegNet" target="_blank" rel="noopener">代码</a>是最近在跑的，需要好好看看。</p>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Convolutional neural network-based approaches for semantic segmentation rely on supervision with pixel-level ground truth, but may not generalize well to unseen image domains. As the labeling process is tedious and labor intensive, developing algorithms that can adapt source ground truth labels to the target domain is of great interest. In this paper, we propose an adversarial learning method for domain adaptation in the context of semantic segmentation. Considering semantic segmentations as structured outputs that contain spatial similarities between the source and target domains, <strong>we adopt adversarial learning in the output space</strong>. To further enhance the adapted model, we construct a <strong>multi-level adversarial network</strong> to effectively perform output space domain adaptation at different feature levels. Extensive experiments and ablation study are conducted under various domain adaptation settings, including synthetic-to-real and cross-city scenarios. We show that the proposed method performs favorably against the state-of-the-art methods in terms of accuracy and visual quality.</p>
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><ul>
+<li>1) a segmentation model to predict output results</li>
+<li>2) a discriminator to distinguish whether the input is from the source or target segmentation output. <h2 id="contributions"><a href="#contributions" class="headerlink" title="contributions"></a>contributions</h2></li>
+<li>propose a domain adaptation method for pixel-level semantic segmentation via adversarial learning</li>
+<li>demonstrate that adaptation in the output (segmentation) space can effectively align scene layout and local context between source and target images</li>
+<li>a multi-level adversarial learning scheme is developed to adapt features at different levels of the segmentation model, which leads to improved performance.</li>
+</ul>
+<h1 id="structure"><a href="#structure" class="headerlink" title="structure"></a>structure</h1><p>感觉也不是那么难理解，就是有点像u-net，它这里的话就是在不同的layer里面用GAN，就是所谓的multi-，<br>然后主要是output space上面，因为这篇文章发现，不管两个domain的图多么不一样，他们在output space总是有很多相似的地方。<br><img src="/images/multiGAN.jpeg" alt=""></p>
+<h1 id="model-overview"><a href="#model-overview" class="headerlink" title="model overview"></a>model overview</h1><p>这个结构有两个模块：生成器$G$和判别器$D_i$ （i 表示是第几层的判别器）。images通过生成器出来的是源域segmentation的概率分布$P_s$</p>
+<h1 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h1><p>$L(I_s, I_t) = L_{seg}(I_s) + \lambda L_{adv}(I_t)$</p>
+<ul>
+<li>$L_{seg}(I_s)$<br>  cross-entropy loss using ground truth annotations in the source domain</li>
+<li>$L_{adv}$<br>  对抗损失，用来使得源域的预期的数据分布和目标域相近</li>
+<li>$\lambda_{abv}$<br>  这个weight用来平衡这两个loss</li>
+</ul>
+<h1 id="Output-space-adaptation"><a href="#Output-space-adaptation" class="headerlink" title="Output space adaptation"></a>Output space adaptation</h1><h2 id="Single-level-adversarial-learning"><a href="#Single-level-adversarial-learning" class="headerlink" title="Single-level adversarial learning"></a>Single-level adversarial learning</h2><h3 id="Discriminator-Training"><a href="#Discriminator-Training" class="headerlink" title="Discriminator Training"></a>Discriminator Training</h3><ul>
+<li>cross entropy<ul>
+<li>定义：<br>  给定两个分布，p，q，它们在给定样本集上面的交叉熵的定义如下<br>  $CEH(p, q) = E_p[-log q] = - \sum_{x \in X}p(x)q(x) = H(p) + D_{KL}(p||q)$，当p的熵给定时，交叉熵和KL散度是一致是的，一定程度上可以用来描述，这两个分布的距离。</li>
+<li>讨论：讲到cross entropy，为什么用cross entropy loss 于分类呢？(<a href="http://jackon.me/posts/why-use-cross-entropy-error-for-loss-function/" target="_blank" rel="noopener">Jackon解答</a>)<ul>
+<li>比起一般的classification error 作为loss，它很更精细准确的去描述model的优劣</li>
+<li>比起MSE，来说，它是一个凸优化的问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>segmentation softmax output:<br>  $P = G(I) \in R^{HxWxC}$, 这里C是种类数，这里C是2，来自源域或者来自目标域</p>
+</li>
+<li><p>cross-entropy loss：<br>  我们将P传到全卷积的判别器D里面：$L_d(P) = - \sum_{h, w}((1 - z)log(D(P)^{(h,w,0)})) + zlog(D(P)^{(h,w,1)})$</p>
+</li>
+</ul>
+<h3 id="Segmentation-Network-Training"><a href="#Segmentation-Network-Training" class="headerlink" title="Segmentation Network Training"></a>Segmentation Network Training</h3><ul>
+<li>segmentation loss:<br>  在源域的话我们正常训练，还是由cross-entropy loss来定义：$L_{seg}(I_s) = -\sum_{h, w}\sum_{c \in C}Y_s^{h,w,c}log(P_s^{(h,w,c)})$</li>
+<li>adversarial loss：<br>  在目标域，我们的对抗损失是：$L_{adv}(I_t) = -\sum_{h,w}log(D(G(I_t)))^{(h,w,1)}$，这个损失是用来欺骗判别器的，使得两者的预期的概率的一致</li>
+</ul>
+<h2 id="Multi-level-Adversarial-Learning"><a href="#Multi-level-Adversarial-Learning" class="headerlink" title="Multi-level Adversarial Learning"></a>Multi-level Adversarial Learning</h2><ul>
+<li>multi-level loss<br>  就是在low-level的feature space里面加上上面的loss，也不是很难理解：<br>  $L_{I_s, I_t} = \sum_i \lambda_i^{seg}(I_s) + \sum_i \lambda^i_{adv}L_{adv}^i(I_t)$，i表示第几层网络。</li>
+<li>whole picture<br>  有了上面的对loss的介绍后，我们的问题其实就是一个min-max的优化问题：<br>  $max_D min_G L(I_s, I_t)$</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/自省/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1659,152 +1840,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/如何读paper/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/07/如何读paper/" itemprop="url">如何读paper</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-07T15:15:30-04:00">
-                2018-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">machine learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这个应该是一个老生常谈的话题了，对于我这种半路出家的人来说，如何高效的看paper其实对自己的发展也是挺重要的。<br>看了知乎上的一些讨论感觉也不错，<a href="https://www.zhihu.com/question/20169638" target="_blank" rel="noopener">如何读一篇优秀的计算机论文？</a></p>
-<p>评论里面的Jobs Bill大大这点讲的就挺好：</p>
-<p>研究一个问题不可能只读一篇paper，当时我的老师给了我几十篇论文（论文的质量算是有所保证了），我平时还要上课背单词哪有那么多时间读啊……于是我采取的方法是按时间顺序把所有论文的abstract和introduction先读了，记录一下研究的什么问题，记录一下研究背景的（人家研究这算法是有什么应用，这部分以后自己写论文也能用上）记录一下此paper做了什么贡献（如何比前人的好），此过程留意论文发表的级别就OK，我现在只读过理论计算机科学算法方面的paper，一般读到introduction就应该弄懂这篇paper和参考文献中的那一篇或几篇作比较，抓住论文重点比较的参考文献接着读（有点儿递归调用的意思吧）。读每一篇时，跳过Related Works，跳过算法的具体实现细节，跳过算法证明，跳过实验说明，直接扫一眼实验结果，记一下在哪些方面改进了。个人感觉这些对于第一遍来说已经足够。</p>
-<p>我感觉第一遍看，把这篇论文要解决的问题大概理解就可以了，如果需要进一步看的话，看它引的论文的abstract和introduction，回头再看它的工作。嗯，目前就先这样子吧。</p>
-<p>如果，像我（哈哈）论文的作者正好在同一个学校的话，自己看到一定程度，直接约交流应该也是可以的，近期想试试，哈哈哈。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1855,7 +1890,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1877,7 +1912,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
