@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="two pointer,facebook," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="还是把心静下来吧，不用想太多，总结和整理。总是会有波动，感觉游泳和合理膳食的确是提高效率的关键。规律的生活总是让人一天有效率的工作。">
-<meta name="keywords" content="reinforcement learning, deep learning, machine learning">
+<meta name="description" content="125. Valid PalindromeGiven a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases. Note: For the purpose of this problem, we define empty string as vali">
+<meta name="keywords" content="two pointer,facebook">
 <meta property="og:type" content="article">
-<meta property="og:title" content="静下心来">
-<meta property="og:url" content="http://yoursite.com/2018/04/18/静下心来/index.html">
+<meta property="og:title" content="leetcode125">
+<meta property="og:url" content="http://yoursite.com/2018/07/11/leetcode125/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="还是把心静下来吧，不用想太多，总结和整理。总是会有波动，感觉游泳和合理膳食的确是提高效率的关键。规律的生活总是让人一天有效率的工作。">
+<meta property="og:description" content="125. Valid PalindromeGiven a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases. Note: For the purpose of this problem, we define empty string as vali">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-12T05:01:13.000Z">
+<meta property="og:updated_time" content="2018-07-12T03:20:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静下心来">
-<meta name="twitter:description" content="还是把心静下来吧，不用想太多，总结和整理。总是会有波动，感觉游泳和合理膳食的确是提高效率的关键。规律的生活总是让人一天有效率的工作。">
+<meta name="twitter:title" content="leetcode125">
+<meta name="twitter:description" content="125. Valid PalindromeGiven a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases. Note: For the purpose of this problem, we define empty string as vali">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/18/静下心来/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/11/leetcode125/"/>
 
 
 
 
 
-  <title>静下心来 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>leetcode125 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/静下心来/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/leetcode125/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">静下心来</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode125</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T21:07:24-04:00">
-                2018-04-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T23:15:20-04:00">
+                2018-07-11
               </time>
             
 
@@ -285,8 +285,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日常/" itemprop="url" rel="index">
-                    <span itemprop="name">日常</span>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
                   </a>
                 </span>
 
@@ -322,7 +322,14 @@
       
 
       
-        <p>还是把心静下来吧，不用想太多，总结和整理。<br>总是会有波动，感觉游泳和合理膳食的确是提高效率的关键。规律的生活总是让人一天有效率的工作。</p>
+        <h1 id="125-Valid-Palindrome"><a href="#125-Valid-Palindrome" class="headerlink" title="125. Valid Palindrome"></a>125. Valid Palindrome</h1><p>Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.</p>
+<p>Note: For the purpose of this problem, we define empty string as valid palindrome.</p>
+<p>Example 1:</p>
+<p>Input: “A man, a plan, a canal: Panama”<br>Output: true<br>Example 2:</p>
+<p>Input: “race a car”<br>Output: </p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>the python string operations:<br>string1.join([….])<br>string2.lower()</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p>Mine<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isPalindrome(self, s):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type s: str</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not s:</span><br><span class="line">            return True</span><br><span class="line">        l, r = 0, len(s) - 1</span><br><span class="line">        while l &lt; r:</span><br><span class="line">            while l &lt; r and (not (s[l].isalpha() or s[l].isdigit())):</span><br><span class="line">                l += 1</span><br><span class="line">            while l &lt; r and (not (s[r].isalpha() or s[r].isdigit())):</span><br><span class="line">                r -= 1</span><br><span class="line">            if s[l].lower() != s[r].lower():</span><br><span class="line">                return False</span><br><span class="line">            l += 1</span><br><span class="line">            r -= 1</span><br><span class="line">        return True</span><br></pre></td></tr></table></figure></p>
+<p>more concise<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isPalindrome(self, s):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type s: str</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        s = &apos;&apos;.join([x for x in s if x.isalpha() or x.isdigit()]).lower()</span><br><span class="line">        return s == s[::-1]</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -338,6 +345,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/two-pointer/" rel="tag"># two pointer</a>
+          
+            <a href="/tags/facebook/" rel="tag"># facebook</a>
+          
+        </div>
+      
 
       
       
@@ -347,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/17/convolution/" rel="next" title="dilated convolution">
-                <i class="fa fa-chevron-left"></i> dilated convolution
+              <a href="/2018/07/11/leetcode15/" rel="next" title="leetcode15">
+                <i class="fa fa-chevron-left"></i> leetcode15
               </a>
             
           </div>
@@ -356,10 +371,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/18/概率图模型/" rel="prev" title="概率图模型">
-                概率图模型 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -411,8 +422,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -472,6 +492,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#125-Valid-Palindrome"><span class="nav-number">1.</span> <span class="nav-text">125. Valid Palindrome</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
