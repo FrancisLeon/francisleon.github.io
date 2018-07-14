@@ -233,6 +233,309 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode351/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/leetcode351/" itemprop="url">leetcode351</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T02:09:12-04:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given an Android 3x3 key lock screen and two integers m and n, where 1 ≤ m ≤ n ≤ 9, count the total number of unlock patterns of the Android lock screen, which consist of minimum of m keys and maximum n keys.</p>
+<p>Rules for a valid pattern:</p>
+<ol>
+<li>Each pattern must connect at least m keys and at most n keys.</li>
+<li>All the keys must be distinct.</li>
+<li>If the line connecting two consecutive keys in the pattern passes through any other keys, the other keys must have previously selected in the pattern. No jumps through non selected key is allowed.</li>
+<li>The order of keys used matters.</li>
+</ol>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| 1 | 2 | 3 |</span><br><span class="line">| 4 | 5 | 6 |</span><br><span class="line">| 7 | 8 | 9 |</span><br></pre></td></tr></table></figure>
+<p>Invalid move: 4 - 1 - 3 - 6<br>Line 1 - 3 passes through key 2 which had not been selected in the pattern.</p>
+<p>Invalid move: 4 - 1 - 9 - 2<br>Line 1 - 9 passes through key 5 which had not been selected in the pattern.</p>
+<p>Valid move: 2 - 4 - 1 - 3 - 6<br>Line 1 - 3 is valid because it passes through key 2, which had been selected in the pattern</p>
+<p>Valid move: 6 - 5 - 4 - 1 - 9 - 2<br>Line 1 - 9 is valid because it passes through key 5, which had been selected in the pattern.</p>
+<p>Example:<br>Given m = 1, n = 1, return 9.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>这种棋盘格子之类的问题往往是用dfs来求解的。然后，discussion里面这个哥们给的<a href="https://leetcode.com/problems/android-unlock-patterns/discuss/131737/Python-easy-readable-DFS-solution-with-clear-explaination" target="_blank" rel="noopener">解</a>挺好的，很清晰：<br>The basic idea is starting from an arbitrary digit (prev), search all the valid next digit. Use a set/dict (visited) to store all the visited digits. What is the invalid combination? Only two cases.</p>
+<p>if prev in {1, 3, 7, 9} and next in {1, 3, 7, 9}, however, (prev + next)/2 not in visited. e.g. 1 -&gt; 7 and 4 not visited.<br>if prev in {2, 4, 6, 8} and next == 10 - prev, however, 5 is not in visited. e.g. 2-&gt;8 and 5 not visited.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def numberOfPatterns(self, m, n):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type m: int</span><br><span class="line">        :type n: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        visited = &#123;&#125;</span><br><span class="line">        self.res = 0</span><br><span class="line">        self.corner = &#123;1,3,7,9&#125;</span><br><span class="line">        self.mid = &#123;2,4,6,8&#125;</span><br><span class="line">        for i in range(1, 10):</span><br><span class="line">            visited[i] = 1</span><br><span class="line">            self.dfsHelper(visited, 1, m, n, i)</span><br><span class="line">            del visited[i]</span><br><span class="line">        return self.res</span><br><span class="line">        </span><br><span class="line">    # 递归的定义：找出所有合理的next pos</span><br><span class="line">    def dfsHelper(self, visited, keys, m, n, prev):</span><br><span class="line">        # 递归的出口：</span><br><span class="line">        if m &lt;= keys &lt;= n:</span><br><span class="line">            self.res += 1</span><br><span class="line">        if keys == n:</span><br><span class="line">            return</span><br><span class="line"></span><br><span class="line">        # 递归的拆解：对1-10遍历，找到valid的next</span><br><span class="line">        for next in range(1, 10):</span><br><span class="line">            if next not in visited:</span><br><span class="line">                if prev in self.corner and next in self.corner and (prev + next)/2 not in visited:</span><br><span class="line">                    continue</span><br><span class="line">                elif prev in self.mid and next == (10 - prev) and 5 not in visited:</span><br><span class="line">                    continue</span><br><span class="line">                visited[next] = 1</span><br><span class="line">                self.dfsHelper(visited, keys + 1, m, n, next)</span><br><span class="line">                del visited[next]</span><br><span class="line">                </span><br><span class="line">#         self.corners = set([1, 3, 7, 9])</span><br><span class="line">#         self.mids = set([2, 4, 6, 8])</span><br><span class="line">#         visited = &#123;&#125;</span><br><span class="line">#         self.res = 0</span><br><span class="line">#         for i in range(1, 10):</span><br><span class="line">#             visited[i] = 1</span><br><span class="line">#             self.dfs(m, n, 1, i, visited)</span><br><span class="line">#             del visited[i]</span><br><span class="line">        </span><br><span class="line">#         return self.res</span><br><span class="line">    </span><br><span class="line">#     # 递归的定义：找出所有合理的next pos</span><br><span class="line">#     def dfs(self, lower, upper, visited_num, prev_n, visited):</span><br><span class="line">#         # 递归的出口：</span><br><span class="line">#         if lower &lt;= visited_num &lt;= upper:</span><br><span class="line">#             self.res += 1</span><br><span class="line">#         if visited_num &gt; upper:</span><br><span class="line">#             return</span><br><span class="line"></span><br><span class="line">#         # 递归的拆解：对1-10遍历，找到valid的next</span><br><span class="line">#         for next_n in range(1, 10):</span><br><span class="line">#             if self.isValid(prev_n, next_n, visited):</span><br><span class="line">#                 visited[next_n] = 1</span><br><span class="line">#                 self.dfs(lower, upper, next_n, visited)</span><br><span class="line">#                 del visited[next_n]</span><br><span class="line">    </span><br><span class="line">#     def isValid(self, prev_n, next_n, visited):</span><br><span class="line">#         if prev_n != next_n:</span><br><span class="line">#             if prev_n in self.corners and next_n in self.corners and (prev_n + next_n) / 2 in visited:</span><br><span class="line">#                 return True</span><br><span class="line">#             if prev_n in self.mids and next_n in self.mids and (prev_n + next_n) / 2 in visited:</span><br><span class="line">#                 return True</span><br><span class="line">#         return False</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode766/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/leetcode766/" itemprop="url">leetcode766</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T01:52:56-04:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>A matrix is Toeplitz if every diagonal from top-left to bottom-right has the same element. Now given an M x N matrix, return True if and only if the matrix is Toeplitz.</p>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">matrix = [</span><br><span class="line">  [1,2,3,4],</span><br><span class="line">  [5,1,2,3],</span><br><span class="line">  [9,5,1,2]</span><br><span class="line">]</span><br><span class="line">Output: True</span><br><span class="line">Explanation:</span><br><span class="line">In the above grid, the diagonals are:</span><br><span class="line">&quot;[9]&quot;, &quot;[5, 5]&quot;, &quot;[1, 1, 1]&quot;, &quot;[2, 2, 2]&quot;, &quot;[3, 3]&quot;, &quot;[4]&quot;.</span><br><span class="line">In each diagonal all elements are the same, so the answer is True.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">matrix = [</span><br><span class="line">  [1,2],</span><br><span class="line">  [2,2]</span><br><span class="line">]</span><br><span class="line">Output: False</span><br><span class="line">Explanation:</span><br><span class="line">The diagonal &quot;[1, 2]&quot; has different elements.</span><br></pre></td></tr></table></figure>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>直接遍历，不过是要check遍历元素和斜对的元素是不是一样</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isToeplitzMatrix(self, matrix):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type matrix: List[List[int]]</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not matrix or len(matrix) == 0:</span><br><span class="line">            return False</span><br><span class="line">        </span><br><span class="line">        rows = len(matrix)</span><br><span class="line">        cols = len(matrix[0])</span><br><span class="line">        </span><br><span class="line">        for r in range(rows):</span><br><span class="line">            for c in range(cols):</span><br><span class="line">                if (r + 1 &lt;= rows -1 and c + 1 &lt;= cols - 1) and matrix[r][c] != matrix[r + 1][c + 1]:</span><br><span class="line">                    return False</span><br><span class="line">        </span><br><span class="line">        return True</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/lintcode900/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1455,429 +1758,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/17/DNN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/17/DNN/" itemprop="url">DNN</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-17T21:36:58-04:00">
-                2018-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">deep learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这个是hugo的deep learning的学习<a href="http://www.dmi.usherb.ca/~larocheh/neural_networks/content.html" target="_blank" rel="noopener">tutorial</a>，需要慢慢刷掉，当然cmu 10707 的<a href="https://www.cs.cmu.edu/~rsalakhu/10707/" target="_blank" rel="noopener">slides</a>很多也是参考这个的(Russlan自己说)整理的，你如果找不到CMU 10707的视频你可以看这个，也是极好的。</p>
-<p>然后，这里我想整理下最最基本的neural network的公式的推导，自己再推一遍，感觉就不虚：</p>
-<h1 id="网络的基本结构："><a href="#网络的基本结构：" class="headerlink" title="网络的基本结构："></a>网络的基本结构：</h1><p><img src="/images/DNNstructure.jpeg" width="50%" height="50%"></p>
-<ul>
-<li>layer pre-activation for $k &gt; 0$ <strong>$(h_{0}(x) = x)$</strong><br>  $a^{(k)}(x) = b^{(k)} + W^{(k)}h^{(k - 1)}(x)$<br>  感觉这么记忆，不会记乱，k就是第几层neuron，然后$h^{(k - 1)}(x)$是前一层的输出，然后weights $W^{(k)}$，bias $b^{(k)}$都是这层的，虽然有前一层输出作为的输入，但是这些还是算这一层的。</li>
-<li><p>hidden layer activation (k from 1 to L)<br>  $h^{(k)}(x) = g(a^{(k)}(x))$<br>  反正这个就是这一层的输出，然后，这层的weights，bias最终都会由这层的输出所终结。</p>
-</li>
-<li><p>output layer activation $k = L + 1$:<br>  $h^{(L + 1)}(x) = o(a^{(L + 1)}(x)) = f(x)$<br>  和hidden不一样就是这个是最后一层了，然后这层的activation function也会和之前hidden layers有所不同，如果是分类的话，往往是softmax</p>
-</li>
-<li><p>softmax activation function at the output:<br>  $o(a) = softmax(a) = [\frac{exp(a_1)}{\sum_c exp(a_c)}…\frac{a_C}{\sum_c exp(a_c)}]^T$<br>  如何理解softmax呢，为什么多分类问题里面要用softmax呢，而不是别的呢？<br>  知乎对此有一定的<a href="https://www.zhihu.com/question/40403377" target="_blank" rel="noopener">讨论</a>，我这里引用下王赟(yun第一声)大神的解答：</p>
-<ul>
-<li>原因之一：希望特征对概率的影响是乘性的</li>
-<li>原因之二：多类分类问题的目标函数常常选为cross-entropy，…(推完整个，回来补)</li>
-</ul>
-</li>
-<li><p>activation function:</p>
-<ul>
-<li><p>sigmoid：</p>
-<ul>
-<li>formula:<br>  $\sigma(x) = \frac{1}{1 + e^{-x}}$，$\sigma(x)’ = \frac{e^x}{(1 + e^x)^2} = (1 - \sigma(x)) \sigma(x)$</li>
-<li>shortcomings:<ul>
-<li>gradient vanish</li>
-<li>symmetric</li>
-<li>time cosuming to compute exp</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>tanh:</p>
-<ul>
-<li>formula:<br>  $tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{2}{1 + e^{-2}} - 1 = 2 \sigma(2x) - 1$，$tanh(x)’ = \frac{e^x - e^{-x}}{e^x + e^{-x}}$</li>
-<li>感觉就是解决了原点对称的问题</li>
-</ul>
-</li>
-<li><p>relu:</p>
-<ul>
-<li>formula：$f(x) = max(0, x)$</li>
-<li>优点：<br>  Relu会使一部分神经元的输出为0，这样就造成了网络的稀疏性，并且减少了参数的相互依存关系，缓解了过拟合问题的发生<br>  计算量小</li>
-<li>缺点：<br>  部分neuro会死亡</li>
-</ul>
-</li>
-<li><p>leaky relu：</p>
-<ul>
-<li>formula：$f(x) = max(\epsilon x, x)$</li>
-<li>优点:<br>  解决了neuron会死亡的问题</li>
-</ul>
-</li>
-<li><p>maxout：</p>
-<ul>
-<li>formula: 对 relu 和 leaky relu的一般归纳：$f(x) = max(w_1^T x + b_1, w_2^T x + b_2)$</li>
-<li>优点:<br>  计算简单，不会死亡，不会饱和</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function:"></a>loss function:</h1><ul>
-<li><p>stochastic gradient descent (SGD):<br>  随机梯度下降应该是最最基础的梯度下降的方法了，</p>
-<ul>
-<li>initialize  $\theta$ ($\theta = {W^{(1)}, b^{(1)}…，W^{(L + 1)}}$)</li>
-<li>algorithm:<br>  for N iterations: (One epoch)<pre><code>for each training example $(x_{(t)}, y_{(t)})$   
-    $\delta = -\nabla_{\theta}l(f(x_{(t)}, \theta), \y_{(t)}) - \lambda\nabla_{(\theta)}$
-    $\omiga_{(\theta)}$
-    $\theta \leftarrow \theta + \alpha \delta$
-</code></pre></li>
-<li>SGD 的<a href="https://zhuanlan.zhihu.com/p/22252270" target="_blank" rel="noopener">优缺点</a>：<ul>
-<li>缺点：<ul>
-<li>选择合适的learning rate比较困难 - 对所有的参数更新使用同样的learning rate。对于稀疏数据或者特征，有时我们可能想更新快一些对于不经常出现的特征，对于常出现的特征更新慢一些，这时候SGD就不太能满足要求了</li>
-<li>相对BGD noise会比较大</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>batch gradient descent (BGD) 的<a href="https://zhuanlan.zhihu.com/p/25765735" target="_blank" rel="noopener">对比</a>：<br>  所谓batch就是一起算，你看公式就知道：<br>  $\theta \leftarrow \theta + \frac{1}{m}\sum_{i}(y_i - f(x;\theta)(x_i))$ (MSE)</p>
-<ul>
-<li>缺点：m很大的时候，train的会比较慢</li>
-<li>优点：比SGD稳定</li>
-</ul>
-</li>
-<li><p>mini-batch GD:<br>  就是这两个的折中，就像强化学习里面的，TD，Monta Carlo之间的n step-TD</p>
-<ul>
-<li>advantages:<ul>
-<li>give a accurate estimate of average loss</li>
-<li>can leverage matrix operations, which cost less than BGD</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>what neural network estimates?<br>  $f(x)_{c} = P(y=c|x)$， where c means which class.</p>
-</li>
-<li><p>what to optimize?<br>  maximize log likelihood —- minize negative log likelihood: $P(y_i=c|x_i)$，given $(x_i, y_i)$<br>  cross-entropy: p, q (p one-hot, q distribution of the P(y=c|x))<br>  $l(f(x), y) = -\sum_c1(y=c)log f(x)_c = - log f(x)_y$</p>
-</li>
-</ul>
-<h1 id="loss-gradient-output"><a href="#loss-gradient-output" class="headerlink" title="loss gradient output:"></a>loss gradient output:</h1><p><img src="/images/DNN-output-layer-gradient.jpeg" width="50%" height="50%"></p>
-<h2 id="loss-gradient-at-output"><a href="#loss-gradient-at-output" class="headerlink" title="loss gradient at output"></a>loss gradient at output</h2><ul>
-<li><p>partial derivative:<br>  $\frac{\partial - logf(x)_y}{\partial f(x)_c} = \frac{-1^{(y = c)}}{f(x)^y}$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
-</li>
-<li><p>gradient:<br>  然后，我们推广到，求梯度<br>  $\nabla_{f(x)} -logf(x)_y= \frac{-1}{f(x)_y} [1^{(y=0)}…1^{(y=C-1)}]^T = \frac{-e(y)}{f(x)^y}$</p>
-</li>
-</ul>
-<h2 id="loss-gradient-at-output-pre-activation"><a href="#loss-gradient-at-output-pre-activation" class="headerlink" title="loss gradient at output pre-activation"></a>loss gradient at output pre-activation</h2><ul>
-<li><p>partial derivative:<br>  首先还是标量的形式，<br>  $\frac{\partial - logf(x)_y}{\partial a^{(L+1)}(x)_c} = (1^{(y = c)}} - f(x)^y)$<br>  这里，y要和c一样才有值，因为这里cross-entropy里面用了one-hot，只有在同一维度下面，求偏导才有值。</p>
-</li>
-<li><p>gradient:<br>  然后，我们类比到向量上面，<br>  $\nabla_{a^{(L+1)}(x)_c}[- logf(x)_y}] = -(e^{(y)}} - f(x)^y)$</p>
-</li>
-<li><p>proof:<br>  这里的proof不完整，只是推了一个维度的，完整的可以参考ece一个师兄的知乎的<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术</a>，之后回来在补推一下。<br><img src="/images/DNN-output-layer-gradient-proof.jpeg" width="70%" height="70%"></p>
-</li>
-</ul>
-<h1 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h1><h2 id="Compute-output-gradient-before-activation"><a href="#Compute-output-gradient-before-activation" class="headerlink" title="Compute output gradient (before activation)"></a>Compute output gradient (before activation)</h2><p>$\nabla_{a^{(L+1)}(x)} -logf(x)_y \leftarrow - (e(y)-f(x))$</p>
-<h2 id="for-k-from-L-1-to-1"><a href="#for-k-from-L-1-to-1" class="headerlink" title="for k from L + 1 to 1"></a>for k from L + 1 to 1</h2><ul>
-<li>compute gradients of hidden layer parameter<br>$\nabla_{W^{(k)}} -logf(x)^y \leftarrow $ $\nabla_{a^{(k)}(x)} -log f(x)^y h^{(k-1)}(x)^T$<br>$\nabla_{b^{(k)}} -logf(x)^y \leftarrow $ $\nabla_{a^{(k)}(x)} -log f(x)^y$</li>
-<li>compute gradient of hidden layer below<br>$\nabla_{b^{(k)}} -logf(x)^y \leftarrow $ $\nabla_{a^{(k)}(x)} -log f(x)^y$</li>
-<li>compute gradient of hidden layer below<br>$\nabla_{h^{(k-1)}(x)} -logf(x)^y \leftarrow $ $W^{(k)T} \nabla_{a^{(k)}(x)} -log f(x)^y$</li>
-<li>compute gradient of hidden layer below (before activation)<br>$\nabla_{a^{(k-1)}(x)} -logf(x)^y \leftarrow $ $(\nabla_{h^{(k-1)}(x)} -log f(x)^y) \odot […,g’(a^{(k-1)}(x)_j),…]$</li>
-</ul>
-<h1 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h1><ul>
-<li><p>L1 &amp; L2 regularization</p>
-<ul>
-<li>L1 $\frac{\lambda}{2m} \sum |w|^2$<br>  L2 regularization is also known as weight decay as it forces the weights to decay towards zero (but not exactly zero).</li>
-<li>L2 $\frac{\lambda}{2m} \sum |w|$<br>  Unlike L2, the weights may be reduced to zero here. Hence, it is very useful when we are trying to compress our model. Otherwise, we usually prefer L2 over it. Sparse solution.</li>
-</ul>
-</li>
-<li><p>Dropout<br>  So what does dropout do? At every iteration, it randomly selects some nodes and removes them along with all of their incoming and outgoing connections as shown below.<br>  <img src="/images/dropout.jpeg" width="70%" height="70%"><br>  So each iteration has a different set of nodes and this results in a different set of outputs. It can also be thought of as an ensemble technique in machine learning.</p>
-<p>  Ensemble models usually perform better than a single model as they capture more randomness. Similarly, dropout also performs better than a normal neural network model.</p>
-<p>  This probability of choosing how many nodes should be dropped is the hyperparameter of the dropout function. As seen in the image above, dropout can be applied to both the hidden layers as well as the input layers.</p>
-</li>
-<li><p>Batch Normalization</p>
-<ul>
-<li>idea<br>  is that since it’s benefit to training if the input data is normalized, so why not normalize in hidden layers to solve the internal covariance shift.</li>
-<li>denormalization<br>  to avoid extra effect of normalization, the denormalization parameters are helpful to adjust<br><img src="/images/batch-normalization.jpeg" width="70%" height="70%"></li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/16/周末做什么/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/16/周末做什么/" itemprop="url">周末做什么</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-16T19:43:21-04:00">
-                2018-06-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日常/" itemprop="url" rel="index">
-                    <span itemprop="name">日常</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>很多人会烦周末了，做什么呢？<br>一些人也许会去出去和朋友浪，一些人也许会花周末的时间一直打游戏，当然也有大神会在周末继续工作。</p>
-<p>我感觉把，周末最需要的是休息吧，作息规律，妥善的饮食，都是重要的。我一直觉得所谓休息不是放纵自己的欲望，一个人幸福也许是来自他/她对自己欲望的驾驭，熬夜刷剧不叫休息，熬夜看世界杯也不叫休息吧，感觉就是放纵，算是对身体的一种伤害，休息应该是不是伤害身体的。娱乐当然需要呀，晚上好好睡觉，白天起来刷剧不是更爽吗。所以，感觉休息是身体的调整吧。当然，还有精神的放松，以及卸下压力，卸下你这一周的重担。</p>
-<p>当然，我感觉你觉得休息够了，你自然可以考虑工作的事情，个人发展的事情，也都挺好的，感觉这个时候更重要的是反思吧，反思这一周，所谓：学而不思则罔吧。你也可以推进一下你需要的长期的要做的事情，你可以整理一下你这一周的得失，以及对下一周的展望。</p>
-<p>总之，周末就是一个节点，一个驿站，周而复始，你就会达到你所向往的未来。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1928,7 +1808,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1950,7 +1830,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
