@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="bfs,graph,facebook," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="去人迹罕至的地方，留下自己的足迹。">
-<meta name="keywords" content="reinforcement learning, deep learning, machine learning">
+<meta name="description" content="133. Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator">
+<meta name="keywords" content="bfs,graph,facebook">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode133">
 <meta property="og:url" content="http://yoursite.com/2018/07/15/leetcode133/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta property="og:description" content="133. Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T14:30:40.000Z">
+<meta property="og:updated_time" content="2018-07-15T14:35:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode133">
-<meta name="twitter:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta name="twitter:description" content="133. Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator">
 
 
 
@@ -273,6 +273,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -300,7 +322,13 @@
       
 
       
-        
+        <h1 id="133-Clone-Graph"><a href="#133-Clone-Graph" class="headerlink" title="133. Clone Graph"></a>133. Clone Graph</h1><p>Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.</p>
+<p>OJ’s undirected graph serialization:<br>Nodes are labeled uniquely.</p>
+<p>We use # as a separator for each node, and , as a separator for node label and each neighbor of the node.<br>As an example, consider the serialized graph {0,1,2#1,2#2,2}.</p>
+<p>The graph has a total of three nodes, and therefore contains three parts as separated by #.</p>
+<p>First node is labeled as 0. Connect node 0 to both nodes 1 and 2.<br>Second node is labeled as 1. Connect node 1 to node 2.<br>Third node is labeled as 2. Connect node 2 to node 2 (itself), thus forming a self-cycle.<br>Visually, the graph looks like the following:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   1</span><br><span class="line">  / \</span><br><span class="line"> /   \</span><br><span class="line">0 --- 2</span><br><span class="line">     / \</span><br><span class="line">     \_/</span><br></pre></td></tr></table></figure></p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Perform bfs algorithm to traverse the whole graph and get all the nodes firstly, and then  copy the nodes and construct the mapping from original nodes to new nodes. Finally, copy the edges (neighbors) via the mapping.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    # @param node, a undirected graph node</span><br><span class="line">    # @return a undirected graph node</span><br><span class="line">    def cloneGraph(self, node):</span><br><span class="line">        root = node</span><br><span class="line">        if node is None:</span><br><span class="line">            return None</span><br><span class="line">        </span><br><span class="line">        # bfs traverse the graph</span><br><span class="line">        nodes = self.getNodes(root)</span><br><span class="line">        </span><br><span class="line">        # copy the nodes</span><br><span class="line">        map = &#123;&#125;</span><br><span class="line">        for node in nodes:</span><br><span class="line">            map[node] = UndirectedGraphNode(node.label)</span><br><span class="line">        </span><br><span class="line">        # copy the edges</span><br><span class="line">        for node in nodes:</span><br><span class="line">            for n in node.neighbors:</span><br><span class="line">                map[node].neighbors.append(map[n])</span><br><span class="line">                </span><br><span class="line">        return map[root]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    def getNodes(self, node):</span><br><span class="line">        que = [node]</span><br><span class="line">        visited = set()</span><br><span class="line">        visited.add(node)</span><br><span class="line">        while que:</span><br><span class="line">            h = que.pop(0)</span><br><span class="line">            for n in h.neighbors:</span><br><span class="line">                if not (n in visited):</span><br><span class="line">                    que.append(n)</span><br><span class="line">                    visited.add(n)</span><br><span class="line">        return list(visited)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -314,6 +342,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bfs/" rel="tag"># bfs</a>
+          
+            <a href="/tags/graph/" rel="tag"># graph</a>
+          
+            <a href="/tags/facebook/" rel="tag"># facebook</a>
+          
+        </div>
       
 
       
@@ -384,8 +422,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -445,6 +492,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#133-Clone-Graph"><span class="nav-number">1.</span> <span class="nav-text">133. Clone Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
