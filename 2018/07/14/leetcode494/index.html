@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="GAN," />
+  <meta name="keywords" content="facebook,dp," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of visu">
-<meta name="keywords" content="GAN">
+<meta name="description" content="494. Target SumYou are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol. Fi">
+<meta name="keywords" content="facebook,dp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation">
-<meta property="og:url" content="http://yoursite.com/2018/06/03/迁移学习-FCNs/index.html">
+<meta property="og:title" content="leetcode494">
+<meta property="og:url" content="http://yoursite.com/2018/07/14/leetcode494/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of visu">
+<meta property="og:description" content="494. Target SumYou are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol. Fi">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/AdaptFCNs.jpeg">
-<meta property="og:updated_time" content="2018-07-04T04:17:47.000Z">
+<meta property="og:image" content="http://yoursite.com/image/leetcode494">
+<meta property="og:updated_time" content="2018-07-15T01:11:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation">
-<meta name="twitter:description" content="介绍这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。 abstractFully convolutional models for dense prediction have proven successful for a wide range of visu">
-<meta name="twitter:image" content="http://yoursite.com/images/AdaptFCNs.jpeg">
+<meta name="twitter:title" content="leetcode494">
+<meta name="twitter:description" content="494. Target SumYou are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol. Fi">
+<meta name="twitter:image" content="http://yoursite.com/image/leetcode494">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/03/迁移学习-FCNs/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/14/leetcode494/"/>
 
 
 
 
 
-  <title>FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>leetcode494 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/迁移学习-FCNs/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/14/leetcode494/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode494</h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-03T13:16:27-04:00">
-                2018-06-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T21:08:22-04:00">
+                2018-07-14
               </time>
             
 
@@ -287,8 +287,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">transfer learning</span>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
                   </a>
                 </span>
 
@@ -324,39 +324,13 @@
       
 
       
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。</p>
-<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Fully convolutional models for dense prediction have proven successful for a wide range of visual tasks. Such models perform well in a supervised setting, but performance can be surprisingly poor under domain shifts that appear mild to a human observer. For example, training on one city and testing on another in a different geographic region and/or weather condition may result in significantly degraded performance due to pixel-level distribution shift. In this paper, we introduce the first domain adaptive semantic segmentation method, proposing an unsupervised adversarial approach to pixel prediction problems. Our method consists of both <strong>global and category specific adaptation techniques. Global domain alignment is performed using a novel semantic segmentation network with fully convolutional domain adversarial learning</strong>. This initially adapted space then enables category specific adaptation through a generalization of constrained weak learning, with explicit transfer of the spatial layout from the source to the target domains. Our approach outperforms baselines across different settings on multiple large-scale datasets, including adapting across various real city environments, different synthetic sub-domains, from simulated to real environments, and on a novel large-scale dash-cam dataset.</p>
-<p>摘要里面最重要的应该是这句话了，<strong>global and category specific adaptation techniques</strong>，后面会详细介绍。</p>
-<h1 id="Fully-Convolutional-Adaptation-Models"><a href="#Fully-Convolutional-Adaptation-Models" class="headerlink" title="Fully Convolutional Adaptation Models"></a>Fully Convolutional Adaptation Models</h1><h2 id="source-domain-and-target-domain"><a href="#source-domain-and-target-domain" class="headerlink" title="source domain and target domain"></a>source domain and target domain</h2><p>既然是涉及transfer，这里就要有source domain （源域），$S$，这里就有图片空间$I_S$和对应的标注空间$L_S$。我们训练得到$\phi_S(I_S)$。然后我们的目标是，学习一个语义分割的模型，它适用于没有被标注的目标域（target domain）$T$，有图片空间$I_T$。我们用$\phi_T()$来表示这个模型。</p>
-<h2 id="domain-shifts"><a href="#domain-shifts" class="headerlink" title="domain shifts"></a>domain shifts</h2><ul>
-<li>global changes，会导致特征空间的边缘概率分布的不同<br>  这个常常是会出现在两个不用的领域里面，两个领域的越是不同，shift会越大，比如：模拟的数据和实际数据。</li>
-<li>category specific parameter changes<br>  不同类在两个不同的领域里面会有不同的偏差，比如：车和标志在不同领域里面的做迁移的时候，分布的改变会不同。</li>
-</ul>
-<h2 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h2><p>我需要假设，源域和目标域有同样的标注空间，以及源域训练得到的模型比目标域有更好的效果。<br>然后基于上面的shifts，我们需要两个loss function：</p>
-<ul>
-<li>$L_da(I_S, I_T)$:<br>  这个和global的distribution distance相关</li>
-<li>$L_mi(I_T, P_{L_S})$:<br>  这个和category specific parameters有关，其中，$P_{L_S}$表示的是从源域迁移过来的标注空间的概率分布<br>此外我们还需要一个loss function:</li>
-<li>$L_seg(I_S, I_T)$:<br>  这个是在源域上面的标准的监督分割的一个目标函数，就是正常的我们在source data上面训练的一个loss function而已。<br>所以最后的loss function:<br>$L(I_S, I_T, P_{L_S}) = L_{da}(I_S, I_T) + L_{mi}(I_T, P_{L_S}) + L_{seg}(I_S, I_T)$</li>
-</ul>
-<p><img src="/images/AdaptFCNs.jpeg" alt=""><br>这张图很好的呈现了整个过程的pipeline，$L_{seg}(I_S, I_T)$是在source domain data上面训练的；fully-convolutional domain adversarial training则是用来降低，源和目标域概率分布不同的距离；我们又通过constrained pixel-wise multiple instance learning objective在目标域上面的数据训练，来完成category specific的更新。</p>
-<h1 id="Global-Domain-Alignment"><a href="#Global-Domain-Alignment" class="headerlink" title="Global Domain Alignment"></a>Global Domain Alignment</h1><p>这里我们详细阐述$L_{da}(I_S, I_T)$，然后重申一遍，我们需要减小源域和目标的域偏移，然后我们采用的是domain adversarial （域的对抗学习）的方法。</p>
-<ul>
-<li>我们需要回答的第一个问题是：在这个密集的预测框架里面，需要由什么来组成一个实例？<br>  回答是考虑最终一个表示层的每一个空间单元的自然接受域所对应的区域，作为独立的实例。换句话说，我们不在网络的最后一层，而是在有pixel prediction的前一层进行操作。<br>  我们将这一层的结果用$\phi_{l-1}(\theta, I)$来表示，它对应的参数是$\theta$。</li>
-<li>接下来我们来进一步拆解，我们的domain adversarial loss，它有交替的最小化目标组成。<ul>
-<li>一是在表示空间，我们想要最小化源域和目标域的距离：$d(\phi_{l-1}(\theta, I_S), \phi_{l-1}(\theta, I_T))$ </li>
-<li>二是我们需要通过训练区分源域和目标域实例的域判别器来估计这个距离，我们将判别器的参数设为$\theta_D$<br>我们需要让这个判别器来学习源域区域和目标域区域的不同，进而来使源域和目标域在表示空间上的距离最小。</li>
-</ul>
-</li>
-<li>loss function and inverse domain loss function:<br>  $L_D = - \sum_{I_S \in S}\sum_{h \in H}\sum_{w \in W}log(P_{\theta_D}(R_{hw}^S)) - \sum_{I_T \in T}\sum_{h \in H}\sum_{w \in W}log(1 - P_{\theta_D}(R_{hw}^T))$<br>  $L_{Dinv} = - \sum_{I_S \in S}\sum_{h \in H}\sum_{w \in W}log(1 - P_{\theta_D}(R_{hw}^S)) - \sum_{I_T \in T}\sum_{h \in H}\sum_{w \in W}log(P_{\theta_D}(R_{hw}^T)) $<ul>
-<li>$P_{\theta_D} = \sigma(\phi(\theta_D, x))$</li>
-<li>output layer l-1: $H \times W$ spatial units</li>
-<li>$R_{hw}^S = \phi_{l - 1}(\theta, I_S)_{hw}$ denote source representation of each unit</li>
-<li>$R_{hw}^T = \phi_{l - 1}(\theta, I_T)_{hw}$ denote target representation of each unit</li>
-</ul>
-</li>
-</ul>
-<p>然后有了这些定义，我们来交替优化这两个目标函数了：$\min_{\theta_D} L_D$，$\min_{\theta} \frac{1}{2}[L_D + L_{Dinv}]$ 前者是学习相关图片域里面最有可能的域分类器，</p>
-
+        <h1 id="494-Target-Sum"><a href="#494-Target-Sum" class="headerlink" title="494. Target Sum"></a>494. Target Sum</h1><p>You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.</p>
+<p>Find out how many ways to assign symbols to make sum of integers equal to target S.</p>
+<p>Example 1:<br>Input: nums is [1, 1, 1, 1, 1], S is 3.<br>Output: 5<br>Explanation: </p>
+<p>-1+1+1+1+1 = 3<br>+1-1+1+1+1 = 3<br>+1+1-1+1+1 = 3<br>+1+1+1-1+1 = 3<br>+1+1+1+1-1 = 3</p>
+<p>There are 5 ways to assign symbols to make the sum of nums be target 3.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>counting problems, max min problems are always involved with DP.<br><img src="/image/leetcode494" alt=""></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def findTargetSumWays(self, nums, S):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type nums: List[int]</span><br><span class="line">        :type S: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        # cache[(i, s)] the number of combination sum up to s from nums[i] to nums[n - 1]</span><br><span class="line">        def findTarget(i, s):</span><br><span class="line">            if (i, s) not in cache:</span><br><span class="line">                r = 0</span><br><span class="line">                if i == len(nums): # base case</span><br><span class="line">                    if s == 0:</span><br><span class="line">                        r = 1</span><br><span class="line">                else:</span><br><span class="line">                    r = findTarget(i+1, s-nums[i]) + findTarget(i+1, s+nums[i])</span><br><span class="line">                cache[(i, s)] = r</span><br><span class="line">            return cache[(i, s)]</span><br><span class="line">        cache = &#123;&#125;</span><br><span class="line">        return findTarget(0, S)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -373,7 +347,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/GAN/" rel="tag"># GAN</a>
+            <a href="/tags/facebook/" rel="tag"># facebook</a>
+          
+            <a href="/tags/dp/" rel="tag"># dp</a>
           
         </div>
       
@@ -386,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/22/苏子进京/" rel="next" title="苏子进京">
-                <i class="fa fa-chevron-left"></i> 苏子进京
+              <a href="/2018/07/14/leetcode78/" rel="next" title="leetcode78">
+                <i class="fa fa-chevron-left"></i> leetcode78
               </a>
             
           </div>
@@ -395,10 +371,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/03/安国寺记/" rel="prev" title="安国寺记">
-                安国寺记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -530,7 +502,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">2.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fully-Convolutional-Adaptation-Models"><span class="nav-number">3.</span> <span class="nav-text">Fully Convolutional Adaptation Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#source-domain-and-target-domain"><span class="nav-number">3.1.</span> <span class="nav-text">source domain and target domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domain-shifts"><span class="nav-number">3.2.</span> <span class="nav-text">domain shifts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-function"><span class="nav-number">3.3.</span> <span class="nav-text">loss function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Global-Domain-Alignment"><span class="nav-number">4.</span> <span class="nav-text">Global Domain Alignment</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#494-Target-Sum"><span class="nav-number">1.</span> <span class="nav-text">494. Target Sum</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
 
           </div>
