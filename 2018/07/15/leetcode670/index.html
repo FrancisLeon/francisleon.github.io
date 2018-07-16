@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="facebook,map," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="去人迹罕至的地方，留下自己的足迹。">
-<meta name="keywords" content="reinforcement learning, deep learning, machine learning">
+<meta name="description" content="670. Maximum SwapGiven a non-negative integer, you could swap two digits at most once to get the maximum valued number. Return the maximum valued number you could get. Example 1:123Input: 2736Output:">
+<meta name="keywords" content="facebook,map">
 <meta property="og:type" content="article">
-<meta property="og:title" content="概率图模型">
-<meta property="og:url" content="http://yoursite.com/2018/04/18/概率图模型/index.html">
+<meta property="og:title" content="leetcode670">
+<meta property="og:url" content="http://yoursite.com/2018/07/15/leetcode670/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta property="og:description" content="670. Maximum SwapGiven a non-negative integer, you could swap two digits at most once to get the maximum valued number. Return the maximum valued number you could get. Example 1:123Input: 2736Output:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-19T01:15:52.000Z">
+<meta property="og:updated_time" content="2018-07-16T02:48:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="概率图模型">
-<meta name="twitter:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta name="twitter:title" content="leetcode670">
+<meta name="twitter:description" content="670. Maximum SwapGiven a non-negative integer, you could swap two digits at most once to get the maximum valued number. Return the maximum valued number you could get. Example 1:123Input: 2736Output:">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/18/概率图模型/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/15/leetcode670/"/>
 
 
 
 
 
-  <title>概率图模型 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>leetcode670 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/概率图模型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/leetcode670/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">概率图模型</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode670</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T21:15:52-04:00">
-                2018-04-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T22:38:48-04:00">
+                2018-07-15
               </time>
             
 
@@ -272,6 +272,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -300,7 +322,16 @@
       
 
       
-        
+        <h1 id="670-Maximum-Swap"><a href="#670-Maximum-Swap" class="headerlink" title="670. Maximum Swap"></a>670. Maximum Swap</h1><p>Given a non-negative integer, you could swap two digits at most once to get the maximum valued number. Return the maximum valued number you could get.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 2736</span><br><span class="line">Output: 7236</span><br><span class="line">Explanation: Swap the number 2 and the number 7.</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 9973</span><br><span class="line">Output: 9973</span><br><span class="line">Explanation: No swap.</span><br></pre></td></tr></table></figure></p>
+<p>Note:<br>The given number is in the range [0, 10^8]</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Simply thinking, brute force is ok, whose time complexity is O(n^2). In fact, for the former bit, we should find a largest bit which occurs latest, which is the solution.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">largest 7689 &gt;&gt; 9687</span><br><span class="line">latest 7688 &gt;&gt; 8687</span><br></pre></td></tr></table></figure></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p>cited from <a href="https://leetcode.com/problems/maximum-swap/discuss/107066/Python-Straightforward-with-Explanation" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-swap/discuss/107066/Python-Straightforward-with-Explanation</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maximumSwap(self, num):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type num: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        A = map(int, str(num))</span><br><span class="line">        num2idx = &#123;x: i for i, x in enumerate(A)&#125;</span><br><span class="line">        for i, x in enumerate(A):</span><br><span class="line">            for larger in range(9, x, -1):</span><br><span class="line">                if num2idx.get(larger, -1) &gt; i: # find a larger bit which is later</span><br><span class="line">                    A[i], A[num2idx[larger]] = A[num2idx[larger]], A[i]</span><br><span class="line">                    return int(&quot;&quot;.join(map(str, A)))</span><br><span class="line">        return num</span><br></pre></td></tr></table></figure></p>
+<h1 id="Thinking"><a href="#Thinking" class="headerlink" title="Thinking"></a>Thinking</h1><p>How about 9973, where ‘num2idx = {x: i for i, x in enumerate(A)}’ may omits 9:0 pair and leave 9:1 ?</p>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>map(function, iterable, …)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;def square(x) :            # 计算平方数</span><br><span class="line">...     return x ** 2</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; map(square, [1,2,3,4,5])   # 计算列表各个元素的平方</span><br><span class="line">[1, 4, 9, 16, 25]</span><br><span class="line">&gt;&gt;&gt; map(lambda x: x ** 2, [1, 2, 3, 4, 5])  # 使用 lambda 匿名函数</span><br><span class="line">[1, 4, 9, 16, 25]</span><br><span class="line"> </span><br><span class="line"># 提供了两个列表，对相同位置的列表数据进行相加</span><br><span class="line">&gt;&gt;&gt; map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])</span><br><span class="line">[3, 7, 11, 15, 19]</span><br></pre></td></tr></table></figure></p>
+<p>map(int, str(123))<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; map(int, [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;])</span><br><span class="line">&gt;&gt; map([int(&apos;1&apos;), int(&apos;2&apos;), int(&apos;3&apos;)])</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -315,6 +346,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/facebook/" rel="tag"># facebook</a>
+          
+            <a href="/tags/map/" rel="tag"># map</a>
+          
+        </div>
+      
 
       
       
@@ -324,8 +363,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/18/静下心来/" rel="next" title="静下心来">
-                <i class="fa fa-chevron-left"></i> 静下心来
+              <a href="/2018/07/15/leetcode215/" rel="next" title="leetcode215">
+                <i class="fa fa-chevron-left"></i> leetcode215
               </a>
             
           </div>
@@ -333,10 +372,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/19/answer-processing/" rel="prev" title="answer_processing">
-                answer_processing <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -388,8 +423,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -449,6 +493,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#670-Maximum-Swap"><span class="nav-number">1.</span> <span class="nav-text">670. Maximum Swap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Thinking"><span class="nav-number">4.</span> <span class="nav-text">Thinking</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">5.</span> <span class="nav-text">Python</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
