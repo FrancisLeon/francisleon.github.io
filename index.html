@@ -233,6 +233,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/leetcode98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/19/leetcode98/" itemprop="url">leetcode98</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-19T00:18:36-04:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BST/" itemprop="url" rel="index">
+                    <span itemprop="name">BST</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BST/recursion/" itemprop="url" rel="index">
+                    <span itemprop="name">recursion</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a>98. Validate Binary Search Tree</h1><p>Given a binary tree, determine if it is a valid binary search tree (BST).</p>
+<p>Assume a BST is defined as follows:</p>
+<p>The left subtree of a node contains only nodes with keys less than the node’s key.<br>The right subtree of a node contains only nodes with keys greater than the node’s key.<br>Both the left and right subtrees must also be binary search trees.<br>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">    2</span><br><span class="line">   / \</span><br><span class="line">  1   3</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    5</span><br><span class="line">   / \</span><br><span class="line">  1   4</span><br><span class="line">     / \</span><br><span class="line">    3   6</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure></p>
+<p>Explanation: The input is: [5,1,4,null,null,3,6]. The root node’s value<br>             is 5 but its right child’s value is 4.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Recurison inorderly. Or divide and conquer.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidBST(self, root):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type root: TreeNode</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.order = []</span><br><span class="line">        self.inorder(root)</span><br><span class="line">        </span><br><span class="line">        prev = float(&apos;-inf&apos;)</span><br><span class="line">        for node in self.order:</span><br><span class="line">            if node.val &lt;= prev:</span><br><span class="line">                return False</span><br><span class="line">            prev = node.val</span><br><span class="line">        </span><br><span class="line">        return True</span><br><span class="line"></span><br><span class="line">    def inorder(self, root):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type root: TreeNode</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if root is None:</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        self.inorder(root.left)</span><br><span class="line">        self.order.append(root)</span><br><span class="line">        self.inorder(root.right)</span><br><span class="line"></span><br><span class="line"># version 2</span><br><span class="line"># class Solution(object):</span><br><span class="line">#     def isValidBST(self, root):</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         :type root: TreeNode</span><br><span class="line">#         :rtype: bool</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         res, _, _ = self.helper(root)</span><br><span class="line">#         return res</span><br><span class="line"></span><br><span class="line">#     def helper(self, root):</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         :type root: TreeNode</span><br><span class="line">#         :rtype: bool</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         if root is None:</span><br><span class="line">#             return True, float(&apos;-inf&apos;), float(&apos;inf&apos;)</span><br><span class="line">#         left, leftmax, leftmin = self.helper(root.left)</span><br><span class="line">#         right, rightmax, rightmin = self.helper(root.right)</span><br><span class="line"></span><br><span class="line">#         rootmax = max(root.val, max(leftmax, rightmax))</span><br><span class="line">#         rootmin = min(root.val, min(rightmin, leftmin))</span><br><span class="line">        </span><br><span class="line">#         if left and right:</span><br><span class="line">#             return leftmax &lt; root.val and root.val &lt; rightmin, rootmax, rootmin </span><br><span class="line"></span><br><span class="line">#         return False, float(&apos;-inf&apos;), float(&apos;inf&apos;)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/leetcode786/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1564,157 +1722,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/leetcode683/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/12/leetcode683/" itemprop="url">leetcode683</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T21:42:28-04:00">
-                2018-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="683-K-Empty-Slots"><a href="#683-K-Empty-Slots" class="headerlink" title="683. K Empty Slots"></a>683. K Empty Slots</h1><p>There is a garden with N slots. In each slot, there is a flower. The N flowers will bloom one by one in N days. In each day, there will be exactly one flower blooming and it will be in the status of blooming since then.</p>
-<p>Given an array flowers consists of number from 1 to N. Each number in the array represents the place where the flower will open in that day.</p>
-<p>For example, flowers[i] = x means that the unique flower that blooms at day i will be at position x, where i and x will be in the range from 1 to N.</p>
-<p>Also given an integer k, you need to output in which day there exists two flowers in the status of blooming, and also the number of flowers between them is k and these flowers are not blooming.</p>
-<p>If there isn’t such day, output -1.</p>
-<p>Example 1:<br>Input:<br>flowers: [1,3,2]<br>k: 1<br>Output: 2<br>Explanation: In the second day, the first and the third flower have become blooming.<br>Example 2:<br>Input:<br>flowers: [1,2,3]<br>k: 1<br>Output: -1<br>Note:<br>The given array will be in the range [1, 20000].</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Through treeset, we may find the ceiling and floor of the new pos, and we can check whether the new pos is k slots away from its ceiling or floor. If so, it’s the answer.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int kEmptySlots(int[] flowers, int k) &#123;</span><br><span class="line">        TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; flowers.length; i++) &#123;</span><br><span class="line">            int pos = flowers[i];</span><br><span class="line">            Integer left = set.floor(pos - 1);</span><br><span class="line">            Integer right = set.ceiling(pos + 1);</span><br><span class="line">            if (left != null &amp;&amp; left == pos - k - 1) &#123;</span><br><span class="line">                return i + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            if (right != null &amp;&amp; pos == right - k - 1) &#123;</span><br><span class="line">                return i + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            set.add(pos);</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p>The ceiling(E e) method is used to return the least element in this set greater than or equal to the given element, or null if there is no such element.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.tutorialspoint;</span><br><span class="line"></span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.TreeSet;</span><br><span class="line"></span><br><span class="line">public class TreeSetDemo &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">      // creating a TreeSet </span><br><span class="line">      TreeSet &lt;Integer&gt;treeadd = new TreeSet&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">      // adding in the tree set</span><br><span class="line">      treeadd.add(12);</span><br><span class="line">      treeadd.add(11);</span><br><span class="line">      treeadd.add(16);</span><br><span class="line">      treeadd.add(15);</span><br><span class="line"></span><br><span class="line">      // getting ceiling value for 13</span><br><span class="line">      System.out.println(&quot;Ceiling value for 13: &quot;+treeadd.ceiling(13));   </span><br><span class="line">   &#125;     </span><br><span class="line">&#125;</span><br><span class="line"># print: Ceiling value for 13: 15</span><br></pre></td></tr></table></figure></p>
-<p>The floor(E e) method is used to return the greatest element in this set less than or equal to the given element, or null if there is no such element.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.tutorialspoint;</span><br><span class="line"></span><br><span class="line">import java.util.TreeSet;</span><br><span class="line"></span><br><span class="line">public class TreeSetDemo &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">      // creating a TreeSet </span><br><span class="line">      TreeSet &lt;Integer&gt;treeadd = new TreeSet&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">      // adding in the tree set</span><br><span class="line">      treeadd.add(12);</span><br><span class="line">      treeadd.add(11);</span><br><span class="line">      treeadd.add(16);</span><br><span class="line">      treeadd.add(15);</span><br><span class="line"></span><br><span class="line">      // getting the floor value for 13</span><br><span class="line">      System.out.println(&quot;Floor value for 13: &quot;+treeadd.floor(13));   </span><br><span class="line">   &#125;    </span><br><span class="line">&#125; </span><br><span class="line"># print: Floor value for 13: 12</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1765,7 +1772,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">91</span>
+                  <span class="site-state-item-count">92</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1776,7 +1783,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
