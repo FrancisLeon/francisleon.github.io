@@ -233,6 +233,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/10-701/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/11/10-701/" itemprop="url">机器学习入门绪论</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-11T18:31:56-04:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><p>这学期选了 introduction to machine learning, 在ml这边相当于 15-513 这样子的入门课，后续课程有很多 10-702 statistic machine learing, 10-703 deep reinforcement learning control, 10-707 introduction to deep learning, 10-708 graphical model, 10-725 convex optimization …<br><a href="http://www.cs.cmu.edu/~pradeepr/701/" target="_blank" rel="noopener">http://www.cs.cmu.edu/~pradeepr/701/</a></p>
+<h1 id="big-picture-of-machine-learning"><a href="#big-picture-of-machine-learning" class="headerlink" title="big picture of machine learning"></a>big picture of machine learning</h1><p>data — ML algorithms —-&gt; knowledge<br>这个图应该可以很好的解释什么是ML。<br>比如imageNet里面你有image和对应的label，你通过dl学习到了，有关于input image和output label的knowledge.<br>在比如强化学习里面，你通过比如:deep q-learning的方法学习了，你自己的approximate q function. 然后这个东西，对你之后agent在environment里面做action选择产生直接影响。</p>
+<h1 id="Three-Axes"><a href="#Three-Axes" class="headerlink" title="Three Axes"></a>Three Axes</h1><p>有了上面的图，你可以从三个角度去总括机器学习，分别是数据，算法，任务（具体要解决的问题）</p>
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><p>首先是数据，<br>分完全被观测到的数据;<br>部分被观测到的数据，这里部分被观测到，我的理解是有些sample的一些variable是未知的，<br>然后partially observable MDP也有这样的意思，毕竟信息不完整。<br>后面有会banch的算法来解决这样子的问题，比如EM等等。</p>
+<h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>算法这里，就主要分两大类，基于模型和不基于模型的，既然涉及到模型，这里讲下模型的定义吧</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>感觉在机器学习里面的模型主要指的是涉及变量之间的关系，特指他们的概率分布上面的联系，比如，对于随机变量X,Y，<br>X是input，Y是output，那么这里的模型就是P(X, Y)，来描述他们之间的关系，这个是probabilistic model of the data</p>
+<h3 id="Model-based"><a href="#Model-based" class="headerlink" title="Model-based"></a>Model-based</h3><p>总的来说model-based methods是这样子的流程<br>data — model learning —-&gt; model —- model inference —-&gt; knowledge</p>
+<ul>
+<li><p>model learning: learning from data to a model</p>
+<ul>
+<li>简单的来说，model是对data的总结：model-based方法会比较省内存，学完一个model后，predict/inference的时候你不需要遍历你的data了</li>
+<li>model也是描述数据是如何产生的：这里我的理解是model揭示了变量之间的关系，或者揭示了问题所涉及的变量之间的机理（mechanism）</li>
+<li>E.g. 给你症状和疾病的数据，然后所学习的model就是所谓的病理了，揭示了症状是如何与疾病相联系的</li>
+</ul>
+</li>
+<li><p>model inference: from model to knowledge</p>
+<ul>
+<li>知道物之理后，我们就可以推演了</li>
+<li>比如：给你症状，根据病理，推演出这个是什么疾病</li>
+</ul>
+</li>
+</ul>
+<p>然后，细分的话，有可以分为probabilistic model of the data methods, parametric models methods及nonparametric models methods</p>
+<h4 id="probabilistic-model-of-the-data-methods"><a href="#probabilistic-model-of-the-data-methods" class="headerlink" title="probabilistic model of the data methods"></a>probabilistic model of the data methods</h4><h4 id="parametric-models-methods"><a href="#parametric-models-methods" class="headerlink" title="parametric models methods"></a>parametric models methods</h4><h4 id="nonparametric-models-methods"><a href="#nonparametric-models-methods" class="headerlink" title="nonparametric models methods"></a>nonparametric models methods</h4><h3 id="Model-free"><a href="#Model-free" class="headerlink" title="Model-free"></a>Model-free</h3><p>总来的说就是不去学习一个model，而是直接通过algorithm学习knowledge。比如在强化学习里面q-learning, 我不去学model，我直接通过q-learning学习value function和policy。</p>
+<h3 id="Tasks-Knowledge"><a href="#Tasks-Knowledge" class="headerlink" title="Tasks/Knowledge"></a>Tasks/Knowledge</h3><h4 id="prediction"><a href="#prediction" class="headerlink" title="prediction"></a>prediction</h4><p>预测，根据输入，估计/预测输出，<br>主要分分类问题（classification）和回归问题（regression）两大类</p>
+<h4 id="description"><a href="#description" class="headerlink" title="description"></a>description</h4><p>会涉及聚类、密度估计、降维等，另外一种叫法叫非监督学习（unsupervised-learning）.</p>
+<ul>
+<li>需要处理的数据里面没有标注<br>比如：给你一个文档，你通过算法得到了词频的分布<br>再比如：给你一堆图片，你根据他们的相似度，做了一定的分类<br>再比如：nlp里面的一些ebedding方法，把word根据某些规则映射到一个向量空间（语义空间）里面，单词的意思的相近与否，可以通过这个空间里面点的距离来判断<br>字面上看，聚类、密度估计的确是对无标注的数据的一种描述吧，更确切的说，应该是一种表述和呈现方式（presentation）</li>
+</ul>
+<h1 id="Machine-Learning-Subfields"><a href="#Machine-Learning-Subfields" class="headerlink" title="Machine Learning Subfields"></a>Machine Learning Subfields</h1><p>在机器学习里面，根据这三个角度上面不同的组合就会有不同的子领域</p>
+<h2 id="supervised-learning"><a href="#supervised-learning" class="headerlink" title="supervised learning"></a>supervised learning</h2><p>数据这里包含了inputs和相应的标注<br>tasks这里涉及的是prediction</p>
+<h2 id="unsupervised-learning"><a href="#unsupervised-learning" class="headerlink" title="unsupervised learning"></a>unsupervised learning</h2><p>数据这里包含了inputs而不包含相应的标注<br>tasks这里涉及的是description</p>
+<h2 id="semi-supervised-learning"><a href="#semi-supervised-learning" class="headerlink" title="semi-supervised learning"></a>semi-supervised learning</h2><p>数据这里包含了inputs，包含了部分的标注<br>tasks这里涉及的是prediction</p>
+<p>如果，我们不仅仅只有observations，我们还可以有action （control），那么我们又会有</p>
+<h2 id="reinforcement-learning"><a href="#reinforcement-learning" class="headerlink" title="reinforcement learning"></a>reinforcement learning</h2><p>markov chain —&gt; </p>
+<h2 id="multi-agent-system"><a href="#multi-agent-system" class="headerlink" title="multi-agent system"></a>multi-agent system</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/为自己喝彩/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1516,125 +1692,6 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$\\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/概率图模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/18/概率图模型/" itemprop="url">概率图模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T21:15:52-04:00">
-                2018-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1685,7 +1742,7 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$\\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
