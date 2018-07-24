@@ -88,7 +88,7 @@
 <meta property="og:description" content="This blog refers to this paper AbstractWe propose a method for semi-supervised semantic segmentation using the adversarial network. While most existing discriminators are trained to classify input ima">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/semi-super-GAN-seg.jpeg">
-<meta property="og:updated_time" content="2018-07-24T15:07:17.000Z">
+<meta property="og:updated_time" content="2018-07-24T15:09:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ADVERSARIAL LEARNING FOR SEMI-SUPERVISED SEMANTIC SEGMENTATION">
 <meta name="twitter:description" content="This blog refers to this paper AbstractWe propose a method for semi-supervised semantic segmentation using the adversarial network. While most existing discriminators are trained to classify input ima">
@@ -335,7 +335,7 @@
 <h2 id="Training-with-labeled-data"><a href="#Training-with-labeled-data" class="headerlink" title="Training with labeled data"></a>Training with labeled data</h2><p>$L_{ce} = -\sum_{h, w} Y_n^{(h, w, c))log(S(X_n)^{(h, w, c)})$<br>, where $Y_n$ is one-hot encoded ground truth, and $S(X_n)$ is the prediction probability maps.</p>
 <p>$L_{adv} = -\sum_{h, w} log(D(S(X_n))^{h, w})$<br>with this adversarial loss, we seek to train the segmentation network to fool the discriminator by maximizing the probability of the segmentation prediction being considered as the ground truth distribution.</p>
 <p>In fact, you can regard $D(S(X_n))$ as $D(S(X_n)) = P(y_n=1|S(X_n))$, which means the probability where sample are drawn from segmentation network but the discriminator assume it’s from ground-truth.</p>
-
+<h2 id="Training-with-un-labeled-data"><a href="#Training-with-un-labeled-data" class="headerlink" title="Training with un-labeled data"></a>Training with un-labeled data</h2>
       
     </div>
     
@@ -507,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture-and-training-pipeline"><span class="nav-number">2.</span> <span class="nav-text">Architecture and training pipeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discriminator-network-training"><span class="nav-number">3.</span> <span class="nav-text">Discriminator network training</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Segmentation-network-training"><span class="nav-number">4.</span> <span class="nav-text">Segmentation network training</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-with-labeled-data"><span class="nav-number">4.1.</span> <span class="nav-text">Training with labeled data</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture-and-training-pipeline"><span class="nav-number">2.</span> <span class="nav-text">Architecture and training pipeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discriminator-network-training"><span class="nav-number">3.</span> <span class="nav-text">Discriminator network training</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Segmentation-network-training"><span class="nav-number">4.</span> <span class="nav-text">Segmentation network training</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-with-labeled-data"><span class="nav-number">4.1.</span> <span class="nav-text">Training with labeled data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-with-un-labeled-data"><span class="nav-number">4.2.</span> <span class="nav-text">Training with un-labeled data</span></a></li></ol></li></ol></div>
             
 
           </div>
