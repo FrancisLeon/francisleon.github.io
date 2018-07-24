@@ -334,6 +334,9 @@
 <p>$X_n$ is the input image, whose size is H x W x 3. S() is the segmentation network, whose input is $X_n$ and output is H x W x C probability maps. And D() is discriminator network, which takes H x W x C probability maps and predict the probabilities for each pix from segmentaiton network or groundtruth. Thus, the cross-entropy loss is binary cross-entropy, where $y_n = 0$ if the sample is drawn from segmentation network and $y_n = 1$ if the sample is from ground truth label.</p>
 <h1 id="Segmentation-network-training"><a href="#Segmentation-network-training" class="headerlink" title="Segmentation network training"></a>Segmentation network training</h1><p>$L_{seg} = L_{ce} + \lambda_{adv} L_{adv} + \lambda_{semi} L_{semi}$</p>
 <p>where $L_{seg}, L_{ce}$ and $L_{adv}$ denote multi-class cross-entropy loss, adversarial loss and semi-supervised loss, respectively, $\lambda_{adv}$ and $\lambda_{semi}$ are two constants for balancing the multi-task training.</p>
+<h2 id="Training-with-labeled-data"><a href="#Training-with-labeled-data" class="headerlink" title="Training with labeled data"></a>Training with labeled data</h2><p>$L_{ce} = -\sum_{h, w} Y_n^{(h, w, c))log(S(X_n)^{(h, w, c)})$<br>, where $Y_n$ is one-hot encoded ground truth, and $S(X_n)$ is the prediction probability maps.</p>
+<p>$L_{adv} = -\sum_{h, w} log(D(S(X_n))^{h, w})$<br>with this adversarial loss, we seek to train the segmentation network to fool the discriminator by maximizing the probability of the segmentation prediction being considered as the ground truth distribution.</p>
+<p>In fact, you can regard $D(S(X_n))$ as $D(S(X_n)) = P(y_n=1|S(X_n))$, which means the probability where sample are drawn from segmentation network but the discriminator assume it’s from ground-truth.</p>
 
           
         
