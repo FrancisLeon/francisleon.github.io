@@ -88,7 +88,7 @@
 <meta property="og:description" content="This blog refers to this paper AbstractWe propose a method for semi-supervised semantic segmentation using the adversarial network. While most existing discriminators are trained to classify input ima">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/semi-super-GAN-seg.jpeg">
-<meta property="og:updated_time" content="2018-07-24T15:14:03.000Z">
+<meta property="og:updated_time" content="2018-07-24T15:16:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ADVERSARIAL LEARNING FOR SEMI-SUPERVISED SEMANTIC SEGMENTATION">
 <meta name="twitter:description" content="This blog refers to this paper AbstractWe propose a method for semi-supervised semantic segmentation using the adversarial network. While most existing discriminators are trained to classify input ima">
@@ -336,6 +336,7 @@
 <p>$L_{adv} = -\sum_{h, w} log(D(S(X_n))^{h, w})$<br>with this adversarial loss, we seek to train the segmentation network to fool the discriminator by maximizing the probability of the segmentation prediction being considered as the ground truth distribution.</p>
 <p>In fact, you can regard $D(S(X_n))$ as $D(S(X_n)) = P(y_n=1|S(X_n))$, which means the probability where sample are drawn from segmentation network but the discriminator assume it’s from ground-truth.</p>
 <h2 id="Training-with-un-labeled-data"><a href="#Training-with-un-labeled-data" class="headerlink" title="Training with un-labeled data"></a>Training with un-labeled data</h2><p>$L_{semi} = -\sum_{h,w}\sum_{c \in C}I(D(S(X_n)^{h,w} &gt; T_{semi}) \hat{Y}_n^{(h,w,c))log(S(X_n)_{(h,w,c)})$</p>
+<p>where, $\hat{Y_n} = argmax(S(X_n))$ the masked segmentation prediction, $T_{semi}$ is threshold to control the sensitivity of the self-taught process.</p>
 
       
     </div>
