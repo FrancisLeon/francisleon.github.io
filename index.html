@@ -337,7 +337,8 @@
 <h2 id="Training-with-labeled-data"><a href="#Training-with-labeled-data" class="headerlink" title="Training with labeled data"></a>Training with labeled data</h2><p>$L_{ce} = -\sum_{h, w} Y_n^{(h, w, c))log(S(X_n)^{(h, w, c)})$<br>, where $Y_n$ is one-hot encoded ground truth, and $S(X_n)$ is the prediction probability maps.</p>
 <p>$L_{adv} = -\sum_{h, w} log(D(S(X_n))^{h, w})$<br>with this adversarial loss, we seek to train the segmentation network to fool the discriminator by maximizing the probability of the segmentation prediction being considered as the ground truth distribution.</p>
 <p>In fact, you can regard $D(S(X_n))$ as $D(S(X_n)) = P(y_n=1|S(X_n))$, which means the probability where sample are drawn from segmentation network but the discriminator assume it’s from ground-truth.</p>
-<h2 id="Training-with-un-labeled-data"><a href="#Training-with-un-labeled-data" class="headerlink" title="Training with un-labeled data"></a>Training with un-labeled data</h2>
+<h2 id="Training-with-un-labeled-data"><a href="#Training-with-un-labeled-data" class="headerlink" title="Training with un-labeled data"></a>Training with un-labeled data</h2><p>$L_{semi} = -\sum_{h,w}\sum_{c \in C}I(D(S(X_n)^{h,w} &gt; T_{semi}) \hat{Y}_n^{(h,w,c))log(S(X_n)_{(h,w,c)})$</p>
+
           
         
       
