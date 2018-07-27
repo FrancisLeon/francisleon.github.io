@@ -233,6 +233,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/GAN-pytorch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/20/GAN-pytorch/" itemprop="url">GAN@pytorch</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T15:45:51-04:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">transfer learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>莫烦python也给了pytorch的GAN<a href="https://morvanzhou.github.io/tutorials/machine-learning/torch/4-06-GAN/" target="_blank" rel="noopener">版本</a>：<br>然后莫烦的全部代码在<a href="https://github.com/MorvanZhou/PyTorch-Tutorial/blob/master/tutorial-contents/406_GAN.py" target="_blank" rel="noopener">这里</a></p>
+<h1 id="hyper-parameter"><a href="#hyper-parameter" class="headerlink" title="hyper parameter"></a>hyper parameter</h1><p>新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一整批话的点都规定一下(PAINT_POINTS).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">torch.manual_seed(1) # reproducible</span><br><span class="line">np.random.seed(1)</span><br><span class="line"></span><br><span class="line"># hyper parameter</span><br><span class="line">BATCH_SIZE = 64</span><br><span class="line">LR_G = 0.0001 </span><br><span class="line">LR_D = 0.0001</span><br><span class="line">N_IDEAS = 5</span><br><span class="line">ART_COMPONENTS = 15</span><br><span class="line">PAINT_POINTS = np.vstack([np.linspace(-1, 1, ART_COMPONENTS) for _ in range(BATCH_SIZE)])</span><br></pre></td></tr></table></figure></p>
+<h1 id="著名画家的画"><a href="#著名画家的画" class="headerlink" title="著名画家的画"></a>著名画家的画</h1><p>我们需要有很多画是来自著名画家的(real data), 将这些著名画家的画, 和新手画家的画都传给新手鉴赏家, 让鉴赏家来区分哪些是著名画家, 哪些是新手画家的画. 如何区分我们在后面呈现. 这里我们生成一些著名画家的画 (batch 条不同的一元二次方程曲线).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def artist_works(): # real target</span><br><span class="line">    a = np.random.uniform(1, 2, size = BATCH_SIZE)[:, np.newaxis]</span><br><span class="line">    paintings = a * np.power(PAINT_POINTS, 2) + (a - 1)</span><br><span class="line">    paintings = torch.from_numpy(paintings).float()</span><br><span class="line">    return paintings</span><br></pre></td></tr></table></figure>
+<h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><p>这里会创建两个神经网络, 分别是 Generator (新手画家), Discriminator(新手鉴赏家). G 会拿着自己的一些灵感当做输入, 输出一元二次曲线上的点 (G 的画).</p>
+<p>D 会接收一幅画作 (一元二次曲线), 输出这幅画作到底是不是著名画家的画(是著名画家的画的概率).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">G = nn.Sequential(                      # Generator</span><br><span class="line">    nn.Linear(N_IDEAS, 128),            # random ideas (could from normal distribution)</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(128, ART_COMPONENTS),     # making a painting from these random ideas</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">D = nn.Sequential(                      # Discriminator</span><br><span class="line">    nn.Linear(ART_COMPONENTS, 128),     # receive art work either from the famous artist or a newbie like G</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(128, 1),</span><br><span class="line">    nn.Sigmoid(),                       # tell the probability that the art work is made by artist</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>接着我们来同时训练 D 和 G. 训练之前, 我们来看看G作画的原理. G 首先会有些灵感, G_ideas 就会拿到这些随机灵感 (可以是正态分布的随机数), 然后 G 会根据这些灵感画画. 接着我们拿着著名画家的画和 G 的画, 让 D 来判定这两批画作是著名画家画的概率.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for step in range(10000):</span><br><span class="line">    artist_paintings = artist_works()           # real painting from artist</span><br><span class="line">    G_ideas = torch.randn(BATCH_SIZE, N_IDEAS)    # random ideas</span><br><span class="line">    G_paintings = G(G_ideas())                  # fake painting from G (random ideas)</span><br><span class="line"></span><br><span class="line">    prob_artist0 = D(artist_paintings)          # D try to increase this prob</span><br><span class="line">    prob_artist1 = D(G_paintings)               # D try to reduce this prob</span><br></pre></td></tr></table></figure>
+<p>然后计算有多少来之画家的画猜对了, 有多少来自 G 的画猜对了, 我们想最大化这些猜对的次数. 这也就是 log(D(x)) + log(1-D(G(z)) 在论文中的形式. 而因为 torch 中提升参数的形式是最小化误差, 那我们把最大化 score 转换成最小化 loss, 在两个 score 的合的地方加一个符号就好. 而 G 的提升就是要减小 D 猜测 G 生成数据的正确率, 也就是减小 D_score1.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D_loss = -torch.mean(torch.log(prob_artist0) + torch.log(1. - prob_artist1))</span><br><span class="line">G_loss = torch.mean(torch.log(1. - prob_artist1))</span><br></pre></td></tr></table></figure>
+<p>最后我们在根据 loss 提升神经网络就好了.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">opt_D.zero_grad()</span><br><span class="line">D_loss.backward(retain_graph=True)              # retain_graph 这个参数是为了再次使用计算图纸</span><br><span class="line">opt_D.step()</span><br><span class="line"></span><br><span class="line">opt_G.zero_grad()</span><br><span class="line">G_loss.backward()</span><br><span class="line">opt_G.step()</span><br></pre></td></tr></table></figure></p>
+<p>之后就是，开始整理总结最近在看的那篇论文作者代码的解读了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/pytorch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1724,156 +1878,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/对抗网络做风格迁移/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/12/对抗网络做风格迁移/" itemprop="url">Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T14:10:48-04:00">
-                2018-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">transfer learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前面几篇主要都是采用了风格迁移的思想，<a href="https://arxiv.org/abs/1703.10593" target="_blank" rel="noopener">这篇论文</a>主要就是讲这个：</p>
-<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Image-to-image translation is a class of vision and graphics problems where the goal is to learn the mapping between an input image and an output image using a training set of aligned image pairs. However, for many tasks, paired training data will not be available. We present an approach for learning to translate an image from a source domain X to a target domain Y in the absence of paired examples. Our goal is to learn a mapping G : X → Y such that the distribution of images from G(X) is indistinguishable from the distribution Y using an adversarial loss. Because this mapping is highly under-constrained, we cou- ple it with an <strong>inverse mapping F : Y → X and introduce a cycle consistency loss to enforce F(G(X)) ≈ X (and vice versa)</strong>. Qualitative results are presented on several tasks where paired training data does not exist, including collection style transfer, object transfiguration, season transfer, photo enhancement, etc. Quantitative comparisons against several prior methods demonstrate the superiority of our approach.</p>
-<h1 id="unpaired"><a href="#unpaired" class="headerlink" title="unpaired"></a>unpaired</h1><p>他们要解决的unpaired translation，换句话说就是没有，很多label的，如下图所示：<br><img src="/images/unpaired.jpeg" alt=""></p>
-<h1 id="loss"><a href="#loss" class="headerlink" title="loss"></a>loss</h1><p>感觉这篇论文最核心的思想就是这个cycle consistency loss，大意是，做translation，从一个句子，从英语翻译到法语，在从法语翻译过来，应该和原句一样才对，反之亦然。cycle consistency loss主要是采用这个思想：<br>$G: X \rightarrow Y, F: Y \rightarrow X, F(G(x)) \approx x, G(F(y))) \approx y$</p>
-<p>首先我们在重温一下GANs，它最核心的一点是一个adversarial loss来使得生成的图片和真实的图片难以被区分。<br>结构如下：<br><img src="/images/GANexplanation.jpeg" alt=""></p>
-<p>然后我们在来看看这篇论文的loss，就会很清晰了，不就是是两个GAN吗，然后结合了这个cycle consistency loss<br><img src="/images/cycleconsisloss.jpeg" alt=""></p>
-<h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>$L_{GAN}(G, D_{Y}, X, Y) = E_{y \sim p_{data}(y)}[log D_{Y}(y)] + E_{x \sim p_{data}(x)}[log(1 - D_{Y}(G(x)))]$<br>$L_{GAN}(F, D_{X}, X, Y) = E_{x \sim p_{data}(x)}[log D_{X}(x)] + E_{y \sim p_{data}(y)}[log(1 - D_{X}(F(y)))]$</p>
-<h2 id="cycle-consistency-loss"><a href="#cycle-consistency-loss" class="headerlink" title="cycle consistency loss"></a>cycle consistency loss</h2><p>$L_{cyc}(G, F) = E_{x \sim p_{data}(x)}[|F(G(x)) - x |<em>{1}] + E</em>{y \sim p_{data}(y)}[|G(F(y)) - y |_{1}]$</p>
-<p>其实总的idea不是很难理解，看懂这个在看别的论文就会好很多，很多论文都是基于cycle-GAN来改的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1924,7 +1928,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">96</span>
+                  <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
