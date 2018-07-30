@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="facebook,bfs,graph," />
+  <meta name="keywords" content="GAN,style transfer," />
 
 
 
@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="133. Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator">
-<meta name="keywords" content="facebook,bfs,graph">
+<meta name="description" content="前面几篇主要都是采用了风格迁移的思想，这篇论文主要就是讲这个： abstractImage-to-image translation is a class of vision and graphics problems where the goal is to learn the mapping between an input image and an output image using a">
+<meta name="keywords" content="GAN,style transfer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode133">
-<meta property="og:url" content="http://yoursite.com/2018/07/15/leetcode133/index.html">
+<meta property="og:title" content="Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks">
+<meta property="og:url" content="http://yoursite.com/2018/06/12/CycleGAN/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="133. Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator">
+<meta property="og:description" content="前面几篇主要都是采用了风格迁移的思想，这篇论文主要就是讲这个： abstractImage-to-image translation is a class of vision and graphics problems where the goal is to learn the mapping between an input image and an output image using a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T14:35:36.000Z">
+<meta property="og:image" content="http://yoursite.com/images/unpaired.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/GANexplanation.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/cycleconsisloss.jpeg">
+<meta property="og:updated_time" content="2018-07-30T20:25:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode133">
-<meta name="twitter:description" content="133. Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator">
+<meta name="twitter:title" content="Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks">
+<meta name="twitter:description" content="前面几篇主要都是采用了风格迁移的思想，这篇论文主要就是讲这个： abstractImage-to-image translation is a class of vision and graphics problems where the goal is to learn the mapping between an input image and an output image using a">
+<meta name="twitter:image" content="http://yoursite.com/images/unpaired.jpeg">
 
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/15/leetcode133/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/12/CycleGAN/"/>
 
 
 
 
 
-  <title>leetcode133 | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks | Truly</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/leetcode133/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/CycleGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chu Lin">
@@ -250,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode133</h1>
+          <h1 class="post-title" itemprop="name headline">Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks</h1>
         
 
         <div class="post-meta">
@@ -262,8 +266,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T10:30:40-04:00">
-                2018-07-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T14:10:48-04:00">
+                2018-06-12
               </time>
             
 
@@ -285,8 +289,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
+                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">transfer learning</span>
                   </a>
                 </span>
 
@@ -322,13 +326,16 @@
       
 
       
-        <h1 id="133-Clone-Graph"><a href="#133-Clone-Graph" class="headerlink" title="133. Clone Graph"></a>133. Clone Graph</h1><p>Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.</p>
-<p>OJ’s undirected graph serialization:<br>Nodes are labeled uniquely.</p>
-<p>We use # as a separator for each node, and , as a separator for node label and each neighbor of the node.<br>As an example, consider the serialized graph {0,1,2#1,2#2,2}.</p>
-<p>The graph has a total of three nodes, and therefore contains three parts as separated by #.</p>
-<p>First node is labeled as 0. Connect node 0 to both nodes 1 and 2.<br>Second node is labeled as 1. Connect node 1 to node 2.<br>Third node is labeled as 2. Connect node 2 to node 2 (itself), thus forming a self-cycle.<br>Visually, the graph looks like the following:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   1</span><br><span class="line">  / \</span><br><span class="line"> /   \</span><br><span class="line">0 --- 2</span><br><span class="line">     / \</span><br><span class="line">     \_/</span><br></pre></td></tr></table></figure></p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Perform bfs algorithm to traverse the whole graph and get all the nodes firstly, and then  copy the nodes and construct the mapping from original nodes to new nodes. Finally, copy the edges (neighbors) via the mapping.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    # @param node, a undirected graph node</span><br><span class="line">    # @return a undirected graph node</span><br><span class="line">    def cloneGraph(self, node):</span><br><span class="line">        root = node</span><br><span class="line">        if node is None:</span><br><span class="line">            return None</span><br><span class="line">        </span><br><span class="line">        # bfs traverse the graph</span><br><span class="line">        nodes = self.getNodes(root)</span><br><span class="line">        </span><br><span class="line">        # copy the nodes</span><br><span class="line">        map = &#123;&#125;</span><br><span class="line">        for node in nodes:</span><br><span class="line">            map[node] = UndirectedGraphNode(node.label)</span><br><span class="line">        </span><br><span class="line">        # copy the edges</span><br><span class="line">        for node in nodes:</span><br><span class="line">            for n in node.neighbors:</span><br><span class="line">                map[node].neighbors.append(map[n])</span><br><span class="line">                </span><br><span class="line">        return map[root]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    def getNodes(self, node):</span><br><span class="line">        que = [node]</span><br><span class="line">        visited = set()</span><br><span class="line">        visited.add(node)</span><br><span class="line">        while que:</span><br><span class="line">            h = que.pop(0)</span><br><span class="line">            for n in h.neighbors:</span><br><span class="line">                if not (n in visited):</span><br><span class="line">                    que.append(n)</span><br><span class="line">                    visited.add(n)</span><br><span class="line">        return list(visited)</span><br></pre></td></tr></table></figure>
+        <p>前面几篇主要都是采用了风格迁移的思想，<a href="https://arxiv.org/abs/1703.10593" target="_blank" rel="noopener">这篇论文</a>主要就是讲这个：</p>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Image-to-image translation is a class of vision and graphics problems where the goal is to learn the mapping between an input image and an output image using a training set of aligned image pairs. However, for many tasks, paired training data will not be available. We present an approach for learning to translate an image from a source domain X to a target domain Y in the absence of paired examples. Our goal is to learn a mapping G : X → Y such that the distribution of images from G(X) is indistinguishable from the distribution Y using an adversarial loss. Because this mapping is highly under-constrained, we cou- ple it with an <strong>inverse mapping F : Y → X and introduce a cycle consistency loss to enforce F(G(X)) ≈ X (and vice versa)</strong>. Qualitative results are presented on several tasks where paired training data does not exist, including collection style transfer, object transfiguration, season transfer, photo enhancement, etc. Quantitative comparisons against several prior methods demonstrate the superiority of our approach.</p>
+<h1 id="unpaired"><a href="#unpaired" class="headerlink" title="unpaired"></a>unpaired</h1><p>他们要解决的unpaired translation，换句话说就是没有，很多label的，如下图所示：<br><img src="/images/unpaired.jpeg" alt=""></p>
+<h1 id="loss"><a href="#loss" class="headerlink" title="loss"></a>loss</h1><p>感觉这篇论文最核心的思想就是这个cycle consistency loss，大意是，做translation，从一个句子，从英语翻译到法语，在从法语翻译过来，应该和原句一样才对，反之亦然。cycle consistency loss主要是采用这个思想：<br>$G: X \rightarrow Y, F: Y \rightarrow X, F(G(x)) \approx x, G(F(y))) \approx y$</p>
+<p>首先我们在重温一下GANs，它最核心的一点是一个adversarial loss来使得生成的图片和真实的图片难以被区分。<br>结构如下：<br><img src="/images/GANexplanation.jpeg" alt=""></p>
+<p>然后我们在来看看这篇论文的loss，就会很清晰了，不就是是两个GAN吗，然后结合了这个cycle consistency loss<br><img src="/images/cycleconsisloss.jpeg" alt=""></p>
+<h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>$L_{GAN}(G, D_{Y}, X, Y) = E_{y \sim p_{data}(y)}[log D_{Y}(y)] + E_{x \sim p_{data}(x)}[log(1 - D_{Y}(G(x)))]$<br>$L_{GAN}(F, D_{X}, X, Y) = E_{x \sim p_{data}(x)}[log D_{X}(x)] + E_{y \sim p_{data}(y)}[log(1 - D_{X}(F(y)))]$</p>
+<h2 id="cycle-consistency-loss"><a href="#cycle-consistency-loss" class="headerlink" title="cycle consistency loss"></a>cycle consistency loss</h2><p>L_{cyc}(G, F) = E_{x \sim p_{data}(x)}[|F(G(x)) - x |] + E_{y \sim p_{data}(y)}[|G(F(y)) - y |]</p>
+<p>其实总的idea不是很难理解，看懂这个在看别的论文就会好很多，很多论文都是基于cycle-GAN来改的。</p>
+
       
     </div>
     
@@ -345,11 +352,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/facebook/" rel="tag"># facebook</a>
+            <a href="/tags/GAN/" rel="tag"># GAN</a>
           
-            <a href="/tags/bfs/" rel="tag"># bfs</a>
-          
-            <a href="/tags/graph/" rel="tag"># graph</a>
+            <a href="/tags/style-transfer/" rel="tag"># style transfer</a>
           
         </div>
       
@@ -362,8 +367,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/14/leetcode494/" rel="next" title="leetcode494">
-                <i class="fa fa-chevron-left"></i> leetcode494
+              <a href="/2018/06/12/conda路径/" rel="next" title="conda 和系统 python 路径问题">
+                <i class="fa fa-chevron-left"></i> conda 和系统 python 路径问题
               </a>
             
           </div>
@@ -372,8 +377,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/15/leetcode215/" rel="prev" title="leetcode215">
-                leetcode215 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/12/舒适区/" rel="prev" title="work and life balance">
+                work and life balance <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -506,7 +511,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#133-Clone-Graph"><span class="nav-number">1.</span> <span class="nav-text">133. Clone Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#unpaired"><span class="nav-number">2.</span> <span class="nav-text">unpaired</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss"><span class="nav-number">3.</span> <span class="nav-text">loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#adversarial-loss"><span class="nav-number">3.1.</span> <span class="nav-text">adversarial loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cycle-consistency-loss"><span class="nav-number">3.2.</span> <span class="nav-text">cycle consistency loss</span></a></li></ol></li></ol></div>
             
 
           </div>
