@@ -233,6 +233,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/leetcode721/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/leetcode721/" itemprop="url">leetcode721</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:38:49-04:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="721-Accounts-Merge"><a href="#721-Accounts-Merge" class="headerlink" title="721. Accounts Merge"></a>721. Accounts Merge</h1><p>Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.</p>
+<p>Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some email that is common to both accounts. Note that even if two accounts have the same name, they may belong to different people as people could have the same name. A person can have any number of accounts initially, but all of their accounts definitely have the same name.</p>
+<p>After merging the accounts, return the accounts in the following format: the first element of each account is the name, and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">accounts = [[&quot;John&quot;, &quot;johnsmith@mail.com&quot;, &quot;john00@mail.com&quot;], [&quot;John&quot;, &quot;johnnybravo@mail.com&quot;], [&quot;John&quot;, &quot;johnsmith@mail.com&quot;, &quot;john_newyork@mail.com&quot;], [&quot;Mary&quot;, &quot;mary@mail.com&quot;]]</span><br><span class="line">Output: [[&quot;John&quot;, &apos;john00@mail.com&apos;, &apos;john_newyork@mail.com&apos;, &apos;johnsmith@mail.com&apos;],  [&quot;John&quot;, &quot;johnnybravo@mail.com&quot;], [&quot;Mary&quot;, &quot;mary@mail.com&quot;]]</span><br><span class="line">Explanation: </span><br><span class="line">The first and third John&apos;s are the same person as they have the common email &quot;johnsmith@mail.com&quot;.</span><br><span class="line">The second John and Mary are different people as none of their email addresses are used by other accounts.</span><br><span class="line">We could return these lists in any order, for example the answer [[&apos;Mary&apos;, &apos;mary@mail.com&apos;], [&apos;John&apos;, &apos;johnnybravo@mail.com&apos;], </span><br><span class="line">[&apos;John&apos;, &apos;john00@mail.com&apos;, &apos;john_newyork@mail.com&apos;, &apos;johnsmith@mail.com&apos;]] would still be accepted.</span><br></pre></td></tr></table></figure></p>
+<p>Note:</p>
+<p>The length of accounts will be in the range [1, 1000].<br>The length of accounts[i] will be in the range [1, 10].<br>The length of accounts[i][j] will be in the range [1, 30].</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Union-find the emails. The emails in an account belong to one group. Since, we can not directly perform uf operations on the strs, so we need mapping them between int array.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">class UnionFind(object):</span><br><span class="line">    def __init__(self, n):</span><br><span class="line">        self.parent = [i for i in range(n)]</span><br><span class="line">        self.rank = [0] * n</span><br><span class="line">        </span><br><span class="line">    def union(self, n, m):</span><br><span class="line">        p, q = self.find(n), self.find(m)</span><br><span class="line">        if p != q:</span><br><span class="line">            if self.rank[p] &gt; self.rank[q]:</span><br><span class="line">                self.parent[q] = p</span><br><span class="line">            else:</span><br><span class="line">                self.parent[p] = q</span><br><span class="line">                if self.rank[p] == self.rank[q]:</span><br><span class="line">                    self.rank[q] += 1</span><br><span class="line">        </span><br><span class="line">    def find(self, n):</span><br><span class="line">        if self.parent[n] != n:</span><br><span class="line">            return self.find(self.parent[n])</span><br><span class="line">        return n</span><br><span class="line"></span><br><span class="line">class Solution(object):</span><br><span class="line">    def accountsMerge(self, accounts):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type accounts: List[List[str]]</span><br><span class="line">        :rtype: List[List[str]]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        # init</span><br><span class="line">        eid = 0     # email id</span><br><span class="line">        e2n = &#123;&#125;    # email to name</span><br><span class="line">        e2i = &#123;&#125;    # email to email id</span><br><span class="line">        i2e = &#123;&#125;    # email id to email</span><br><span class="line">        for account in accounts:</span><br><span class="line">            name = account[0]</span><br><span class="line">            for email in account[1:]:</span><br><span class="line">                if not (email in e2i):</span><br><span class="line">                    e2n[email] = name</span><br><span class="line">                    e2i[email] = eid</span><br><span class="line">                    i2e[eid] = email</span><br><span class="line">                    eid += 1</span><br><span class="line"></span><br><span class="line">        # union find</span><br><span class="line">        uf = UnionFind(eid + 1)</span><br><span class="line">        for account in accounts:</span><br><span class="line">            first_eid = e2i[account[1]]</span><br><span class="line">            for email in account[2:]:</span><br><span class="line">                uf.union(first_eid, e2i[email])</span><br><span class="line">        </span><br><span class="line">        # prev steps to construct answer:</span><br><span class="line">        # find the all the parent emails as well as their children in a group</span><br><span class="line">        p2c = collections.defaultdict(set)    # parent email to children emails</span><br><span class="line">        for account in accounts:</span><br><span class="line">            for email in account[1:]:</span><br><span class="line">                parent_email_id = uf.find(e2i[email])</span><br><span class="line">                parent_email = i2e[parent_email_id]</span><br><span class="line">                p2c[parent_email].add(email)</span><br><span class="line">        </span><br><span class="line">        # construct the answers</span><br><span class="line">        res = []</span><br><span class="line">        for parent in p2c:</span><br><span class="line">            tmp = []</span><br><span class="line">            name = e2n[parent]</span><br><span class="line">            tmp = [name]</span><br><span class="line">            tmp += sorted(list(p2c[parent]))</span><br><span class="line">            res.append(tmp)</span><br><span class="line">            </span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/leetcode98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1565,152 +1713,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/leetcode277/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/13/leetcode277/" itemprop="url">leetcode277</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T14:31:26-04:00">
-                2018-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="277-Find-the-Celebrity"><a href="#277-Find-the-Celebrity" class="headerlink" title="277. Find the Celebrity"></a>277. Find the Celebrity</h1><p>Suppose you are at a party with n people (labeled from 0 to n - 1) and among them, there may exist one celebrity. The definition of a celebrity is that all the other n - 1 people know him/her but he/she does not know any of them.</p>
-<p>Now you want to find out who the celebrity is or verify that there is not one. The only thing you are allowed to do is to ask questions like: “Hi, A. Do you know B?” to get information of whether A knows B. You need to find out the celebrity (or verify there is not one) by asking as few questions as possible (in the asymptotic sense).</p>
-<p>You are given a helper function bool knows(a, b) which tells you whether A knows B. Implement a function int findCelebrity(n), your function should minimize the number of calls to knows.</p>
-<p>Note: There will be exactly one celebrity if he/she is in the party. Return the celebrity’s label if there is a celebrity in the party. If there is no celebrity, return -1.</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea:"></a>Idea:</h1><p>In fact, through api knows(a, b), one candidate can be screened. If knows(a, b) is true, a is not the celebrity, otherwise, b is not celebrity. The key idea here, is to make best use of the judgment from knows(a, b)</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># The knows API is already defined for you.</span><br><span class="line"># @param a, person a</span><br><span class="line"># @param b, person b</span><br><span class="line"># @return a boolean, whether a knows b</span><br><span class="line"># def knows(a, b):</span><br><span class="line"></span><br><span class="line">class Solution(object):</span><br><span class="line">    def findCelebrity(self, n):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type n: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        ans = 0</span><br><span class="line">        for i in range(1, n):</span><br><span class="line">            if knows(ans, i):</span><br><span class="line">                ans = i</span><br><span class="line">        print ans</span><br><span class="line">                </span><br><span class="line">        for i in range(0, n):</span><br><span class="line">            if i == ans:</span><br><span class="line">                continue</span><br><span class="line">            if not knows(i, ans):</span><br><span class="line">                return -1</span><br><span class="line">            if knows(ans, i):</span><br><span class="line">                return -1</span><br><span class="line">            </span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1761,7 +1763,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
