@@ -233,6 +233,301 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/conda路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/conda路径/" itemprop="url">conda 和系统 python 路径问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T09:58:22-04:00">
+                2018-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>conda装完，在~/.bashrc 里面加上它的路径，source完就会取代系统自己的python路径有时候会不方便，我找到了<a href="https://blog.csdn.net/zhangxinyu11021130/article/details/64125058" target="_blank" rel="noopener">这篇博客</a>，以后可以参考一下，以下为转发内容：</p>
+<p>那么，如果在~/.bashrc中修改文件的话，即加入export PATH=”/home/myname/anaconda2/bin:$PATH”，则输入python命令就会直接出来Anaconda环境下的python，当然，用TensorFlow是好的，用caffe就。。。。。。。因此，用caffe的话，我就会把这行去掉，再重新source ~/.bashrc.</p>
+<p>这样做是麻烦了一些，但是那怎么办呢？我就想在caffe下使用自带python，在tensorflow的时候使用Anaconda。</p>
+<p>于是，学到了一个“技巧”，叫做别名声明alias。</p>
+<p>具体用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias py27=&quot;/usr/bin/python2.7&quot; </span><br><span class="line">alias pyana=&quot;/home/myname/anaconda2/bin/python2.7&quot; (我自己的，一定要精确到python的版本，不能只到文件夹)</span><br></pre></td></tr></table></figure></p>
+<p>这样在使用系统自带python的时候，只需要在命令行输入py27即可，用Anaconda，输入python或者pyana都可。</p>
+<p>注意： </p>
+<ol>
+<li>~/.bashrc的文件中，export PATH=”/home/myname/anaconda2/bin:$PATH”还是要加上的 </li>
+<li>上面两行在每次开机的时候都是要输入的，如果不想每次都输入，则要将这两行加入~/.bashrc的文件中 </li>
+<li>如果想取消别名声明，用unalias py27或者删除~/.bashrc中的PATH，并且重新source ~/.bashrc</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/leetcode338/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/11/leetcode338/" itemprop="url">388. Longest Absolute File Path</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-11T18:29:30-04:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>从今天开始刷google leetcode tag，应该都是先从抄开始的吧，先求速度吧。还是那句话，难的不是如何开始，而是坚持吧。作息，情绪，运动，娱乐，压力的平衡和统一，还是不是很容易。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/6月中旬小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1502,321 +1797,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/安国寺记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/03/安国寺记/" itemprop="url">安国寺记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-03T23:29:27-04:00">
-                2018-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/附庸风雅/" itemprop="url" rel="index">
-                    <span itemprop="name">附庸风雅</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>‘乌台诗案’后，在旧年除夕，苏东坡被释放出狱。出了东城街北面的监狱大门，他停了一会儿，用鼻子嗅了嗅空气，感觉到了微风吹到脸上的快乐，在喜鹊吱喳叫声中，看见行人在加上骑马而过。他真是积习难改，当天他又写了两首诗。一首诗里面说：平生文字为吾累，辞去声名不厌低。塞上纵归他日马，城东不斗少年鸡。<br>后来去黄州，安定下来后，开始思考人生的意义，毕竟他死里逃生。他开始沉淀自己的个性，转向佛老思想，于是就有了，&lt;&lt;安国寺记&gt;&gt;：<br>元丰二年十二月，余自吴兴守得罪，上不忍诛，以为黄州团练副使，使思过而自新焉。其明年二月至黄。舍馆粗定，衣食稍给，闭门却扫，收招魂魄，退伏思念，求所以自新之方。反观从来举意动作，皆不中道，非独今以得罪者也。欲新其一，恐失其二，触类而求之，有不可胜悔者，于是喟然叹曰：“道不足以御气，性不足以胜习。不锄其本，而耘其末，今虽改之，后必复作，盍归诚佛僧求一洗之？”得城南精舍曰安国寺，有茂林修竹，陂池亭榭。间一、二日辄往，焚香默坐，深自省察，则物我相忘，身心皆空，求罪垢所以生而不可得。一念清净，染污自落，表里翛然，无所附丽，私窃乐之。旦往而暮还者，五年于此矣。<br>寺僧曰继连，为僧首七年，得赐衣。又七年，当赐号，欲谢去，其徒与父老相率留之。连笑曰：“知足不辱，知止不殆。”卒谢去。余是以愧其人。七年，余将有临汝之行。连曰：“寺未有记，具石请记之。”余不得辞。<br>寺立于伪唐保大二年，始名“护国”，嘉祐八年赐今名。堂宇斋阁，连皆易新之，严丽深稳，悦可人意，至者忘归。岁正月，男女万人会庭中，饮食作乐，且祠瘟神，江淮旧俗也。四月六日，汝州团练副使眉山苏轼记。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/迁移学习-FCNs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/03/迁移学习-FCNs/" itemprop="url">FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-03T13:16:27-04:00">
-                2018-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">transfer learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这篇论文是首次将domain adaptation应用到self-driving的semantic segmentation里面，和FCN在segmentation里面是一样算是开篇之作。</p>
-<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Fully convolutional models for dense prediction have proven successful for a wide range of visual tasks. Such models perform well in a supervised setting, but performance can be surprisingly poor under domain shifts that appear mild to a human observer. For example, training on one city and testing on another in a different geographic region and/or weather condition may result in significantly degraded performance due to pixel-level distribution shift. In this paper, we introduce the first domain adaptive semantic segmentation method, proposing an unsupervised adversarial approach to pixel prediction problems. Our method consists of both <strong>global and category specific adaptation techniques. Global domain alignment is performed using a novel semantic segmentation network with fully convolutional domain adversarial learning</strong>. This initially adapted space then enables category specific adaptation through a generalization of constrained weak learning, with explicit transfer of the spatial layout from the source to the target domains. Our approach outperforms baselines across different settings on multiple large-scale datasets, including adapting across various real city environments, different synthetic sub-domains, from simulated to real environments, and on a novel large-scale dash-cam dataset.</p>
-<p>摘要里面最重要的应该是这句话了，<strong>global and category specific adaptation techniques</strong>，后面会详细介绍。</p>
-<h1 id="Fully-Convolutional-Adaptation-Models"><a href="#Fully-Convolutional-Adaptation-Models" class="headerlink" title="Fully Convolutional Adaptation Models"></a>Fully Convolutional Adaptation Models</h1><h2 id="source-domain-and-target-domain"><a href="#source-domain-and-target-domain" class="headerlink" title="source domain and target domain"></a>source domain and target domain</h2><p>既然是涉及transfer，这里就要有source domain （源域），$S$，这里就有图片空间$I_S$和对应的标注空间$L_S$。我们训练得到$\phi_S(I_S)$。然后我们的目标是，学习一个语义分割的模型，它适用于没有被标注的目标域（target domain）$T$，有图片空间$I_T$。我们用$\phi_T()$来表示这个模型。</p>
-<h2 id="domain-shifts"><a href="#domain-shifts" class="headerlink" title="domain shifts"></a>domain shifts</h2><ul>
-<li>global changes，会导致特征空间的边缘概率分布的不同<br>  这个常常是会出现在两个不用的领域里面，两个领域的越是不同，shift会越大，比如：模拟的数据和实际数据。</li>
-<li>category specific parameter changes<br>  不同类在两个不同的领域里面会有不同的偏差，比如：车和标志在不同领域里面的做迁移的时候，分布的改变会不同。</li>
-</ul>
-<h2 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h2><p>我需要假设，源域和目标域有同样的标注空间，以及源域训练得到的模型比目标域有更好的效果。<br>然后基于上面的shifts，我们需要两个loss function：</p>
-<ul>
-<li>$L_da(I_S, I_T)$:<br>  这个和global的distribution distance相关</li>
-<li>$L_mi(I_T, P_{L_S})$:<br>  这个和category specific parameters有关，其中，$P_{L_S}$表示的是从源域迁移过来的标注空间的概率分布<br>此外我们还需要一个loss function:</li>
-<li>$L_seg(I_S, I_T)$:<br>  这个是在源域上面的标准的监督分割的一个目标函数，就是正常的我们在source data上面训练的一个loss function而已。<br>所以最后的loss function:<br>$L(I_S, I_T, P_{L_S}) = L_{da}(I_S, I_T) + L_{mi}(I_T, P_{L_S}) + L_{seg}(I_S, I_T)$</li>
-</ul>
-<p><img src="/images/AdaptFCNs.jpeg" alt=""><br>这张图很好的呈现了整个过程的pipeline，$L_{seg}(I_S, I_T)$是在source domain data上面训练的；fully-convolutional domain adversarial training则是用来降低，源和目标域概率分布不同的距离；我们又通过constrained pixel-wise multiple instance learning objective在目标域上面的数据训练，来完成category specific的更新。</p>
-<h1 id="Global-Domain-Alignment"><a href="#Global-Domain-Alignment" class="headerlink" title="Global Domain Alignment"></a>Global Domain Alignment</h1><p>这里我们详细阐述$L_{da}(I_S, I_T)$，然后重申一遍，我们需要减小源域和目标的域偏移，然后我们采用的是domain adversarial （域的对抗学习）的方法。</p>
-<ul>
-<li>我们需要回答的第一个问题是：在这个密集的预测框架里面，需要由什么来组成一个实例？<br>  回答是考虑最终一个表示层的每一个空间单元的自然接受域所对应的区域，作为独立的实例。换句话说，我们不在网络的最后一层，而是在有pixel prediction的前一层进行操作。<br>  我们将这一层的结果用$\phi_{l-1}(\theta, I)$来表示，它对应的参数是$\theta$。</li>
-<li>接下来我们来进一步拆解，我们的domain adversarial loss，它有交替的最小化目标组成。<ul>
-<li>一是在表示空间，我们想要最小化源域和目标域的距离：$d(\phi_{l-1}(\theta, I_S), \phi_{l-1}(\theta, I_T))$ </li>
-<li>二是我们需要通过训练区分源域和目标域实例的域判别器来估计这个距离，我们将判别器的参数设为$\theta_D$<br>我们需要让这个判别器来学习源域区域和目标域区域的不同，进而来使源域和目标域在表示空间上的距离最小。</li>
-</ul>
-</li>
-<li>loss function and inverse domain loss function:<br>  $L_D = - \sum_{I_S \in S}\sum_{h \in H}\sum_{w \in W}log(P_{\theta_D}(R_{hw}^S)) - \sum_{I_T \in T}\sum_{h \in H}\sum_{w \in W}log(1 - P_{\theta_D}(R_{hw}^T))$<br>  $L_{Dinv} = - \sum_{I_S \in S}\sum_{h \in H}\sum_{w \in W}log(1 - P_{\theta_D}(R_{hw}^S)) - \sum_{I_T \in T}\sum_{h \in H}\sum_{w \in W}log(P_{\theta_D}(R_{hw}^T)) $<ul>
-<li>$P_{\theta_D} = \sigma(\phi(\theta_D, x))$</li>
-<li>output layer l-1: $H \times W$ spatial units</li>
-<li>$R_{hw}^S = \phi_{l - 1}(\theta, I_S)_{hw}$ denote source representation of each unit</li>
-<li>$R_{hw}^T = \phi_{l - 1}(\theta, I_T)_{hw}$ denote target representation of each unit</li>
-</ul>
-</li>
-</ul>
-<p>然后有了这些定义，我们来交替优化这两个目标函数了：$\min_{\theta_D} L_D$，$\min_{\theta} \frac{1}{2}[L_D + L_{Dinv}]$ 前者是学习相关图片域里面最有可能的域分类器，</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1867,7 +1847,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-count">106</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
