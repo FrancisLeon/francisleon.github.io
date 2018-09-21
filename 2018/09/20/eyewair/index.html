@@ -88,7 +88,9 @@
 <meta property="og:description" content="Paper Gaze Estimation from Multimodal Kinect Data author  Kenneth Alberto Funes Mora and Jean-Marc OdobezIdiap Research Institute, CH-1920, Martigny, Switzerland E ́colePolytechniqueFe ́de ́raldeLausa">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/eyewairpipeline.png">
-<meta property="og:updated_time" content="2018-09-21T18:13:08.000Z">
+<meta property="og:image" content="http://yoursite.com/images/ARL.png">
+<meta property="og:image" content="http://yoursite.com/images/eyewair-feature-extract.png">
+<meta property="og:updated_time" content="2018-09-21T19:37:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eyewair">
 <meta name="twitter:description" content="Paper Gaze Estimation from Multimodal Kinect Data author  Kenneth Alberto Funes Mora and Jean-Marc OdobezIdiap Research Institute, CH-1920, Martigny, Switzerland E ́colePolytechniqueFe ́de ́raldeLausa">
@@ -364,7 +366,9 @@
 <li>$s(\alpha) = \mu_s + U_s diag(\sigma_s)\alpha$</li>
 <li>$t(\beta) = \mu_t + U_t diag(\sigma_t)\beta$</li>
 </ul>
-<h1 id="Pose-Tracking-ICP-Iterative-Closest-Points"><a href="#Pose-Tracking-ICP-Iterative-Closest-Points" class="headerlink" title="Pose Tracking/ICP (Iterative Closest Points)"></a>Pose Tracking/ICP (Iterative Closest Points)</h1><ul>
+<p>Fitting:</p>
+<ul>
+<li><h1 id="Pose-Tracking-ICP-Iterative-Closest-Points"><a href="#Pose-Tracking-ICP-Iterative-Closest-Points" class="headerlink" title="Pose Tracking/ICP (Iterative Closest Points)"></a>Pose Tracking/ICP (Iterative Closest Points)</h1></li>
 <li>Given: two corresponding point sets, <ul>
 <li>$x = {x_1, …, x_n}$, $P = {p_1, …, p_n}$</li>
 </ul>
@@ -373,8 +377,21 @@
 <li>$E(R, t) = \frac{1}{N_p}\sum_{i=1}^{N_p}(x_i - Rp_i -t)^2$</li>
 </ul>
 </li>
+<li>solution: SVD</li>
 </ul>
-<h1 id="Eye-in-Head-Gaze-estimation"><a href="#Eye-in-Head-Gaze-estimation" class="headerlink" title="Eye-in-Head Gaze estimation"></a>Eye-in-Head Gaze estimation</h1>
+<h1 id="Head-stabilization"><a href="#Head-stabilization" class="headerlink" title="Head stabilization"></a>Head stabilization</h1><h1 id="Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression"><a href="#Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression" class="headerlink" title="Eye-in-Head Gaze estimation/Adaptive Linear Regression"></a>Eye-in-Head Gaze estimation/Adaptive Linear Regression</h1><ul>
+<li><p>Key idea:</p>
+<ul>
+<li>is to adaptively find the subset of training samples where the test sample is most linearly representable.<br><img src="/images/ARL.png" width="70%"></li>
+</ul>
+</li>
+<li><p>eye appearance feature extraction:<br><img src="/images/eyewair-feature-extract.png" width="70%"></p>
+<ul>
+<li>feature vector: $e_i = \frac{[s_1, s_2, …, s_{r \times c}]^T}{\sum_j S_j}$</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     
@@ -548,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Paper"><span class="nav-number">1.</span> <span class="nav-text">Paper</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gaze-Estimation"><span class="nav-number">2.</span> <span class="nav-text">Gaze Estimation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">3.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Works"><span class="nav-number">4.</span> <span class="nav-text">Related Works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pipeline"><span class="nav-number">5.</span> <span class="nav-text">Pipeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3D-Morphable-Model-Basel-Face-Model"><span class="nav-number">6.</span> <span class="nav-text">3D Morphable Model/Basel Face Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pose-Tracking-ICP-Iterative-Closest-Points"><span class="nav-number">7.</span> <span class="nav-text">Pose Tracking/ICP (Iterative Closest Points)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eye-in-Head-Gaze-estimation"><span class="nav-number">8.</span> <span class="nav-text">Eye-in-Head Gaze estimation</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Paper"><span class="nav-number">1.</span> <span class="nav-text">Paper</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gaze-Estimation"><span class="nav-number">2.</span> <span class="nav-text">Gaze Estimation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">3.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Works"><span class="nav-number">4.</span> <span class="nav-text">Related Works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pipeline"><span class="nav-number">5.</span> <span class="nav-text">Pipeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3D-Morphable-Model-Basel-Face-Model"><span class="nav-number">6.</span> <span class="nav-text">3D Morphable Model/Basel Face Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pose-Tracking-ICP-Iterative-Closest-Points"><span class="nav-number">7.</span> <span class="nav-text">Pose Tracking/ICP (Iterative Closest Points)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Head-stabilization"><span class="nav-number">8.</span> <span class="nav-text">Head stabilization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression"><span class="nav-number">9.</span> <span class="nav-text">Eye-in-Head Gaze estimation/Adaptive Linear Regression</span></a></li></ol></div>
             
 
           </div>

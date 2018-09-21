@@ -507,7 +507,9 @@
 <li>$s(\alpha) = \mu_s + U_s diag(\sigma_s)\alpha$</li>
 <li>$t(\beta) = \mu_t + U_t diag(\sigma_t)\beta$</li>
 </ul>
-<h1 id="Pose-Tracking-ICP-Iterative-Closest-Points"><a href="#Pose-Tracking-ICP-Iterative-Closest-Points" class="headerlink" title="Pose Tracking/ICP (Iterative Closest Points)"></a>Pose Tracking/ICP (Iterative Closest Points)</h1><ul>
+<p>Fitting:</p>
+<ul>
+<li><h1 id="Pose-Tracking-ICP-Iterative-Closest-Points"><a href="#Pose-Tracking-ICP-Iterative-Closest-Points" class="headerlink" title="Pose Tracking/ICP (Iterative Closest Points)"></a>Pose Tracking/ICP (Iterative Closest Points)</h1></li>
 <li>Given: two corresponding point sets, <ul>
 <li>$x = {x_1, …, x_n}$, $P = {p_1, …, p_n}$</li>
 </ul>
@@ -516,8 +518,21 @@
 <li>$E(R, t) = \frac{1}{N_p}\sum_{i=1}^{N_p}(x_i - Rp_i -t)^2$</li>
 </ul>
 </li>
+<li>solution: SVD</li>
 </ul>
-<h1 id="Eye-in-Head-Gaze-estimation"><a href="#Eye-in-Head-Gaze-estimation" class="headerlink" title="Eye-in-Head Gaze estimation"></a>Eye-in-Head Gaze estimation</h1>
+<h1 id="Head-stabilization"><a href="#Head-stabilization" class="headerlink" title="Head stabilization"></a>Head stabilization</h1><h1 id="Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression"><a href="#Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression" class="headerlink" title="Eye-in-Head Gaze estimation/Adaptive Linear Regression"></a>Eye-in-Head Gaze estimation/Adaptive Linear Regression</h1><ul>
+<li><p>Key idea:</p>
+<ul>
+<li>is to adaptively find the subset of training samples where the test sample is most linearly representable.<br><img src="/images/ARL.png" width="70%"></li>
+</ul>
+</li>
+<li><p>eye appearance feature extraction:<br><img src="/images/eyewair-feature-extract.png" width="70%"></p>
+<ul>
+<li>feature vector: $e_i = \frac{[s_1, s_2, …, s_{r \times c}]^T}{\sum_j S_j}$</li>
+</ul>
+</li>
+</ul>
+
           
         
       
