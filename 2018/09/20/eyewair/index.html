@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/eyewairpipeline.png">
 <meta property="og:image" content="http://yoursite.com/images/ARL.png">
 <meta property="og:image" content="http://yoursite.com/images/eyewair-feature-extract.png">
-<meta property="og:updated_time" content="2018-09-21T19:45:29.000Z">
+<meta property="og:updated_time" content="2018-09-21T20:01:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eyewair">
 <meta name="twitter:description" content="Paper Gaze Estimation from Multimodal Kinect Data author  Kenneth Alberto Funes Mora and Jean-Marc OdobezIdiap Research Institute, CH-1920, Martigny, Switzerland E ́colePolytechniqueFe ́de ́raldeLausa">
@@ -377,7 +377,8 @@
 </li>
 <li>solution: SVD</li>
 </ul>
-<h1 id="Head-stabilization"><a href="#Head-stabilization" class="headerlink" title="Head stabilization"></a>Head stabilization</h1><h1 id="Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression"><a href="#Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression" class="headerlink" title="Eye-in-Head Gaze estimation/Adaptive Linear Regression"></a>Eye-in-Head Gaze estimation/Adaptive Linear Regression</h1><ul>
+<h1 id="Head-stabilization"><a href="#Head-stabilization" class="headerlink" title="Head stabilization"></a>Head stabilization</h1><p>render the scene using the inverse rigid transformation of the head pose parameters. $p_t^{-1} = {R_t^T, -R_t^Tt_t}$</p>
+<h1 id="Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression"><a href="#Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression" class="headerlink" title="Eye-in-Head Gaze estimation/Adaptive Linear Regression"></a>Eye-in-Head Gaze estimation/Adaptive Linear Regression</h1><ul>
 <li><p>Key idea:</p>
 <ul>
 <li>is to adaptively find the subset of training samples where the test sample is most linearly representable.<br><img src="/images/ARL.png" width="70%"></li>
@@ -386,6 +387,8 @@
 <li><p>eye appearance feature extraction:<br><img src="/images/eyewair-feature-extract.png" width="70%"></p>
 <ul>
 <li>feature vector: $e_i = \frac{[s_1, s_2, …, s_{r \times c}]^T}{\sum_j S_j}$</li>
+<li>$E = [e1,e2,··· ,en] ∈ R^{m×n}, X = [x1, x2, · · · , xn] ∈ R^{2×n}$</li>
+<li>$AE = X$</li>
 </ul>
 </li>
 </ul>
