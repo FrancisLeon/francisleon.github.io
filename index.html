@@ -348,8 +348,25 @@
 </ul>
 </li>
 </ul>
-<p># </p>
-
+<h1 id="3D-Morphable-Model-Basel-Face-Model"><a href="#3D-Morphable-Model-Basel-Face-Model" class="headerlink" title="3D Morphable Model/Basel Face Model"></a>3D Morphable Model/Basel Face Model</h1><p>The faces are parameterized as triangular meshes with m = 53490 vertices and shared topology.</p>
+<ul>
+<li>vertices:<ul>
+<li>$(x_j, y_j, z_j)^T \in R^3$</li>
+<li>$s = (x_1, y_1, z_1, …, x_m, y_m, z_m)^T$</li>
+</ul>
+</li>
+<li>colors:<ul>
+<li>$(r_j, g_j, b_j)^T \in [0, 1]^3$</li>
+<li>$t = (r_1, g_1, b_1, …, r_m, g_m, b_m)^T$</li>
+</ul>
+</li>
+</ul>
+<p>BFM assumes independence between shape and texture, constructing two independent Linear Models, $M_s = (\mu_s, \sigma_s, U_s)$, $\mu_t, \sigma_t, U_t$</p>
+<ul>
+<li>$s(\alpha) = \mu_s + U_s diag(\sigma_s)\alpha$</li>
+<li>$t(\beta) = \mu_t + U_t diag(\sigma_t)\beta$</li>
+</ul>
+<h1 id="Pose-Tracking-ICP-Iterative-Closest-Points"><a href="#Pose-Tracking-ICP-Iterative-Closest-Points" class="headerlink" title="Pose Tracking/ICP (Iterative Closest Points)"></a>Pose Tracking/ICP (Iterative Closest Points)</h1><h1 id="Eye-in-Head-Gaze-estimation"><a href="#Eye-in-Head-Gaze-estimation" class="headerlink" title="Eye-in-Head Gaze estimation"></a>Eye-in-Head Gaze estimation</h1>
           
         
       
