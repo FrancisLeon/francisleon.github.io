@@ -90,7 +90,8 @@
 <meta property="og:image" content="http://yoursite.com/images/eyewairpipeline.png">
 <meta property="og:image" content="http://yoursite.com/images/ARL.png">
 <meta property="og:image" content="http://yoursite.com/images/eyewair-feature-extract.png">
-<meta property="og:updated_time" content="2018-09-21T20:01:32.000Z">
+<meta property="og:image" content="http://yoursite.com/images/feature-manifold.png">
+<meta property="og:updated_time" content="2018-09-21T20:03:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eyewair">
 <meta name="twitter:description" content="Paper Gaze Estimation from Multimodal Kinect Data author  Kenneth Alberto Funes Mora and Jean-Marc OdobezIdiap Research Institute, CH-1920, Martigny, Switzerland E ́colePolytechniqueFe ́de ́raldeLausa">
@@ -338,7 +339,7 @@
 <li>exploit the depth sensor to perform an accurate tracking of a 3D mesh model and robustly estimate a person head pose</li>
 <li>compute a person’s eye-in-head gaze direction via usage of the image modality.</li>
 </ul>
-<h1 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h1><h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h1><p><img src="/images/eyewairpipeline.png" width="50%"></p>
+<h1 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h1><h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h1><p><img src="/images/eyewairpipeline.png" width="90%"></p>
 <ul>
 <li>a) Offline step.<br>  From multiple 3D face instances the 3DMM is fit to obtain a person specific 3D model. </li>
 <li>b)-d) Online steps. <ul>
@@ -388,7 +389,7 @@
 <ul>
 <li>feature vector: $e_i = \frac{[s_1, s_2, …, s_{r \times c}]^T}{\sum_j S_j}$</li>
 <li>$E = [e1,e2,··· ,en] ∈ R^{m×n}, X = [x1, x2, · · · , xn] ∈ R^{2×n}$</li>
-<li>$AE = X$</li>
+<li>$AE = X$<br><img src="/images/feature-manifold.png" width="70%"></li>
 </ul>
 </li>
 </ul>
