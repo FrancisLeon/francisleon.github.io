@@ -331,6 +331,7 @@
 <h2 id="Conceptions"><a href="#Conceptions" class="headerlink" title="Conceptions:"></a>Conceptions:</h2><ul>
 <li>Registration: Registering two surfaces means finding a mapping between a template surface and a target surface that describes the position of semantically corresponding points.</li>
 <li>Dense registration: methods find a mapping from each point in the template onto the target while sparse methods find correspondence only for selected feature points. We present a dense registration method.</li>
+<li>Regularisation: To choose the “correct” deformation from all possible warps, a registration algorithm has to impose constraints on the deformation. In this context, this is called regularisation of the deformation field.</li>
 </ul>
 <h2 id="Fitting"><a href="#Fitting" class="headerlink" title="Fitting"></a>Fitting</h2><p>The main difference, is that the deformation model is a statistical model and the optimisation in each step is an iterative method, which finds the minimum of a convex function.</p>
 <ul>
@@ -342,7 +343,7 @@
 </ol>
 </li>
 </ul>
-
+<h1 id="Nonrigid-optimal-step-ICP-algorithms"><a href="#Nonrigid-optimal-step-ICP-algorithms" class="headerlink" title="Nonrigid optimal step ICP algorithms"></a>Nonrigid optimal step ICP algorithms</h1>
           
         
       
