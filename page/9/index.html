@@ -233,6 +233,309 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/CycleGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/CycleGAN/" itemprop="url">Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T14:10:48-07:00">
+                2018-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">transfer learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前面几篇主要都是采用了风格迁移的思想，<a href="https://arxiv.org/abs/1703.10593" target="_blank" rel="noopener">这篇论文</a>主要就是讲这个：</p>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Image-to-image translation is a class of vision and graphics problems where the goal is to learn the mapping between an input image and an output image using a training set of aligned image pairs. However, for many tasks, paired training data will not be available. We present an approach for learning to translate an image from a source domain X to a target domain Y in the absence of paired examples. Our goal is to learn a mapping G : X → Y such that the distribution of images from G(X) is indistinguishable from the distribution Y using an adversarial loss. Because this mapping is highly under-constrained, we cou- ple it with an <strong>inverse mapping F : Y → X and introduce a cycle consistency loss to enforce F(G(X)) ≈ X (and vice versa)</strong>. Qualitative results are presented on several tasks where paired training data does not exist, including collection style transfer, object transfiguration, season transfer, photo enhancement, etc. Quantitative comparisons against several prior methods demonstrate the superiority of our approach.</p>
+<h1 id="unpaired"><a href="#unpaired" class="headerlink" title="unpaired"></a>unpaired</h1><p>他们要解决的unpaired translation，换句话说就是没有，很多label的，如下图所示：<br><img src="/images/unpaired.jpeg" alt=""></p>
+<h1 id="loss"><a href="#loss" class="headerlink" title="loss"></a>loss</h1><p>感觉这篇论文最核心的思想就是这个cycle consistency loss，大意是，做translation，从一个句子，从英语翻译到法语，在从法语翻译过来，应该和原句一样才对，反之亦然。cycle consistency loss主要是采用这个思想：<br>$G: X \rightarrow Y, F: Y \rightarrow X, F(G(x)) \approx x, G(F(y))) \approx y$</p>
+<p>首先我们在重温一下GANs，它最核心的一点是一个adversarial loss来使得生成的图片和真实的图片难以被区分。<br>结构如下：<br><img src="/images/GANexplanation.jpeg" alt=""></p>
+<p>然后我们在来看看这篇论文的loss，就会很清晰了，不就是是两个GAN吗，然后结合了这个cycle consistency loss<br><img src="/images/cycleconsisloss.jpeg" alt=""></p>
+<h2 id="adversarial-loss"><a href="#adversarial-loss" class="headerlink" title="adversarial loss"></a>adversarial loss</h2><p>$L_{GAN}(G, D_{Y}, X, Y) = E_{y \sim p_{data}(y)}[log D_{Y}(y)] + E_{x \sim p_{data}(x)}[log(1 - D_{Y}(G(x)))]$<br>$L_{GAN}(F, D_{X}, X, Y) = E_{x \sim p_{data}(x)}[log D_{X}(x)] + E_{y \sim p_{data}(y)}[log(1 - D_{X}(F(y)))]$</p>
+<h2 id="cycle-consistency-loss"><a href="#cycle-consistency-loss" class="headerlink" title="cycle consistency loss"></a>cycle consistency loss</h2><p>$L_{cyc}(G, F) = E_{x \sim p_{data}(x)}[|F(G(x)) - x |] + E_{y \sim p_{data}(y)}[|G(F(y)) - y |]$</p>
+<p>其实总的idea不是很难理解，看懂这个在看别的论文就会好很多，很多论文都是基于cycle-GAN来改的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/conda路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/conda路径/" itemprop="url">conda 和系统 python 路径问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T09:58:22-07:00">
+                2018-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>conda装完，在~/.bashrc 里面加上它的路径，source完就会取代系统自己的python路径有时候会不方便，我找到了<a href="https://blog.csdn.net/zhangxinyu11021130/article/details/64125058" target="_blank" rel="noopener">这篇博客</a>，以后可以参考一下，以下为转发内容：</p>
+<p>那么，如果在~/.bashrc中修改文件的话，即加入export PATH=”/home/myname/anaconda2/bin:$PATH”，则输入python命令就会直接出来Anaconda环境下的python，当然，用TensorFlow是好的，用caffe就。。。。。。。因此，用caffe的话，我就会把这行去掉，再重新source ~/.bashrc.</p>
+<p>这样做是麻烦了一些，但是那怎么办呢？我就想在caffe下使用自带python，在tensorflow的时候使用Anaconda。</p>
+<p>于是，学到了一个“技巧”，叫做别名声明alias。</p>
+<p>具体用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias py27=&quot;/usr/bin/python2.7&quot; </span><br><span class="line">alias pyana=&quot;/home/myname/anaconda2/bin/python2.7&quot; (我自己的，一定要精确到python的版本，不能只到文件夹)</span><br></pre></td></tr></table></figure></p>
+<p>这样在使用系统自带python的时候，只需要在命令行输入py27即可，用Anaconda，输入python或者pyana都可。</p>
+<p>注意： </p>
+<ol>
+<li>~/.bashrc的文件中，export PATH=”/home/myname/anaconda2/bin:$PATH”还是要加上的 </li>
+<li>上面两行在每次开机的时候都是要输入的，如果不想每次都输入，则要将这两行加入~/.bashrc的文件中 </li>
+<li>如果想取消别名声明，用unalias py27或者删除~/.bashrc中的PATH，并且重新source ~/.bashrc</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/leetcode338/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1502,290 +1805,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/为什么坚持/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/04/为什么坚持/" itemprop="url">为什么坚持</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-04T00:21:35-07:00">
-                2018-06-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日常/" itemprop="url" rel="index">
-                    <span itemprop="name">日常</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>也许还是数学，做研究可以在去碰数学，也许就是这么简单，我相信世间真理是简单的，我深信数学的力量，<br>我还是想坚持，也许statistic machine learning是我目前所找寻的答案吧。所有的经历，所有的印记，都深深的烙印在自己的心田。我只想用数学拨开这个领域的外衣，看到里面的美吧。看到田渊栋说，虽然做应用，但骨子里还是做数学证明，哈哈哈，也许就是这样子吧，我才会坚持下来。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/安国寺记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/03/安国寺记/" itemprop="url">安国寺记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-03T23:29:27-07:00">
-                2018-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/附庸风雅/" itemprop="url" rel="index">
-                    <span itemprop="name">附庸风雅</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>‘乌台诗案’后，在旧年除夕，苏东坡被释放出狱。出了东城街北面的监狱大门，他停了一会儿，用鼻子嗅了嗅空气，感觉到了微风吹到脸上的快乐，在喜鹊吱喳叫声中，看见行人在加上骑马而过。他真是积习难改，当天他又写了两首诗。一首诗里面说：平生文字为吾累，辞去声名不厌低。塞上纵归他日马，城东不斗少年鸡。<br>后来去黄州，安定下来后，开始思考人生的意义，毕竟他死里逃生。他开始沉淀自己的个性，转向佛老思想，于是就有了，&lt;&lt;安国寺记&gt;&gt;：<br>元丰二年十二月，余自吴兴守得罪，上不忍诛，以为黄州团练副使，使思过而自新焉。其明年二月至黄。舍馆粗定，衣食稍给，闭门却扫，收招魂魄，退伏思念，求所以自新之方。反观从来举意动作，皆不中道，非独今以得罪者也。欲新其一，恐失其二，触类而求之，有不可胜悔者，于是喟然叹曰：“道不足以御气，性不足以胜习。不锄其本，而耘其末，今虽改之，后必复作，盍归诚佛僧求一洗之？”得城南精舍曰安国寺，有茂林修竹，陂池亭榭。间一、二日辄往，焚香默坐，深自省察，则物我相忘，身心皆空，求罪垢所以生而不可得。一念清净，染污自落，表里翛然，无所附丽，私窃乐之。旦往而暮还者，五年于此矣。<br>寺僧曰继连，为僧首七年，得赐衣。又七年，当赐号，欲谢去，其徒与父老相率留之。连笑曰：“知足不辱，知止不殆。”卒谢去。余是以愧其人。七年，余将有临汝之行。连曰：“寺未有记，具石请记之。”余不得辞。<br>寺立于伪唐保大二年，始名“护国”，嘉祐八年赐今名。堂宇斋阁，连皆易新之，严丽深稳，悦可人意，至者忘归。岁正月，男女万人会庭中，饮食作乐，且祠瘟神，江淮旧俗也。四月六日，汝州团练副使眉山苏轼记。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1836,7 +1855,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

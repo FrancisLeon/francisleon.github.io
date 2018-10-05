@@ -233,6 +233,299 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode461/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/leetcode461/" itemprop="url">leetcode461</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T23:10:20-07:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="461-Hamming-Distance"><a href="#461-Hamming-Distance" class="headerlink" title="461. Hamming Distance"></a>461. Hamming Distance</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.</p>
+<p>Given two integers x and y, calculate the Hamming distance.<br>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: x = 1, y = 4</span><br><span class="line"></span><br><span class="line">Output: 2</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">1   (0 0 0 1)</span><br><span class="line">4   (0 1 0 0)</span><br><span class="line">       ↑   ↑</span><br><span class="line"></span><br><span class="line">The above arrows point to positions where the corresponding bits are different.</span><br></pre></td></tr></table></figure></p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>It’s involved with bits, which bring bit operations into my mind. — xor</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def hammingDistance(self, x, y):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type x: int</span><br><span class="line">        :type y: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        return bin(x ^ y).count(&apos;1&apos;)</span><br></pre></td></tr></table></figure>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>bin() example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">number = 5</span><br><span class="line">print(&apos;The binary equivalent of 5 is:&apos;, bin(number))</span><br><span class="line"></span><br><span class="line"># result:</span><br><span class="line">The binary equivalent of 5 is: 0b101</span><br></pre></td></tr></table></figure></p>
+<p>count() example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">aList = [123, &apos;xyz&apos;, &apos;zara&apos;, &apos;abc&apos;, 123];</span><br><span class="line">print &quot;Count for 123 : &quot;, aList.count(123)</span><br><span class="line">print &quot;Count for zara : &quot;, aList.count(&apos;zara&apos;)</span><br><span class="line"></span><br><span class="line"># result:</span><br><span class="line">Count for 123 :  2</span><br><span class="line">Count for zara :  1</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/leetcode1/" itemprop="url">leetcode1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T22:24:59-07:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-Two-Sum"><a href="#1-Two-Sum" class="headerlink" title="1. Two Sum"></a>1. Two Sum</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Given nums = [2, 7, 11, 15], target = 9,</span><br><span class="line"></span><br><span class="line">Because nums[0] + nums[1] = 2 + 7 = 9,</span><br><span class="line">return [0, 1].</span><br></pre></td></tr></table></figure></p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>hashmap，一次遍历的时候，存之后可能出现的值和此时值的index，比如:[2, 7, 11, 15], t = 9, 遍历2的时候存k : 9 - 2 = 7 , v : 0</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def twoSum(self, nums, target):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type nums: List[int]</span><br><span class="line">        :type target: int</span><br><span class="line">        :rtype: List[int]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        dic = &#123;&#125;</span><br><span class="line">        for i in range(len(nums)):</span><br><span class="line">            if nums[i] not in dic:</span><br><span class="line">                dic[target - nums[i]] = i</span><br><span class="line">            else:</span><br><span class="line">                return [dic[nums[i]]] + [i]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/leetcode49/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1445,326 +1738,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/GAN-pytorch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/20/GAN-pytorch/" itemprop="url">GAN@pytorch</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T15:45:51-07:00">
-                2018-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">transfer learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>莫烦python也给了pytorch的GAN<a href="https://morvanzhou.github.io/tutorials/machine-learning/torch/4-06-GAN/" target="_blank" rel="noopener">版本</a>：<br>然后莫烦的全部代码在<a href="https://github.com/MorvanZhou/PyTorch-Tutorial/blob/master/tutorial-contents/406_GAN.py" target="_blank" rel="noopener">这里</a></p>
-<h1 id="hyper-parameter"><a href="#hyper-parameter" class="headerlink" title="hyper parameter"></a>hyper parameter</h1><p>新手画家 (Generator) 在作画的时候需要有一些灵感 (random noise), 我们这些灵感的个数定义为 N_IDEAS. 而一幅画需要有一些规格, 我们将这幅画的画笔数定义一下, N_COMPONENTS 就是一条一元二次曲线(这幅画画)上的点个数. 为了进行批训练, 我们将一整批话的点都规定一下(PAINT_POINTS).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">torch.manual_seed(1) # reproducible</span><br><span class="line">np.random.seed(1)</span><br><span class="line"></span><br><span class="line"># hyper parameter</span><br><span class="line">BATCH_SIZE = 64</span><br><span class="line">LR_G = 0.0001 </span><br><span class="line">LR_D = 0.0001</span><br><span class="line">N_IDEAS = 5</span><br><span class="line">ART_COMPONENTS = 15</span><br><span class="line">PAINT_POINTS = np.vstack([np.linspace(-1, 1, ART_COMPONENTS) for _ in range(BATCH_SIZE)])</span><br></pre></td></tr></table></figure></p>
-<h1 id="著名画家的画"><a href="#著名画家的画" class="headerlink" title="著名画家的画"></a>著名画家的画</h1><p>我们需要有很多画是来自著名画家的(real data), 将这些著名画家的画, 和新手画家的画都传给新手鉴赏家, 让鉴赏家来区分哪些是著名画家, 哪些是新手画家的画. 如何区分我们在后面呈现. 这里我们生成一些著名画家的画 (batch 条不同的一元二次方程曲线).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def artist_works(): # real target</span><br><span class="line">    a = np.random.uniform(1, 2, size = BATCH_SIZE)[:, np.newaxis]</span><br><span class="line">    paintings = a * np.power(PAINT_POINTS, 2) + (a - 1)</span><br><span class="line">    paintings = torch.from_numpy(paintings).float()</span><br><span class="line">    return paintings</span><br></pre></td></tr></table></figure>
-<h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><p>这里会创建两个神经网络, 分别是 Generator (新手画家), Discriminator(新手鉴赏家). G 会拿着自己的一些灵感当做输入, 输出一元二次曲线上的点 (G 的画).</p>
-<p>D 会接收一幅画作 (一元二次曲线), 输出这幅画作到底是不是著名画家的画(是著名画家的画的概率).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">G = nn.Sequential(                      # Generator</span><br><span class="line">    nn.Linear(N_IDEAS, 128),            # random ideas (could from normal distribution)</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(128, ART_COMPONENTS),     # making a painting from these random ideas</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">D = nn.Sequential(                      # Discriminator</span><br><span class="line">    nn.Linear(ART_COMPONENTS, 128),     # receive art work either from the famous artist or a newbie like G</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(128, 1),</span><br><span class="line">    nn.Sigmoid(),                       # tell the probability that the art work is made by artist</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>接着我们来同时训练 D 和 G. 训练之前, 我们来看看G作画的原理. G 首先会有些灵感, G_ideas 就会拿到这些随机灵感 (可以是正态分布的随机数), 然后 G 会根据这些灵感画画. 接着我们拿着著名画家的画和 G 的画, 让 D 来判定这两批画作是著名画家画的概率.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for step in range(10000):</span><br><span class="line">    artist_paintings = artist_works()           # real painting from artist</span><br><span class="line">    G_ideas = torch.randn(BATCH_SIZE, N_IDEAS)    # random ideas</span><br><span class="line">    G_paintings = G(G_ideas())                  # fake painting from G (random ideas)</span><br><span class="line"></span><br><span class="line">    prob_artist0 = D(artist_paintings)          # D try to increase this prob</span><br><span class="line">    prob_artist1 = D(G_paintings)               # D try to reduce this prob</span><br></pre></td></tr></table></figure>
-<p>然后计算有多少来之画家的画猜对了, 有多少来自 G 的画猜对了, 我们想最大化这些猜对的次数. 这也就是 log(D(x)) + log(1-D(G(z)) 在论文中的形式. 而因为 torch 中提升参数的形式是最小化误差, 那我们把最大化 score 转换成最小化 loss, 在两个 score 的合的地方加一个符号就好. 而 G 的提升就是要减小 D 猜测 G 生成数据的正确率, 也就是减小 D_score1.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D_loss = -torch.mean(torch.log(prob_artist0) + torch.log(1. - prob_artist1))</span><br><span class="line">G_loss = torch.mean(torch.log(1. - prob_artist1))</span><br></pre></td></tr></table></figure>
-<p>最后我们在根据 loss 提升神经网络就好了.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">opt_D.zero_grad()</span><br><span class="line">D_loss.backward(retain_graph=True)              # retain_graph 这个参数是为了再次使用计算图纸</span><br><span class="line">opt_D.step()</span><br><span class="line"></span><br><span class="line">opt_G.zero_grad()</span><br><span class="line">G_loss.backward()</span><br><span class="line">opt_G.step()</span><br></pre></td></tr></table></figure></p>
-<p>之后就是，开始整理总结最近在看的那篇论文作者代码的解读了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/pytorch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/20/pytorch/" itemprop="url">pytorch 入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T15:30:49-07:00">
-                2018-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tech/" itemprop="url" rel="index">
-                    <span itemprop="name">tech</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近在看domain adaptation的代码，需要学习pytorch，然后参考<a href="https://morvanzhou.github.io/" target="_blank" rel="noopener">莫烦python的代码</a>，自己整理一遍:</p>
-<h1 id="用-Numpy-还是-Torch"><a href="#用-Numpy-还是-Torch" class="headerlink" title="用 Numpy 还是 Torch"></a>用 Numpy 还是 Torch</h1><p>Torch 自称为神经网络界的 Numpy, 因为他能将 torch 产生的 tensor 放在 GPU 中加速运算 (前提是你有合适的 GPU), 就像 Numpy 会把 array 放在 CPU 中加速运算. 所以神经网络的话, 当然是用 Torch 的 tensor 形式数据最好咯. 就像 Tensorflow 当中的 tensor 一样.</p>
-<p>当然, 我们对 Numpy 还是爱不释手的, 因为我们太习惯 numpy 的形式了. 不过 torch 看出来我们的喜爱, 他把 torch 做的和 numpy 能很好的兼容. 比如这样就能自由地转换 numpy array 和 torch tensor 了:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">np_data = np.arange(6).reshape((2, 3))</span><br><span class="line">torch_data = torch.from_numpy(np_data)</span><br><span class="line">tensor2array = torch_data.numpy()</span><br><span class="line">print(</span><br><span class="line">    &apos;\nnumpy array:&apos;, np_data,          # [[0 1 2], [3 4 5]]</span><br><span class="line">    &apos;\ntorch tensor:&apos;, torch_data,      # 0 1 2 \n 3 4 5 [torch.LongTensor of 2 x 3]</span><br><span class="line">    &apos;\ntensor to array&apos;: tensor2array,  # [[0 1 2], [3 4 5]]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h1 id="Torch-中的数学运算"><a href="#Torch-中的数学运算" class="headerlink" title="Torch 中的数学运算"></a>Torch 中的数学运算</h1><h2 id="简单运算"><a href="#简单运算" class="headerlink" title="简单运算"></a>简单运算</h2><p>其实 torch 中 tensor 的运算和 numpy array 的如出一辙, 我们就以对比的形式来看. 如果想了解 torch 中其它更多有用的运算符，<a href="https://pytorch.org/docs/stable/torch.html" target="_blank" rel="noopener">API就是你要去的地方</a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># abs 绝对值的计算</span><br><span class="line">data = [-1, -2, 1, 2]</span><br><span class="line">tensor = torch.FloatTensor(data)</span><br><span class="line">print(</span><br><span class="line">    &apos;\nabs&apos;,</span><br><span class="line">    &apos;\nnumpy: &apos;, np.abs(data),          # [1 2 1 2]</span><br><span class="line">    &apos;\ntorch: &apos;, torch.abs(tensor)      # [1 2 1 2]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># sin   三角函数 sin</span><br><span class="line">print(</span><br><span class="line">    &apos;\nsin&apos;,</span><br><span class="line">    &apos;\nnumpy: &apos;, np.sin(data),      # [-0.84147098 -0.90929743  0.84147098  0.90929743]</span><br><span class="line">    &apos;\ntorch: &apos;, torch.sin(tensor)  # [-0.8415 -0.9093  0.8415  0.9093]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># mean  均值</span><br><span class="line">print(</span><br><span class="line">    &apos;\nmean&apos;,</span><br><span class="line">    &apos;\nnumpy: &apos;, np.mean(data),         # 0.0</span><br><span class="line">    &apos;\ntorch: &apos;, torch.mean(tensor)     # 0.0</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h2 id="矩阵的运算"><a href="#矩阵的运算" class="headerlink" title="矩阵的运算"></a>矩阵的运算</h2><p>除了简单的计算, 矩阵运算才是神经网络中最重要的部分. 所以我们展示下矩阵的乘法. 注意一下包含了一个 numpy 中可行, 但是 torch 中不可行的方式.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># matrix multiplication 矩阵点乘</span><br><span class="line">data = [[1,2], [3,4]]</span><br><span class="line">tensor = torch.FloatTensor(data)  # 转换成32位浮点 tensor</span><br><span class="line"># correct method</span><br><span class="line">print(</span><br><span class="line">    &apos;\nmatrix multiplication (matmul)&apos;,</span><br><span class="line">    &apos;\nnumpy: &apos;, np.matmul(data, data),     # [[7, 10], [15, 22]]</span><br><span class="line">    &apos;\ntorch: &apos;, torch.mm(tensor, tensor)   # [[7, 10], [15, 22]]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># !!!!  下面是错误的方法 !!!!</span><br><span class="line">data = np.array(data)</span><br><span class="line">print(</span><br><span class="line">    &apos;\nmatrix multiplication (dot)&apos;,</span><br><span class="line">    &apos;\nnumpy: &apos;, data.dot(data),        # [[7, 10], [15, 22]] 在numpy 中可行</span><br><span class="line">    &apos;\ntorch: &apos;, tensor.dot(tensor)     # torch 会转换成 [1,2,3,4].dot([1,2,3,4) = 30.0</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<p>新版本中(&gt;=0.3.0), 关于 tensor.dot() 有了新的改变, 它只能针对于一维的数组. 所以上面的有所改变.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensor.dot(tensor)     # torch 会转换成 [1,2,3,4].dot([1,2,3,4) = 30.0</span><br><span class="line"></span><br><span class="line"># 变为</span><br><span class="line">torch.dot(tensor.dot(tensor)</span><br></pre></td></tr></table></figure></p>
-<h1 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a>Variable</h1><h2 id="什么是Variable"><a href="#什么是Variable" class="headerlink" title="什么是Variable"></a>什么是Variable</h2><p>这个感觉和tensorflow里面的一样，就是存有变化的数值的地方，然后这个变化的值就是tensor。然后，这里Variable可能有点像tensorflow里面的placeholder吧</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from torch.autograd import Variable</span><br><span class="line"></span><br><span class="line">tensor = torch.FloatTensor(([1, 2], [3, 4]))</span><br><span class="line"># requires_grad 是参不参与误差的反向传播，要不要计算梯度</span><br><span class="line">variable = Variable(tensor, requires_grad=True)</span><br><span class="line"></span><br><span class="line">print(tensor)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"> 1  2</span><br><span class="line"> 3  4</span><br><span class="line">[torch.FloatTensor of size 2x2]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">print(variable)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">Variable containing:</span><br><span class="line"> 1  2</span><br><span class="line"> 3  4</span><br><span class="line">[torch.FloatTensor of size 2x2]</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="Variable-计算，梯度"><a href="#Variable-计算，梯度" class="headerlink" title="Variable 计算，梯度"></a>Variable 计算，梯度</h2><p>我们再对比一下 tensor 的计算和 variable 的计算.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t_out = torch.mean(tensor*tensor)       # x^2</span><br><span class="line">v_out = torch.mean(variable*variable)   # x^2</span><br><span class="line">print(t_out)</span><br><span class="line">print(v_out)    # 7.5</span><br></pre></td></tr></table></figure></p>
-<p>这里我们应该也看不出Variable和一般tensor的不同，和tensorflow类似，Variable参与计算时，也是在打一个computational graph （原来是将所有的计算步骤 (节点) 都连接起来, 最后进行误差反向传递的时候, 一次性将所有 variable 里面的修改幅度 (梯度) 都计算出来, 而 tensor 就没有这个能力啦，毕竟，tensor 只是一个值而已。）</p>
-<p><strong>v_out = torch.mean(variable*variable)</strong> 就是在计算图中添加的一个计算步骤, 计算误差反向传递的时候有他一份功劳, 我们就来举个例子:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">v_out.backward()    # 模拟 v_out 的误差反向传递</span><br><span class="line"></span><br><span class="line"># 下面两步看不懂没关系, 只要知道 Variable 是计算图的一部分, 可以用来传递误差就好.</span><br><span class="line"># v_out = 1/4 * sum(variable*variable) 这是计算图中的 v_out 计算步骤</span><br><span class="line"># 针对于 v_out 的梯度就是, d(v_out)/d(variable) = 1/4*2*variable = variable/2</span><br><span class="line"></span><br><span class="line">print(variable.grad)    # 初始 Variable 的梯度</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"> 0.5000  1.0000</span><br><span class="line"> 1.5000  2.0000</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
-<h2 id="获取-Variable-里面的数据"><a href="#获取-Variable-里面的数据" class="headerlink" title="获取 Variable 里面的数据"></a>获取 Variable 里面的数据</h2><p>直接print(variable)只会输出 Variable 形式的数据, 在很多时候是用不了的(比如想要用 plt 画图), 所以我们要转换一下, 将它变成 tensor 形式.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">print(variable)     #  Variable 形式</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">Variable containing:</span><br><span class="line"> 1  2</span><br><span class="line"> 3  4</span><br><span class="line">[torch.FloatTensor of size 2x2]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">print(variable.data)    # tensor 形式</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"> 1  2</span><br><span class="line"> 3  4</span><br><span class="line">[torch.FloatTensor of size 2x2]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">print(variable.data.numpy())    # numpy 形式</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">[[ 1.  2.]</span><br><span class="line"> [ 3.  4.]]</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></p>
-<h1 id="Activation"><a href="#Activation" class="headerlink" title="Activation"></a>Activation</h1><h2 id="什么是-Activation"><a href="#什么是-Activation" class="headerlink" title="什么是 Activation"></a>什么是 Activation</h2><p>为什么需要非线性的函数？</p>
-<ul>
-<li>线性的话，你多少层都一样</li>
-<li>非线性的话，可以拟合不同的函数</li>
-</ul>
-<h2 id="Torch-中的激励函数"><a href="#Torch-中的激励函数" class="headerlink" title="Torch 中的激励函数"></a>Torch 中的激励函数</h2><p>Torch 中的激励函数有很多, 不过我们平时要用到的就这几个. relu, sigmoid, tanh, softplus. 那我们就看看他们各自长什么样啦.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn.functional as F     # 激励函数都在这</span><br><span class="line">from torch.autograd import Variable</span><br><span class="line"></span><br><span class="line"># 做一些假数据来观看图像</span><br><span class="line">x = torch.linspace(-5, 5, 200)  # x data (tensor), shape=(100, 1)</span><br><span class="line">x = Variable(x)</span><br></pre></td></tr></table></figure>
-<p>接着就是做生成不同的激励函数数据:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x_np = x.data.numpy()   # 换成 numpy array, 出图时用</span><br><span class="line"></span><br><span class="line"># 几种常用的 激励函数</span><br><span class="line">y_relu = F.relu(x).data.numpy()</span><br><span class="line">y_sigmoid = F.sigmoid(x).data.numpy()</span><br><span class="line">y_tanh = F.tanh(x).data.numpy()</span><br><span class="line">y_softplus = F.softplus(x).data.numpy()</span><br><span class="line"># y_softmax = F.softmax(x)  softmax 比较特殊, 不能直接显示, 不过他是关于概率的, 用于分类</span><br></pre></td></tr></table></figure></p>
-<p>接着我们开始画图, 画图的代码也在下面:<br><img src="/images/activationfunc.jpeg" width="50%" height="50%"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt  # python 的可视化模块, 我有教程 (https://morvanzhou.github.io/tutorials/data-manipulation/plt/)</span><br><span class="line"></span><br><span class="line">plt.figure(1, figsize=(8, 6))</span><br><span class="line">plt.subplot(221)</span><br><span class="line">plt.plot(x_np, y_relu, c=&apos;red&apos;, label=&apos;relu&apos;)</span><br><span class="line">plt.ylim((-1, 5))</span><br><span class="line">plt.legend(loc=&apos;best&apos;)</span><br><span class="line"></span><br><span class="line">plt.subplot(222)</span><br><span class="line">plt.plot(x_np, y_sigmoid, c=&apos;red&apos;, label=&apos;sigmoid&apos;)</span><br><span class="line">plt.ylim((-0.2, 1.2))</span><br><span class="line">plt.legend(loc=&apos;best&apos;)</span><br><span class="line"></span><br><span class="line">plt.subplot(223)</span><br><span class="line">plt.plot(x_np, y_tanh, c=&apos;red&apos;, label=&apos;tanh&apos;)</span><br><span class="line">plt.ylim((-1.2, 1.2))</span><br><span class="line">plt.legend(loc=&apos;best&apos;)</span><br><span class="line"></span><br><span class="line">plt.subplot(224)</span><br><span class="line">plt.plot(x_np, y_softplus, c=&apos;red&apos;, label=&apos;softplus&apos;)</span><br><span class="line">plt.ylim((-0.2, 6))</span><br><span class="line">plt.legend(loc=&apos;best&apos;)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h1 id="搭神经网络"><a href="#搭神经网络" class="headerlink" title="搭神经网络"></a>搭神经网络</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1815,7 +1788,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
