@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="information retrieval,natural language processing," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="去人迹罕至的地方，留下自己的足迹。">
-<meta name="keywords" content="reinforcement learning, deep learning, machine learning">
+<meta name="description" content="tf: term frequency 定义：  词频（term frequency，tf）指的是某一个给定的词语在该文件中出现的频率。这个数字是对词数（term count）的归一化，以防止它偏向长的文件。 term：  $tf_{i, j} = \frac{n_{i, j}}{\sum_k n_{k, j}}$ $n_{i, j}$表示词i在文件$d_j$里面出现的次数  inverse doc">
+<meta name="keywords" content="information retrieval,natural language processing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tf-idf">
 <meta property="og:url" content="http://yoursite.com/2018/10/17/tf-idf/index.html">
 <meta property="og:site_name" content="Truly">
-<meta property="og:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta property="og:description" content="tf: term frequency 定义：  词频（term frequency，tf）指的是某一个给定的词语在该文件中出现的频率。这个数字是对词数（term count）的归一化，以防止它偏向长的文件。 term：  $tf_{i, j} = \frac{n_{i, j}}{\sum_k n_{k, j}}$ $n_{i, j}$表示词i在文件$d_j$里面出现的次数  inverse doc">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-17T15:58:40.000Z">
+<meta property="og:updated_time" content="2018-10-19T02:30:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tf-idf">
-<meta name="twitter:description" content="去人迹罕至的地方，留下自己的足迹。">
+<meta name="twitter:description" content="tf: term frequency 定义：  词频（term frequency，tf）指的是某一个给定的词语在该文件中出现的频率。这个数字是对词数（term count）的归一化，以防止它偏向长的文件。 term：  $tf_{i, j} = \frac{n_{i, j}}{\sum_k n_{k, j}}$ $n_{i, j}$表示词i在文件$d_j$里面出现的次数  inverse doc">
 
 
 
@@ -273,6 +273,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -300,7 +322,15 @@
       
 
       
-        
+        <h2 id="tf-term-frequency"><a href="#tf-term-frequency" class="headerlink" title="tf: term frequency"></a>tf: term frequency</h2><ul>
+<li>定义：<br>  词频（term frequency，tf）指的是某一个给定的词语在该文件中出现的频率。这个数字是对词数（term count）的归一化，以防止它偏向长的文件。</li>
+<li>term：<br>  $tf_{i, j} = \frac{n_{i, j}}{\sum_k n_{k, j}}$ $n_{i, j}$表示词i在文件$d_j$里面出现的次数</li>
+</ul>
+<h2 id="inverse-docment-frequency"><a href="#inverse-docment-frequency" class="headerlink" title="inverse docment frequency"></a>inverse docment frequency</h2><ul>
+<li>定义：<br>  可以由总文件数目除以包含该词语之文件的数目，再将得到的商取以10为底的对数得到</li>
+<li>term:<br>  $idf_i = lg \frac{|D}{|{j:t_i \in d_j}| + 1}$</li>
+</ul>
+
       
     </div>
     
@@ -314,6 +344,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/information-retrieval/" rel="tag"># information retrieval</a>
+          
+            <a href="/tags/natural-language-processing/" rel="tag"># natural language processing</a>
+          
+        </div>
       
 
       
@@ -388,8 +426,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -404,7 +451,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-count">123</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -426,7 +473,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -449,6 +496,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-term-frequency"><span class="nav-number">1.</span> <span class="nav-text">tf: term frequency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inverse-docment-frequency"><span class="nav-number">2.</span> <span class="nav-text">inverse docment frequency</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

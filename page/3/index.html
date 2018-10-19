@@ -233,6 +233,309 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/leetcode891-sums-of-subsequence-widths/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/21/leetcode891-sums-of-subsequence-widths/" itemprop="url">leetcode891-sums-of-subsequence-widths</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-21T21:05:24-04:00">
+                2018-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given an array of integers A, consider all non-empty subsequences of A.</p>
+<p>For any sequence S, let the width of S be the difference between the maximum and minimum element of S.</p>
+<p>Return the sum of the widths of all subsequences of A. </p>
+<p>As the answer may be very large, return the answer modulo 10^9 + 7.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: [2,1,3]</span><br><span class="line">Output: 6</span><br><span class="line">Explanation:</span><br><span class="line">Subsequences are [1], [2], [3], [2,1], [2,3], [1,3], [2,1,3].</span><br><span class="line">The corresponding widths are 0, 0, 0, 1, 1, 2, 2.</span><br><span class="line">The sum of these widths is 6.</span><br></pre></td></tr></table></figure></p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Previously, I perform dfs, but it sufferred from time limit. However, if you find the nature of the problem, it’s just a math problem:<br>The order in initial arrays doesn’t matter,<br>my first intuition is to sort the array.</p>
+<p>For A[i]:<br>There are i smaller numbers,<br>so there are 2 ^ i sequences in which A[i] is maximum.<br>we should do res += A[i] * (2 ^ i)</p>
+<p>There are n - i - 1 bigger numbers,<br>so there are 2 ^ (n - i - 1) sequences in which A[i] is minimum.<br>we should do res -= A[i] * 2 ^ (n - i - 1)</p>
+<p>Done.</p>
+<p>Time Complexity:<br>O(NlogN)</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p>dfs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def sumSubseqWidths(self, A):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type A: List[int]</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.res = []</span><br><span class="line">        </span><br><span class="line">        A = sorted(A)</span><br><span class="line">        self.dfs([], 0, A)</span><br><span class="line">        return sum(self.res)</span><br><span class="line">    </span><br><span class="line">    def dfs(self, pre, start, A):</span><br><span class="line">        if start &gt; len(A):</span><br><span class="line">            return</span><br><span class="line">        if len(pre) &gt; 0:</span><br><span class="line">            self.res.append(pre[-1] - pre[0])</span><br><span class="line">        for i in range(start, len(A)):</span><br><span class="line">            pre.append(A[i])</span><br><span class="line">            self.dfs(pre[:], i+1, A)</span><br><span class="line">            pre.pop()</span><br></pre></td></tr></table></figure></p>
+<p>math<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int sumSubseqWidths(vector&lt;int&gt;&amp; A) &#123;</span><br><span class="line">        sort(A.begin(), A.end());</span><br><span class="line">        long c = 1, res = 0, mod = 1e9 + 7; </span><br><span class="line">        for (int i = 0; i &lt; A.size(); i++, c = (c&lt;&lt;1) % mod) &#123;</span><br><span class="line">            res = (res + A[i] * c - A[A.size() - i - 1] * c) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        return (res + mod) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p>Vector in C++ STL<br>Vectors are same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted, with their storage being handled automatically by the container. Vector elements are placed in contiguous storage so that they can be accessed and traversed using iterators. In vectors, data is inserted at the end. Inserting at the end takes differential time, as sometimes there may be a need of extending the array. Removing the last element takes only constant time because no resizing happens. Inserting and erasing at the beginning or in the middle is linear in time.</p>
+<p>Certain functions associated with the vector are:<br>Iterators</p>
+<p>begin() – Returns an iterator pointing to the first element in the vector<br>end() – Returns an iterator pointing to the theoretical element that follows the last element in the vector<br>…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/leetcode65-valid-number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/15/leetcode65-valid-number/" itemprop="url">leetcode65-valid-number</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-15T20:27:05-04:00">
+                2018-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Validate if a given string is numeric.</p>
+<p>Some examples:<br>“0” =&gt; true<br>“ 0.1 “ =&gt; true<br>“abc” =&gt; false<br>“1 a” =&gt; false<br>“2e10” =&gt; true</p>
+<p>Note: It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.</p>
+<p>Update (2015-02-10):<br>The signature of the C++ function had been updated. If you still see your function signature accepts a const char * argument, please click the reload button to reset your code definition.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Deterministic finite automaton (DFA) — natural language processing<br><img src="/images/leetcode65.png" width="70%"></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.states = [&#123;&#125;, </span><br><span class="line">                  &#123;&apos;blank&apos;:1, &apos;digit&apos;:3, &apos;sign&apos;:2, &apos;dot&apos;:4&#125;, </span><br><span class="line">                  &#123;&apos;digit&apos;:3, &apos;dot&apos;:4&#125;,</span><br><span class="line">                  &#123;&apos;digit&apos;:3, &apos;blank&apos;:9, &apos;e&apos;:6, &apos;dot&apos;:5&#125;,</span><br><span class="line">                  &#123;&apos;digit&apos;:5&#125;,</span><br><span class="line">                  &#123;&apos;digit&apos;:5, &apos;e&apos;:6, &apos;blank&apos;:9&#125;,</span><br><span class="line">                  &#123;&apos;sign&apos;:7, &apos;digit&apos;:8&#125;,</span><br><span class="line">                  &#123;&apos;digit&apos;:8&#125;, </span><br><span class="line">                  &#123;&apos;digit&apos;:8, &apos;blank&apos;:9&#125;,</span><br><span class="line">                  &#123;&apos;blank&apos;:9&#125;]</span><br><span class="line">        </span><br><span class="line">    def isNumber(self, s):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type s: str</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        cur_q = 1</span><br><span class="line">        for c in s:</span><br><span class="line">            if c in &apos;0123456789&apos;:</span><br><span class="line">                state = &apos;digit&apos;</span><br><span class="line">            elif c in &apos;-+&apos;:</span><br><span class="line">                state = &apos;sign&apos;</span><br><span class="line">            elif c == &apos;.&apos;:</span><br><span class="line">                state = &apos;dot&apos;</span><br><span class="line">            elif c == &apos; &apos;:</span><br><span class="line">                state = &apos;blank&apos;</span><br><span class="line">            elif c == &apos;e&apos;:</span><br><span class="line">                state = &apos;e&apos;</span><br><span class="line">            else:</span><br><span class="line">                return False</span><br><span class="line">            if not (state in self.states[cur_q]):</span><br><span class="line">                return False</span><br><span class="line">            cur_q = self.states[cur_q][state]</span><br><span class="line">        if not (cur_q in [3, 5, 8, 9]):</span><br><span class="line">            return False</span><br><span class="line">        return True</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/12/ml-metrics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1393,301 +1696,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/leetcode721/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/20/leetcode721/" itemprop="url">leetcode721</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:38:49-04:00">
-                2018-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="721-Accounts-Merge"><a href="#721-Accounts-Merge" class="headerlink" title="721. Accounts Merge"></a>721. Accounts Merge</h1><p>Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.</p>
-<p>Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some email that is common to both accounts. Note that even if two accounts have the same name, they may belong to different people as people could have the same name. A person can have any number of accounts initially, but all of their accounts definitely have the same name.</p>
-<p>After merging the accounts, return the accounts in the following format: the first element of each account is the name, and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.</p>
-<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">accounts = [[&quot;John&quot;, &quot;johnsmith@mail.com&quot;, &quot;john00@mail.com&quot;], [&quot;John&quot;, &quot;johnnybravo@mail.com&quot;], [&quot;John&quot;, &quot;johnsmith@mail.com&quot;, &quot;john_newyork@mail.com&quot;], [&quot;Mary&quot;, &quot;mary@mail.com&quot;]]</span><br><span class="line">Output: [[&quot;John&quot;, &apos;john00@mail.com&apos;, &apos;john_newyork@mail.com&apos;, &apos;johnsmith@mail.com&apos;],  [&quot;John&quot;, &quot;johnnybravo@mail.com&quot;], [&quot;Mary&quot;, &quot;mary@mail.com&quot;]]</span><br><span class="line">Explanation: </span><br><span class="line">The first and third John&apos;s are the same person as they have the common email &quot;johnsmith@mail.com&quot;.</span><br><span class="line">The second John and Mary are different people as none of their email addresses are used by other accounts.</span><br><span class="line">We could return these lists in any order, for example the answer [[&apos;Mary&apos;, &apos;mary@mail.com&apos;], [&apos;John&apos;, &apos;johnnybravo@mail.com&apos;], </span><br><span class="line">[&apos;John&apos;, &apos;john00@mail.com&apos;, &apos;john_newyork@mail.com&apos;, &apos;johnsmith@mail.com&apos;]] would still be accepted.</span><br></pre></td></tr></table></figure></p>
-<p>Note:</p>
-<p>The length of accounts will be in the range [1, 1000].<br>The length of accounts[i] will be in the range [1, 10].<br>The length of accounts[i][j] will be in the range [1, 30].</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Union-find the emails. The emails in an account belong to one group. Since, we can not directly perform uf operations on the strs, so we need mapping them between int array.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">class UnionFind(object):</span><br><span class="line">    def __init__(self, n):</span><br><span class="line">        self.parent = [i for i in range(n)]</span><br><span class="line">        self.rank = [0] * n</span><br><span class="line">        </span><br><span class="line">    def union(self, n, m):</span><br><span class="line">        p, q = self.find(n), self.find(m)</span><br><span class="line">        if p != q:</span><br><span class="line">            if self.rank[p] &gt; self.rank[q]:</span><br><span class="line">                self.parent[q] = p</span><br><span class="line">            else:</span><br><span class="line">                self.parent[p] = q</span><br><span class="line">                if self.rank[p] == self.rank[q]:</span><br><span class="line">                    self.rank[q] += 1</span><br><span class="line">        </span><br><span class="line">    def find(self, n):</span><br><span class="line">        if self.parent[n] != n:</span><br><span class="line">            return self.find(self.parent[n])</span><br><span class="line">        return n</span><br><span class="line"></span><br><span class="line">class Solution(object):</span><br><span class="line">    def accountsMerge(self, accounts):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type accounts: List[List[str]]</span><br><span class="line">        :rtype: List[List[str]]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        # init</span><br><span class="line">        eid = 0     # email id</span><br><span class="line">        e2n = &#123;&#125;    # email to name</span><br><span class="line">        e2i = &#123;&#125;    # email to email id</span><br><span class="line">        i2e = &#123;&#125;    # email id to email</span><br><span class="line">        for account in accounts:</span><br><span class="line">            name = account[0]</span><br><span class="line">            for email in account[1:]:</span><br><span class="line">                if not (email in e2i):</span><br><span class="line">                    e2n[email] = name</span><br><span class="line">                    e2i[email] = eid</span><br><span class="line">                    i2e[eid] = email</span><br><span class="line">                    eid += 1</span><br><span class="line"></span><br><span class="line">        # union find</span><br><span class="line">        uf = UnionFind(eid + 1)</span><br><span class="line">        for account in accounts:</span><br><span class="line">            first_eid = e2i[account[1]]</span><br><span class="line">            for email in account[2:]:</span><br><span class="line">                uf.union(first_eid, e2i[email])</span><br><span class="line">        </span><br><span class="line">        # prev steps to construct answer:</span><br><span class="line">        # find the all the parent emails as well as their children in a group</span><br><span class="line">        p2c = collections.defaultdict(set)    # parent email to children emails</span><br><span class="line">        for account in accounts:</span><br><span class="line">            for email in account[1:]:</span><br><span class="line">                parent_email_id = uf.find(e2i[email])</span><br><span class="line">                parent_email = i2e[parent_email_id]</span><br><span class="line">                p2c[parent_email].add(email)</span><br><span class="line">        </span><br><span class="line">        # construct the answers</span><br><span class="line">        res = []</span><br><span class="line">        for parent in p2c:</span><br><span class="line">            tmp = []</span><br><span class="line">            name = e2n[parent]</span><br><span class="line">            tmp = [name]</span><br><span class="line">            tmp += sorted(list(p2c[parent]))</span><br><span class="line">            res.append(tmp)</span><br><span class="line">            </span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/leetcode98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/19/leetcode98/" itemprop="url">leetcode98</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-19T00:18:36-04:00">
-                2018-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a>98. Validate Binary Search Tree</h1><p>Given a binary tree, determine if it is a valid binary search tree (BST).</p>
-<p>Assume a BST is defined as follows:</p>
-<p>The left subtree of a node contains only nodes with keys less than the node’s key.<br>The right subtree of a node contains only nodes with keys greater than the node’s key.<br>Both the left and right subtrees must also be binary search trees.<br>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">    2</span><br><span class="line">   / \</span><br><span class="line">  1   3</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure></p>
-<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    5</span><br><span class="line">   / \</span><br><span class="line">  1   4</span><br><span class="line">     / \</span><br><span class="line">    3   6</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure></p>
-<p>Explanation: The input is: [5,1,4,null,null,3,6]. The root node’s value<br>             is 5 but its right child’s value is 4.</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Recurison inorderly. Or divide and conquer.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidBST(self, root):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type root: TreeNode</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.order = []</span><br><span class="line">        self.inorder(root)</span><br><span class="line">        </span><br><span class="line">        prev = float(&apos;-inf&apos;)</span><br><span class="line">        for node in self.order:</span><br><span class="line">            if node.val &lt;= prev:</span><br><span class="line">                return False</span><br><span class="line">            prev = node.val</span><br><span class="line">        </span><br><span class="line">        return True</span><br><span class="line"></span><br><span class="line">    def inorder(self, root):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type root: TreeNode</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if root is None:</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        self.inorder(root.left)</span><br><span class="line">        self.order.append(root)</span><br><span class="line">        self.inorder(root.right)</span><br><span class="line"></span><br><span class="line"># version 2</span><br><span class="line"># class Solution(object):</span><br><span class="line">#     def isValidBST(self, root):</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         :type root: TreeNode</span><br><span class="line">#         :rtype: bool</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         res, _, _ = self.helper(root)</span><br><span class="line">#         return res</span><br><span class="line"></span><br><span class="line">#     def helper(self, root):</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         :type root: TreeNode</span><br><span class="line">#         :rtype: bool</span><br><span class="line">#         &quot;&quot;&quot;</span><br><span class="line">#         if root is None:</span><br><span class="line">#             return True, float(&apos;-inf&apos;), float(&apos;inf&apos;)</span><br><span class="line">#         left, leftmax, leftmin = self.helper(root.left)</span><br><span class="line">#         right, rightmax, rightmin = self.helper(root.right)</span><br><span class="line"></span><br><span class="line">#         rootmax = max(root.val, max(leftmax, rightmax))</span><br><span class="line">#         rootmin = min(root.val, min(rightmin, leftmin))</span><br><span class="line">        </span><br><span class="line">#         if left and right:</span><br><span class="line">#             return leftmax &lt; root.val and root.val &lt; rightmin, rootmax, rootmin </span><br><span class="line"></span><br><span class="line">#         return False, float(&apos;-inf&apos;), float(&apos;inf&apos;)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1738,7 +1746,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-count">123</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1760,7 +1768,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
