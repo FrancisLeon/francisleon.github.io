@@ -233,6 +233,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/leetcode278/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/11/leetcode278/" itemprop="url">leetcode278</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T22:15:11-07:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="278-First-Bad-Version"><a href="#278-First-Bad-Version" class="headerlink" title="278. First Bad Version"></a>278. First Bad Version</h1><p>You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.</p>
+<p>Suppose you have n versions [1, 2, …, n] and you want to find out the first bad one, which causes all the following ones to be bad.</p>
+<p>You are given an API bool isBadVersion(version) which will return whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.</p>
+<p>Example:</p>
+<p>Given n = 5, and version = 4 is the first bad version.</p>
+<p>call isBadVersion(3) -&gt; false<br>call isBadVersion(5) -&gt; true<br>call isBadVersion(4) -&gt; true</p>
+<p>Then 4 is the first bad version. </p>
+<h1 id="Idea-binary-search"><a href="#Idea-binary-search" class="headerlink" title="Idea: binary search"></a>Idea: binary search</h1><p>template:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    /**</span><br><span class="line">     * @param A an integer array sorted in ascending order</span><br><span class="line">     * @param target an integer</span><br><span class="line">     * @return an integer</span><br><span class="line">     */</span><br><span class="line">    public int findPosition(int[] nums, int target) &#123;</span><br><span class="line">        if (nums == null || nums.length == 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        int start = 0, end = nums.length - 1;</span><br><span class="line">        // 要点1: start + 1 &lt; end</span><br><span class="line">        while (start + 1 &lt; end) &#123;</span><br><span class="line">	    // 要点2：start + (end - start) / 2</span><br><span class="line">            int mid = start + (end - start) / 2;</span><br><span class="line">            // 要点3：=, &lt;, &gt; 分开讨论，mid 不+1也不-1</span><br><span class="line">            if (nums[mid] == target) &#123;</span><br><span class="line">                return mid;</span><br><span class="line">            &#125; else if (nums[mid] &lt; target) &#123;</span><br><span class="line">                start = mid;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                end = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 要点4: 循环结束后，单独处理start和end</span><br><span class="line">        if (nums[start] == target) &#123;</span><br><span class="line">            return start;</span><br><span class="line">        &#125;</span><br><span class="line">        if (nums[end] == target) &#123;</span><br><span class="line">            return end;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def firstBadVersion(self, n):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type n: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        start, end = 1, n</span><br><span class="line">        while start + 1 &lt; end:</span><br><span class="line">            mid = start + (end - start) / 2</span><br><span class="line">            if isBadVersion(mid):</span><br><span class="line">                end = mid</span><br><span class="line">            else:</span><br><span class="line">                start = mid</span><br><span class="line">        if isBadVersion(start):</span><br><span class="line">            return start</span><br><span class="line">        return end</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/leetcode311/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -264,7 +414,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T00:48:11-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T00:48:11-07:00">
                 2018-07-11
               </time>
             
@@ -411,7 +561,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T00:34:19-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T00:34:19-07:00">
                 2018-07-11
               </time>
             
@@ -558,7 +708,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T01:09:28-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T01:09:28-07:00">
                 2018-07-09
               </time>
             
@@ -708,7 +858,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T00:13:18-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T00:13:18-07:00">
                 2018-07-09
               </time>
             
@@ -856,7 +1006,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T14:03:47-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T14:03:47-07:00">
                 2018-07-07
               </time>
             
@@ -1046,7 +1196,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-06T15:34:11-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-06T15:34:11-07:00">
                 2018-07-06
               </time>
             
@@ -1187,7 +1337,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T00:37:13-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T00:37:13-07:00">
                 2018-07-05
               </time>
             
@@ -1351,7 +1501,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T20:27:09-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T20:27:09-07:00">
                 2018-07-04
               </time>
             
@@ -1492,7 +1642,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T20:26:54-04:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T20:26:54-07:00">
                 2018-07-04
               </time>
             
@@ -1589,161 +1739,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/RNN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/04/RNN/" itemprop="url">RNN</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T00:21:23-04:00">
-                2018-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">deep learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>If our inputs and outputs are sequences, the structure of the DNN may vary due to different length of inputs and outputs. Also, traditional DNN may not abstract the temporary feature from the sequences. So, a new network which include information flow from previous states and share the weight in each single local structure may achieve our requirements.</p>
-<h2 id="Structure"><a href="#Structure" class="headerlink" title="Structure"></a>Structure</h2><p><img src="/images/simple-RNN-structure.jpeg" alt=""></p>
-<h2 id="BPTT"><a href="#BPTT" class="headerlink" title="BPTT"></a>BPTT</h2><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><h3 id="Dataset-Define"><a href="#Dataset-Define" class="headerlink" title="Dataset Define"></a>Dataset Define</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Create dataset</span><br><span class="line">nb_of_samples = 20</span><br><span class="line">sequence_len = 10</span><br><span class="line"># Create the sequences</span><br><span class="line">X = np.zeros((nb_of_samples, sequence_len))</span><br><span class="line">for row_idx in range(nb_of_samples):</span><br><span class="line">    X[row_idx,:] = np.around(np.random.rand(sequence_len)).astype(int)</span><br><span class="line"># Create the targets for each sequence</span><br><span class="line">t = np.sum(X, axis=1)</span><br></pre></td></tr></table></figure>
-<h3 id="forward"><a href="#forward" class="headerlink" title="forward"></a>forward</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># Define the forward step functions</span><br><span class="line">def update_state(xk, sk, wx, wRec):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Compute state k from the previous state (sk) and current input (xk),</span><br><span class="line">    by use of the input weights (wx) and recursive weights (wRec).</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return xk * wx + sk * wRec</span><br><span class="line"></span><br><span class="line">def forward_states(X, wx, wRec):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Unfold the network and compute all state activations given the input X,</span><br><span class="line">    and input weights (wx) and recursive weights (wRec).</span><br><span class="line">    Return the state activations in a matrix, the last column S[:,-1] contains the</span><br><span class="line">    final activations.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # Initialise the matrix that holds all states for all input sequences.</span><br><span class="line">    # The initial state s0 is set to 0.</span><br><span class="line">    S = np.zeros((X.shape[0], X.shape[1]+1))</span><br><span class="line">    # Use the recurrence relation defined by update_state to update the </span><br><span class="line">    #  states trough time.</span><br><span class="line">    for k in range(0, X.shape[1]):</span><br><span class="line">        # S[k] = S[k-1] * wRec + X[k] * wx</span><br><span class="line">        S[:,k+1] = update_state(X[:,k], S[:,k], wx, wRec)</span><br><span class="line">    return S</span><br><span class="line"></span><br><span class="line">def cost(y, t): </span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Return the MSE between the targets t and the outputs y.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return ((t - y)**2).sum() / nb_of_samples</span><br></pre></td></tr></table></figure>
-<h3 id="back-progapation"><a href="#back-progapation" class="headerlink" title="back-progapation"></a>back-progapation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">def output_gradient(y, t):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Compute the gradient of the MSE cost function with respect to the output y.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return 2.0 * (y - t) / nb_of_samples</span><br><span class="line"></span><br><span class="line">def backward_gradient(X, S, grad_out, wRec):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Backpropagate the gradient computed at the output (grad_out) through the network.</span><br><span class="line">    Accumulate the parameter gradients for wX and wRec by for each layer by addition.</span><br><span class="line">    Return the parameter gradients as a tuple, and the gradients at the output of each layer.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # Initialise the array that stores the gradients of the cost with respect to the states.</span><br><span class="line">    grad_over_time = np.zeros((X.shape[0], X.shape[1]+1))</span><br><span class="line">    grad_over_time[:,-1] = grad_out</span><br><span class="line">    # Set the gradient accumulations to 0</span><br><span class="line">    wx_grad = 0</span><br><span class="line">    wRec_grad = 0</span><br><span class="line">    for k in range(X.shape[1], 0, -1):</span><br><span class="line">        # Compute the parameter gradients and accumulate the results.</span><br><span class="line">        wx_grad += np.sum(grad_over_time[:,k] * X[:,k-1])</span><br><span class="line">        wRec_grad += np.sum(grad_over_time[:,k] * S[:,k-1])</span><br><span class="line">        # Compute the gradient at the output of the previous layer</span><br><span class="line">        grad_over_time[:,k-1] = grad_over_time[:,k] * wRec</span><br><span class="line">    return (wx_grad, wRec_grad), grad_over_time</span><br></pre></td></tr></table></figure>
-<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>If you regard each layer in time flow as a layer in DNN, then the RNN somehow is a kind of DNN, while there’s an input in each layer. The BP of RNN (BPTT) is very similar to BP in DNN. Thus, if the length of RNN is large enough, then BPTT may suffer from gradient explosion and gradient vanishing.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
-<li><p>gradient explosion:<br>  The clipping may solve the problem of explosion</p>
-</li>
-<li><p>gradient vanishing:<br>  We may need modification of the traditional RNN structure. Thus, GRU and LSTM came into being.</p>
-</li>
-</ul>
-<h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1><p>The chain rule results in vanishing, thus, if we change this structue into combination of sum terms.<br><img src="/images/LSTM.jpeg" alt=""><br>The cell state in LSTM is linear combination of current state and previous state, which avoid the gradient vanishing.</p>
-<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h1><p>The GRU simplifies the output and remove forget gate in LSTM.<br><img src="/images/GRULSTM.jpeg" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1794,7 +1789,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1853,7 +1848,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
