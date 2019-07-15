@@ -233,6 +233,326 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/10/leetcode212-word-search-II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/10/leetcode212-word-search-II/" itemprop="url">leetcode212-word-search-II</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-10T23:20:09-07:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given a 2D board and a list of words from the dictionary, find all words in the board.</p>
+<p>Each word must be constructed from letters of sequentially adjacent cell, where “adjacent” cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and board =</span><br><span class="line">[</span><br><span class="line">  [&apos;o&apos;,&apos;a&apos;,&apos;a&apos;,&apos;n&apos;],</span><br><span class="line">  [&apos;e&apos;,&apos;t&apos;,&apos;a&apos;,&apos;e&apos;],</span><br><span class="line">  [&apos;i&apos;,&apos;h&apos;,&apos;k&apos;,&apos;r&apos;],</span><br><span class="line">  [&apos;i&apos;,&apos;f&apos;,&apos;l&apos;,&apos;v&apos;]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">Output: [&quot;eat&quot;,&quot;oath&quot;]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>idea:<br>  trie + dfs</p>
+</li>
+<li><p>code:</p>
+<ul>
+<li><p>trie:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class TrieNode &#123;</span><br><span class="line">public:</span><br><span class="line">    bool is_end;</span><br><span class="line">    vector&lt;TrieNode*&gt; children;</span><br><span class="line">    TrieNode() &#123;</span><br><span class="line">        is_end = false;</span><br><span class="line">        children = vector&lt;TrieNode*&gt;(26, NULL);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Trie &#123;</span><br><span class="line">public:</span><br><span class="line">    TrieNode* getRoot() &#123;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Trie(vector&lt;string&gt;&amp; words) &#123;</span><br><span class="line">        root = new TrieNode;</span><br><span class="line">        for (int i = 0; i &lt; words.size(); i++) &#123;</span><br><span class="line">            addWord(words[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void addWord(const string&amp; word) &#123;</span><br><span class="line">        TrieNode* cur = root;</span><br><span class="line">        for (int i = 0; i &lt; word.size(); i++) &#123;</span><br><span class="line">            int index = word[i] - &apos;a&apos;;</span><br><span class="line">            if (cur-&gt;children[index] == NULL) &#123;</span><br><span class="line">                cur-&gt;children[index] = new TrieNode();</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur-&gt;children[index];</span><br><span class="line">        &#125;</span><br><span class="line">        cur-&gt;is_end = true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    TrieNode* root;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>body</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;string&gt; findWords(vector&lt;vector&lt;char&gt;&gt;&amp; board, vector&lt;string&gt;&amp; words) &#123;</span><br><span class="line">        Trie* trie = new Trie(words);</span><br><span class="line">        TrieNode* root = trie-&gt;getRoot();</span><br><span class="line">        set&lt;string&gt; result_set;</span><br><span class="line">        row = board.size();</span><br><span class="line">        col = board[0].size();</span><br><span class="line">        for (int r = 0; r &lt; row; r++) &#123;</span><br><span class="line">            for (int c = 0; c &lt; col; c++) &#123;</span><br><span class="line">                findWords(board, r, c, root, &quot;&quot;, result_set);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        vector&lt;string&gt; result;</span><br><span class="line">        for (auto candidate : result_set) &#123;</span><br><span class="line">            result.push_back(candidate);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    int row;</span><br><span class="line">    int col;</span><br><span class="line">    void findWords(vector&lt;vector&lt;char&gt;&gt;&amp; board, int r, int c, TrieNode* root, string word, set&lt;string&gt;&amp; result) &#123;</span><br><span class="line">        if (r &lt; 0 || r == row || c &lt; 0 || c == col || board[r][c] == &apos; &apos;) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (root-&gt;children[board[r][c] - &apos;a&apos;] != NULL) &#123;</span><br><span class="line">            word = word + board[r][c];</span><br><span class="line">            root = root-&gt;children[board[r][c] - &apos;a&apos;];</span><br><span class="line">            if (root-&gt;is_end) &#123;</span><br><span class="line">                result.insert(word);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            char backtrace = board[r][c];</span><br><span class="line">            board[r][c] = &apos; &apos;;</span><br><span class="line">            findWords(board, r + 1, c, root, word, result);</span><br><span class="line">            findWords(board, r - 1, c, root, word, result);</span><br><span class="line">            findWords(board, r, c + 1, root, word, result);</span><br><span class="line">            findWords(board, r, c - 1, root, word, result);</span><br><span class="line">            board[r][c] = backtrace;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/05/人脸识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/05/人脸识别/" itemprop="url">人脸识别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T12:55:11-07:00">
+                2018-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/computer-vision/" itemprop="url" rel="index">
+                    <span itemprop="name">computer vision</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Expression-Invariant-3D-Face-Recognition-with-a-Morphable-Model"><a href="#Expression-Invariant-3D-Face-Recognition-with-a-Morphable-Model" class="headerlink" title="Expression Invariant 3D Face Recognition with a Morphable Model"></a>Expression Invariant 3D Face Recognition with a Morphable Model</h1><h2 id="Author"><a href="#Author" class="headerlink" title="Author"></a>Author</h2><p>Brian Amberg<br><a href="mailto:brian.amberg@unibas.ch" target="_blank" rel="noopener">brian.amberg@unibas.ch</a><br>Reinhard Knothe<br><a href="mailto:reinhard.knothe@unibas.ch" target="_blank" rel="noopener">reinhard.knothe@unibas.ch</a><br>Thomas Vetter<br><a href="mailto:thomas.vetter@unibas.ch" target="_blank" rel="noopener">thomas.vetter@unibas.ch</a></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>We describe an expression-invariant method for face recognition by fitting an identity/expression separated 3D Morphable Model to shape data. The expression model greatly improves recognition and retrieval rates in the uncooperative setting, while achieving recognition rates on par with the best recognition algorithms in the face recognition great vendor test. The fitting is performed with a <strong>robust nonrigid ICP algorithm</strong>. It is able to perform face recognition in a fully <strong>automated</strong> scenario and on <strong>noisy</strong> data. The system was evaluated on two datasets, <strong>one with a high noise level and strong expressions</strong>, and <strong>the standard UND range scan database</strong>, showing that while expression invariance increases recognition and retrieval performance for the expression dataset, it does not decrease performance on the neutral dataset. The high recognition rates are achieved even with a purely shape based method, without taking image data into account.</p>
+<h2 id="Conceptions"><a href="#Conceptions" class="headerlink" title="Conceptions:"></a>Conceptions:</h2><ul>
+<li>Registration: Registering two surfaces means finding a mapping between a template surface and a target surface that describes the position of semantically corresponding points.</li>
+<li>Dense registration: methods find a mapping from each point in the template onto the target while sparse methods find correspondence only for selected feature points. We present a dense registration method.</li>
+<li>Regularisation: <ul>
+<li>To choose the “correct” deformation from all possible warps, a registration algorithm has to impose constraints on the deformation. In this context, this is called regularisation of the deformation field.</li>
+<li>for here: minimizing the difference between transformations acting on neighbouring vertices of a mesh.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Fitting"><a href="#Fitting" class="headerlink" title="Fitting"></a>Fitting</h2><p>The main difference, is that the deformation model is a statistical model and the optimisation in each step is an iterative method, which finds the minimum of a convex function.</p>
+<ul>
+<li>steps:<br>  Repeat until convergence:<ol>
+<li>Find candidate correspondences by searching for the closest compatible point for each model vertex.</li>
+<li>Weight the correspondences by their distance using a robust estimator.</li>
+<li>Fit the 3DMM to these correspondences using a regularization strength of $\theta_i$.</li>
+<li>Continue with the lower $\theta_{i + 1}$ if the median change in vertex position is smaller than a threshold.</li>
+</ol>
+</li>
+</ul>
+<h1 id="Nonrigid-optimal-step-ICP-algorithms"><a href="#Nonrigid-optimal-step-ICP-algorithms" class="headerlink" title="Nonrigid optimal step ICP algorithms"></a>Nonrigid optimal step ICP algorithms</h1><h1 id="Deformation"><a href="#Deformation" class="headerlink" title="Deformation"></a>Deformation</h1><p><img src="/images/3DMM-deformation.png" width="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/CNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1390,361 +1710,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/PCA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/21/PCA/" itemprop="url">PCA</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-21T11:30:16-07:00">
-                2018-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">machine learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="SVD"><a href="#SVD" class="headerlink" title="SVD"></a>SVD</h2><p>$X_{k \times } = U S V^T$ </p>
-<ul>
-<li>$X = [x_1, x_2, …, x_m] \in R^{N \times m}$<br>  <img src="/images/SVD.png" width="50%"></li>
-<li>U is a m x m matrix, where $U^TU = I$</li>
-<li>V is a n x n matrix, where $V^TV = I$</li>
-<li>S is a m x n matrix, where.</li>
-</ul>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h2 id="SVD-fit-3D-point"><a href="#SVD-fit-3D-point" class="headerlink" title="SVD fit 3D point"></a>SVD fit 3D point</h2><h2 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/eyeware/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/20/eyeware/" itemprop="url">eyewair</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-20T19:10:22-07:00">
-                2018-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/computer-vision/" itemprop="url" rel="index">
-                    <span itemprop="name">computer vision</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h1><ul>
-<li>Gaze Estimation from Multimodal Kinect Data</li>
-<li>author<br>  Kenneth Alberto Funes Mora and Jean-Marc Odobez<br>Idiap Research Institute, CH-1920, Martigny, Switzerland E ́colePolytechniqueFe ́de ́raldeLausanne,CH-1015,Lausanne,Switzerland</li>
-<li>link: <a href="https://ieeexplore.ieee.org/document/6239182/" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/6239182/</a></li>
-</ul>
-<h1 id="Gaze-Estimation"><a href="#Gaze-Estimation" class="headerlink" title="Gaze Estimation"></a>Gaze Estimation</h1><ul>
-<li>tracking where the people look at.</li>
-</ul>
-<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><ul>
-<li>exploit the depth sensor to perform an accurate tracking of a 3D mesh model and robustly estimate a person head pose</li>
-<li>compute a person’s eye-in-head gaze direction via usage of the image modality.</li>
-</ul>
-<h1 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h1><h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h1><p><img src="/images/eyewairpipeline.png" width="90%"></p>
-<ul>
-<li>a) Offline step.<br>  From multiple 3D face instances the 3DMM is fit to obtain a person specific 3D model. </li>
-<li>b)-d) Online steps. <ul>
-<li>b) The person model is registered at each instant to multimodal data to retrieve the head pose. In the figure, the model is rendered with a horizontal spacing for visualization. The region used for tracking is rendered in purple. </li>
-<li>c) Head stabilization computed from the inverse head pose parameters and 3D mesh, creating a frontal pose face image. Further steps show the gaze estimation in the head coordinate system. The final gaze vector is corrected according to the estimated head pose. </li>
-<li>d) Obtained gaze vectors (in red our estimation and in green the ground truth).</li>
-</ul>
-</li>
-</ul>
-<h1 id="3D-Morphable-Model-Basel-Face-Model"><a href="#3D-Morphable-Model-Basel-Face-Model" class="headerlink" title="3D Morphable Model/Basel Face Model"></a>3D Morphable Model/Basel Face Model</h1><p>The faces are parameterized as triangular meshes with m = 53490 vertices and shared topology.</p>
-<ul>
-<li>vertices:<ul>
-<li>$(x_j, y_j, z_j)^T \in R^3$</li>
-<li>$s = (x_1, y_1, z_1, …, x_m, y_m, z_m)^T$</li>
-</ul>
-</li>
-<li>colors:<ul>
-<li>$(r_j, g_j, b_j)^T \in [0, 1]^3$</li>
-<li>$t = (r_1, g_1, b_1, …, r_m, g_m, b_m)^T$</li>
-</ul>
-</li>
-</ul>
-<p>BFM assumes independence between shape and texture, constructing two independent Linear Models, $M_s = (\mu_s, \sigma_s, U_s)$, $\mu_t, \sigma_t, U_t$</p>
-<ul>
-<li>$s(\alpha) = \mu_s + U_s diag(\sigma_s)\alpha$</li>
-<li>$t(\beta) = \mu_t + U_t diag(\sigma_t)\beta$</li>
-</ul>
-<h1 id="Pose-Tracking-ICP-Iterative-Closest-Points"><a href="#Pose-Tracking-ICP-Iterative-Closest-Points" class="headerlink" title="Pose Tracking/ICP (Iterative Closest Points)"></a>Pose Tracking/ICP (Iterative Closest Points)</h1><ul>
-<li>Given: two corresponding point sets, <ul>
-<li>$x = {x_1, …, x_n}$, $P = {p_1, …, p_n}$</li>
-</ul>
-</li>
-<li>Wanted: translation t and rotation R thatminimizes the sum of the squared error:<ul>
-<li>$E(R, t) = \frac{1}{N_p}\sum_{i=1}^{N_p}(x_i - Rp_i -t)^2$</li>
-</ul>
-</li>
-<li>solution: SVD</li>
-</ul>
-<h1 id="Head-stabilization"><a href="#Head-stabilization" class="headerlink" title="Head stabilization"></a>Head stabilization</h1><p>render the scene using the inverse rigid transformation of the head pose parameters. $p_t^{-1} = {R_t^T, -R_t^Tt_t}$</p>
-<h1 id="Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression"><a href="#Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression" class="headerlink" title="Eye-in-Head Gaze estimation/Adaptive Linear Regression"></a>Eye-in-Head Gaze estimation/Adaptive Linear Regression</h1><ul>
-<li><p>Key idea:</p>
-<ul>
-<li>is to adaptively find the subset of training samples where the test sample is most linearly representable.<br><img src="/images/ARL.png" width="70%"></li>
-</ul>
-</li>
-<li><p>eye appearance feature extraction:<br><img src="/images/eyewair-feature-extract.png" width="70%"></p>
-<ul>
-<li>feature vector: $e_i = \frac{[s_1, s_2, …, s_{r \times c}]^T}{\sum_j S_j}$</li>
-<li>$E = [e1,e2,··· ,en] ∈ R^{m×n}, X = [x1, x2, · · · , xn] ∈ R^{2×n}$</li>
-<li>$AE = X$<br><img src="/images/feature-manifold.png" width="70%"></li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1795,7 +1760,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1806,7 +1771,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1817,7 +1782,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
