@@ -233,6 +233,337 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/RCNN-family/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/07/RCNN-family/" itemprop="url">RCNN-family</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T14:03:47-07:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">deep learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h1><p>To what extent do [Krizhevsky et. al’s results] generalize to object detection?</p>
+<p>Object detection is the task of finding the different objects in an image and classifying them</p>
+<h1 id="mAP-mean-average-precision"><a href="#mAP-mean-average-precision" class="headerlink" title="mAP (mean average precision)"></a>mAP (mean average precision)</h1><p><a href="http://tarangshah.com/blog/2018-01-27/what-is-map-understanding-the-statistic-of-choice-for-comparing-object-detection-models/" target="_blank" rel="noopener">This</a> blog explain the mAP clearly.</p>
+<h1 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h1><p>The goal of R-CNN is to take in an image, and correctly identify where the main objects (via a bounding box) in the image.</p>
+<p>Inputs: Image<br>Outputs: Bounding boxes + labels for each object in the image.</p>
+<p><img src="/images/RCNN-pipeline.jpeg" alt=""></p>
+<h2 id="region-proposals"><a href="#region-proposals" class="headerlink" title="region proposals:"></a>region proposals:</h2><p>At a high level, Selective Search (shown in the image above) looks at the image through windows of different sizes, and for each size tries to group together adjacent pixels by texture, color, or intensity to identify objects.</p>
+<h2 id="feature-extraction"><a href="#feature-extraction" class="headerlink" title="feature extraction:"></a>feature extraction:</h2><p>They extract a 4096-dimensional feature vector from each region proposal using the Caffe implementation of the CNN described by Krizhevsky et al.. Features are computed by forward propagating a mean-subtracted 227 × 227 RGB image through five convolutional layers and two fully connected layers. </p>
+<p>Since the sizes of boxes from region proposals varies, they need firstly warp image data in that region into a form that is compatible with the CNN (its architecture requires inputs of a fixed 227 × 227 pixel size)  </p>
+<h2 id="training"><a href="#training" class="headerlink" title="training:"></a>training:</h2><h3 id="Supervised-pre-training"><a href="#Supervised-pre-training" class="headerlink" title="Supervised pre-training"></a>Supervised pre-training</h3><p>They discriminatively pre-trained the CNN on a large auxiliary dataset (ILSVRC2012 classification) using image-level annotations only (bounding-box labels are not available for this data).</p>
+<h3 id="Domain-specific-fine-tuning"><a href="#Domain-specific-fine-tuning" class="headerlink" title="Domain-specific fine-tuning."></a>Domain-specific fine-tuning.</h3><p> To adapt our CNN to the new task (detection) and the new domain (warped proposal windows), we continue stochastic gradient descent (SGD) training of the CNN parameters using only warped region proposals with a bias ratio mini-batch amoung negative and positive samples which are assigned according to the IoU larger than 0.5 or not.</p>
+<h3 id="Object-category-classifiers"><a href="#Object-category-classifiers" class="headerlink" title="Object category classifiers."></a>Object category classifiers.</h3><p>Similar to the step above, given threshold split the data set into negative and positve samples for classification in SVM.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>Generate a set of proposals for bounding boxes.</li>
+<li>Run the images in the bounding boxes through a pre-trained AlexNet and finally an SVM to see what object the image in the box is.</li>
+<li>Run the box through a linear regression model to output tighter coordinates for the box once the object has been classified.</li>
+</ul>
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems:"></a>Problems:</h2><ol>
+<li>Training is a multi-stage pipeline. R-CNN first fine-tunes a ConvNet on object proposals using log loss. Then, it fits SVMs to ConvNet features. These SVMs act as object detectors, replacing the softmax classifier learnt by fine-tuning. In the third training stage, bounding-box regressors are learned.</li>
+<li>Training is expensive in space and time. For SVM and bounding-box regressor training, features are extracted from each object proposal in each image and written to disk. With very deep networks, such as VGG16, this process takes 2.5 GPU-days for the 5k images of the VOC07 trainval set. These features require hundreds of gigabytes of storage.</li>
+<li>Object detection is slow. At test-time, features are extracted from each object proposal in each test image. Detection with VGG16 takes 47s / image (on a GPU).</li>
+</ol>
+<h1 id="Fast-RCNN"><a href="#Fast-RCNN" class="headerlink" title="Fast-RCNN"></a>Fast-RCNN</h1><h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/images/fast-rcnn.jpeg" alt=""><br>The input images as well as a set of region proposals are forwarded through a conv network and projected to a feature map. The feature map for each projected region proposal is processed via the RoI pooling layer and FCs into a fix-size RoI feature vector. Each feature vector is then fed into a sequence of fully connected layers (FC) that finally branch into two sibling output layers: one that produces softmax probability estimates over K object classes plus a catch-all “background” class and another layer that outputs four real-valued numbers for each of the K object classes. Each set of 4 values encodes refined bounding-box positions for one of the K classes.</p>
+<h2 id="RoI-Region-of-Interest-pooling-layer"><a href="#RoI-Region-of-Interest-pooling-layer" class="headerlink" title="RoI (Region of Interest) pooling layer"></a>RoI (Region of Interest) pooling layer</h2><p>Similary to the warping in RCNN to process the region proposal into a fix-size input of fine-tune netowrk, the RoI max pooling works by dividing the h  w RoI window into an H  W grid of sub-windows of approximate size h=H  w=W and then max-pooling the values in each sub-window into the corresponding output grid cell.</p>
+<h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><ul>
+<li><p>step1: pre-trained:<br>  Amoung three pre-trained network from ImageNet the last max pooling layer is replaced by a RoI pooling layer that is configured by setting H and W to be compatible with the net’s first fully connected layer and last fully connected layer and softmax are replaced with the two sibling layers.</p>
+</li>
+<li><p>step2: fine-tune:</p>
+<ul>
+<li>summary:<ul>
+<li>mini-batch:<br>  In Fast RCNN training, stochastic gradient descent (SGD) minibatches are sampled hierarchically, first by sampling N images and then by sampling R=N RoIs from each image.</li>
+<li>end-to-end:<br>  Fast R-CNN uses a streamlined training process with one fine-tuning stage that jointly optimizes a softmax classifier and bounding-box regressors, rather than training a softmax classifier, SVMs, and regressors in three separate stages.</li>
+</ul>
+</li>
+<li>loss: multi-task loss:<br>  $L(p, u, t^u, v) = L_{cls}(p, u) + \lambda_{[u &gt; 0]}L_{loc}(t^u, v)$<br>  Each training RoI is labeled with a ground-truth class u and a ground-truth bounding-box regression target v. We use a multi-task loss L on each labeled RoI to jointly train for classification and bounding-box regression:<ul>
+<li>$L_{cls}(p(x), u) = - log p_u$<br> classification loss is log loss for true class u</li>
+<li>$L_{loc}(t^u, v) = \sum_{i \in {x, y, w, h}} smooth_{L_1} (t_i^u - v)$<br>  is a robust L1 loss that is less sensitive to outliers than the L2 loss used in R-CNN and SPPnet. When the regression targets are unbounded, training with L2 loss can require careful tuning of learning rates in order to prevent exploding gradients. </li>
+</ul>
+</li>
+<li><p>mini-batch:</p>
+<ul>
+<li>sharing weights:<br>  each SGD mini-batch is constructed from N = 2 images, chosen uniformly at random (as is common practice, we actually iterate over permutations of the dataset). We use mini-batches of size R = 128, sampling 64 RoIs from each image.</li>
+<li>ratio: Similar to the ratio mini-batch in RCNN, 25 % RoIs IoU at least 0.5 are as positive     images (with ground truth labels), [0.1, 0.5) are as back-ground.</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/spatial-transformer-network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/06/spatial-transformer-network/" itemprop="url">spatial transformer network</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-06T15:34:11-07:00">
+                2018-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">deep learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/DDPG/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1403,307 +1734,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/30/leetcode14/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/30/leetcode14/" itemprop="url">leetcode14</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-30T16:04:14-07:00">
-                2018-06-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="14-Longest-Common-Prefix"><a href="#14-Longest-Common-Prefix" class="headerlink" title="14. Longest Common Prefix"></a>14. Longest Common Prefix</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Write a function to find the longest common prefix string amongst an array of strings.<br>If there is no common prefix, return an empty string “”.<br>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">Output: &quot;fl&quot;</span><br></pre></td></tr></table></figure></p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestCommonPrefix(self, strs):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type strs: List[str]</span><br><span class="line">        :rtype: str</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not strs or len(strs) == 0:</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        </span><br><span class="line">        for i, strs_ in enumerate(zip(*strs)):</span><br><span class="line">            if len(set(strs_)) &gt; 1:</span><br><span class="line">                return strs[0][:i]</span><br><span class="line">    </span><br><span class="line">        return min(strs)</span><br></pre></td></tr></table></figure>
-<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="zip"><a href="#zip" class="headerlink" title="zip(*)"></a>zip(*)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">for group in zip(*arr):</span><br><span class="line">    print(group)</span><br></pre></td></tr></table></figure>
-<p>(‘f’, ‘f’, ‘f’)<br>(‘l’, ‘l’, ‘l’)<br>(‘o’, ‘o’, ‘i’)<br>(‘w’, ‘w’, ‘g’)<br>zip(*) unpack</p>
-<h2 id="min"><a href="#min" class="headerlink" title="min()"></a>min()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(min(arr))</span><br></pre></td></tr></table></figure>
-<p>flight</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/流水账/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/28/流水账/" itemprop="url">流水账</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-28T22:29:10-07:00">
-                2018-06-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日常/" itemprop="url" rel="index">
-                    <span itemprop="name">日常</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这几天RSS (Robotics Science and System) 大会在CMU召开，蹭了几个Poster Session和一些大佬交流了下。最惊喜的是看到了男神田渊栋，还和他合了一张影。感觉CMU真是学术的圣地呀。也许现在自己没有资格进去，但是我总感觉未来有一天，会和他们站在同一个平台上，平等的较量和交流。和他们的交流讨论探讨时，一些东西一点点的浸润到自己的心田，自己的思维，自己的气魄里面。我相信，会有那么一天的。毕竟，自己的人生才刚刚开始。哈哈哈，还是好好做好手头上的事情，先上岸才行呀~</p>
-<p>然后，想想自己从四月份开始写博客到现在也po了50多的内容。感觉有一篇净土能宣泄内心的躁动还是挺好的。自己的不甘，自己的抱负，自己的落寞，自己的苦楚，自己写给自己看，自己和自己说，自己为自己喝彩。</p>
-<p>关于，找工作还是读博，未来的方向是什么我也不知道，但是白天research，晚上刷题投简历的过程，让我开始有一点点感觉了。总之，还是坚持吧。想来这个过程还是挺有意思的，哈哈哈~</p>
-<p>突然想起男神知乎上面的po的<a href="https://zhuanlan.zhihu.com/p/37354190" target="_blank" rel="noopener">“关于&lt;&lt;棋魂&gt;&gt;”</a>里面的话：<br>“油管上的歌，转着转着又到了《棋魂》系列。我很早以前就看过这部动画，可以说是第一部让人流泪的动画。《棋魂》里，有人天份奇高又有助力于是终成正果，有人鞠躬尽瘁却与胜利失之交臂，有人在放弃后终于又鼓起勇气继续追求，有人纵横多年却在引退之时看到广阔天地。</p>
-<p>下的是棋，问的是道，求的是梦，见的是人心。</p>
-<p>还记得在故事一开始，进藤光在依靠佐为赢了塔矢亮之后，随口说出“围棋嘛，随便下着玩玩就好了”，塔矢亮听到这句话时的表情。这样无奈，彷徨，不甘，绝望，却又带着羡慕还有挣扎的表情，这样的表情，真心追求过梦想的人，曾体会过在无法逾越的高墙面前抓破头皮的绝望的人，在现实的夹缝中苦苦挣扎想要做得更好的人，想要出人头地却无奈随波逐流的人，我想，都可以带着颤抖的心和抽泣的脸去理解。然而，纵然带着平庸天份，纵然淹没在茫茫人海，还是有那么一群人，在嘲讽中渐渐改进，在孤独中反省内心，在失败中不停尝试，在奋斗的道路上一点点前行。”</p>
-<p>也许现在我只是一个分母，但是，我还是会慢慢不停的尝试，一点点前行，谢谢你们，遇到你们真好<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">我知道，你们惊艳的presentation背后，是艰辛的付出，是不断的：尝试-&gt;失败-&gt;总结-&gt;尝试-&gt;失败-&gt;总结-&gt;....-&gt;好像是对的，但其实还是错了-&gt;尝试-&gt;失败-&gt;总结 ... 所以，对我来说，我还有很长很长的路要走。</span><br><span class="line"></span><br><span class="line">怀揣着这份不甘，希冀能和你们相遇，所谓：求道之人，不问寒暑</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/男神.jpeg" width="50%" height="50%"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1749,7 +1784,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-count">132</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1771,7 +1806,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">88</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
