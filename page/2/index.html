@@ -233,6 +233,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/virtual-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/27/virtual-function/" itemprop="url">virtual-function</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-27T20:12:58-08:00">
+                2018-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cpp/" itemprop="url" rel="index">
+                    <span itemprop="name">cpp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>cited from <a href="https://www.geeksforgeeks.org/pure-virtual-functions-and-abstract-classes/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/pure-virtual-functions-and-abstract-classes/</a></p>
+<h2 id="Pure-Virtual-Functions-and-Abstract-Classes-in-C"><a href="#Pure-Virtual-Functions-and-Abstract-Classes-in-C" class="headerlink" title="Pure Virtual Functions and Abstract Classes in C++"></a>Pure Virtual Functions and Abstract Classes in C++</h2><p>Sometimes implementation of all function cannot be provided in a base class because we don’t know the implementation. Such a class is called abstract class. For example, let Shape be a base class. We cannot provide implementation of function draw() in Shape, but we know every derived class must have implementation of draw(). Similarly an Animal class doesn’t have implementation of move() (assuming that all animals move), but all animals must know how to move. We cannot create objects of abstract classes.</p>
+<p>A pure virtual function (or abstract function) in C++ is a virtual function for which we don’t have implementation, we only declare it. A <strong>pure virtual function is declared by assigning 0 in declaration</strong>. See the following example.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line">  </span><br><span class="line">class Base </span><br><span class="line">&#123; </span><br><span class="line">   int x; </span><br><span class="line">public: </span><br><span class="line">    virtual void fun() = 0; </span><br><span class="line">    int getX() &#123; return x; &#125; </span><br><span class="line">&#125;; </span><br><span class="line">  </span><br><span class="line">// This class inherits from Base and implements fun() </span><br><span class="line">class Derived: public Base </span><br><span class="line">&#123; </span><br><span class="line">    int y; </span><br><span class="line">public: </span><br><span class="line">    void fun() &#123; cout &lt;&lt; &quot;fun() called&quot;; &#125; </span><br><span class="line">&#125;; </span><br><span class="line">  </span><br><span class="line">int main(void) </span><br><span class="line">&#123; </span><br><span class="line">    Derived d; </span><br><span class="line">    d.fun(); </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun() called</span><br></pre></td></tr></table></figure></p>
+<h2 id="Some-Interesting-Facts"><a href="#Some-Interesting-Facts" class="headerlink" title="Some Interesting Facts"></a>Some Interesting Facts</h2><ul>
+<li><p>A class is abstract if it has at least one pure virtual function.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// pure virtual functions make a class abstract </span><br><span class="line">#include&lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line"></span><br><span class="line">class Test </span><br><span class="line">&#123; </span><br><span class="line">int x; </span><br><span class="line">public: </span><br><span class="line">    virtual void show() = 0; </span><br><span class="line">    int getX() &#123; return x; &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">int main(void) </span><br><span class="line">&#123; </span><br><span class="line">    Test t; </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  output:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Compiler Error: cannot declare variable &apos;t&apos; to be of abstract</span><br><span class="line">type &apos;Test&apos; because the following virtual functions are pure </span><br><span class="line">within &apos;Test&apos;: note:     virtual void Test::show()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can have pointers and references of abstract class type.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line"></span><br><span class="line">class Base </span><br><span class="line">&#123; </span><br><span class="line">public: </span><br><span class="line">    virtual void show() = 0; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">class Derived: public Base </span><br><span class="line">&#123; </span><br><span class="line">public: </span><br><span class="line">    void show() &#123; cout &lt;&lt; &quot;In Derived \n&quot;; &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">int main(void) </span><br><span class="line">&#123; </span><br><span class="line">    Base *bp = new Derived(); </span><br><span class="line">    bp-&gt;show(); </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>If we do not override the pure virtual function in derived class, then derived class also becomes abstract class.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line">class Base </span><br><span class="line">&#123; </span><br><span class="line">public: </span><br><span class="line">    virtual void show() = 0; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">class Derived : public Base &#123; &#125;; </span><br><span class="line"></span><br><span class="line">int main(void) </span><br><span class="line">&#123; </span><br><span class="line">Derived d; </span><br><span class="line">return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  output:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Compiler Error: cannot declare variable &apos;d&apos; to be of abstract type </span><br><span class="line">&apos;Derived&apos;  because the following virtual functions are pure within</span><br><span class="line">&apos;Derived&apos;: virtual void Base::show()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>An abstract class can have constructors.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line"></span><br><span class="line">// An abstract class with constructor </span><br><span class="line">class Base </span><br><span class="line">&#123; </span><br><span class="line">protected: </span><br><span class="line">int x; </span><br><span class="line">public: </span><br><span class="line">virtual void fun() = 0; </span><br><span class="line">Base(int i) &#123; x = i; &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">class Derived: public Base </span><br><span class="line">&#123; </span><br><span class="line">    int y; </span><br><span class="line">public: </span><br><span class="line">    Derived(int i, int j):Base(i) &#123; y = j; &#125; </span><br><span class="line">    void fun() &#123; cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y; &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">int main(void) </span><br><span class="line">&#123; </span><br><span class="line">    Derived d(4, 5); </span><br><span class="line">    d.fun(); </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  Output:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = 4, y = 5</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Interface-vs-Abstract-Classes"><a href="#Interface-vs-Abstract-Classes" class="headerlink" title="Interface vs Abstract Classes:"></a>Interface vs Abstract Classes:</h2><p>An interface does not have implementation of any of its methods, it can be considered as a collection of method declarations. In C++, an interface can be simulated by making all methods as pure virtual. In Java, there is a separate keyword for interface.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/CASENet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1531,147 +1698,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/02/convolution-leetcode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/02/convolution-leetcode/" itemprop="url">convolution with sobel filter</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-02T23:59:57-07:00">
-                2018-10-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1722,7 +1748,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
