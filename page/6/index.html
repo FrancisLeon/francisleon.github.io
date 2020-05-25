@@ -233,6 +233,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/leetcode786/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/17/leetcode786/" itemprop="url">leetcode786</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T16:29:14-07:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="786-K-th-Smallest-Prime-Fraction"><a href="#786-K-th-Smallest-Prime-Fraction" class="headerlink" title="786. K-th Smallest Prime Fraction"></a>786. K-th Smallest Prime Fraction</h1><p>A sorted list A contains 1, plus some number of primes.  Then, for every p &lt; q in the list, we consider the fraction p/q.</p>
+<p>What is the K-th smallest fraction considered?  Return your answer as an array of ints, where answer[0] = p and answer[1] = q.</p>
+<p>Examples:<br>Input: A = [1, 2, 3, 5], K = 3<br>Output: [2, 5]<br>Explanation:<br>The fractions to be considered in sorted order are:<br>1/5, 1/3, 2/5, 1/2, 3/5, 2/3.<br>The third fraction is 2/5.</p>
+<p>Input: A = [1, 7], K = 1<br>Output: [1, 7]</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Binary Search + Matrix<br>cited from <a href="https://www.youtube.com/watch?v=ZzfXmZgJ0cw" target="_blank" rel="noopener">花花酱</a><br><img src="/images/leetcode786.jpeg" alt=""></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def kthSmallestPrimeFraction(self, A, K):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type A: List[int]</span><br><span class="line">        :type K: int</span><br><span class="line">        :rtype: List[int]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        l = 0.0</span><br><span class="line">        r = 1.0</span><br><span class="line">        n = len(A)</span><br><span class="line">        while l &lt; r:</span><br><span class="line">            m = l + (r - l) / 2</span><br><span class="line">            max_f = 0.0</span><br><span class="line">            tot = 0</span><br><span class="line">            p, q = 0, 0</span><br><span class="line">            j = 1</span><br><span class="line">            for i in range(0, n - 1):</span><br><span class="line">                while j &lt; n and A[i] &gt; m * A[j]: # find the first ele in a row smaller than m</span><br><span class="line">                    j += 1</span><br><span class="line">                tot += n - j # add the number of elements smaller than m in this row</span><br><span class="line">                if n == j: # no ele smaller than m</span><br><span class="line">                    break</span><br><span class="line">                f = 1.0 * A[i] / A[j]</span><br><span class="line">                if f &gt; max_f: # find the largest frac in the k fracs</span><br><span class="line">                    p, q, max_f = i, j , f</span><br><span class="line">            if tot == K:</span><br><span class="line">                return [A[p], A[q]]</span><br><span class="line">            elif tot &gt; K: # m too large</span><br><span class="line">                r = m</span><br><span class="line">            else:         # m too small</span><br><span class="line">                l = m</span><br><span class="line">        return []</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/leetcode636/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1569,167 +1715,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/leetcode314/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/12/leetcode314/" itemprop="url">leetcode314</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T20:47:24-07:00">
-                2018-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="314-Binary-Tree-Vertical-Order-Traversal"><a href="#314-Binary-Tree-Vertical-Order-Traversal" class="headerlink" title="314. Binary Tree Vertical Order Traversal"></a>314. Binary Tree Vertical Order Traversal</h1><p>Given a binary tree, return the vertical order traversal of its nodes’ values. (ie, from top to bottom, column by column).</p>
-<p>If two nodes are in the same row and column, the order should be from left to right.</p>
-<p>Examples 1:</p>
-<p>Input: [3,9,20,null,null,15,7]</p>
-<p>   3<br>  /\<br> /  \<br> 9  20<br>    /\<br>   /  \<br>  15   7 </p>
-<p>Output:</p>
-<p>[<br>  [9],<br>  [3,15],<br>  [20],<br>  [7]<br>]<br>Examples 2:</p>
-<p>Input: [3,9,8,4,0,1,7]</p>
-<pre><code> 3
-/\
-</code></pre><p>   /  \<br>   9   8<br>  /\  /\<br> /  \/  \<br> 4  01   7 </p>
-<p>Output:</p>
-<p>[<br>  [4],<br>  [9],<br>  [3,0,1],<br>  [8],<br>  [7]<br>]</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>the order:<br>Say, in example2,<br>[3, 0, 1], include the order from layer-layer and left-right in the same layer, which the bfs may achieve the requirement. Since, we may need the order vertical, we can perform bfs on a col que as well as nodes.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def verticalOrder(self, root):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type root: TreeNode</span><br><span class="line">        :rtype: List[List[int]]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not root:</span><br><span class="line">            return []</span><br><span class="line"></span><br><span class="line">        que_node = [root]</span><br><span class="line">        que_col = [0]</span><br><span class="line">        dic_ = collections.defaultdict(list)</span><br><span class="line">        dic_[0].append(root.val)</span><br><span class="line">        </span><br><span class="line">        while que_node:</span><br><span class="line">            h = que_node.pop(0)</span><br><span class="line">            c = que_col.pop(0)</span><br><span class="line">            </span><br><span class="line">            if h.left:</span><br><span class="line">                que_node.append(h.left)</span><br><span class="line">                que_col.append(c - 1)</span><br><span class="line">                dic_[c - 1].append(h.left.val)</span><br><span class="line">                </span><br><span class="line">            if h.right:</span><br><span class="line">                que_node.append(h.right)</span><br><span class="line">                que_col.append(c + 1)</span><br><span class="line">                dic_[c + 1].append(h.right.val)</span><br><span class="line">        res = []</span><br><span class="line">        for i in sorted(dic_.keys()):</span><br><span class="line">            res.append(dic_[i])</span><br><span class="line">            </span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1775,7 +1765,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">140</span>
+                  <span class="site-state-item-count">141</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1797,7 +1787,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
