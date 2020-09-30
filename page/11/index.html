@@ -233,6 +233,294 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/lintcode900/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/lintcode900/" itemprop="url">lintcode900</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T01:37:02-07:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.</p>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>Given root = {1}, target = 4.428571, return 1.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>思路很简单，就是找到通过检索BST找到upper bound和lower bound，最后在比较谁是离得最近的。upper bound的意思是在整棵树里面，比target小却最大的数，lower bound的意思是在整棵树里面比target大的最小的数。这个大小关系是，进一步递归检索的关键。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">Definition of TreeNode:</span><br><span class="line">class TreeNode:</span><br><span class="line">    def __init__(self, val):</span><br><span class="line">        self.val = val</span><br><span class="line">        self.left, self.right = None, None</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param root: the given BST</span><br><span class="line">    @param target: the given target</span><br><span class="line">    @return: the value in the BST that is closest to the target</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def closestValue(self, root, target):</span><br><span class="line">        # write your code here</span><br><span class="line">        if root is None:</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        lower_node = self.lower_bound(root, target)</span><br><span class="line">        upper_node = self.upper_bound(root, target)</span><br><span class="line">        </span><br><span class="line">        if lower_node is None:</span><br><span class="line">            return upper_node.val</span><br><span class="line"></span><br><span class="line">        if upper_node is None:</span><br><span class="line">            return lower_node.val    </span><br><span class="line">    </span><br><span class="line">        if lower_node and upper_node:</span><br><span class="line">            if target - lower_node.val &gt; upper_node.val - target:</span><br><span class="line">                return upper_node.val</span><br><span class="line">            else:</span><br><span class="line">                return lower_node.val</span><br><span class="line">            </span><br><span class="line">        return None</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    # find the node with the largest value that smaller than target</span><br><span class="line">    def lower_bound(self, root, target):</span><br><span class="line">        if root is None:</span><br><span class="line">            return None</span><br><span class="line">        </span><br><span class="line">        # the expect val should be smaller than or equal to target</span><br><span class="line">        if root.val &gt; target:</span><br><span class="line">            return self.lower_bound(root.left, target)</span><br><span class="line">        </span><br><span class="line">        # the largest val</span><br><span class="line">        lower_node = self.lower_bound(root.right, target)</span><br><span class="line">        if lower_node:</span><br><span class="line">            return lower_node</span><br><span class="line">        </span><br><span class="line">        # if lower_node is None, the there&apos;s no node larger than root, so return root</span><br><span class="line">        return root</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    # find the node with the smallest value that larger than or equal to target</span><br><span class="line">    def upper_bound(self, root, target):</span><br><span class="line">        if root is None:</span><br><span class="line">            return None</span><br><span class="line">        </span><br><span class="line">        # the expect val should be larger than or equal to target</span><br><span class="line">        if root.val &lt; target:</span><br><span class="line">            return self.upper_bound(root.right, target)</span><br><span class="line">        </span><br><span class="line">        # the smallest val</span><br><span class="line">        upper_node = self.upper_bound(root.left, target)</span><br><span class="line">        if upper_node:</span><br><span class="line">            return upper_node</span><br><span class="line">            </span><br><span class="line">        return root</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/lintcode152/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/lintcode152/" itemprop="url">lintcode152</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T00:01:05-07:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given two integers n and k, return all possible combinations of k numbers out of 1 … n.</p>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>Given <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">[</span><br><span class="line">  [2,4],</span><br><span class="line">  [3,4],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  [1,3],</span><br><span class="line">  [1,4]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param n: Given the range of numbers</span><br><span class="line">    @param k: Given the numbers of combinations</span><br><span class="line">    @return: All the combinations of k numbers out of 1..n</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def combine(self, n, k):</span><br><span class="line">        # write your code here</span><br><span class="line">        self.res = []</span><br><span class="line">        tmp = []</span><br><span class="line">        self.dfs(n, k, 1, 0, tmp)</span><br><span class="line">        return self.res</span><br><span class="line">        </span><br><span class="line">    # 递归的定义：在 [1,2...n] 中找到所有以 tmp 开头的的集合，并放到 res里面</span><br><span class="line">    # cur_start_pos: 表示当前要开始的位置</span><br><span class="line">    # visited_num: 表示已经遍历过的数目</span><br><span class="line">    def dfs(self, n, k, cur_start_pos, visited_num, tmp):</span><br><span class="line">        # 递归的出口:</span><br><span class="line">        if visited_num == k:</span><br><span class="line">            self.res.append(tmp[:])</span><br><span class="line">            return</span><br><span class="line">        # 递归的拆解：</span><br><span class="line">        for i in range(cur_start_pos, n + 1):</span><br><span class="line">            # 将当前的element放在tmp set里面: [1] -&gt; [1, 2]</span><br><span class="line">            tmp.append(i)</span><br><span class="line">            # 进入下一层: n = 4, k = 2, next_start_pos = i + 1 = 3 注意是在tmp最后的一个元素后面开始, visited_num_now = 2, </span><br><span class="line">            self.dfs(n, k, i + 1, visited_num + 1, tmp)</span><br><span class="line">            # 回溯: [1, 2] -&gt; [1]</span><br><span class="line">            tmp.pop()</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/那些高山们/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1590,310 +1878,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/进阶之路/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/14/进阶之路/" itemprop="url">进阶之路</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-14T13:59:17-07:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/思考/" itemprop="url" rel="index">
-                    <span itemprop="name">思考</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这篇已经看了好几遍了，但是每读每新：<br>作者：田渊栋<br>链接：<a href="https://www.zhihu.com/question/30022694/answer/224543003" target="_blank" rel="noopener">https://www.zhihu.com/question/30022694/answer/224543003</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>追求数目没有意义。读文章一般两个目的：</p>
-<ol>
-<li><p>看大家在做什么，找方向。这时候一般读读Abstract和Introduction，对领域有初步了解，知道它主要关于什么，搞清一些概念的含义和联系。这时候不懂没关系，多看几篇文章就懂了。一般聪明的人这一步可以做得很快。</p>
-</li>
-<li><p>搞清细节找一个自己感兴趣的方向精读，把里面的课题思路和推理细节搞明白，并且还要顺藤摸瓜找到其它大量的相关文献继续读下去。标准是在脑里能有对这个领域有清楚的脉络，能做到独立完成大部分推导和证明。一个靠谱的检查方法是给同组的人或者导师做个讲座，看他们能听懂不。很多时候自己以为懂了，其实和别人一说马上就露出马脚。同时讨论也可以激发新思路，说不定就能找到下一篇文章的出发点。这一步往往会花费一个科研人员大量时间，也是业余和职业科研的关键区别所在。总之分配给每篇文章的时间天差地别。烂文几秒钟就可以放弃，而经典文章还需要每过一阵子回头再去看一看想一想。至于如何评判文章质量，那就得要靠长年科研积累出来的品味了。接下来的两个阶段就不是光看论文可以看出来的。</p>
-</li>
-<li><p>写代码实现别人的工作，并且改进每篇文章都会有意或者无意抬高自己贬低别人，都存在一些有意或者无意隐藏的细节，这些不亲手做是看不到的。所以得要动手花时间去实现别人的方法，想方设法达到别人的效果，然后反过来再看看文章。时间长了马上就会学到故意隐藏的蛛丝马迹，理解别人留白的道理。光看文章的话，这类经验的积累要慢很多。一般说的“纸上谈兵”就是指这一步没做。我在15年1月刚去Facebook AI Research的时候，在深度学习上还没有实际操作经验。交给我的第一件事情是复现VGG在ImageNet上的性能，那时还没有BatchNorm，跑5个有2个能开始收敛的就不错了，最后花了几周搞定了。整个过程让我学到不少经验。</p>
-</li>
-<li><p>总结经验，融会贯通，找到并且遵循自己的方法论重复3很多次之后，可能会觉得自己比较有经验了。别人问起的时候也能侃侃而谈，但说的往往是一些分散且孤立的经验。并且你会发现自己很容易遗忘这些经验，这个并不是因为记忆力不好，而是因为思路不系统。这个就需要反复思考反复提炼，从而形成自己的方法论。有了方法论之后，心里就有大方向而不会随便乱试乱撞，效率就会高很多，并且能在一个科研方向上挖很深坚持很久，而不是哪个课题热做哪个。在指导别人的时候也可以做到有的放矢。在这个基础上再看文献，往往就会读懂很多一开始读不懂的东西。比如说为什么作者要强调A而否认B，那是因为他相信A后面的哲学和方法论。</p>
-</li>
-</ol>
-<p>如果你发现自己提炼不了，或者本来知识就是凌乱的，那么要么就是(1)境界未到，要么就是(2)领域还没有成熟，目前的知识点只是零碎的拼凑。(1)要靠自己练，(2)则预示着大机遇，一个研究者牛不牛就看他是不是可以在别人都放弃的地方找到新的规律。</p>
-<p>一般完成1是新闻及科普的水平，2到3是博士生低年级至高年级的水平，精通3到初入4是博后的水平，精通4则是研究员和教授的水准。另外，从1到4并没有特别固定的顺序，可能你在某个领域是4，另一个领域还只是1或2的程度；或者你在4中获得的经验能反过来帮助1和2（这个很常见）；或者一上来就可以跳过2做3，然后等3有了结果之后再去补2，等等。当然，一步跳到4那是民科的水平。</p>
-<p>然后，看看我自己，应该还初入2, 3这个阶段吧，需要继续努力呀！！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/批量重命名/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/13/批量重命名/" itemprop="url">批量重命名图片文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T20:51:35-07:00">
-                2018-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tech/" itemprop="url" rel="index">
-                    <span itemprop="name">tech</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>转自灰羽吖大大CSDN的<a href="https://blog.csdn.net/wearge/article/details/77374150" target="_blank" rel="noopener">博客</a>：<br>其实只要对os这个包熟悉便不难，对于人脸识别项目，有些图片可能来自其他途径，这些图片常用作测试，但是对于外来图片存在命名问题。这篇就讲一下怎么实现批量重命名图片等其他文件</p>
-<p>代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">path_name=&apos;/home/huiyu/PycharmProjects/faceCodeByMe/testdata&apos;</span><br><span class="line">#path_name :表示你需要批量改的文件夹</span><br><span class="line">i=0</span><br><span class="line">for item in os.listdir(path_name):#进入到文件夹内，对每个文件进行循环遍历</span><br><span class="line">    os.rename(os.path.join(path_name,item),os.path.join(path_name,(str(i)+&apos;.jpg&apos;)))#os.path.join(path_name,item)表示找到每个文件的绝对路径并进行拼接操作</span><br><span class="line">    i+=1</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1939,7 +1928,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">152</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
