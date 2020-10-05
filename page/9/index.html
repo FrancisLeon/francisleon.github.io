@@ -233,6 +233,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/leetcode43/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/09/leetcode43/" itemprop="url">leetcode43</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T00:13:18-07:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="43-Multiply-Strings"><a href="#43-Multiply-Strings" class="headerlink" title="43. Multiply Strings"></a>43. Multiply Strings</h1><p>Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.</p>
+<p>Example 1:</p>
+<p>Input: num1 = “2”, num2 = “3”<br>Output: “6”<br>Example 2:</p>
+<p>Input: num1 = “123”, num2 = “456”<br>Output: “56088”<br>Note:</p>
+<p>The length of both num1 and num2 is &lt; 110.<br>Both num1 and num2 contain only digits 0-9.<br>Both num1 and num2 do not contain any leading zero, except the number 0 itself.<br>You must not use any built-in BigInteger library or convert the inputs to integer directly.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Simply thinking, decompose the multiplication into multiply num1 with each bit of num2 and add them together.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param num1: a non-negative integers</span><br><span class="line">    @param num2: a non-negative integers</span><br><span class="line">    @return: return product of num1 and num2</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.d = &#123;str(i): i for i in range(0, 10)&#125;</span><br><span class="line">        self.s = &#123;i: str(i) for i in range(0, 10)&#125;</span><br><span class="line">	</span><br><span class="line">    def multiply(self, num1, num2):</span><br><span class="line">        # num1 is smaller number</span><br><span class="line">        if num1 == &apos;0&apos; or num2 == &apos;0&apos;:</span><br><span class="line">            return &apos;0&apos;</span><br><span class="line">        </span><br><span class="line">        total_sum = &quot;0&quot;</span><br><span class="line">        for i, figure in enumerate(num1[::-1]):</span><br><span class="line">            term = self.single_multiply(num2, figure) + &quot;0&quot; * i</span><br><span class="line">            total_sum = self.add(term, total_sum)</span><br><span class="line">        return total_sum</span><br><span class="line">            </span><br><span class="line">    def single_multiply(self, num, bit):</span><br><span class="line">        idx = len(num) - 1</span><br><span class="line">        b = self.d[bit]</span><br><span class="line">        carry = 0</span><br><span class="line">        cur = 0</span><br><span class="line">        res = &apos;&apos;</span><br><span class="line">        while idx &gt;= 0:</span><br><span class="line">            n1 = self.d[num[idx]]</span><br><span class="line">            cur = (n1 * b + carry) % 10</span><br><span class="line">            carry = (n1 * b + carry) / 10</span><br><span class="line">            res = self.s[cur] + res</span><br><span class="line">            idx -= 1</span><br><span class="line">        </span><br><span class="line">        if carry &gt; 0:</span><br><span class="line">            res = self.s[carry] + res</span><br><span class="line">        return res</span><br><span class="line">    </span><br><span class="line">    def add(self, num1, num2):</span><br><span class="line">        if not num1:</span><br><span class="line">            num1 = &apos;0&apos;</span><br><span class="line">        if not num2:</span><br><span class="line">            num2 = &apos;0&apos;</span><br><span class="line"></span><br><span class="line">        idx1 = len(num1) - 1</span><br><span class="line">        idx2 = len(num2) - 1 </span><br><span class="line">        </span><br><span class="line">        res = &apos;&apos;</span><br><span class="line">        cur = 0</span><br><span class="line">        carry = 0</span><br><span class="line">        while idx1 &gt;= 0 or idx2 &gt;= 0:</span><br><span class="line">            n1 = self.d[num1[idx1]] if idx1 &gt;= 0 else 0</span><br><span class="line">            n2 = self.d[num2[idx2]] if idx2 &gt;= 0 else 0</span><br><span class="line">            cur = (n1 + n2 + carry) % 10</span><br><span class="line">            carry = (n1 + n2 + carry) / 10</span><br><span class="line">            res = self.s[cur] + res</span><br><span class="line">            idx1 -= 1</span><br><span class="line">            idx2 -= 1</span><br><span class="line">        if carry == 1:</span><br><span class="line">            res = &apos;1&apos; + res</span><br><span class="line"></span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [1, 2, 3, 4]</span><br><span class="line">print(a[len(a) - 1::-1])</span><br><span class="line">print(a[::-1]) # omission</span><br><span class="line">[4, 3, 2, 1]</span><br><span class="line">[4, 3, 2, 1]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/RCNN-family/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1588,152 +1736,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/30/leetcode148/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/30/leetcode148/" itemprop="url">leetcode148</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-30T23:21:11-07:00">
-                2018-06-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="148-Sort-List"><a href="#148-Sort-List" class="headerlink" title="148. Sort List"></a>148. Sort List</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Sort a linked list in O(n log n) time using constant space complexity.<br>Example 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 4-&gt;2-&gt;1-&gt;3</span><br><span class="line">Output: 1-&gt;2-&gt;3-&gt;4</span><br></pre></td></tr></table></figure></p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>merge sort, divide and conquer</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="body"><a href="#body" class="headerlink" title="body"></a>body</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def sortList(self, head):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    :type head: ListNode</span><br><span class="line">    :rtype: ListNode</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # base case:</span><br><span class="line">    if head is None or head.next is None:</span><br><span class="line">        return head</span><br><span class="line">    </span><br><span class="line">    # divide</span><br><span class="line">    mid = self.findMid(head)</span><br><span class="line">    next_head = mid.next</span><br><span class="line">    mid.next = None</span><br><span class="line">    sorted_left = self.sortList(head)</span><br><span class="line">    sorted_right = self.sortList(next_head)</span><br><span class="line"></span><br><span class="line">    # conquer</span><br><span class="line">    res = self.merge(sorted_left, sorted_right)</span><br><span class="line">    return res</span><br></pre></td></tr></table></figure>
-<h2 id="find-middle-fast-and-slow-pointer"><a href="#find-middle-fast-and-slow-pointer" class="headerlink" title="find middle: fast and slow pointer"></a>find middle: fast and slow pointer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def findMid(self, head):</span><br><span class="line">    if head is None:</span><br><span class="line">        return None</span><br><span class="line">    runner = head</span><br><span class="line">    walker = head</span><br><span class="line">    while runner.next and runner.next.next:</span><br><span class="line">    # error while walker.next and runner.next.next:</span><br><span class="line">        walker = walker.next</span><br><span class="line">        runner = runner.next.next</span><br><span class="line">    return walker</span><br></pre></td></tr></table></figure>
-<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def merge(self, head1, head2):</span><br><span class="line">    dummy = ListNode(0)</span><br><span class="line">    cur = dummy</span><br><span class="line">    p1 = head1</span><br><span class="line">    p2 = head2</span><br><span class="line"></span><br><span class="line">    # perform the normal case</span><br><span class="line">    while p1 and p2:</span><br><span class="line">        if p1.val &lt; p2.val:</span><br><span class="line">            cur.next = ListNode(p1.val)</span><br><span class="line">            p1 = p1.next</span><br><span class="line">        else:</span><br><span class="line">            cur.next = ListNode(p2.val)</span><br><span class="line">            p2 = p2.next</span><br><span class="line">        cur = cur.next</span><br><span class="line"></span><br><span class="line">    # handle the rest list</span><br><span class="line">    if p1:</span><br><span class="line">        cur.next = p1</span><br><span class="line">    if p2:</span><br><span class="line">        cur.next = p2</span><br><span class="line">    return dummy.next</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1784,7 +1786,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">152</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
