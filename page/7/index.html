@@ -233,6 +233,307 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/numpy-array-merge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/22/numpy-array-merge/" itemprop="url">numpy array merge</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-22T13:06:04-07:00">
+                2018-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>cited from <a href="https://morvanzhou.github.io/tutorials/data-manipulation/np-pd/2-6-np-concat/" target="_blank" rel="noopener">莫烦python</a></p>
+<h1 id="np-vstack"><a href="#np-vstack" class="headerlink" title="np.vstack()"></a>np.vstack()</h1><p>对于一个array的合并，我们可以想到按行、按列等多种方式进行合并。首先先看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">A = np.array([1,1,1])</span><br><span class="line">B = np.array([2,2,2])</span><br><span class="line">         </span><br><span class="line">print(np.vstack((A,B)))    # vertical stack</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">[[1,1,1]</span><br><span class="line"> [2,2,2]]</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>vertical stack本身属于一种上下合并，即对括号中的两个整体进行对应操作。此时我们对组合而成的矩阵进行属性探究：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C = np.vstack((A,B))      </span><br><span class="line">print(A.shape,C.shape)</span><br><span class="line"></span><br><span class="line"># (3,) (2,3)</span><br></pre></td></tr></table></figure></p>
+<h1 id="np-hstack"><a href="#np-hstack" class="headerlink" title="np.hstack()"></a>np.hstack()</h1><p>利用shape函数可以让我们很容易地知道A和C的属性，从打印出的结果来看，A仅仅是一个拥有3项元素的数组（数列），而合并后得到的C是一个2行3列的矩阵。</p>
+<p>介绍完了上下合并，我们来说说左右合并：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">D = np.hstack((A,B))       # horizontal stack</span><br><span class="line"></span><br><span class="line">print(D)</span><br><span class="line"># [1,1,1,2,2,2]</span><br><span class="line"></span><br><span class="line">print(A.shape,D.shape)</span><br><span class="line"># (3,) (6,)</span><br></pre></td></tr></table></figure></p>
+<p>通过打印出的结果可以看出：D本身来源于A，B两个数列的左右合并，而且新生成的D本身也是一个含有6项元素的序列。</p>
+<h1 id="np-newaxis"><a href="#np-newaxis" class="headerlink" title="np.newaxis()"></a>np.newaxis()</h1><p>说完了array的合并，我们稍稍提及一下前一节中转置操作，如果面对如同前文所述的A序列， 转置操作便很有可能无法对其进行转置（因为A并不是矩阵的属性），此时就需要我们借助其他的函数操作进行转置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">print(A[np.newaxis,:])</span><br><span class="line"># [[1 1 1]]</span><br><span class="line"></span><br><span class="line">print(A[np.newaxis,:].shape)</span><br><span class="line"># (1,3)</span><br><span class="line"></span><br><span class="line">print(A[:,np.newaxis])</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">[[1]</span><br><span class="line">[1]</span><br><span class="line">[1]]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">print(A[:,np.newaxis].shape)</span><br><span class="line"># (3,1)</span><br></pre></td></tr></table></figure></p>
+<p>此时我们便将具有3个元素的array转换为了1行3列以及3行1列的矩阵了。</p>
+<p>结合着上面的知识，我们把它综合起来：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">A = np.array([1,1,1])[:,np.newaxis]</span><br><span class="line">B = np.array([2,2,2])[:,np.newaxis]</span><br><span class="line">         </span><br><span class="line">C = np.vstack((A,B))   # vertical stack</span><br><span class="line">D = np.hstack((A,B))   # horizontal stack</span><br><span class="line"></span><br><span class="line">print(D)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">[[1 2]</span><br><span class="line">[1 2]</span><br><span class="line">[1 2]]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">print(A.shape,D.shape)</span><br><span class="line"># (3,1) (3,2)</span><br></pre></td></tr></table></figure></p>
+<h1 id="np-concatenate"><a href="#np-concatenate" class="headerlink" title="np.concatenate()"></a>np.concatenate()</h1><p>当你的合并操作需要针对多个矩阵或序列时，借助concatenate函数可能会让你使用起来比前述的函数更加方便：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">C = np.concatenate((A,B,B,A),axis=0)</span><br><span class="line"></span><br><span class="line">print(C)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">array([[1],</span><br><span class="line">       [1],</span><br><span class="line">       [1],</span><br><span class="line">       [2],</span><br><span class="line">       [2],</span><br><span class="line">       [2],</span><br><span class="line">       [2],</span><br><span class="line">       [2],</span><br><span class="line">       [2],</span><br><span class="line">       [1],</span><br><span class="line">       [1],</span><br><span class="line">       [1]])</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">D = np.concatenate((A,B,B,A),axis=1)</span><br><span class="line"></span><br><span class="line">print(D)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">array([[1, 2, 2, 1],</span><br><span class="line">       [1, 2, 2, 1],</span><br><span class="line">       [1, 2, 2, 1]])</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>axis参数很好的控制了矩阵的纵向或是横向打印，相比较vstack和hstack函数显得更加方便。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/leetcode377/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/21/leetcode377/" itemprop="url">leetcode377</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-21T14:43:24-07:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="377-Combination-Sum-IV"><a href="#377-Combination-Sum-IV" class="headerlink" title="377. Combination Sum IV"></a>377. Combination Sum IV</h1><p>Given an integer array with all positive numbers and no duplicates, find the number of possible combinations that add up to a positive integer target.</p>
+<p>Example:</p>
+<p>nums = [1, 2, 3]<br>target = 4</p>
+<p>The possible combination ways are:<br>(1, 1, 1, 1)<br>(1, 1, 2)<br>(1, 2, 1)<br>(1, 3)<br>(2, 1, 1)<br>(2, 2)<br>(3, 1)</p>
+<p>Note that different sequences are counted as different combinations.</p>
+<p>Therefore the output is 7.<br>Follow up:<br>What if negative numbers are allowed in the given array?<br>How does it change the problem?<br>What limitation we need to add to the question to allow negative numbers?</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>dp or memorized dfs: they are same in fact.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code:"></a>Code:</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def combinationSum4(self, nums, target):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type nums: List[int]</span><br><span class="line">        :type target: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">#         memory = &#123;&#125;</span><br><span class="line">#         nums.sort()</span><br><span class="line">        </span><br><span class="line">#         def dfs(target):</span><br><span class="line">#             if target in memory:</span><br><span class="line">#                 return memory[target]</span><br><span class="line">            </span><br><span class="line">#             res = 0</span><br><span class="line">#             for num in nums:</span><br><span class="line">#                 if num &gt; target:</span><br><span class="line">#                     break</span><br><span class="line">#                 elif num == target:</span><br><span class="line">#                     res += 1</span><br><span class="line">#                 else:</span><br><span class="line">#                     res += dfs(target - num)</span><br><span class="line">#             memory[target] = res</span><br><span class="line">#             return res       </span><br><span class="line">#         return dfs(target)</span><br><span class="line">        nums.sort()</span><br><span class="line">        dp = [0] * (target + 1)</span><br><span class="line">        dp[0] = 1 # if num == target</span><br><span class="line">        for t in range(1, target + 1):</span><br><span class="line">            for n in nums:</span><br><span class="line">                if n &gt; t:</span><br><span class="line">                    break</span><br><span class="line">                dp[t] += dp[t - n]</span><br><span class="line">        print dp</span><br><span class="line">        return dp[target]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/leetcode721/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1419,300 +1720,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/14/leetcode78/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/14/leetcode78/" itemprop="url">leetcode78</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T16:22:30-07:00">
-                2018-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="78-Subsets"><a href="#78-Subsets" class="headerlink" title="78. Subsets"></a>78. Subsets</h1><p>Given a set of distinct integers, nums, return all possible subsets (the power set).</p>
-<p>Note: The solution set must not contain duplicate subsets.</p>
-<p>Example:</p>
-<p>Input: nums = [1,2,3]<br>Output:<br>[<br>  [3],<br>  [1],<br>  [2],<br>  [1,2,3],<br>  [1,3],<br>  [2,3],<br>  [1,2],<br>  []<br>]</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>classical dfs problem</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def subsets(self, nums):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type nums: List[int]</span><br><span class="line">        :rtype: List[List[int]]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.res = []</span><br><span class="line">        if not nums:</span><br><span class="line">            return self.res</span><br><span class="line">        self.dfs([], 0, nums)</span><br><span class="line">        return self.res</span><br><span class="line">        </span><br><span class="line">    # return all the subset while start from pos in nums</span><br><span class="line">    def dfs(self, subset, pos, nums):</span><br><span class="line">        if pos &gt; len(nums):</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        self.res.append(list(subset))</span><br><span class="line">        for i in range(pos, len(nums)):</span><br><span class="line">            subset.append(nums[i])</span><br><span class="line">            self.dfs(subset, i+1, nums)</span><br><span class="line">            subset.pop()</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/14/leetcode211/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/14/leetcode211/" itemprop="url">leetcode211</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T15:32:25-07:00">
-                2018-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="211-Add-and-Search-Word-Data-structure-design"><a href="#211-Add-and-Search-Word-Data-structure-design" class="headerlink" title="211. Add and Search Word - Data structure design"></a>211. Add and Search Word - Data structure design</h1><p>Design a data structure that supports the following two operations:</p>
-<p>void addWord(word)<br>bool search(word)<br>search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.</p>
-<p>Example:</p>
-<p>addWord(“bad”)<br>addWord(“dad”)<br>addWord(“mad”)<br>search(“pad”) -&gt; false<br>search(“bad”) -&gt; true<br>search(“.ad”) -&gt; true<br>search(“b..”) -&gt; true</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Trie (for add) + Dfs (for search)</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class TrieNode():</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.children = &#123;&#125;</span><br><span class="line">        self.isWord = False</span><br><span class="line"></span><br><span class="line">class WordDictionary(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Initialize your data structure here.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.root = TrieNode()</span><br><span class="line">        </span><br><span class="line">    def addWord(self, word):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Adds a word into the data structure.</span><br><span class="line">        :type word: str</span><br><span class="line">        :rtype: void</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        node = self.root</span><br><span class="line">        for c in word:</span><br><span class="line">            if c not in node.children:</span><br><span class="line">                node.children[c] = TrieNode()</span><br><span class="line">            node = node.children[c]</span><br><span class="line">        node.isWord = True</span><br><span class="line"></span><br><span class="line">    def search(self, word):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Returns if the word is in the data structure. A word could contain the dot character &apos;.&apos; to represent any one letter.</span><br><span class="line">        :type word: str</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.ans = False</span><br><span class="line">        self.dfs(0, word, self.root)</span><br><span class="line">        return self.ans</span><br><span class="line"></span><br><span class="line">    def dfs(self, pos, word, root):</span><br><span class="line">        if pos &gt;= len(word):</span><br><span class="line">            if root.isWord:</span><br><span class="line">                self.ans = True</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        if word[pos] == &apos;.&apos;:</span><br><span class="line">            for c in root.children:</span><br><span class="line">                self.dfs(pos+1, word, root.children[c])</span><br><span class="line">        else:</span><br><span class="line">            if word[pos] in root.children:</span><br><span class="line">                self.dfs(pos+1, word, root.children[word[pos]])</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1763,7 +1770,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
