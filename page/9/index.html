@@ -233,6 +233,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/leetcode311/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/11/leetcode311/" itemprop="url">leetcode311</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T00:48:11-07:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="311-Sparse-Matrix-Multiplication"><a href="#311-Sparse-Matrix-Multiplication" class="headerlink" title="311. Sparse Matrix Multiplication"></a>311. Sparse Matrix Multiplication</h1><p>Given two sparse matrices A and B, return the result of AB.</p>
+<p>You may assume that A’s column number is equal to B’s row number.</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line"></span><br><span class="line">A = [</span><br><span class="line">  [ 1, 0, 0],</span><br><span class="line">  [-1, 0, 3]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">B = [</span><br><span class="line">  [ 7, 0, 0 ],</span><br><span class="line">  [ 0, 0, 0 ],</span><br><span class="line">  [ 0, 0, 1 ]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">Output:</span><br><span class="line"></span><br><span class="line">     |  1 0 0 |   | 7 0 0 |   |  7 0 0 |</span><br><span class="line">AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |</span><br><span class="line">                  | 0 0 1 |</span><br></pre></td></tr></table></figure></p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>normally,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">    for j in range(m):</span><br><span class="line">        for k in range(k):</span><br><span class="line">            C[i][j] = A[i][k] * B[k][i]</span><br></pre></td></tr></table></figure></p>
+<p>In fact, this is same as<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">    for k in range(k):</span><br><span class="line">        for j in range(m):</span><br><span class="line">            C[i][j] = A[i][k] * B[k][i]</span><br></pre></td></tr></table></figure></p>
+<p>In this form, each A[i][k] may multiply a row of B, when a is 0, we can ignore it. What’s more, we can record the indexes of non-zero elements in a row of B, which also fasten the computation.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def multiply(self, A, B):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type A: List[List[int]]</span><br><span class="line">        :type B: List[List[int]]</span><br><span class="line">        :rtype: List[List[int]]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        n, p, m = len(A), len(A[0]), len(B[0])</span><br><span class="line">        C = [[0] * m for _ in range(n)]</span><br><span class="line">        </span><br><span class="line">        cols = []</span><br><span class="line">        for k in range(p):</span><br><span class="line">            tmp = []</span><br><span class="line">            for j in range(m):</span><br><span class="line">                if B[k][j] != 0:</span><br><span class="line">                    tmp.append(j)</span><br><span class="line">            cols.append(tmp)</span><br><span class="line">        </span><br><span class="line">        for i in range(n):</span><br><span class="line">            for k in range(p):</span><br><span class="line">                if A[i][k] == 0:</span><br><span class="line">                    continue</span><br><span class="line">                for j in cols[k]:</span><br><span class="line">                    C[i][j] += A[i][k] * B[k][j]</span><br><span class="line">                    </span><br><span class="line">        return C</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/leetcode91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1597,151 +1744,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/leetcode202/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/03/leetcode202/" itemprop="url">leetcode202</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-03T03:11:46-07:00">
-                2018-07-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="202-Happy-Number"><a href="#202-Happy-Number" class="headerlink" title="202. Happy Number"></a>202. Happy Number</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Write an algorithm to determine if a number is “happy”.</p>
-<p>A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.</p>
-<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: 19</span><br><span class="line">Output: true</span><br><span class="line">Explanation: </span><br><span class="line">1^2 + 9^2 = 82</span><br><span class="line">8^2 + 2^2 = 68</span><br><span class="line">6^2 + 8^2 = 100</span><br><span class="line">1^2 + 0^2 + 0^2 = 1</span><br></pre></td></tr></table></figure></p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Since, there will be a repeated loop. We can use set() to save the repeated numbers.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isHappy(self, n):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type n: int</span><br><span class="line">        :rtype: bool</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        set_ = set()</span><br><span class="line">        while n not in set_:</span><br><span class="line">            set_.add(n)</span><br><span class="line">            tmp = 0</span><br><span class="line">            while n &gt; 0:</span><br><span class="line">                bit = n % 10</span><br><span class="line">                tmp += bit * bit</span><br><span class="line">                n /= 10</span><br><span class="line">            n = tmp</span><br><span class="line">            </span><br><span class="line">        return 1 in set_</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1792,7 +1794,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">156</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
