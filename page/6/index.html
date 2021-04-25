@@ -233,6 +233,213 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/eyeware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/20/eyeware/" itemprop="url">eyewair</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-20T19:10:22-07:00">
+                2018-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/computer-vision/" itemprop="url" rel="index">
+                    <span itemprop="name">computer vision</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h1><ul>
+<li>Gaze Estimation from Multimodal Kinect Data</li>
+<li>author<br>  Kenneth Alberto Funes Mora and Jean-Marc Odobez<br>Idiap Research Institute, CH-1920, Martigny, Switzerland E ́colePolytechniqueFe ́de ́raldeLausanne,CH-1015,Lausanne,Switzerland</li>
+<li>link: <a href="https://ieeexplore.ieee.org/document/6239182/" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/6239182/</a></li>
+</ul>
+<h1 id="Gaze-Estimation"><a href="#Gaze-Estimation" class="headerlink" title="Gaze Estimation"></a>Gaze Estimation</h1><ul>
+<li>tracking where the people look at.</li>
+</ul>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><ul>
+<li>exploit the depth sensor to perform an accurate tracking of a 3D mesh model and robustly estimate a person head pose</li>
+<li>compute a person’s eye-in-head gaze direction via usage of the image modality.</li>
+</ul>
+<h1 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h1><h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h1><p><img src="/images/eyewairpipeline.png" width="90%"></p>
+<ul>
+<li>a) Offline step.<br>  From multiple 3D face instances the 3DMM is fit to obtain a person specific 3D model. </li>
+<li>b)-d) Online steps. <ul>
+<li>b) The person model is registered at each instant to multimodal data to retrieve the head pose. In the figure, the model is rendered with a horizontal spacing for visualization. The region used for tracking is rendered in purple. </li>
+<li>c) Head stabilization computed from the inverse head pose parameters and 3D mesh, creating a frontal pose face image. Further steps show the gaze estimation in the head coordinate system. The final gaze vector is corrected according to the estimated head pose. </li>
+<li>d) Obtained gaze vectors (in red our estimation and in green the ground truth).</li>
+</ul>
+</li>
+</ul>
+<h1 id="3D-Morphable-Model-Basel-Face-Model"><a href="#3D-Morphable-Model-Basel-Face-Model" class="headerlink" title="3D Morphable Model/Basel Face Model"></a>3D Morphable Model/Basel Face Model</h1><p>The faces are parameterized as triangular meshes with m = 53490 vertices and shared topology.</p>
+<ul>
+<li>vertices:<ul>
+<li>$(x_j, y_j, z_j)^T \in R^3$</li>
+<li>$s = (x_1, y_1, z_1, …, x_m, y_m, z_m)^T$</li>
+</ul>
+</li>
+<li>colors:<ul>
+<li>$(r_j, g_j, b_j)^T \in [0, 1]^3$</li>
+<li>$t = (r_1, g_1, b_1, …, r_m, g_m, b_m)^T$</li>
+</ul>
+</li>
+</ul>
+<p>BFM assumes independence between shape and texture, constructing two independent Linear Models, $M_s = (\mu_s, \sigma_s, U_s)$, $\mu_t, \sigma_t, U_t$</p>
+<ul>
+<li>$s(\alpha) = \mu_s + U_s diag(\sigma_s)\alpha$</li>
+<li>$t(\beta) = \mu_t + U_t diag(\sigma_t)\beta$</li>
+</ul>
+<h1 id="Pose-Tracking-ICP-Iterative-Closest-Points"><a href="#Pose-Tracking-ICP-Iterative-Closest-Points" class="headerlink" title="Pose Tracking/ICP (Iterative Closest Points)"></a>Pose Tracking/ICP (Iterative Closest Points)</h1><ul>
+<li>Given: two corresponding point sets, <ul>
+<li>$x = {x_1, …, x_n}$, $P = {p_1, …, p_n}$</li>
+</ul>
+</li>
+<li>Wanted: translation t and rotation R thatminimizes the sum of the squared error:<ul>
+<li>$E(R, t) = \frac{1}{N_p}\sum_{i=1}^{N_p}(x_i - Rp_i -t)^2$</li>
+</ul>
+</li>
+<li>solution: SVD</li>
+</ul>
+<h1 id="Head-stabilization"><a href="#Head-stabilization" class="headerlink" title="Head stabilization"></a>Head stabilization</h1><p>render the scene using the inverse rigid transformation of the head pose parameters. $p_t^{-1} = {R_t^T, -R_t^Tt_t}$</p>
+<h1 id="Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression"><a href="#Eye-in-Head-Gaze-estimation-Adaptive-Linear-Regression" class="headerlink" title="Eye-in-Head Gaze estimation/Adaptive Linear Regression"></a>Eye-in-Head Gaze estimation/Adaptive Linear Regression</h1><ul>
+<li><p>Key idea:</p>
+<ul>
+<li>is to adaptively find the subset of training samples where the test sample is most linearly representable.<br><img src="/images/ARL.png" width="70%"></li>
+</ul>
+</li>
+<li><p>eye appearance feature extraction:<br><img src="/images/eyewair-feature-extract.png" width="70%"></p>
+<ul>
+<li>feature vector: $e_i = \frac{[s_1, s_2, …, s_{r \times c}]^T}{\sum_j S_j}$</li>
+<li>$E = [e1,e2,··· ,en] ∈ R^{m×n}, X = [x1, x2, · · · , xn] ∈ R^{2×n}$</li>
+<li>$AE = X$<br><img src="/images/feature-manifold.png" width="70%"></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/CRF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1505,150 +1712,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/CyCADA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/10/CyCADA/" itemprop="url">CyCADA</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-10T14:50:12-07:00">
-                2018-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/transfer-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">transfer learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="CYCADA-CYCLE-CONSISTENT-ADVERSARIAL-DOMAIN-ADAPTATION"><a href="#CYCADA-CYCLE-CONSISTENT-ADVERSARIAL-DOMAIN-ADAPTATION" class="headerlink" title="CYCADA: CYCLE-CONSISTENT ADVERSARIAL DOMAIN ADAPTATION"></a>CYCADA: CYCLE-CONSISTENT ADVERSARIAL DOMAIN ADAPTATION</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>Domain adaptation is critical for success in new, unseen environments. Adversarial adaptation models applied in feature spaces discover domain invariant represen- tations, but are difficult to visualize and sometimes fail to capture pixel-level and low-level domain shifts. Recent work has shown that generative adversarial networks combined with <strong>cycle-consistency constraints</strong> are surprisingly effective at mapping images between domains, even without the use of aligned image pairs. We propose a novel discriminatively-trained Cycle-Consistent Adversarial Domain Adaptation model. CyCADA adapts representations at both the <strong>pixel-level</strong> and <strong>feature-level</strong>, enforces cycle-consistency while leveraging a task loss, and does <strong>not require aligned pairs</strong>. Our model can be applied in a variety of visual recogni- tion and prediction settings. We show new state-of-the-art results across multiple adaptation tasks, including digit classification and semantic segmentation of road scenes demonstrating transfer from synthetic to real world domains.</p>
-<h2 id="CyCADA-losses-comparison"><a href="#CyCADA-losses-comparison" class="headerlink" title="CyCADA losses comparison:"></a>CyCADA losses comparison:</h2><p><img src="/images/CyCADA-loss-table.png" width="70%"></p>
-<h1 id="CyCADA-architecture-comparison-with-SSGAN-and-Cycle-GAN"><a href="#CyCADA-architecture-comparison-with-SSGAN-and-Cycle-GAN" class="headerlink" title="CyCADA architecture comparison with SSGAN and Cycle-GAN"></a>CyCADA architecture comparison with SSGAN and Cycle-GAN</h1><p><img src="/images/CyCADA-architecture.png" width="70%"><br><img src="/images/multiGAN.jpeg" width="70%"><br><img src="/images/SGGAN.jpeg" width="70%"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1699,7 +1762,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-count">158</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1758,7 +1821,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
