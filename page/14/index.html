@@ -233,6 +233,266 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/conda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/08/conda/" itemprop="url">conda cheat sheet</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T10:49:58-07:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在使用anaconda，抄了一下cheat sheet:</p>
+<h1 id="Conda-basics"><a href="#Conda-basics" class="headerlink" title="Conda basics"></a>Conda basics</h1><table>
+<thead>
+<tr>
+<th>statement</th>
+<th>command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verify conda is installed, check version number</td>
+<td>conda info</td>
+</tr>
+<tr>
+<td>Update conda to the current version</td>
+<td>conda update conda</td>
+</tr>
+<tr>
+<td>Install a package included in Anaconda</td>
+<td>conda install PACKAGENAME</td>
+</tr>
+<tr>
+<td>Run a package after install, example Spyder*</td>
+<td>spyder</td>
+</tr>
+<tr>
+<td>Update any installed program</td>
+<td>conda update PACKAGENAME</td>
+</tr>
+<tr>
+<td>Command line help COMMANDNAME –help</td>
+<td>conda install –help</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Using-environments"><a href="#Using-environments" class="headerlink" title="Using environments"></a>Using environments</h1><table>
+<thead>
+<tr>
+<th>statement</th>
+<th>command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create a new environment named py35, install Python 3.5</td>
+<td>conda create –name py35 python=3.5</td>
+</tr>
+<tr>
+<td>Activate the new environment to use it WINDOWS:</td>
+<td>activate py35</td>
+</tr>
+<tr>
+<td>LINUX, macOS:</td>
+<td>source activate py35</td>
+</tr>
+<tr>
+<td>Get a list of all my environments, active environment is shown with *</td>
+<td>conda env list </td>
+</tr>
+<tr>
+<td>Make exact copy of an environment</td>
+<td>conda create –clone py35 –name py35-2</td>
+</tr>
+<tr>
+<td>List all packages and versions installed in active environment</td>
+<td>conda list</td>
+</tr>
+<tr>
+<td>List the history of each change to the current environment</td>
+<td>conda list –revisions</td>
+</tr>
+<tr>
+<td>Restore environment to a previous revision</td>
+<td>conda install –revision 2</td>
+</tr>
+<tr>
+<td>Save environment to a text file</td>
+<td>conda list –explicit &gt; bio-env.txt</td>
+</tr>
+<tr>
+<td>Delete an environment and everything in it</td>
+<td>conda env remove –name bio-env</td>
+</tr>
+<tr>
+<td>Deactivate the current environment WINDOWS:</td>
+<td>deactivate</td>
+</tr>
+<tr>
+<td>macOS, LINUX:</td>
+<td>source deactivate</td>
+</tr>
+<tr>
+<td>Create environment from a text file</td>
+<td>conda env create – le bio-env.txt</td>
+</tr>
+<tr>
+<td>Stack commands: create a new environment, name and install the biopython package</td>
+<td>conda create –name bio-env biopython it bio-env </td>
+</tr>
+</tbody>
+</table>
+<h1 id="Finding-conda-packages"><a href="#Finding-conda-packages" class="headerlink" title="Finding conda packages"></a>Finding conda packages</h1><table>
+<thead>
+<tr>
+<th>statement</th>
+<th>command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Use conda to search for a package</td>
+<td>conda search PACKAGENAME</td>
+</tr>
+<tr>
+<td>See list of all packages in Anaconda</td>
+<td><a href="https://docs.anaconda.com/anaconda/packages/pkg-docs" target="_blank" rel="noopener">https://docs.anaconda.com/anaconda/packages/pkg-docs</a></td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/如何读paper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1541,153 +1801,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/数学篇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/数学篇/" itemprop="url">数学篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-12T01:39:07-07:00">
-                2018-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学学习/" itemprop="url" rel="index">
-                    <span itemprop="name">数学学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在知乎看了顾颜大神的回答，本科修了十几门数学学院的课，回头看自己感觉自己真是惭愧。虽然本科学物理的，但是学校底子差了点，不过还是有意识的会去数学学院蹭蹭课。这里希望自己可以慢慢拾起一些学过基本的东西，以及记录未来会和自己方向贴近的东西。庄子说，生有涯，学无涯，我这个人比较笨，就慢慢来吧。也不可能把所有基础的数学理论在很短的时间里面过一遍，这个过程自己也要慢慢的探索。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1733,7 +1851,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
