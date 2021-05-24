@@ -233,6 +233,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/leetcode683/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/12/leetcode683/" itemprop="url">leetcode683</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T21:42:28-07:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="683-K-Empty-Slots"><a href="#683-K-Empty-Slots" class="headerlink" title="683. K Empty Slots"></a>683. K Empty Slots</h1><p>There is a garden with N slots. In each slot, there is a flower. The N flowers will bloom one by one in N days. In each day, there will be exactly one flower blooming and it will be in the status of blooming since then.</p>
+<p>Given an array flowers consists of number from 1 to N. Each number in the array represents the place where the flower will open in that day.</p>
+<p>For example, flowers[i] = x means that the unique flower that blooms at day i will be at position x, where i and x will be in the range from 1 to N.</p>
+<p>Also given an integer k, you need to output in which day there exists two flowers in the status of blooming, and also the number of flowers between them is k and these flowers are not blooming.</p>
+<p>If there isn’t such day, output -1.</p>
+<p>Example 1:<br>Input:<br>flowers: [1,3,2]<br>k: 1<br>Output: 2<br>Explanation: In the second day, the first and the third flower have become blooming.<br>Example 2:<br>Input:<br>flowers: [1,2,3]<br>k: 1<br>Output: -1<br>Note:<br>The given array will be in the range [1, 20000].</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Through treeset, we may find the ceiling and floor of the new pos, and we can check whether the new pos is k slots away from its ceiling or floor. If so, it’s the answer.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int kEmptySlots(int[] flowers, int k) &#123;</span><br><span class="line">        TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; flowers.length; i++) &#123;</span><br><span class="line">            int pos = flowers[i];</span><br><span class="line">            Integer left = set.floor(pos - 1);</span><br><span class="line">            Integer right = set.ceiling(pos + 1);</span><br><span class="line">            if (left != null &amp;&amp; left == pos - k - 1) &#123;</span><br><span class="line">                return i + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            if (right != null &amp;&amp; pos == right - k - 1) &#123;</span><br><span class="line">                return i + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            set.add(pos);</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p>The ceiling(E e) method is used to return the least element in this set greater than or equal to the given element, or null if there is no such element.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.tutorialspoint;</span><br><span class="line"></span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.TreeSet;</span><br><span class="line"></span><br><span class="line">public class TreeSetDemo &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">      // creating a TreeSet </span><br><span class="line">      TreeSet &lt;Integer&gt;treeadd = new TreeSet&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">      // adding in the tree set</span><br><span class="line">      treeadd.add(12);</span><br><span class="line">      treeadd.add(11);</span><br><span class="line">      treeadd.add(16);</span><br><span class="line">      treeadd.add(15);</span><br><span class="line"></span><br><span class="line">      // getting ceiling value for 13</span><br><span class="line">      System.out.println(&quot;Ceiling value for 13: &quot;+treeadd.ceiling(13));   </span><br><span class="line">   &#125;     </span><br><span class="line">&#125;</span><br><span class="line"># print: Ceiling value for 13: 15</span><br></pre></td></tr></table></figure></p>
+<p>The floor(E e) method is used to return the greatest element in this set less than or equal to the given element, or null if there is no such element.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.tutorialspoint;</span><br><span class="line"></span><br><span class="line">import java.util.TreeSet;</span><br><span class="line"></span><br><span class="line">public class TreeSetDemo &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">      // creating a TreeSet </span><br><span class="line">      TreeSet &lt;Integer&gt;treeadd = new TreeSet&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">      // adding in the tree set</span><br><span class="line">      treeadd.add(12);</span><br><span class="line">      treeadd.add(11);</span><br><span class="line">      treeadd.add(16);</span><br><span class="line">      treeadd.add(15);</span><br><span class="line"></span><br><span class="line">      // getting the floor value for 13</span><br><span class="line">      System.out.println(&quot;Floor value for 13: &quot;+treeadd.floor(13));   </span><br><span class="line">   &#125;    </span><br><span class="line">&#125; </span><br><span class="line"># print: Floor value for 13: 12</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/leetcode314/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1573,196 +1724,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/RCNN-family/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/07/RCNN-family/" itemprop="url">RCNN-family</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T14:03:47-07:00">
-                2018-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">deep learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h1><p>To what extent do [Krizhevsky et. al’s results] generalize to object detection?</p>
-<p>Object detection is the task of finding the different objects in an image and classifying them</p>
-<h1 id="mAP-mean-average-precision"><a href="#mAP-mean-average-precision" class="headerlink" title="mAP (mean average precision)"></a>mAP (mean average precision)</h1><p><a href="http://tarangshah.com/blog/2018-01-27/what-is-map-understanding-the-statistic-of-choice-for-comparing-object-detection-models/" target="_blank" rel="noopener">This</a> blog explain the mAP clearly.</p>
-<h1 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h1><p>The goal of R-CNN is to take in an image, and correctly identify where the main objects (via a bounding box) in the image.</p>
-<p>Inputs: Image<br>Outputs: Bounding boxes + labels for each object in the image.</p>
-<p><img src="/images/RCNN-pipeline.jpeg" alt=""></p>
-<h2 id="region-proposals"><a href="#region-proposals" class="headerlink" title="region proposals:"></a>region proposals:</h2><p>At a high level, Selective Search (shown in the image above) looks at the image through windows of different sizes, and for each size tries to group together adjacent pixels by texture, color, or intensity to identify objects.</p>
-<h2 id="feature-extraction"><a href="#feature-extraction" class="headerlink" title="feature extraction:"></a>feature extraction:</h2><p>They extract a 4096-dimensional feature vector from each region proposal using the Caffe implementation of the CNN described by Krizhevsky et al.. Features are computed by forward propagating a mean-subtracted 227 × 227 RGB image through five convolutional layers and two fully connected layers. </p>
-<p>Since the sizes of boxes from region proposals varies, they need firstly warp image data in that region into a form that is compatible with the CNN (its architecture requires inputs of a fixed 227 × 227 pixel size)  </p>
-<h2 id="training"><a href="#training" class="headerlink" title="training:"></a>training:</h2><h3 id="Supervised-pre-training"><a href="#Supervised-pre-training" class="headerlink" title="Supervised pre-training"></a>Supervised pre-training</h3><p>They discriminatively pre-trained the CNN on a large auxiliary dataset (ILSVRC2012 classification) using image-level annotations only (bounding-box labels are not available for this data).</p>
-<h3 id="Domain-specific-fine-tuning"><a href="#Domain-specific-fine-tuning" class="headerlink" title="Domain-specific fine-tuning."></a>Domain-specific fine-tuning.</h3><p> To adapt our CNN to the new task (detection) and the new domain (warped proposal windows), we continue stochastic gradient descent (SGD) training of the CNN parameters using only warped region proposals with a bias ratio mini-batch amoung negative and positive samples which are assigned according to the IoU larger than 0.5 or not.</p>
-<h3 id="Object-category-classifiers"><a href="#Object-category-classifiers" class="headerlink" title="Object category classifiers."></a>Object category classifiers.</h3><p>Similar to the step above, given threshold split the data set into negative and positve samples for classification in SVM.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
-<li>Generate a set of proposals for bounding boxes.</li>
-<li>Run the images in the bounding boxes through a pre-trained AlexNet and finally an SVM to see what object the image in the box is.</li>
-<li>Run the box through a linear regression model to output tighter coordinates for the box once the object has been classified.</li>
-</ul>
-<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems:"></a>Problems:</h2><ol>
-<li>Training is a multi-stage pipeline. R-CNN first fine-tunes a ConvNet on object proposals using log loss. Then, it fits SVMs to ConvNet features. These SVMs act as object detectors, replacing the softmax classifier learnt by fine-tuning. In the third training stage, bounding-box regressors are learned.</li>
-<li>Training is expensive in space and time. For SVM and bounding-box regressor training, features are extracted from each object proposal in each image and written to disk. With very deep networks, such as VGG16, this process takes 2.5 GPU-days for the 5k images of the VOC07 trainval set. These features require hundreds of gigabytes of storage.</li>
-<li>Object detection is slow. At test-time, features are extracted from each object proposal in each test image. Detection with VGG16 takes 47s / image (on a GPU).</li>
-</ol>
-<h1 id="Fast-RCNN"><a href="#Fast-RCNN" class="headerlink" title="Fast-RCNN"></a>Fast-RCNN</h1><h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/images/fast-rcnn.jpeg" alt=""><br>The input images as well as a set of region proposals are forwarded through a conv network and projected to a feature map. The feature map for each projected region proposal is processed via the RoI pooling layer and FCs into a fix-size RoI feature vector. Each feature vector is then fed into a sequence of fully connected layers (FC) that finally branch into two sibling output layers: one that produces softmax probability estimates over K object classes plus a catch-all “background” class and another layer that outputs four real-valued numbers for each of the K object classes. Each set of 4 values encodes refined bounding-box positions for one of the K classes.</p>
-<h2 id="RoI-Region-of-Interest-pooling-layer"><a href="#RoI-Region-of-Interest-pooling-layer" class="headerlink" title="RoI (Region of Interest) pooling layer"></a>RoI (Region of Interest) pooling layer</h2><p>Similary to the warping in RCNN to process the region proposal into a fix-size input of fine-tune netowrk, the RoI max pooling works by dividing the h  w RoI window into an H  W grid of sub-windows of approximate size h=H  w=W and then max-pooling the values in each sub-window into the corresponding output grid cell.</p>
-<h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><ul>
-<li><p>step1: pre-trained:<br>  Amoung three pre-trained network from ImageNet the last max pooling layer is replaced by a RoI pooling layer that is configured by setting H and W to be compatible with the net’s first fully connected layer and last fully connected layer and softmax are replaced with the two sibling layers.</p>
-</li>
-<li><p>step2: fine-tune:</p>
-<ul>
-<li>summary:<ul>
-<li>mini-batch:<br>  In Fast RCNN training, stochastic gradient descent (SGD) minibatches are sampled hierarchically, first by sampling N images and then by sampling R=N RoIs from each image.</li>
-<li>end-to-end:<br>  Fast R-CNN uses a streamlined training process with one fine-tuning stage that jointly optimizes a softmax classifier and bounding-box regressors, rather than training a softmax classifier, SVMs, and regressors in three separate stages.</li>
-</ul>
-</li>
-<li>loss: multi-task loss:<br>  $L(p, u, t^u, v) = L_{cls}(p, u) + \lambda_{[u &gt; 0]}L_{loc}(t^u, v)$<br>  Each training RoI is labeled with a ground-truth class u and a ground-truth bounding-box regression target v. We use a multi-task loss L on each labeled RoI to jointly train for classification and bounding-box regression:<ul>
-<li>$L_{cls}(p(x), u) = - log p_u$<br> classification loss is log loss for true class u</li>
-<li>$L_{loc}(t^u, v) = \sum_{i \in {x, y, w, h}} smooth_{L_1} (t_i^u - v)$<br>  is a robust L1 loss that is less sensitive to outliers than the L2 loss used in R-CNN and SPPnet. When the regression targets are unbounded, training with L2 loss can require careful tuning of learning rates in order to prevent exploding gradients. </li>
-</ul>
-</li>
-<li><p>mini-batch:</p>
-<ul>
-<li>sharing weights:<br>  each SGD mini-batch is constructed from N = 2 images, chosen uniformly at random (as is common practice, we actually iterate over permutations of the dataset). We use mini-batches of size R = 128, sampling 64 RoIs from each image.</li>
-<li>ratio: Similar to the ratio mini-batch in RCNN, 25 % RoIs IoU at least 0.5 are as positive     images (with ground truth labels), [0.1, 0.5) are as back-ground.</li>
-</ul>
-</li>
-<li></li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1813,7 +1774,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">162</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

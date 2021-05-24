@@ -233,6 +233,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/13/debug小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chu Lin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Truly">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/13/debug小结/" itemprop="url">debug小结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-13T10:34:23-07:00">
+                2019-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>写代码的时候，遇到bug然后debug总是痛苦的，下面讲讲自己的一些点点心得和踩过的坑：</p>
+<h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>其实遇到bug的第一步是要知道这是什么bug，之前遇到一个bug说是<br>NameError: name ‘cv2’ is not defined，然后和这个bug：ModuleNotFoundError: No module named ‘cv2’搞混了<br>然后自己focus都在这个环境里面为什么没有opencv-python。<br>其实NameError: name ‘cv2’ is not defined，就是代码里面没有import cv2，知道了错，查了一下code就马上fix了。<br>所以，遇到bug，多花点时间看看error message是什么很重要，因为大方向要是搞错了只会南辕北辙。</p>
+<h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><p>知道了bug的含义，然后耗时间的就是，是什么原因trigger了这个bug。虽然有时候，bug本身的含义，能直接让你去fix，如上面的例子，但是有些时候，问题复杂了，就没有那么容易直接看出来了。</p>
+<p>有时候就需要你有一些猜想，合理的猜想可以有些一些角度：1. 代码的逻辑问题，2. 依赖包的版本问题，3. 环境问题（环境变量问题，driver问题，docker的一些flag的问题），4.自己忘记和code base sync了……<br>但是要注意，当你给出自己的一些猜想的时候，你不要去钻牛角尖，适当的时候要摒弃自己的这些猜想，因为有可能是错的。我自己常常就陷在会在自己一些开始的猜想里面，出不来。<br>所以，我感觉需要有一个自觉，需要想一想自己此刻的assumption是什么，有这个自觉很重要。</p>
+<h2 id="How"><a href="#How" class="headerlink" title="How"></a>How</h2><ol>
+<li>找到简单，易行的测试的办法::<br>之前是de云上面的一个bug，非常复杂，总是基于很多guessing去trigger一次又一次job，每次跑一次都要很久，fail了之后，又要重新起机子，浪费了很多时间。后来意识到，可以在本地（或者在起一个一样type的机子和settings）mimic一个一样的环境，然后自己log in那个机子，去复现上面的操作，最后极大的加快了debug的过程了。</li>
+</ol>
+<p>就是你要静下来想一想，有没有什么好的办法去debug，或者用gdb，或者说自己模拟一个环境之类的。我们的目的是要快速有效的解决问题，很快找到简单易行的方法很重要！</p>
+<ol start="2">
+<li><p>找同事，一起debug:<br>找同事的目的也是为了可以和同事一起更快的解决问题<br>找同事前：<br>在自己知道what,why,google了一圈，然后试了一些方法后，还是没有解决，可以去找同事。因为你在自己做了一些前期工作后，可以更有效率的和他们交流。<br>找谁：<br>你需要找一个在这个问题上面比较有经验的人，bug所对应code blame的那个同事会是很好的合作对象，毕竟code是他们写的，他们可能遇到这样类似的问题过。<br>合作：<br>一起讨论一起交流一起解决，两个人合作解决问题，有思路的碰撞，可能就能更好的解决问题。</p>
+</li>
+<li><p>找其他可以替代的solution:<br>有时候你可能需要直接刚这个问题，比如说要对应的源码，<br>但是也许你可以用替代的方法，比如说我用cv2不行，我也行可以用pillow之类的。<br>看问题的价值和紧急程度了。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/28/cpp-Autonomous-Driving/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1642,125 +1797,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/18/MLE-MAP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chu Lin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Truly">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/18/MLE-MAP/" itemprop="url">MLE-MAP</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-18T20:34:27-07:00">
-                2018-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1811,7 +1847,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">162</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
